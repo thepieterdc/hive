@@ -40,7 +40,7 @@ public class CoordinateTest extends TestCase {
 	 * @throws Exception
 	 */
 	public void testX() throws Exception {
-		assertEquals(5000, this.coordinate.x());
+		assertEquals(5000.0, this.coordinate.x());
 	}
 
 	/**
@@ -48,6 +48,6 @@ public class CoordinateTest extends TestCase {
 	 * @throws Exception
 	 */
 	public void testY() throws Exception {
-		assertEquals(8000, this.coordinate.y());
+		assertEquals(8000.0, this.coordinate.y());
 	}
 }
