@@ -42,6 +42,13 @@ public enum Svg {
 		return path;
 	}
 
+	/**
+	 * @return the path as a string
+	 */
+	public String rawPath() {
+		return this.rawPath;
+	}
+
 	@Override
 	public String toString() {
 		return "Svg[path="+this.rawPath+"]";

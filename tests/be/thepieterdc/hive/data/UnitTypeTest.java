@@ -11,9 +11,9 @@ import junit.framework.TestCase;
  */
 public class UnitTypeTest extends TestCase {
 	/**
-	 * Tests UnitType#abbreviation()
+	 * Tests UnitType#abbreviation().
 	 */
-	public void testAbbrevation() {
+	public void testAbbrevation() throws Exception {
 		assertEquals("A", UnitType.ANT.abbreviation());
 		assertEquals("B", UnitType.BEATLE.abbreviation());
 		assertEquals("G", UnitType.GRASSHOPPER.abbreviation());
@@ -22,9 +22,9 @@ public class UnitTypeTest extends TestCase {
 	}
 
 	/**
-	 * Tests UnitType#path() and Svg#path()
+	 * Tests UnitType#path() and Svg#path().
 	 */
-	public void testPath() {
+	public void testPath() throws Exception {
 		assertTrue(UnitType.ANT.path() != null);
 		assertTrue(UnitType.BEATLE.path() != null);
 		assertTrue(UnitType.GRASSHOPPER.path() != null);
@@ -33,13 +33,24 @@ public class UnitTypeTest extends TestCase {
 	}
 
 	/**
-	 * Tests UnitType#abbreviation()
+	 * Tests UnitType#abbreviation().
 	 */
-	public void testPrettyName() {
+	public void testPrettyName() throws Exception {
 		assertEquals("Ant", UnitType.ANT.prettyName());
 		assertEquals("Beatle", UnitType.BEATLE.prettyName());
 		assertEquals("Grasshopper", UnitType.GRASSHOPPER.prettyName());
 		assertEquals("Queen", UnitType.QUEEN.prettyName());
 		assertEquals("Spider", UnitType.SPIDER.prettyName());
+	}
+
+	/**
+	 * Tests UnitType#toString().
+	 */
+	public void testToString() throws Exception {
+		assertEquals("UnitType[abbreviation=A, prettyName=Ant]", UnitType.ANT.toString());
+		assertEquals("UnitType[abbreviation=B, prettyName=Beatle]", UnitType.BEATLE.toString());
+		assertEquals("UnitType[abbreviation=G, prettyName=Grasshopper]", UnitType.GRASSHOPPER.toString());
+		assertEquals("UnitType[abbreviation=Q, prettyName=Queen]", UnitType.QUEEN.toString());
+		assertEquals("UnitType[abbreviation=S, prettyName=Spider]", UnitType.SPIDER.toString());
 	}
 }
