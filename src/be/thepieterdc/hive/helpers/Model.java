@@ -20,6 +20,15 @@ public class Model implements Observable {
 		this.listeners.add(listener);
 	}
 
+	/**
+	 * Notifies the listeners that the model has changed.
+	 */
+	public void notifyListeners() {
+		for(InvalidationListener l : this.listeners) {
+			l.invalidated(this);
+		}
+	}
+
 	@Override
 	public void removeListener(InvalidationListener listener) {
 		this.listeners.remove(listener);
