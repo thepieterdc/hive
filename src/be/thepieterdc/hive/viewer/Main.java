@@ -1,7 +1,17 @@
 package be.thepieterdc.hive.viewer;
 
+import be.thepieterdc.hive.helpers.messages.ErrorMessage;
+import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Main application
@@ -11,9 +21,33 @@ import javafx.stage.Stage;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class Main extends Application {
-	@Override
-	public void start(Stage stage) throws Exception {
+	private ViewerModel model;
 
+	@Override
+	public void start(Stage stage) {
+		Parameters args = this.getParameters();
+		try {
+			if(args == null || args.getRaw().size() != 1) {
+				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
+			}
+			List<String> parameters = args.getRaw();
+			this.model = new ViewerModel();
+			try {
+				this.model.moves(Files.readAllLines(Paths.get(parameters.get(0))));
+			} catch(IOException e) {
+				throw new Exception("Inputdata onleesbaar of onbestaand.");
+			}
+
+			//Placeholder//
+			Pane rootPane = new Pane();
+
+			Scene scene = new Scene(rootPane);
+			stage.setScene(scene);
+			stage.setTitle("Hive Viewer");
+			stage.show();
+		} catch (Exception e) {
+			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
+		}
 	}
 
 	/**
