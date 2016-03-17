@@ -31,9 +31,8 @@ public class Main extends Application {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
 			}
 			List<String> parameters = args.getRaw();
-			this.model = new ViewerModel();
 			try {
-				this.model.moves(Files.readAllLines(Paths.get(parameters.get(0))));
+				this.model = new ViewerModel(Files.readAllLines(Paths.get(parameters.get(0))));
 			} catch(IOException e) {
 				throw new Exception("Inputdata onleesbaar of onbestaand.");
 			}
