@@ -15,22 +15,15 @@ import java.util.List;
  */
 public class ViewerModel extends Model {
 	private Move move = null;
-	private final List<Move> moves;
+	private final List<Move> moves = new ArrayList<>();
 
 	/**
 	 * ViewerModel constructor.
 	 *
 	 * @param moves the moves to set
 	 */
-	public ViewerModel(List moves) {
-		this.moves = new ArrayList<>();
-
-		//Allow for moves to be passed as strings and as "move" objects
-		for (Object o : moves) {
-			if (o instanceof String) {
-
-			}
-		}
+	public ViewerModel(List<Move> moves) {
+		this.moves.addAll(moves);
 	}
 
 	/**

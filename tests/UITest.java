@@ -1,10 +1,8 @@
-package be.thepieterdc.hive.components;
-
+import be.thepieterdc.hive.components.MovesButton;
 import be.thepieterdc.hive.data.Svg;
-import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
-import javafx.event.Event;
+import javafx.collections.FXCollections;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -31,19 +29,19 @@ import java.util.Arrays;
 public class UITest extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
-		ViewerModel model = new ViewerModel(Arrays.asList(new Move(0, "Start"), new Move(1, "Test"), new Move(2, "Lele")));
+		ViewerModel model = new ViewerModel(Arrays.asList("Start", "Test", "Lele"));
+		ListView<String> movesViewPane = new ListView<>();
+		movesViewPane.setItems(FXCollections.observableList(model.moves()));
+		movesViewPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			model.move(newValue);
+		});
 
-		ListView<Move> movesViewPane = new ListView<>();
-		movesViewPane.getItems().addAll(model.moves());
+		MovesButton begin = new MovesButton(model, Svg.MOVEBUTTON_BEGIN, event -> movesViewPane.getSelectionModel().selectFirst());
+		MovesButton prev = new MovesButton(model, Svg.MOVEBUTTON_PREVIOUS, event -> movesViewPane.getSelectionModel().selectPrevious());
+		MovesButton next = new MovesButton(model, Svg.MOVEBUTTON_NEXT, event -> movesViewPane.getSelectionModel().selectNext());
+		MovesButton end = new MovesButton(model, Svg.MOVEBUTTON_END, event -> movesViewPane.getSelectionModel().selectLast());
 
-		MovesButton begin = new MovesButton(model, Svg.MOVEBUTTON_BEGIN) {
-			@Override
-			public void handle(Event event) {
-				movesViewPane.getSelectionModel().selectFirst();
-			}
-		};
-
-		HBox buttonBarPane = new HBox(begin);
+		HBox buttonBarPane = new HBox(begin, prev, next, end);
 
 		VBox movesPane = new VBox(movesViewPane, buttonBarPane);
 
