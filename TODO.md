@@ -11,3 +11,5 @@ Overbodige imports wat wegdoen
 Algemene cleanup(zet alles op streng)
 
 i18n
+
+Svg hertekenen en alle units implementen
