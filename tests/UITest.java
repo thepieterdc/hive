@@ -1,23 +1,5 @@
-import be.thepieterdc.hive.components.MovesButton;
-import be.thepieterdc.hive.data.Svg;
-import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
 
 /**
  * Tests the entire UI
@@ -29,6 +11,7 @@ import java.util.Arrays;
 public class UITest extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
+		/*
 		ViewerModel model = new ViewerModel(Arrays.asList("Start", "Test", "Lele"));
 		ListView<String> movesViewPane = new ListView<>();
 		movesViewPane.setItems(FXCollections.observableList(model.moves()));
@@ -80,6 +63,7 @@ public class UITest extends Application {
 		Scene s = new Scene(root);
 		stage.setScene(s);
 		stage.show();
+		*/
 	}
 
 	public static void main(String[] args) {

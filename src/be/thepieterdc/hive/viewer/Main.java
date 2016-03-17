@@ -8,9 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -32,8 +29,8 @@ public class Main extends Application {
 			}
 			List<String> parameters = args.getRaw();
 			try {
-				this.model = new ViewerModel(Files.readAllLines(Paths.get(parameters.get(0))));
-			} catch(IOException e) {
+				this.model = /*new ViewerModel(Files.readAllLines(Paths.get(parameters.get(0))));*/ null;
+			} catch(Exception e) {
 				throw new Exception("Inputdata onleesbaar of onbestaand.");
 			}
 

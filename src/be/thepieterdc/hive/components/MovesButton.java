@@ -13,6 +13,14 @@ import javafx.scene.control.Button;
 public class MovesButton extends Button {
 	/**
 	 * MovesButton constructor.
+	 * @param lbl the text label
+	 */
+	public MovesButton(String lbl) {
+		this.setText(lbl);
+	}
+
+	/**
+	 * MovesButton constructor.
 	 * @param lbl the graphical label
 	 */
 	public MovesButton(Svg lbl) {
