@@ -31,21 +31,18 @@ public class MovesButtonBar extends HBox implements InvalidationListener {
 		this.model.addListener(this);
 
 		this.btnBegin.setOnAction(event -> model.move(0));
-		this.btnPrevious.setOnAction(event -> model.move(model.moves().indexOf(model.move())-1));
-		this.btnNext.setOnAction(event -> model.move(model.moves().indexOf(model.move())+1));
-		this.btnEnd.setOnAction(event -> model.move(model.moves().size()-1));
+		this.btnPrevious.setOnAction(event -> model.move(model.moveIndex()-1));
+		this.btnNext.setOnAction(event -> model.move(model.moveIndex()+1));
+		this.btnEnd.setOnAction(event -> model.move(model.totalMoves()-1));
 
 		this.getChildren().addAll(this.btnBegin, this.btnPrevious, this.btnPlay, this.btnNext, this.btnEnd);
 	}
 
 	@Override
 	public void invalidated(Observable observable) {
-		int moveNum = this.model.moves().indexOf(this.model.move());
-		int maxMoves = this.model.moves().size();
-
-		this.btnBegin.setDisable(moveNum-1 < 0);
-		this.btnPrevious.setDisable(moveNum-1 < 0);
-		this.btnNext.setDisable(moveNum+1 > maxMoves-1);
-		this.btnEnd.setDisable(moveNum+1 > maxMoves-1);
+		this.btnBegin.setDisable(this.model.moveIndex()-1 < 0);
+		this.btnPrevious.setDisable(this.model.moveIndex()-1 < 0);
+		this.btnNext.setDisable(this.model.moveIndex()+1 > this.model.totalMoves()-1);
+		this.btnEnd.setDisable(this.model.moveIndex()+1 > this.model.totalMoves()-1);
 	}
 }

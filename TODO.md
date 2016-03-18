@@ -1,6 +1,6 @@
-In ViewerModel een teller en alle occurences van indexOf verwijderen
-               en totalMoves() en alle occ   van moves.size()
 Move legit maken
+
+Bug @ model; executed twice
 
 Overal argument checks
 

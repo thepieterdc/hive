@@ -1,5 +1,19 @@
-import javafx.application.Application;
-import javafx.stage.Stage;
+package be.thepieterdc.hive.components;
+
+import be.thepieterdc.hive.helpers.Move;
+import be.thepieterdc.hive.models.ViewerModel;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Polygon;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Tests the entire UI
@@ -8,25 +22,15 @@ import javafx.stage.Stage;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class UITest extends Application {
+public class UITest extends ComponentTest {
 	@Override
-	public void start(Stage stage) throws Exception {
-		/*
-		ViewerModel model = new ViewerModel(Arrays.asList("Start", "Test", "Lele"));
-		ListView<String> movesViewPane = new ListView<>();
-		movesViewPane.setItems(FXCollections.observableList(model.moves()));
-		movesViewPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			model.move(newValue);
-		});
+	protected Parent component() {
+		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("test"), Move.fromRepresentation("test2"), Move.fromRepresentation("test3"));
+		ViewerModel m = new ViewerModel(moves);
 
-		MovesButton begin = new MovesButton(model, Svg.MOVEBUTTON_BEGIN, event -> movesViewPane.getSelectionModel().selectFirst());
-		MovesButton prev = new MovesButton(model, Svg.MOVEBUTTON_PREVIOUS, event -> movesViewPane.getSelectionModel().selectPrevious());
-		MovesButton next = new MovesButton(model, Svg.MOVEBUTTON_NEXT, event -> movesViewPane.getSelectionModel().selectNext());
-		MovesButton end = new MovesButton(model, Svg.MOVEBUTTON_END, event -> movesViewPane.getSelectionModel().selectLast());
+		MovesPane movesPane = new MovesPane(m);
 
-		HBox buttonBarPane = new HBox(begin, prev, next, end);
-
-		VBox movesPane = new VBox(movesViewPane, buttonBarPane);
+		m.move(0);
 
 		Polygon hexOne = new Polygon();
 		hexOne.getPoints().addAll(0.0, 0.0, 0.0, 20.0, 20.0, 20.0, 20.0, 0.0);
@@ -60,10 +64,7 @@ public class UITest extends Application {
 		root.setOrientation(Orientation.VERTICAL);
 		root.setPrefSize(800, 500);
 
-		Scene s = new Scene(root);
-		stage.setScene(s);
-		stage.show();
-		*/
+		return root;
 	}
 
 	public static void main(String[] args) {

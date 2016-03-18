@@ -14,29 +14,33 @@ import java.util.List;
  */
 public class ViewerModel extends Model {
 	private Move move = null;
+	private int moveIndex;
 	private final List<Move> moves;
+	private final int totalMoves;
 
 	/**
 	 * ViewerModel constructor.
-	 *
 	 * @param moves the moves to set
 	 */
 	public ViewerModel(List<Move> moves) {
 		this.moves = moves;
+		this.totalMoves = this.moves.size();
 	}
 
 	/**
-	 * move-setter
-	 *
+	 * move-setter.
 	 * @param index the index of the move
 	 */
 	public void move(int index) {
-		this.move(this.moves.get(index));
+		Move m = this.moves.get(index);
+		if(!m.equals(this.move)) {
+			this.moveIndex = index;
+			this.move(m);
+		}
 	}
 
 	/**
-	 * move-setter
-	 *
+	 * move-setter.
 	 * @param m the move to set
 	 */
 	public void move(Move m) {
@@ -49,7 +53,6 @@ public class ViewerModel extends Model {
 
 	/**
 	 * move-getter.
-	 *
 	 * @return the move
 	 */
 	public Move move() {
@@ -57,11 +60,26 @@ public class ViewerModel extends Model {
 	}
 
 	/**
+	 * moveIndex-getter.
+	 * @return the index of the move
+	 */
+	public int moveIndex() {
+		return this.moveIndex;
+	}
+
+	/**
 	 * moves-getter.
-	 *
 	 * @return the moves
 	 */
 	public List<Move> moves() {
 		return this.moves;
+	}
+
+	/**
+	 * totalMoves-getter.
+	 * @return the total amount of moves
+	 */
+	public int totalMoves() {
+		return this.totalMoves;
 	}
 }
