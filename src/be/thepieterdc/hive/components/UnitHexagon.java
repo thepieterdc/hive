@@ -1,10 +1,10 @@
 package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.data.UnitType;
-import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
@@ -20,27 +20,20 @@ public class UnitHexagon extends StackPane {
 	 * UnitHexagon constructor.
 	 */
 	public UnitHexagon(UnitType unit, Color color) {
-		Circle c = new Circle(20);
-		c.setFill(Color.WHITE);
-		c.setStroke(Color.BLACK);
-		c.setStrokeWidth(1);
-		Text t = new Text("A");
+		Hexagon hexagon = new Hexagon();
+		hexagon.setFill(Color.WHITE);
+		hexagon.setStroke(Color.BLACK);
+		hexagon.setScaleX(15);
+		hexagon.setScaleY(15);
 
-		Group g = new Group(c, t);
-		g.setAutoSizeChildren(true);
+		Text text = new Text("A");
+		text.setStrokeType(StrokeType.OUTSIDE);
+		text.setStrokeWidth(0);
+		text.setFont(new Font(200));
 
-		this.getChildren().add(g);
-		this.setOnScroll(event -> {
-			event.consume();
+		this.setMaxHeight(Integer.MAX_VALUE);
+		this.setMaxWidth(Integer.MAX_VALUE);
 
-			if(event.getDeltaY() == 0) {
-				return;
-			}
-
-			double scaleFactor = (event.getDeltaY() > 0) ? 1.1 : 1/1.1;
-
-			g.setScaleX(g.getScaleX() * scaleFactor);
-			g.setScaleY(g.getScaleY() * scaleFactor);
-		});
+		this.getChildren().addAll(hexagon, text);
 	}
 }
