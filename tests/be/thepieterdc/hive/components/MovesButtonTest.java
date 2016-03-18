@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 
 /**
- * Description here
+ * Test for the MovesButtonBar component.
  * <p>
  * Created at 17/03/16 17:29
  *

@@ -3,7 +3,6 @@ package be.thepieterdc.hive.models;
 import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ import java.util.List;
  */
 public class ViewerModel extends Model {
 	private Move move = null;
-	private final List<Move> moves = new ArrayList<>();
+	private final List<Move> moves;
 
 	/**
 	 * ViewerModel constructor.
@@ -23,7 +22,7 @@ public class ViewerModel extends Model {
 	 * @param moves the moves to set
 	 */
 	public ViewerModel(List<Move> moves) {
-		this.moves.addAll(moves);
+		this.moves = moves;
 	}
 
 	/**
@@ -41,6 +40,7 @@ public class ViewerModel extends Model {
 	 * @param m the move to set
 	 */
 	public void move(Move m) {
+		System.out.println(m.representation());
 		if (!m.equals(this.move)) {
 			this.move = m;
 			this.notifyListeners();

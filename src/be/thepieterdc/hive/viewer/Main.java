@@ -1,5 +1,6 @@
 package be.thepieterdc.hive.viewer;
 
+import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
@@ -8,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +33,12 @@ public class Main extends Application {
 			}
 			List<String> parameters = args.getRaw();
 			try {
-				this.model = /*new ViewerModel(Files.readAllLines(Paths.get(parameters.get(0))));*/ null;
+				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
+				List<Move> movesMove = new ArrayList<>();
+				for(String s : movesString) {
+					movesMove.add(Move.fromRepresentation(s));
+				}
+				this.model = new ViewerModel(movesMove);
 			} catch(Exception e) {
 				throw new Exception("Inputdata onleesbaar of onbestaand.");
 			}
