@@ -1,7 +1,5 @@
 Move legit maken
 
-Bug @ model; executed twice
-
 Overal argument checks
 
 toStrings waar mogelijk
