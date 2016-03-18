@@ -44,7 +44,6 @@ public class UITest extends ComponentTest {
 
 		StackPane playPane = new StackPane(hexagons);
 
-
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
 		mainPane.setDividerPositions(0.30);
 
