@@ -30,6 +30,9 @@ public class MovesPane extends VBox implements InvalidationListener {
 
 		this.movesList = new ListView<>();
 		this.movesList.setItems(FXCollections.observableList(this.model.moves()));
+		this.movesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			model.move(newValue);
+		});
 
 		MovesButtonBar movesButtonBar = new MovesButtonBar(this.model);
 
