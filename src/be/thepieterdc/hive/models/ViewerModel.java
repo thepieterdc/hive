@@ -33,9 +33,10 @@ public class ViewerModel extends Model {
 	 */
 	public void move(int index) {
 		Move m = this.moves.get(index);
-		if(!m.equals(this.move)) {
+		if (!m.equals(this.move)) {
 			this.moveIndex = index;
-			this.move(m);
+			this.move = m;
+			this.notifyListeners();
 		}
 	}
 
@@ -44,11 +45,7 @@ public class ViewerModel extends Model {
 	 * @param m the move to set
 	 */
 	public void move(Move m) {
-		System.out.println(m.representation());
-		if (!m.equals(this.move)) {
-			this.move = m;
-			this.notifyListeners();
-		}
+		this.move(this.moves.indexOf(m));
 	}
 
 	/**
