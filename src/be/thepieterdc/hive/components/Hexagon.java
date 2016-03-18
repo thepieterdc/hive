@@ -11,7 +11,6 @@ import javafx.scene.shape.Polygon;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class Hexagon extends Polygon {
-
 	/**
 	 * Hexagon constructor.
 	 */
@@ -49,6 +48,15 @@ public class Hexagon extends Polygon {
 	}
 
 	/**
+	 * Calculates the height of this hexagon.
+	 * @return the height of the hexagon
+	 */
+	public double height() {
+		return 0;
+		//return this.height;
+	}
+
+	/**
 	 * Calculates the coordinate of the top point
 	 * @return the coordinate of the top point
 	 */
@@ -70,5 +78,14 @@ public class Hexagon extends Polygon {
 	 */
 	public static Coordinate topRight() {
 		return new Coordinate(Math.sqrt(75), 5);
+	}
+
+	/**
+	 * Calculates the width of this hexagon.
+	 * @return the width of the hexagon
+	 */
+	public double width() {
+		return 0;
+		//return this.width;
 	}
 }

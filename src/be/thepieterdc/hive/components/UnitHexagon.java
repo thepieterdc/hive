@@ -20,8 +20,7 @@ public class UnitHexagon extends StackPane {
 	 * @param color the unit color
 	 */
 	public UnitHexagon(UnitType unit, Color color) {
-		this.setMaxHeight(Integer.MAX_VALUE);
-		this.setMaxWidth(Integer.MAX_VALUE);
+		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
 		Hexagon hexagon = new Hexagon();
 		hexagon.setFill(color.invert());
@@ -31,7 +30,9 @@ public class UnitHexagon extends StackPane {
 
 		Text text = new Text(unit.abbreviation());
 		text.setFont(new Font(200));
+		text.setFill(color);
 
 		this.getChildren().addAll(hexagon, text);
+		this.setOnMouseClicked(event -> hexagon.setStrokeWidth(hexagon.getStrokeWidth()+1));
 	}
 }
