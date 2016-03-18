@@ -7,7 +7,7 @@ import javafx.beans.Observable;
 import javafx.scene.layout.HBox;
 
 /**
- * A bar that contains the MoveButtons
+ * A bar that contains the MoveButtons.
  * <p>
  * Created at 17/03/16 17:05
  *
