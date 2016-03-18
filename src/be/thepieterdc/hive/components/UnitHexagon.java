@@ -34,5 +34,6 @@ public class UnitHexagon extends StackPane {
 
 		this.getChildren().addAll(hexagon, text);
 		this.setOnMouseClicked(event -> hexagon.setStrokeWidth(hexagon.getStrokeWidth()+1));
+		this.setMinSize(hexagon.width(), hexagon.height());
 	}
 }

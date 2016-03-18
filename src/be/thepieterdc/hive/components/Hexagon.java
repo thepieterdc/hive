@@ -11,15 +11,24 @@ import javafx.scene.shape.Polygon;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class Hexagon extends Polygon {
+	private final Coordinate bottom;
+	private final Coordinate bottomLeft;
+	private final Coordinate top;
+	private final Coordinate topRight;
 	/**
 	 * Hexagon constructor.
 	 */
 	public Hexagon() {
-		this.getPoints().addAll(top().asList());
-		this.getPoints().addAll(topRight().asList());
+		this.bottom = bottom();
+		this.bottomLeft = bottomLeft();
+		this.top = top();
+		this.topRight = topRight();
+
+		this.getPoints().addAll(this.top.asList());
+		this.getPoints().addAll(this.topRight.asList());
 		this.getPoints().addAll(bottomRight().asList());
-		this.getPoints().addAll(bottom().asList());
-		this.getPoints().addAll(bottomLeft().asList());
+		this.getPoints().addAll(this.bottom.asList());
+		this.getPoints().addAll(this.bottomLeft.asList());
 		this.getPoints().addAll(topLeft().asList());
 	}
 
@@ -52,8 +61,7 @@ public class Hexagon extends Polygon {
 	 * @return the height of the hexagon
 	 */
 	public double height() {
-		return 0;
-		//return this.height;
+		return this.getScaleX() * (this.top.y() - this.bottom.y() + this.getStrokeWidth());
 	}
 
 	/**
@@ -85,7 +93,6 @@ public class Hexagon extends Polygon {
 	 * @return the width of the hexagon
 	 */
 	public double width() {
-		return 0;
-		//return this.width;
+		return this.getScaleX() * (this.topRight.x() - this.bottomLeft.x() + this.getStrokeWidth());
 	}
 }
