@@ -29,7 +29,7 @@ public class Hexagon extends Polygon {
 	 * @return the coordinate of the bottom point
 	 */
 	public static Coordinate bottom() {
-		return new Coordinate(0, -1);
+		return new Coordinate(0, -10);
 	}
 
 	/**
@@ -37,15 +37,15 @@ public class Hexagon extends Polygon {
 	 * @return the coordinate of the bottom-left point
 	 */
 	public static Coordinate bottomLeft() {
-		return new Coordinate(-Math.sqrt(0.75), -0.5);
+		return new Coordinate(-Math.sqrt(75), -5);
 	}
 
 	/**
-	 * Calculates the coordinate of the bottom-right point
+	 * Calculates the coordinate of the bottom-right point.
 	 * @return the coordinate of the bottom-right point
 	 */
 	public static Coordinate bottomRight() {
-		return new Coordinate(Math.sqrt(0.75), -0.5);
+		return new Coordinate(Math.sqrt(75), -5);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Hexagon extends Polygon {
 	 * @return the coordinate of the top point
 	 */
 	public static Coordinate top() {
-		return new Coordinate(0, 1);
+		return new Coordinate(0, 10);
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Hexagon extends Polygon {
 	 * @return the coordinate of the top-left point
 	 */
 	public static Coordinate topLeft() {
-		return new Coordinate(-Math.sqrt(0.75), 0.5);
+		return new Coordinate(-Math.sqrt(75), 5);
 	}
 
 	/**
@@ -69,6 +69,6 @@ public class Hexagon extends Polygon {
 	 * @return the coordinate of the top-right point
 	 */
 	public static Coordinate topRight() {
-		return new Coordinate(Math.sqrt(0.75), 0.5);
+		return new Coordinate(Math.sqrt(75), 5);
 	}
 }

@@ -15,10 +15,8 @@ public class HexagonTest extends ComponentTest {
 	@Override
 	protected Parent component() {
 		Hexagon hexagon = new Hexagon();
-		hexagon.setScaleX(100);
-		hexagon.setScaleY(100);
-
-		hexagon.getPoints().forEach(System.out::println);
+		hexagon.setScaleX(10);
+		hexagon.setScaleY(10);
 
 		return new VBox(new Group(hexagon));
 	}
