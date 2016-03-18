@@ -3,7 +3,6 @@ package be.thepieterdc.hive.components;
 import be.thepieterdc.hive.data.UnitType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -15,24 +14,23 @@ import javafx.scene.text.Text;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class UnitHexagon extends StackPane {
-
 	/**
 	 * UnitHexagon constructor.
+	 * @param unit the unit type
+	 * @param color the unit color
 	 */
 	public UnitHexagon(UnitType unit, Color color) {
+		this.setMaxHeight(Integer.MAX_VALUE);
+		this.setMaxWidth(Integer.MAX_VALUE);
+
 		Hexagon hexagon = new Hexagon();
-		hexagon.setFill(Color.WHITE);
-		hexagon.setStroke(Color.BLACK);
+		hexagon.setFill(color.invert());
+		hexagon.setStroke(color);
 		hexagon.setScaleX(15);
 		hexagon.setScaleY(15);
 
-		Text text = new Text("A");
-		text.setStrokeType(StrokeType.OUTSIDE);
-		text.setStrokeWidth(0);
+		Text text = new Text(unit.abbreviation());
 		text.setFont(new Font(200));
-
-		this.setMaxHeight(Integer.MAX_VALUE);
-		this.setMaxWidth(Integer.MAX_VALUE);
 
 		this.getChildren().addAll(hexagon, text);
 	}
