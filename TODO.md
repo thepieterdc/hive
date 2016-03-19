@@ -1,8 +1,8 @@
-Move legit maken
-
 Overal argument checks
 
 toStrings waar mogelijk
+
+Move#representation() niet meer meegeven maar bepalen
 
 Zoveel mogelijk unittests
 

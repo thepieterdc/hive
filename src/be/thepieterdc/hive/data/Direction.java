@@ -30,6 +30,15 @@ public enum Direction {
 	 * @param rep the representation; include an "r" to indicate where the unit type is situated
 	 * @return the Direction found
 	 */
+	public static Direction fromRepresentation(char rep) {
+		return fromRepresentation(String.valueOf(rep));
+	}
+
+	/**
+	 * Finds the Direction for a given representation.
+	 * @param rep the representation; include an "r" to indicate where the unit type is situated
+	 * @return the Direction found
+	 */
 	public static Direction fromRepresentation(String rep) {
 		for(Direction d : Direction.values()) {
 			if(d.representation.equals(rep)) {
@@ -45,6 +54,8 @@ public enum Direction {
 	public String prettyName() {
 		return this.name().substring(0, 1).toUpperCase()+this.name().substring(1);
 	}
+
+	public
 
 	@Override
 	public String toString() {

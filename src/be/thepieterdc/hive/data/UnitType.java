@@ -1,6 +1,5 @@
 package be.thepieterdc.hive.data;
 
-import be.thepieterdc.hive.helpers.Unit;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -34,6 +33,15 @@ public enum UnitType {
 	 */
 	public String abbreviation() {
 		return this.name().substring(0, 1);
+	}
+
+	/**
+	 * Finds the UnitType for a given abbreviation.
+	 * @param a the abbreviation.
+	 * @return the UnitType found
+	 */
+	public static UnitType fromAbbreviation(char a) {
+		return fromAbbreviation(String.valueOf(a));
 	}
 
 	/**
