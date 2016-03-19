@@ -24,24 +24,14 @@ public class UnitHexagonTest extends ComponentTest {
 		UnitHexagon queenHexagon = new UnitHexagon(UnitType.QUEEN, Color.RED);
 		UnitHexagon spiderHexagon = new UnitHexagon(UnitType.SPIDER, Color.PURPLE);
 
-		/*
-		antHexagon.setScaleX(15);
-		antHexagon.setScaleY(15);
-		beatleHexagon.setScaleX(15);
-		beatleHexagon.setScaleY(15);
-		grasshopperHexagon.setScaleX(15);
-		grasshopperHexagon.setScaleY(15);
-		ladybugHexagon.setScaleX(15);
-		ladybugHexagon.setScaleY(15);
-		mosquitoHexagon.setScaleX(15);
-		mosquitoHexagon.setScaleY(15);
-		pillbugHexagon.setScaleX(15);
-		pillbugHexagon.setScaleY(15);
-		queenHexagon.setScaleX(15);
-		queenHexagon.setScaleY(15);
-		spiderHexagon.setScaleX(15);
-		spiderHexagon.setScaleY(15);
-		*/
+		antHexagon.scale(15);
+		beatleHexagon.scale(15);
+		grasshopperHexagon.scale(15);
+		ladybugHexagon.scale(15);
+		mosquitoHexagon.scale(15);
+		pillbugHexagon.scale(15);
+		queenHexagon.scale(15);
+		spiderHexagon.scale(15);
 
 		HBox hbox = new HBox(antHexagon, beatleHexagon, grasshopperHexagon, ladybugHexagon, mosquitoHexagon, pillbugHexagon, queenHexagon, spiderHexagon);
 		hbox.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);

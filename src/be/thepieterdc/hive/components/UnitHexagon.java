@@ -25,17 +25,13 @@ public class UnitHexagon extends StackPane {
 		this.hexagon = new Hexagon();
 		this.hexagon.setFill(color.invert());
 		this.hexagon.setStroke(color);
-		this.hexagon.setScaleX(15);
-		this.hexagon.setScaleY(15);
 
 		this.unit = unit.path();
 		this.unit.setFill(color);
 		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(25/15));
 		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(25/15));
 
-		this.setMinSize(hexagon.width(), hexagon.height());
 		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-
 		this.getChildren().addAll(this.hexagon, this.unit);
 	}
 
@@ -44,6 +40,16 @@ public class UnitHexagon extends StackPane {
 	 */
 	public double height() {
 		return this.hexagon.height();
+	}
+
+	/**
+	 * Scales this hexagon with a given factor.
+	 * @param factor the factor to scale
+	 */
+	public void scale(double factor) {
+		this.hexagon.setScaleX(factor);
+		this.hexagon.setScaleY(factor);
+		this.setMinSize(this.width(), this.height());
 	}
 
 	/**
