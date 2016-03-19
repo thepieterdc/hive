@@ -35,4 +35,25 @@ public class Unit {
 		this.rank = rank;
 		this.type = type;
 	}
+
+	/**
+	 * @return the player color
+	 */
+	public Color player() {
+		return this.player;
+	}
+
+	/**
+	 * @return the unit rank
+	 */
+	public int rank() {
+		return this.rank;
+	}
+
+	/**
+	 * @return the unit type
+	 */
+	public UnitType type() {
+		return this.type;
+	}
 }
