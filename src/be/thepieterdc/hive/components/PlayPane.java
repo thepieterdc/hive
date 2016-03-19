@@ -5,7 +5,6 @@ import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
 import java.util.HashMap;
@@ -37,9 +36,6 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		for (Map.Entry<Coordinate, Hexagon> child : state.entrySet()) {
 			hexagons.getChildren().add(child.getValue());
 		}
-
-		Parent parent = this.getParent();
-		System.out.println(parent);
 
 		this.getChildren().add(hexagons);
 
