@@ -1,5 +1,6 @@
 package be.thepieterdc.hive.viewer;
 
+import be.thepieterdc.hive.exceptions.MalformedMoveException;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
@@ -10,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -41,8 +43,10 @@ public class Main extends Application {
 					movesMove.add(Move.fromRepresentation(s));
 				}
 				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);
-			} catch(Exception e) {
-				throw new Exception("Inputdata onleesbaar of onbestaand.");
+			} catch(IOException e) {
+				throw new Exception("Inputdata was not found or is unreadable.");
+			} catch(MalformedMoveException e) {
+				throw new Exception("Invalid move: "+e.move());
 			}
 
 			//Placeholder//

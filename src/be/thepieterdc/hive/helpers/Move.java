@@ -29,9 +29,8 @@ public class Move {
 	}
 
 	public static Move fromRepresentation(String r) throws MalformedMoveException {
+		String original = r;
 		try {
-			String original = r;
-
 			r = r.toLowerCase();
 			if (r.equals("start")) {
 				return new StartMove();
@@ -45,6 +44,7 @@ public class Move {
 			if (!r.contains(" ")) {
 				return new FirstMove(thisUnit, original);
 			}
+
 			r = r.substring(r.indexOf(' ') + 1);
 
 			//Location of the /\- orientation indicator can be on both sides of the move//
@@ -65,11 +65,12 @@ public class Move {
 			Color otherCol = String.valueOf(r.charAt(colorPos)).equals("b") ? Color.BLACK : Color.WHITE;
 			UnitType otherType = UnitType.fromAbbreviation(r.charAt(typePos));
 			int otherRank = otherType.equals(UnitType.QUEEN) ? 0 : r.charAt(rankPos) - 48;
+
 			Unit otherUnit = new Unit(otherCol, otherType, otherRank);
 
-			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(r.charAt(orientationPos), Direction.RIGHT), original);
+			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(r.charAt(otherType.equals(UnitType.QUEEN) ? orientationPos-1:orientationPos), Direction.RIGHT), original);
 		} catch(Exception e) {
-			throw new MalformedMoveException(r);
+			throw new MalformedMoveException(original);
 		}
 	}
 
