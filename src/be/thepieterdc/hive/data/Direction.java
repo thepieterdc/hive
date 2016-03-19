@@ -20,6 +20,23 @@ public enum Direction {
 		this.representation = r;
 	}
 
+	/**
+	 * Finds the Direction for a given representation.
+	 * @param rep the representation
+	 * @return the Direction found
+	 */
+	public static Direction fromRepresentation(String rep) {
+		for(Direction d : Direction.values()) {
+			if(d.representation.equals(rep)) {
+				return d;
+			}
+		}
+		throw new IllegalArgumentException("Direction not found.");
+	}
+
+	/**
+	 * @return a pretty formatted name of this unit
+	 */
 	public String prettyName() {
 		return this.name().substring(0, 1).toUpperCase()+this.name().substring(1);
 	}
