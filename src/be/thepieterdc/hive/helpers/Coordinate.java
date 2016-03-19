@@ -1,5 +1,8 @@
 package be.thepieterdc.hive.helpers;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a coordinate.
  * <p>
@@ -19,6 +22,13 @@ public class Coordinate {
 	public Coordinate(double x, double y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	/**
+	 * @return a list of the coordinates, for simpler usage in Polygon contexts.
+	 */
+	public List<Double> asList() {
+		return Arrays.asList(this.x, this.y);
 	}
 
 	@Override

@@ -1,16 +1,18 @@
 package be.thepieterdc.hive.viewer;
 
+import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,10 +33,14 @@ public class Main extends Application {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
 			}
 			List<String> parameters = args.getRaw();
-			this.model = new ViewerModel();
 			try {
-				this.model.moves(Files.readAllLines(Paths.get(parameters.get(0))));
-			} catch(IOException e) {
+				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
+				List<Move> movesMove = new ArrayList<>();
+				for(String s : movesString) {
+					movesMove.add(Move.fromRepresentation(s));
+				}
+				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);
+			} catch(Exception e) {
 				throw new Exception("Inputdata onleesbaar of onbestaand.");
 			}
 

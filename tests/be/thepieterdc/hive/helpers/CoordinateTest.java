@@ -2,6 +2,8 @@ package be.thepieterdc.hive.helpers;
 
 import junit.framework.TestCase;
 
+import java.util.Arrays;
+
 /**
  * Description here
  * <p>
@@ -28,8 +30,14 @@ public class CoordinateTest extends TestCase {
 	}
 
 	/**
+	 * Tests Coordinate#asList().
+	 */
+	public void testAsList() throws Exception {
+		assertEquals(Arrays.asList(5000.0, 8000.0), this.coordinate.asList());
+	}
+
+	/**
 	 * Tests Coordinate#toString().
-	 * @throws Exception
 	 */
 	public void testToString() throws Exception {
 		assertEquals("Coordinate[x=5000.0, y=8000.0]", this.coordinate.toString());
@@ -37,7 +45,6 @@ public class CoordinateTest extends TestCase {
 
 	/**
 	 * Tests Coordinate#x().
-	 * @throws Exception
 	 */
 	public void testX() throws Exception {
 		assertEquals(5000.0, this.coordinate.x());
@@ -45,7 +52,6 @@ public class CoordinateTest extends TestCase {
 
 	/**
 	 * Tests Coordinate#y().
-	 * @throws Exception
 	 */
 	public void testY() throws Exception {
 		assertEquals(8000.0, this.coordinate.y());
