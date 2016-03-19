@@ -1,9 +1,11 @@
 package be.thepieterdc.hive.models;
 
+import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ import java.util.List;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class ViewerModel extends Model {
+	private final HashMap<Integer, BoardState> boardStates;
 	private Move move = null;
 	private int moveIndex;
 	private final List<Move> moves;
@@ -24,10 +27,15 @@ public class ViewerModel extends Model {
 	private final int totalMoves;
 
 	public ViewerModel(List<Move> moves, Color player1Color, Color player2Color) {
+		this.boardStates = new HashMap<>();
 		this.moves = moves;
 		this.player1 = player1Color;
 		this.player2 = player2Color;
 		this.totalMoves = this.moves.size();
+	}
+
+	public BoardState boardState(int index) {
+		return this.boardStates.get(index);
 	}
 
 	public void move(int index) {

@@ -55,7 +55,7 @@ public class Main extends Application {
 			} catch(MalformedMoveException e) {
 				throw new Exception("Invalid move: "+e.move());
 			}
-			
+
 			MovesPane movesPane = new MovesPane(this.model);
 
 			UnitHexagon hexOne = new UnitHexagon(new Unit(Color.TURQUOISE, UnitType.BEATLE));
