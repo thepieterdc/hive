@@ -30,8 +30,8 @@ public class UnitHexagon extends StackPane {
 
 		this.unit = unit.path();
 		this.unit.setFill(color);
-		this.unit.setScaleX(25);
-		this.unit.setScaleY(25);
+		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(25/15));
+		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(25/15));
 
 		this.setMinSize(hexagon.width(), hexagon.height());
 		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
