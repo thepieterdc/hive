@@ -26,6 +26,8 @@ public class ViewerModel extends Model {
 	/**
 	 * ViewerModel constructor.
 	 * @param moves the moves to set
+	 * @param player1Color the color for player 1
+	 * @param player2Color the color for player 2
 	 */
 	public ViewerModel(List<Move> moves, Color player1Color, Color player2Color) {
 		this.moves = moves;

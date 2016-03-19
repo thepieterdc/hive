@@ -42,7 +42,7 @@ public class UnitPane extends GridPane implements InvalidationListener {
 
 	/**
 	 * UnitPane constructor.
-	 * @param m
+	 * @param m the model
 	 */
 	public UnitPane(ViewerModel m) {
 		this.model = m;
