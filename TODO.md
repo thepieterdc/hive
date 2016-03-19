@@ -1,12 +1,10 @@
-Move legit maken
-
 Overal argument checks
 
 toStrings waar mogelijk
 
-Overal jdocs
+Move#representation() niet meer meegeven maar bepalen
 
-Uniforme structuur(assignments eerst in constructoren)
+Zoveel mogelijk unittests
 
 Overbodige imports wat wegdoen
 
@@ -14,4 +12,6 @@ Algemene cleanup(zet alles op streng)
 
 i18n
 
-Svg hertekenen en alle units implementen
+Overal jdocs
+
+Remove unused methods

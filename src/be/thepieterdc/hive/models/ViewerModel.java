@@ -18,28 +18,18 @@ public class ViewerModel extends Model {
 	private int moveIndex;
 	private final List<Move> moves;
 
-	private final Color player1Color;
-	private final Color player2Color;
+	private final Color player1;
+	private final Color player2;
 
 	private final int totalMoves;
 
-	/**
-	 * ViewerModel constructor.
-	 * @param moves the moves to set
-	 * @param player1Color the color for player 1
-	 * @param player2Color the color for player 2
-	 */
 	public ViewerModel(List<Move> moves, Color player1Color, Color player2Color) {
 		this.moves = moves;
-		this.player1Color = player1Color;
-		this.player2Color = player2Color;
+		this.player1 = player1Color;
+		this.player2 = player2Color;
 		this.totalMoves = this.moves.size();
 	}
 
-	/**
-	 * move-setter.
-	 * @param index the index of the move
-	 */
 	public void move(int index) {
 		Move m = this.moves.get(index);
 		if (!m.equals(this.move)) {
@@ -49,58 +39,30 @@ public class ViewerModel extends Model {
 		}
 	}
 
-	/**
-	 * move-setter.
-	 * @param m the move to set
-	 */
 	public void move(Move m) {
 		this.move(this.moves.indexOf(m));
 	}
 
-	/**
-	 * move-getter.
-	 * @return the move
-	 */
 	public Move move() {
 		return this.move;
 	}
 
-	/**
-	 * moveIndex-getter.
-	 * @return the index of the move
-	 */
 	public int moveIndex() {
 		return this.moveIndex;
 	}
 
-	/**
-	 * moves-getter.
-	 * @return the moves
-	 */
 	public List<Move> moves() {
 		return this.moves;
 	}
 
-	/**
-	 * player1Color-getter.
-	 * @return the color of player 1
-	 */
-	public Color player1Color() {
-		return this.player1Color;
+	public Color player1() {
+		return this.player1;
 	}
 
-	/**
-	 * player2Color-getter.
-	 * @return the color of player 2
-	 */
-	public Color player2Color() {
-		return this.player2Color;
+	public Color player2() {
+		return this.player2;
 	}
 
-	/**
-	 * totalMoves-getter.
-	 * @return the total amount of moves
-	 */
 	public int totalMoves() {
 		return this.totalMoves;
 	}

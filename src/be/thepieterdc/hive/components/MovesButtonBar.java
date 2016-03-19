@@ -22,10 +22,6 @@ public class MovesButtonBar extends HBox implements InvalidationListener {
 	private final MovesButton btnNext = new MovesButton(Svg.MOVEBUTTON_NEXT);
 	private final MovesButton btnEnd = new MovesButton(Svg.MOVEBUTTON_END);
 
-	/**
-	 * MovesButtonBar constructor.
-	 * @param m the model
-	 */
 	public MovesButtonBar(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);

@@ -40,37 +40,33 @@ public class UnitPane extends GridPane implements InvalidationListener {
 	private final UnitHexagon p2S1;
 	private final UnitHexagon p2S2;
 
-	/**
-	 * UnitPane constructor.
-	 * @param m the model
-	 */
 	public UnitPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
 
-		this.p1A1 = new UnitHexagon(UnitType.ANT, this.model.player1Color(), 5);
-		this.p1A2 = new UnitHexagon(UnitType.ANT, this.model.player1Color(), 5);
-		this.p1A3 = new UnitHexagon(UnitType.ANT, this.model.player1Color(), 5);
-		this.p1B1 = new UnitHexagon(UnitType.BEATLE, this.model.player1Color(), 5);
-		this.p1B2 = new UnitHexagon(UnitType.BEATLE, this.model.player1Color(), 5);
-		this.p1G1 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player1Color(), 5);
-		this.p1G2 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player1Color(), 5);
-		this.p1G3 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player1Color(), 5);
-		this.p1Q = new UnitHexagon(UnitType.QUEEN, this.model.player1Color(), 5);
-		this.p1S1 = new UnitHexagon(UnitType.SPIDER, this.model.player1Color(), 5);
-		this.p1S2 = new UnitHexagon(UnitType.SPIDER, this.model.player1Color(), 5);
+		this.p1A1 = new UnitHexagon(UnitType.ANT, this.model.player1(), 5);
+		this.p1A2 = new UnitHexagon(UnitType.ANT, this.model.player1(), 5);
+		this.p1A3 = new UnitHexagon(UnitType.ANT, this.model.player1(), 5);
+		this.p1B1 = new UnitHexagon(UnitType.BEATLE, this.model.player1(), 5);
+		this.p1B2 = new UnitHexagon(UnitType.BEATLE, this.model.player1(), 5);
+		this.p1G1 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player1(), 5);
+		this.p1G2 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player1(), 5);
+		this.p1G3 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player1(), 5);
+		this.p1Q = new UnitHexagon(UnitType.QUEEN, this.model.player1(), 5);
+		this.p1S1 = new UnitHexagon(UnitType.SPIDER, this.model.player1(), 5);
+		this.p1S2 = new UnitHexagon(UnitType.SPIDER, this.model.player1(), 5);
 
-		this.p2A1 = new UnitHexagon(UnitType.ANT, this.model.player2Color(), 5);
-		this.p2A2 = new UnitHexagon(UnitType.ANT, this.model.player2Color(), 5);
-		this.p2A3 = new UnitHexagon(UnitType.ANT, this.model.player2Color(), 5);
-		this.p2B1 = new UnitHexagon(UnitType.BEATLE, this.model.player2Color(), 5);
-		this.p2B2 = new UnitHexagon(UnitType.BEATLE, this.model.player2Color(), 5);
-		this.p2G1 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player2Color(), 5);
-		this.p2G2 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player2Color(), 5);
-		this.p2G3 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player2Color(), 5);
-		this.p2Q = new UnitHexagon(UnitType.QUEEN, this.model.player2Color(), 5);
-		this.p2S1 = new UnitHexagon(UnitType.SPIDER, this.model.player2Color(), 5);
-		this.p2S2 = new UnitHexagon(UnitType.SPIDER, this.model.player2Color(), 5);
+		this.p2A1 = new UnitHexagon(UnitType.ANT, this.model.player2(), 5);
+		this.p2A2 = new UnitHexagon(UnitType.ANT, this.model.player2(), 5);
+		this.p2A3 = new UnitHexagon(UnitType.ANT, this.model.player2(), 5);
+		this.p2B1 = new UnitHexagon(UnitType.BEATLE, this.model.player2(), 5);
+		this.p2B2 = new UnitHexagon(UnitType.BEATLE, this.model.player2(), 5);
+		this.p2G1 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player2(), 5);
+		this.p2G2 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player2(), 5);
+		this.p2G3 = new UnitHexagon(UnitType.GRASSHOPPER, this.model.player2(), 5);
+		this.p2Q = new UnitHexagon(UnitType.QUEEN, this.model.player2(), 5);
+		this.p2S1 = new UnitHexagon(UnitType.SPIDER, this.model.player2(), 5);
+		this.p2S2 = new UnitHexagon(UnitType.SPIDER, this.model.player2(), 5);
 
 		this.addRow(0, p1A1, p1A2, p1A3, p1B1, p1B2, p1G1, p1G2, p1G3, p1Q, p1S1, p1S2);
 		this.addRow(1, p2A1, p2A2, p2A3, p2B1, p2B2, p2G1, p2G2, p2G3, p2Q, p2S1, p2S2);

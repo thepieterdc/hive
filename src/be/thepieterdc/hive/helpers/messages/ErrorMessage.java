@@ -10,10 +10,6 @@ import be.thepieterdc.hive.helpers.Message;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class ErrorMessage extends Message {
-	/**
-	 * ErrorMessage constructor.
-	 * @param message the message to display
-	 */
 	public ErrorMessage(String message) {
 		super(message, AlertType.ERROR, true);
 	}

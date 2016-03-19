@@ -5,6 +5,7 @@ import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
@@ -20,16 +21,21 @@ public class MovesPane extends VBox implements InvalidationListener {
 
 	private final ListView<Move> movesList;
 
-	/**
-	 * MovesPane constructor.
-	 * @param m the model
-	 */
 	public MovesPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
 
 		this.movesList = new ListView<>();
 		this.movesList.setItems(FXCollections.observableList(this.model.moves()));
+		this.movesList.setCellFactory(param -> new ListCell<Move>() {
+			@Override
+			protected void updateItem(Move t, boolean b) {
+				super.updateItem(t, b);
+				if(t != null) {
+					this.setText(t.representation());
+				}
+			}
+		});
 		this.movesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			model.move(newValue);
 		});

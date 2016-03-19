@@ -10,10 +10,6 @@ import be.thepieterdc.hive.helpers.Message;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class InfoMessage extends Message {
-	/**
-	 * InfoMessage constructor.
-	 * @param message the message to display
-	 */
 	public InfoMessage(String message) {
 		super(message, AlertType.INFORMATION);
 	}

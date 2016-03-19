@@ -1,5 +1,5 @@
 /**
- * Shows message(alert) boxes.
+ * Defines alert types.
  * <p>
  * Created at 17/03/16 14:29
  *

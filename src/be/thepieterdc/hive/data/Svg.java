@@ -28,26 +28,16 @@ public enum Svg {
 
 	private final String rawPath;
 
-	/**
-	 * Svg constructor.
-	 * @param p the raw path
-	 */
 	Svg(String p) {
 		this.rawPath = p;
 	}
 
-	/**
-	 * @return the SVGPath from the raw path
-	 */
 	public SVGPath path() {
 		SVGPath path = new SVGPath();
 		path.setContent(this.rawPath);
 		return path;
 	}
 
-	/**
-	 * @return the path as a string
-	 */
 	public String rawPath() {
 		return this.rawPath;
 	}
