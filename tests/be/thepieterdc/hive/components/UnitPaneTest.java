@@ -9,22 +9,22 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Test for the MovesButtonBar component.
+ * Test for the UnitPane component.
  * <p>
- * Created at 18/03/16 09:28
+ * Created at 19/03/16 09:50
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class MovesButtonBarTest extends ComponentTest {
+public class UnitPaneTest extends ComponentTest {
 	@Override
 	protected Parent component() {
 		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("test"), Move.fromRepresentation("test2"), Move.fromRepresentation("test3"));
 		ViewerModel m = new ViewerModel(moves, Color.BLACK, Color.WHITE);
-		MovesButtonBar movesButtonBar = new MovesButtonBar(m);
+		UnitPane pane = new UnitPane(m);
 
 		m.move(0);
 
-		return movesButtonBar;
+		return pane;
 	}
 
 	public static void main(String[] args) {

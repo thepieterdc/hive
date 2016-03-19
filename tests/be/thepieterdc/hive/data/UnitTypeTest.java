@@ -17,6 +17,9 @@ public class UnitTypeTest extends TestCase {
 		assertEquals("A", UnitType.ANT.abbreviation());
 		assertEquals("B", UnitType.BEATLE.abbreviation());
 		assertEquals("G", UnitType.GRASSHOPPER.abbreviation());
+		assertEquals("L", UnitType.LADYBUG.abbreviation());
+		assertEquals("M", UnitType.MOSQUITO.abbreviation());
+		assertEquals("P", UnitType.PILLBUG.abbreviation());
 		assertEquals("Q", UnitType.QUEEN.abbreviation());
 		assertEquals("S", UnitType.SPIDER.abbreviation());
 	}
@@ -28,6 +31,9 @@ public class UnitTypeTest extends TestCase {
 		assertTrue(UnitType.ANT.path() != null);
 		assertTrue(UnitType.BEATLE.path() != null);
 		assertTrue(UnitType.GRASSHOPPER.path() != null);
+		assertTrue(UnitType.LADYBUG.path() != null);
+		assertTrue(UnitType.MOSQUITO.path() != null);
+		assertTrue(UnitType.PILLBUG.path() != null);
 		assertTrue(UnitType.QUEEN.path() != null);
 		assertTrue(UnitType.SPIDER.path() != null);
 	}
@@ -39,6 +45,9 @@ public class UnitTypeTest extends TestCase {
 		assertEquals("Ant", UnitType.ANT.prettyName());
 		assertEquals("Beatle", UnitType.BEATLE.prettyName());
 		assertEquals("Grasshopper", UnitType.GRASSHOPPER.prettyName());
+		assertEquals("Ladybug", UnitType.LADYBUG.prettyName());
+		assertEquals("Mosquito", UnitType.MOSQUITO.prettyName());
+		assertEquals("Pillbug", UnitType.PILLBUG.prettyName());
 		assertEquals("Queen", UnitType.QUEEN.prettyName());
 		assertEquals("Spider", UnitType.SPIDER.prettyName());
 	}
@@ -50,6 +59,9 @@ public class UnitTypeTest extends TestCase {
 		assertEquals("UnitType[abbreviation=A, prettyName=Ant]", UnitType.ANT.toString());
 		assertEquals("UnitType[abbreviation=B, prettyName=Beatle]", UnitType.BEATLE.toString());
 		assertEquals("UnitType[abbreviation=G, prettyName=Grasshopper]", UnitType.GRASSHOPPER.toString());
+		assertEquals("UnitType[abbreviation=L, prettyName=Ladybug]", UnitType.LADYBUG.toString());
+		assertEquals("UnitType[abbreviation=M, prettyName=Mosquito]", UnitType.MOSQUITO.toString());
+		assertEquals("UnitType[abbreviation=P, prettyName=Pillbug]", UnitType.PILLBUG.toString());
 		assertEquals("UnitType[abbreviation=Q, prettyName=Queen]", UnitType.QUEEN.toString());
 		assertEquals("UnitType[abbreviation=S, prettyName=Spider]", UnitType.SPIDER.toString());
 	}

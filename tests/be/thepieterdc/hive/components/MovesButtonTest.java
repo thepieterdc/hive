@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
 public class MovesButtonTest extends ComponentTest {
 	@Override
 	protected Parent component() {
-		MovesButton svgButton = new MovesButton(Svg.UNIT_GRASSHOPPER);
+		MovesButton svgButton = new MovesButton(Svg.UNIT_QUEEN);
 		svgButton.setOnAction(event -> System.out.println("Svg test"));
 		MovesButton textButton = new MovesButton("Test");
 		textButton.setOnAction(event -> System.out.println("Text test"));
