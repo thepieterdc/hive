@@ -14,7 +14,7 @@ public class Move {
 	private final Color thisPlayer;
 	private final UnitType thisColor;
 	private final Color otherPlayer;
-	private final UnitType other
+	private final UnitType other;
 
 	/**
 	 * Move constructor.

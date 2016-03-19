@@ -5,14 +5,13 @@ import junit.framework.TestCase;
 import java.util.Arrays;
 
 /**
- * Description here
+ * Tests be.thepieterdc.hive.helpers.Coordinate.
  * <p>
  * Created at 16/03/16 19:39
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class CoordinateTest extends TestCase {
-
 	private Coordinate coordinate = null;
 
 	/**
