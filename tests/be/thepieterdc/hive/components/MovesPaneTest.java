@@ -3,6 +3,7 @@ package be.thepieterdc.hive.components;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.scene.Parent;
+import javafx.scene.paint.Color;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,7 @@ public class MovesPaneTest extends ComponentTest {
 	@Override
 	protected Parent component() {
 		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("test"), Move.fromRepresentation("test2"), Move.fromRepresentation("test3"));
-		ViewerModel m = new ViewerModel(moves);
+		ViewerModel m = new ViewerModel(moves, Color.BLACK, Color.WHITE);
 		MovesPane movesPane = new MovesPane(m);
 
 		m.move(0);
