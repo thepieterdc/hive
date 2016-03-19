@@ -57,10 +57,6 @@ public class Main extends Application {
 		}
 	}
 
-	/**
-	 * Starts the program.
-	 * @param args the filename to use as inputdata
-	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

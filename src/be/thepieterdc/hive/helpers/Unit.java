@@ -15,44 +15,24 @@ public class Unit {
 	private final int rank;
 	private final UnitType type;
 
-	/**
-	 * Unit constructor.
-	 * @param player the player color
-	 * @param type the unit type
-	 */
 	public Unit(Color player, UnitType type) {
 		this(player, type, 0);
 	}
 
-	/**
-	 * Unit constructor.
-	 * @param player the player color
-	 * @param type the unit type
-	 * @param rank the rank of the unit
-	 */
 	public Unit(Color player, UnitType type, int rank) {
 		this.player = player;
 		this.rank = rank;
 		this.type = type;
 	}
 
-	/**
-	 * @return the player color
-	 */
 	public Color player() {
 		return this.player;
 	}
 
-	/**
-	 * @return the unit rank
-	 */
 	public int rank() {
 		return this.rank;
 	}
 
-	/**
-	 * @return the unit type
-	 */
 	public UnitType type() {
 		return this.type;
 	}

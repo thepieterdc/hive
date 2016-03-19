@@ -13,10 +13,6 @@ import javafx.stage.Stage;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 abstract class ComponentTest extends Application {
-
-	/**
-	 * @see Application
-	 */
 	@Override
 	public void start(Stage s) throws Exception {
 		Scene scene = new Scene(component());
@@ -24,8 +20,5 @@ abstract class ComponentTest extends Application {
 		s.show();
 	}
 
-	/**
-	 * @return the component to test
-	 */
 	abstract protected Parent component();
 }

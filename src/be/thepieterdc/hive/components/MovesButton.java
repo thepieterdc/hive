@@ -11,18 +11,10 @@ import javafx.scene.control.Button;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class MovesButton extends Button {
-	/**
-	 * MovesButton constructor.
-	 * @param lbl the text label
-	 */
 	public MovesButton(String lbl) {
 		this.setText(lbl);
 	}
 
-	/**
-	 * MovesButton constructor.
-	 * @param lbl the graphical label
-	 */
 	public MovesButton(Svg lbl) {
 		this.setGraphic(lbl.path());
 	}
