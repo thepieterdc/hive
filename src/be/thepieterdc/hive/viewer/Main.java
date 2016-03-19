@@ -37,6 +37,7 @@ public class Main extends Application {
 				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
 				List<Move> movesMove = new ArrayList<>();
 				for(String s : movesString) {
+					System.out.println(s);
 					movesMove.add(Move.fromRepresentation(s));
 				}
 				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);

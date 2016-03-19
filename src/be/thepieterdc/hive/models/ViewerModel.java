@@ -18,8 +18,8 @@ public class ViewerModel extends Model {
 	private int moveIndex;
 	private final List<Move> moves;
 
-	private final Color player1Color;
-	private final Color player2Color;
+	private final Color player1;
+	private final Color player2;
 
 	private final int totalMoves;
 
@@ -31,8 +31,8 @@ public class ViewerModel extends Model {
 	 */
 	public ViewerModel(List<Move> moves, Color player1Color, Color player2Color) {
 		this.moves = moves;
-		this.player1Color = player1Color;
-		this.player2Color = player2Color;
+		this.player1 = player1Color;
+		this.player2 = player2Color;
 		this.totalMoves = this.moves.size();
 	}
 
@@ -82,19 +82,19 @@ public class ViewerModel extends Model {
 	}
 
 	/**
-	 * player1Color-getter.
+	 * player1-getter.
 	 * @return the color of player 1
 	 */
-	public Color player1Color() {
-		return this.player1Color;
+	public Color player1() {
+		return this.player1;
 	}
 
 	/**
-	 * player2Color-getter.
+	 * player2-getter.
 	 * @return the color of player 2
 	 */
-	public Color player2Color() {
-		return this.player2Color;
+	public Color player2() {
+		return this.player2;
 	}
 
 	/**

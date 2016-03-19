@@ -11,8 +11,10 @@ import javafx.scene.paint.Color;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class Move {
-	private final Color player;
-	private final UnitType unit;
+	private final Color thisPlayer;
+	private final UnitType thisColor;
+	private final Color otherPlayer;
+	private final UnitType other
 
 	/**
 	 * Move constructor.
@@ -30,6 +32,11 @@ public class Move {
 	 * @return the Move created
 	 */
 	public static Move fromRepresentation(String r) {
+		r = r.toLowerCase();
+		if(r.equals("start")) {
+			return new Move(null, null, null, null, null);
+		}
+
 		return new Move(Color.ALICEBLUE, UnitType.ANT);
 	}
 
