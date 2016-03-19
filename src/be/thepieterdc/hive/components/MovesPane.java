@@ -20,10 +20,6 @@ public class MovesPane extends VBox implements InvalidationListener {
 
 	private final ListView<Move> movesList;
 
-	/**
-	 * MovesPane constructor.
-	 * @param m the model
-	 */
 	public MovesPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);

@@ -1,6 +1,7 @@
 package be.thepieterdc.hive.helpers.moves;
 
 import be.thepieterdc.hive.helpers.Move;
+import be.thepieterdc.hive.helpers.Unit;
 
 /**
  * The first move.
@@ -10,4 +11,7 @@ import be.thepieterdc.hive.helpers.Move;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class FirstMove extends Move {
+	public FirstMove(Unit u, String r) {
+		super(u, null, null, r);
+	}
 }

@@ -16,22 +16,11 @@ public class UnitHexagon extends StackPane {
 	private final Hexagon hexagon;
 	private final SVGPath unit;
 
-	/**
-	 * UnitHexagon constructor.
-	 * @param unit the unit type
-	 * @param color the unit color
-	 * @param beginScale the default scale
-	 */
 	public UnitHexagon(UnitType unit, Color color, double beginScale) {
 		this(unit, color);
 		this.scale(beginScale);
 	}
 
-	/**
-	 * UnitHexagon constructor.
-	 * @param unit the unit type
-	 * @param color the unit color
-	 */
 	public UnitHexagon(UnitType unit, Color color) {
 		this.hexagon = new Hexagon();
 		this.hexagon.setFill(color.invert());
@@ -46,26 +35,16 @@ public class UnitHexagon extends StackPane {
 		this.getChildren().addAll(this.hexagon, this.unit);
 	}
 
-	/**
-	 * @return the height of this hexagon
-	 */
 	public double height() {
 		return this.hexagon.height();
 	}
 
-	/**
-	 * Scales this hexagon with a given factor.
-	 * @param factor the factor to scale
-	 */
 	public void scale(double factor) {
 		this.hexagon.setScaleX(factor);
 		this.hexagon.setScaleY(factor);
 		this.setMinSize(this.width(), this.height());
 	}
 
-	/**
-	 * @return the width of this hexagon
-	 */
 	public double width() {
 		return this.hexagon.width();
 	}

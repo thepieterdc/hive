@@ -40,10 +40,6 @@ public class UnitPane extends GridPane implements InvalidationListener {
 	private final UnitHexagon p2S1;
 	private final UnitHexagon p2S2;
 
-	/**
-	 * UnitPane constructor.
-	 * @param m the model
-	 */
 	public UnitPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
