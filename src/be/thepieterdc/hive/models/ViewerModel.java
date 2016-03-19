@@ -34,8 +34,16 @@ public class ViewerModel extends Model {
 		this.totalMoves = this.moves.size();
 	}
 
+	public void addState(int index, BoardState b) {
+		this.boardStates.put(index, b);
+	}
+
 	public BoardState boardState(int index) {
 		return this.boardStates.get(index);
+	}
+
+	public BoardState boardState() {
+		return this.boardStates.get(this.moveIndex);
 	}
 
 	public void move(int index) {

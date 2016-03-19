@@ -25,7 +25,7 @@ public class BoardState {
 		return previous;
 	}
 
-	public HashMap state() {
+	public HashMap<Coordinate, Hexagon> state() {
 		return this.state;
 	}
 }

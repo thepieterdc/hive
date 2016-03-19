@@ -1,29 +1,27 @@
 package be.thepieterdc.hive.viewer;
 
 import be.thepieterdc.hive.components.MovesPane;
-import be.thepieterdc.hive.components.UnitHexagon;
+import be.thepieterdc.hive.components.PlayPane;
 import be.thepieterdc.hive.components.UnitPane;
-import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.exceptions.MalformedMoveException;
+import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
-import be.thepieterdc.hive.helpers.Unit;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
+import be.thepieterdc.hive.helpers.moves.StartMove;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Orientation;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Main application
@@ -45,10 +43,7 @@ public class Main extends Application {
 			List<String> parameters = args.getRaw();
 			try {
 				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
-				List<Move> movesMove = new ArrayList<>();
-				for(String s : movesString) {
-					movesMove.add(Move.fromRepresentation(s));
-				}
+				List<Move> movesMove = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
 				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);
 			} catch(IOException e) {
 				throw new Exception("Inputdata was not found or is unreadable.");
@@ -56,21 +51,11 @@ public class Main extends Application {
 				throw new Exception("Invalid move: "+e.move());
 			}
 
+			this.model.addState(0, new BoardState((StartMove) this.model.moves().get(0)));
+
 			MovesPane movesPane = new MovesPane(this.model);
 
-			UnitHexagon hexOne = new UnitHexagon(new Unit(Color.TURQUOISE, UnitType.BEATLE));
-			hexOne.scale(10);
-			hexOne.setTranslateX(-200);
-			UnitHexagon hexTwo = new UnitHexagon(new Unit(Color.MEDIUMAQUAMARINE, UnitType.LADYBUG, 3));
-			hexTwo.scale(10);
-			UnitHexagon hexThree = new UnitHexagon(new Unit(Color.BLANCHEDALMOND, UnitType.GRASSHOPPER, 2));
-			hexThree.scale(10);
-			hexThree.setTranslateX(200);
-
-			Group hexagons = new Group();
-			hexagons.getChildren().addAll(hexOne, hexTwo, hexThree);
-
-			StackPane playPane = new StackPane(hexagons);
+			PlayPane playPane = new PlayPane(this.model);
 
 			SplitPane mainPane = new SplitPane(movesPane, playPane);
 			mainPane.setDividerPositions(0.0);
