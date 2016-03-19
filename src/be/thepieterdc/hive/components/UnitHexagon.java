@@ -3,8 +3,7 @@ package be.thepieterdc.hive.components;
 import be.thepieterdc.hive.data.UnitType;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.shape.SVGPath;
 
 /**
  * UnitHexagon component.
@@ -14,26 +13,43 @@ import javafx.scene.text.Text;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class UnitHexagon extends StackPane {
+	private final Hexagon hexagon;
+	private final SVGPath unit;
+
 	/**
 	 * UnitHexagon constructor.
 	 * @param unit the unit type
 	 * @param color the unit color
 	 */
 	public UnitHexagon(UnitType unit, Color color) {
+		this.hexagon = new Hexagon();
+		this.hexagon.setFill(color.invert());
+		this.hexagon.setStroke(color);
+		this.hexagon.setScaleX(15);
+		this.hexagon.setScaleY(15);
+
+		this.unit = unit.path();
+		this.unit.setFill(color);
+		this.unit.setScaleX(25);
+		this.unit.setScaleY(25);
+
+		this.setMinSize(hexagon.width(), hexagon.height());
 		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
-		Hexagon hexagon = new Hexagon();
-		hexagon.setFill(color.invert());
-		hexagon.setStroke(color);
-		hexagon.setScaleX(15);
-		hexagon.setScaleY(15);
+		this.getChildren().addAll(this.hexagon, this.unit);
+	}
 
-		Text text = new Text(unit.abbreviation());
-		text.setFont(new Font(200));
-		text.setFill(color);
+	/**
+	 * @return the height of this hexagon
+	 */
+	public double height() {
+		return this.hexagon.height();
+	}
 
-		this.getChildren().addAll(hexagon, text);
-		this.setOnMouseClicked(event -> hexagon.setStrokeWidth(hexagon.getStrokeWidth()+1));
-		this.setMinSize(hexagon.width(), hexagon.height());
+	/**
+	 * @return the width of this hexagon
+	 */
+	public double width() {
+		return this.hexagon.width();
 	}
 }
