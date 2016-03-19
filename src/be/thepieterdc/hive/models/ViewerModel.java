@@ -2,6 +2,7 @@ package be.thepieterdc.hive.models;
 
 import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
+import javafx.scene.paint.Color;
 
 import java.util.List;
 
@@ -16,14 +17,20 @@ public class ViewerModel extends Model {
 	private Move move = null;
 	private int moveIndex;
 	private final List<Move> moves;
+
+	private final Color player1Color;
+	private final Color player2Color;
+
 	private final int totalMoves;
 
 	/**
 	 * ViewerModel constructor.
 	 * @param moves the moves to set
 	 */
-	public ViewerModel(List<Move> moves) {
+	public ViewerModel(List<Move> moves, Color player1Color, Color player2Color) {
 		this.moves = moves;
+		this.player1Color = player1Color;
+		this.player2Color = player2Color;
 		this.totalMoves = this.moves.size();
 	}
 
@@ -70,6 +77,22 @@ public class ViewerModel extends Model {
 	 */
 	public List<Move> moves() {
 		return this.moves;
+	}
+
+	/**
+	 * player1Color-getter.
+	 * @return the color of player 1
+	 */
+	public Color player1Color() {
+		return this.player1Color;
+	}
+
+	/**
+	 * player2Color-getter.
+	 * @return the color of player 2
+	 */
+	public Color player2Color() {
+		return this.player2Color;
 	}
 
 	/**
