@@ -1,8 +1,7 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.data.UnitType;
+import be.thepieterdc.hive.helpers.Unit;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -16,18 +15,18 @@ public class UnitHexagon extends StackPane {
 	private final Hexagon hexagon;
 	private final SVGPath unit;
 
-	public UnitHexagon(UnitType unit, Color color, double beginScale) {
-		this(unit, color);
+	public UnitHexagon(Unit u, double beginScale) {
+		this(u);
 		this.scale(beginScale);
 	}
 
-	public UnitHexagon(UnitType unit, Color color) {
+	public UnitHexagon(Unit u) {
 		this.hexagon = new Hexagon();
-		this.hexagon.setFill(color.invert());
-		this.hexagon.setStroke(color);
+		this.hexagon.setFill(u.player().invert());
+		this.hexagon.setStroke(u.player());
 
-		this.unit = unit.path();
-		this.unit.setFill(color);
+		this.unit = u.type().path();
+		this.unit.setFill(u.player());
 		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
 		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
 

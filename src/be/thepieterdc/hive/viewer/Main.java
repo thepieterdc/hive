@@ -6,6 +6,7 @@ import be.thepieterdc.hive.components.UnitPane;
 import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.exceptions.MalformedMoveException;
 import be.thepieterdc.hive.helpers.Move;
+import be.thepieterdc.hive.helpers.Unit;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
@@ -57,12 +58,12 @@ public class Main extends Application {
 
 			MovesPane movesPane = new MovesPane(this.model);
 
-			UnitHexagon hexOne = new UnitHexagon(UnitType.BEATLE, Color.TURQUOISE);
+			UnitHexagon hexOne = new UnitHexagon(new Unit(Color.TURQUOISE, UnitType.BEATLE));
 			hexOne.scale(10);
 			hexOne.setTranslateX(-200);
-			UnitHexagon hexTwo = new UnitHexagon(UnitType.LADYBUG, Color.MEDIUMAQUAMARINE);
+			UnitHexagon hexTwo = new UnitHexagon(new Unit(Color.MEDIUMAQUAMARINE, UnitType.LADYBUG, 3));
 			hexTwo.scale(10);
-			UnitHexagon hexThree = new UnitHexagon(UnitType.QUEEN, Color.BLANCHEDALMOND);
+			UnitHexagon hexThree = new UnitHexagon(new Unit(Color.BLANCHEDALMOND, UnitType.GRASSHOPPER, 2));
 			hexThree.scale(10);
 			hexThree.setTranslateX(200);
 
