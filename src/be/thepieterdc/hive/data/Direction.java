@@ -8,7 +8,12 @@ package be.thepieterdc.hive.data;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum Direction {
-	LEFT("\\");
+	LEFT("-r"),
+	LEFTUPPER("\\a"),
+	LEFTUNDER("/a"),
+	RIGHT("r-"),
+	RIGHTUPPER("a/"),
+	RIGHTUNDER("a\\");
 
 	private final String representation;
 
@@ -22,7 +27,7 @@ public enum Direction {
 
 	/**
 	 * Finds the Direction for a given representation.
-	 * @param rep the representation
+	 * @param rep the representation; include an "r" to indicate where the unit type is situated
 	 * @return the Direction found
 	 */
 	public static Direction fromRepresentation(String rep) {
