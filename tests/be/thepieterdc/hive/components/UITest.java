@@ -4,12 +4,9 @@ import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
@@ -50,16 +47,8 @@ public class UITest extends ComponentTest {
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
 		mainPane.setDividerPositions(0.0);
 
-		Label[] topLabels = new Label[] {new Label("wQ"), new Label("wA1"), new Label("wA2"), new Label("wA3"), new Label("wS1"), new Label("wS2"), new Label("wB1"), new Label("wB1"), new Label("wG1"), new Label("wG2"), new Label("wG3")};
-		Label[] bottomLabels = new Label[] {new Label("bQ"), new Label("bA1"), new Label("bA2"), new Label("bA3"), new Label("bS1"), new Label("bS2"), new Label("bB1"), new Label("bB1"), new Label("bG1"), new Label("bG2"), new Label("bG3")};
-
 		//TILEPANE//
-		GridPane bottomPane = new GridPane();
-		bottomPane.setGridLinesVisible(true);
-		bottomPane.addRow(0, topLabels);
-		bottomPane.addRow(1, bottomLabels);
-		bottomPane.setAlignment(Pos.CENTER);
-		bottomPane.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		UnitPane bottomPane = new UnitPane(m);
 
 		SplitPane root = new SplitPane(mainPane, bottomPane);
 		root.setDividerPositions(100.0);

@@ -20,6 +20,17 @@ public class UnitHexagon extends StackPane {
 	 * UnitHexagon constructor.
 	 * @param unit the unit type
 	 * @param color the unit color
+	 * @param beginScale the default scale
+	 */
+	public UnitHexagon(UnitType unit, Color color, double beginScale) {
+		this(unit, color);
+		this.scale(beginScale);
+	}
+
+	/**
+	 * UnitHexagon constructor.
+	 * @param unit the unit type
+	 * @param color the unit color
 	 */
 	public UnitHexagon(UnitType unit, Color color) {
 		this.hexagon = new Hexagon();
@@ -28,8 +39,8 @@ public class UnitHexagon extends StackPane {
 
 		this.unit = unit.path();
 		this.unit.setFill(color);
-		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(25/15));
-		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(25/15));
+		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
+		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
 
 		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 		this.getChildren().addAll(this.hexagon, this.unit);

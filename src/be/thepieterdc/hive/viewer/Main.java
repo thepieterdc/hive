@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.nio.file.Files;
@@ -38,7 +39,7 @@ public class Main extends Application {
 				for(String s : movesString) {
 					movesMove.add(Move.fromRepresentation(s));
 				}
-				this.model = new ViewerModel(movesMove);
+				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);
 			} catch(Exception e) {
 				throw new Exception("Inputdata onleesbaar of onbestaand.");
 			}
