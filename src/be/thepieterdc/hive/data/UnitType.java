@@ -35,7 +35,7 @@ public enum UnitType {
 
 	public static UnitType fromAbbreviation(String a) {
 		for(UnitType u : UnitType.values()) {
-			if(u.abbreviation().equals(a)) {
+			if(u.abbreviation().equals(a.toUpperCase())) {
 				return u;
 			}
 		}

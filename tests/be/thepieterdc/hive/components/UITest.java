@@ -23,7 +23,7 @@ import java.util.List;
 public class UITest extends ComponentTest {
 	@Override
 	protected Parent component() {
-		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("test"), Move.fromRepresentation("test2"), Move.fromRepresentation("test3"));
+		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("wQ"), Move.fromRepresentation("bQ -wQ"));
 		ViewerModel m = new ViewerModel(moves, Color.BLACK, Color.WHITE);
 
 		MovesPane movesPane = new MovesPane(m);

@@ -18,7 +18,7 @@ import java.util.List;
 public class UnitPaneTest extends ComponentTest {
 	@Override
 	protected Parent component() {
-		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("test"), Move.fromRepresentation("test2"), Move.fromRepresentation("test3"));
+		List<Move> moves = Arrays.asList(Move.fromRepresentation("start"), Move.fromRepresentation("wQ"), Move.fromRepresentation("bQ -wQ"));
 		ViewerModel m = new ViewerModel(moves, Color.BLACK, Color.WHITE);
 		UnitPane pane = new UnitPane(m);
 
