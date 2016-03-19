@@ -35,6 +35,8 @@ public enum UnitType {
 		return this.name().substring(0, 1);
 	}
 
+	public static String from
+
 	/**
 	 * @return the svg path of this unit
 	 */

@@ -4,7 +4,7 @@ Overal argument checks
 
 toStrings waar mogelijk
 
-Uniforme structuur(assignments eerst in constructoren)
+Zoveel mogelijk unittests
 
 Overbodige imports wat wegdoen
 
