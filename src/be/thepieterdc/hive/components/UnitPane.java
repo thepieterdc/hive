@@ -7,6 +7,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.layout.GridPane;
 
+import java.util.HashMap;
+
 /**
  * Grid that holds all playable units.
  * <p>
@@ -16,61 +18,58 @@ import javafx.scene.layout.GridPane;
  */
 public class UnitPane extends GridPane implements InvalidationListener {
 	private final ViewerModel model;
+	private final HashMap<UnitHexagon, UnitPaneItem> unitHexagons = new HashMap<>();
 
-	private final UnitHexagon p1A1;
-	private final UnitHexagon p1A2;
-	private final UnitHexagon p1A3;
-	private final UnitHexagon p1B1;
-	private final UnitHexagon p1B2;
-	private final UnitHexagon p1G1;
-	private final UnitHexagon p1G2;
-	private final UnitHexagon p1G3;
-	private final UnitHexagon p1Q;
-	private final UnitHexagon p1S1;
-	private final UnitHexagon p1S2;
+	private class UnitPaneItem {
+		private final int col;
+		private final int row;
+		private boolean visible = true;
 
-	private final UnitHexagon p2A1;
-	private final UnitHexagon p2A2;
-	private final UnitHexagon p2A3;
-	private final UnitHexagon p2B1;
-	private final UnitHexagon p2B2;
-	private final UnitHexagon p2G1;
-	private final UnitHexagon p2G2;
-	private final UnitHexagon p2G3;
-	private final UnitHexagon p2Q;
-	private final UnitHexagon p2S1;
-	private final UnitHexagon p2S2;
+		UnitPaneItem(int row, int col) {
+			this.col = col;
+			this.row = row;
+		}
+
+		public void hide() {
+			this.visible = false;
+		}
+
+		public void show() {
+			this.visible = true;
+		}
+
+		public boolean visible() {
+			return this.visible;
+		}
+	}
 
 	public UnitPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
 
-		this.p1A1 = new UnitHexagon(new Unit(this.model.player1(), UnitType.ANT, 1), 5);
-		this.p1A2 = new UnitHexagon(new Unit(this.model.player1(), UnitType.ANT, 2), 5);
-		this.p1A3 = new UnitHexagon(new Unit(this.model.player1(), UnitType.ANT, 3), 5);
-		this.p1B1 = new UnitHexagon(new Unit(this.model.player1(), UnitType.BEATLE, 1), 5);
-		this.p1B2 = new UnitHexagon(new Unit(this.model.player1(), UnitType.BEATLE, 2), 5);
-		this.p1G1 = new UnitHexagon(new Unit(this.model.player1(), UnitType.GRASSHOPPER, 1), 5);
-		this.p1G2 = new UnitHexagon(new Unit(this.model.player1(), UnitType.GRASSHOPPER, 2), 5);
-		this.p1G3 = new UnitHexagon(new Unit(this.model.player1(), UnitType.GRASSHOPPER, 3), 5);
-		this.p1Q = new UnitHexagon(new Unit(this.model.player1(), UnitType.QUEEN), 5);
-		this.p1S1 = new UnitHexagon(new Unit(this.model.player1(), UnitType.SPIDER, 1), 5);
-		this.p1S2 = new UnitHexagon(new Unit(this.model.player1(), UnitType.SPIDER, 2), 5);
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.ANT, 1), 5), new UnitPaneItem(0, 0));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.ANT, 2), 5), new UnitPaneItem(0, 1));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.ANT, 3), 5), new UnitPaneItem(0, 2));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.BEATLE, 1), 5), new UnitPaneItem(0, 3));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.BEATLE, 2), 5), new UnitPaneItem(0, 4));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.GRASSHOPPER, 1), 5), new UnitPaneItem(0, 5));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.GRASSHOPPER, 2), 5), new UnitPaneItem(0, 6));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.GRASSHOPPER, 3), 5), new UnitPaneItem(0, 7));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.QUEEN), 5), new UnitPaneItem(0, 8));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.SPIDER, 1), 5), new UnitPaneItem(0, 9));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player1(), UnitType.SPIDER, 2), 5), new UnitPaneItem(0, 10));
 
-		this.p2A1 = new UnitHexagon(new Unit(this.model.player2(), UnitType.ANT, 1), 5);
-		this.p2A2 = new UnitHexagon(new Unit(this.model.player2(), UnitType.ANT, 2), 5);
-		this.p2A3 = new UnitHexagon(new Unit(this.model.player2(), UnitType.ANT, 3), 5);
-		this.p2B1 = new UnitHexagon(new Unit(this.model.player2(), UnitType.BEATLE, 1), 5);
-		this.p2B2 = new UnitHexagon(new Unit(this.model.player2(), UnitType.BEATLE, 2), 5);
-		this.p2G1 = new UnitHexagon(new Unit(this.model.player2(), UnitType.GRASSHOPPER, 1), 5);
-		this.p2G2 = new UnitHexagon(new Unit(this.model.player2(), UnitType.GRASSHOPPER, 2), 5);
-		this.p2G3 = new UnitHexagon(new Unit(this.model.player2(), UnitType.GRASSHOPPER, 3), 5);
-		this.p2Q = new UnitHexagon(new Unit(this.model.player2(), UnitType.QUEEN), 5);
-		this.p2S1 = new UnitHexagon(new Unit(this.model.player2(), UnitType.SPIDER, 1), 5);
-		this.p2S2 = new UnitHexagon(new Unit(this.model.player2(), UnitType.SPIDER, 2), 5);
-
-		this.addRow(0, p1A1, p1A2, p1A3, p1B1, p1B2, p1G1, p1G2, p1G3, p1Q, p1S1, p1S2);
-		this.addRow(1, p2A1, p2A2, p2A3, p2B1, p2B2, p2G1, p2G2, p2G3, p2Q, p2S1, p2S2);
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.ANT, 1), 5), new UnitPaneItem(1, 0));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.ANT, 2), 5), new UnitPaneItem(1, 1));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.ANT, 3), 5), new UnitPaneItem(1, 2));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.BEATLE, 1), 5), new UnitPaneItem(1, 3));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.BEATLE, 2), 5), new UnitPaneItem(1, 4));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.GRASSHOPPER, 1), 5), new UnitPaneItem(1, 5));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.GRASSHOPPER, 2), 5), new UnitPaneItem(1, 6));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.GRASSHOPPER, 3), 5), new UnitPaneItem(1, 7));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.QUEEN), 5), new UnitPaneItem(1, 8));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.SPIDER, 1), 5), new UnitPaneItem(1, 9));
+		this.unitHexagons.put(new UnitHexagon(new Unit(this.model.player2(), UnitType.SPIDER, 2), 5), new UnitPaneItem(1, 10));
 	}
 
 	@Override
