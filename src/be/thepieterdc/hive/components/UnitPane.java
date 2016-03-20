@@ -72,27 +72,30 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		Unit p2Q = new Unit(this.model.player2(), UnitType.QUEEN);
 		Unit p2S1 = new Unit(this.model.player2(), UnitType.SPIDER, 1);
 		Unit p2S2 = new Unit(this.model.player2(), UnitType.SPIDER, 2);
-		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p1A1, 5), 1, 0));
-		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p1A2, 5), 1, 1));
-		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p1A3, 5), 1, 2));
-		this.unitHexagons.put(p2B1, new UnitPaneItem(new UnitHexagon(p1B1, 5), 1, 3));
-		this.unitHexagons.put(p2B2, new UnitPaneItem(new UnitHexagon(p1B2, 5), 1, 4));
-		this.unitHexagons.put(p2G1, new UnitPaneItem(new UnitHexagon(p1G1, 5), 1, 5));
-		this.unitHexagons.put(p2G2, new UnitPaneItem(new UnitHexagon(p1G2, 5), 1, 6));
-		this.unitHexagons.put(p2G3, new UnitPaneItem(new UnitHexagon(p1G3, 5), 1, 7));
-		this.unitHexagons.put(p2Q, new UnitPaneItem(new UnitHexagon(p1Q, 5), 1, 8));
-		this.unitHexagons.put(p2S1, new UnitPaneItem(new UnitHexagon(p1S1, 5), 1, 9));
-		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p1S2, 5), 1, 10));
+		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p2A1, 5), 1, 0));
+		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p2A2, 5), 1, 1));
+		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p2A3, 5), 1, 2));
+		this.unitHexagons.put(p2B1, new UnitPaneItem(new UnitHexagon(p2B1, 5), 1, 3));
+		this.unitHexagons.put(p2B2, new UnitPaneItem(new UnitHexagon(p2B2, 5), 1, 4));
+		this.unitHexagons.put(p2G1, new UnitPaneItem(new UnitHexagon(p2G1, 5), 1, 5));
+		this.unitHexagons.put(p2G2, new UnitPaneItem(new UnitHexagon(p2G2, 5), 1, 6));
+		this.unitHexagons.put(p2G3, new UnitPaneItem(new UnitHexagon(p2G3, 5), 1, 7));
+		this.unitHexagons.put(p2Q, new UnitPaneItem(new UnitHexagon(p2Q, 5), 1, 8));
+		this.unitHexagons.put(p2S1, new UnitPaneItem(new UnitHexagon(p2S1, 5), 1, 9));
+		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p2S2, 5), 1, 10));
 	}
 
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
 		HashMap<Unit, GridCoordinate> state = this.model.boardState().units();
+		System.out.println(state.size());
 		for (Map.Entry<Unit, UnitPaneItem> entry : this.unitHexagons.entrySet()) {
 			UnitPaneItem item = entry.getValue();
 			if(!state.containsKey(entry.getKey())) {
 				this.add(item.hexagon, item.column, item.row);
+			} else {
+				System.out.println("Test");
 			}
 		}
 	}
