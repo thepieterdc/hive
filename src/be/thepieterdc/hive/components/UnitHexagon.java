@@ -13,7 +13,8 @@ import javafx.scene.shape.SVGPath;
  */
 public class UnitHexagon extends StackPane {
 	private final Hexagon hexagon;
-	private final SVGPath unit;
+	private final Unit unit;
+	private final SVGPath unitSvg;
 
 	public UnitHexagon(Unit u, double beginScale) {
 		this(u);
@@ -21,17 +22,19 @@ public class UnitHexagon extends StackPane {
 	}
 
 	public UnitHexagon(Unit u) {
+		this.unit = u;
+
 		this.hexagon = new Hexagon();
 		this.hexagon.setFill(u.player().invert());
 		this.hexagon.setStroke(u.player());
 
-		this.unit = u.type().path();
-		this.unit.setFill(u.player());
-		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
-		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
+		this.unitSvg = u.type().path();
+		this.unitSvg.setFill(u.player());
+		this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
+		this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
 
 		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-		this.getChildren().addAll(this.hexagon, this.unit);
+		this.getChildren().addAll(this.hexagon, this.unitSvg);
 	}
 
 	public double height() {
@@ -42,6 +45,10 @@ public class UnitHexagon extends StackPane {
 		this.hexagon.setScaleX(factor);
 		this.hexagon.setScaleY(factor);
 		this.setMinSize(this.width(), this.height());
+	}
+
+	public Unit unit() {
+		return this.unit;
 	}
 
 	public double width() {

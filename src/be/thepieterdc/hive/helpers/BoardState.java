@@ -24,6 +24,7 @@ public class BoardState {
 	private final HashMap<Unit, GridCoordinate> units = new HashMap<>();
 
 	private BoardState(FirstMove f) {
+		this.coordinates.putAll();
 		this.state.putAll(surroundings(new GridCoordinate(0, 0), new UnitHexagon(f.unit())));
 	}
 
