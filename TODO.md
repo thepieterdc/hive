@@ -14,4 +14,6 @@ i18n
 
 Overal jdocs
 
+Svg hertekenen(size niet juist)
+
 Remove unused methods

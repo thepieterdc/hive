@@ -33,11 +33,37 @@ public class PlayPane extends StackPane implements InvalidationListener {
 
 		Group hexagons = new Group();
 
+		double minX = Integer.MAX_VALUE;
+		double maxX = Integer.MIN_VALUE;
+		double minY = Integer.MAX_VALUE;
+		double maxY = Integer.MIN_VALUE;
+
 		for (Map.Entry<Coordinate, Hexagon> child : state.entrySet()) {
-			hexagons.getChildren().add(child.getValue());
+			Coordinate coord = child.getKey();
+			minX = Math.min(minX, coord.x());
+			maxX = Math.max(maxX, coord.x());
+			minY = Math.min(minY, coord.y());
+			maxY = Math.max(maxY, coord.y());
+		}
+
+		int widthPieces = (int) (Math.abs(minX)+Math.abs(maxX)+1);
+		int heightPieces = (int) (Math.abs(minY)+Math.abs(maxY)+1);
+
+		double widthScreen = this.getBoundsInParent().getWidth();
+		double heightScreen = this.getBoundsInParent().getHeight();
+
+		double maxSizePieces = (Math.min(widthScreen, heightScreen) / Math.max(widthPieces, heightPieces) - 30)/50;
+
+		for (Map.Entry<Coordinate, Hexagon> child : state.entrySet()) {
+			Coordinate coord = child.getKey();
+			Hexagon hex = child.getValue();
+			hex.setLayoutX(coord.x());
+			hex.setLayoutX(coord.y());
+			hex.setScaleX(maxSizePieces);
+			hex.setScaleY(maxSizePieces);
+			hexagons.getChildren().addAll(hex);
 		}
 
 		this.getChildren().add(hexagons);
-
 	}
 }

@@ -11,9 +11,9 @@ import be.thepieterdc.hive.helpers.moves.StartMove;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -44,7 +44,7 @@ public class Main extends Application {
 			try {
 				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
 				List<Move> movesMove = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
-				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);
+				this.model = new ViewerModel(movesMove, Color.BLANCHEDALMOND, Color.DARKGRAY);
 			} catch(IOException e) {
 				throw new Exception("Inputdata was not found or is unreadable.");
 			} catch(MalformedMoveException e) {
@@ -63,17 +63,14 @@ public class Main extends Application {
 			//TILEPANE//
 			UnitPane bottomPane = new UnitPane(this.model);
 
-			SplitPane root = new SplitPane(mainPane, bottomPane);
-			root.setDividerPositions(100.0);
-			root.setOrientation(Orientation.VERTICAL);
+			VBox root = new VBox(mainPane, bottomPane);
 			root.setPrefSize(800, 500);
-
-			this.model.move(0);
 
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setTitle("Hive Viewer");
 			stage.show();
+			this.model.move(0);
 		} catch (Exception e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
