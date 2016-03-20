@@ -28,9 +28,11 @@ public class BoardState {
 	}
 
 	private BoardState(HashMap<Unit, GridCoordinate> unitsMap) {
+		this.coordinates.putAll(surroundingsFromUnits(unitsMap));
 		this.units.putAll(unitsMap);
 	}
 
+	//TODO: parameter verwijderen?
 	private BoardState(StartMove s) {
 		this.coordinates.put(new GridCoordinate(0, 0), null);
 	}
@@ -38,12 +40,9 @@ public class BoardState {
 	private static BoardState calculate(BoardState previous, Move move) {
 		HashMap<Unit, GridCoordinate> unitsMap = new HashMap<>(previous.units);
 		if(!unitsMap.containsKey(move.otherUnit())) {
-			for (Map.Entry<Unit, GridCoordinate> entry : unitsMap.entrySet()) {
-				System.out.println(entry.getKey().type());
-			}
 			throw new UnmarshalException("Other unit not on board: "+move.otherUnit().type());
 		}
-		unitsMap.put(move.otherUnit(), GridCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
+		unitsMap.put(move.unit(), GridCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
 		return new BoardState(unitsMap);
 	}
 
@@ -51,14 +50,34 @@ public class BoardState {
 		return this.coordinates;
 	}
 
-	//TODO misschien omwisselen; dat deze surroundings alles berekent//
+	//TODO misschien(zeker) omwisselen; dat deze surroundings alles berekent//
 	private static HashMap<GridCoordinate, Node> surroundings(GridCoordinate c, Node n) {
 		HashMap<GridCoordinate, Node> m = new HashMap<>();
 		m.put(c, n);
-		return surroundings(m);
+		return surroundingsFromCoords(m);
 	}
 
-	private static HashMap<GridCoordinate, Node> surroundings(HashMap<GridCoordinate, Node> m) {
+	private static HashMap<GridCoordinate, Node> surroundingsFromUnits(HashMap<Unit, GridCoordinate> m) {
+		HashMap<GridCoordinate, Node> surrounds = new HashMap<>();
+		for(Map.Entry<Unit, GridCoordinate> entry : m.entrySet()) {
+			GridCoordinate c = entry.getValue();
+			surrounds.put(c, new UnitHexagon(entry.getKey()));
+
+			for(int y = c.y()-1; y <= c.y()+1; y++) {
+				GridCoordinate left = new GridCoordinate(c.x()-1, y);
+				if(!m.containsKey(left)) {
+					surrounds.put(left, new DefaultHexagon());
+				}
+				GridCoordinate right = new GridCoordinate(c.x()-1, y);
+				if(!m.containsKey(right)) {
+					surrounds.put(right, new DefaultHexagon());
+				}
+			}
+		}
+		return surrounds;
+	}
+
+	private static HashMap<GridCoordinate, Node> surroundingsFromCoords(HashMap<GridCoordinate, Node> m) {
 		HashMap<GridCoordinate, Node> surrounds = new HashMap<>();
 		for(Map.Entry<GridCoordinate, Node> entry : m.entrySet()) {
 			GridCoordinate c = entry.getKey();
