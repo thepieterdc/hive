@@ -52,7 +52,8 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		double widthScreen = this.getBoundsInParent().getWidth();
 		double heightScreen = this.getBoundsInParent().getHeight();
 
-		double maxSizePieces = (Math.min(widthScreen, heightScreen) / Math.max(widthPieces, heightPieces) - 30)/50;
+		double maxSizePieces = (Math.min(widthScreen, heightScreen) / Math.max(widthPieces, heightPieces) - 30)/20;
+
 
 		for (Map.Entry<Coordinate, Hexagon> child : state.entrySet()) {
 			Coordinate coord = child.getKey();

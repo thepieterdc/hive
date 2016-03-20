@@ -7,7 +7,6 @@ import be.thepieterdc.hive.exceptions.MalformedMoveException;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
-import be.thepieterdc.hive.helpers.moves.StartMove;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -20,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,17 +41,20 @@ public class Main extends Application {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
 			}
 			List<String> parameters = args.getRaw();
+			List<Move> moves;
+			HashMap<Integer, BoardState> states;
 			try {
 				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
-				List<Move> movesMove = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
-				this.model = new ViewerModel(movesMove, Color.BLANCHEDALMOND, Color.DARKGRAY);
+				moves = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
+				states = BoardState.unmarshall(moves);
 			} catch(IOException e) {
 				throw new Exception("Inputdata was not found or is unreadable.");
 			} catch(MalformedMoveException e) {
 				throw new Exception("Invalid move: "+e.move());
 			}
 
-			this.model.addState(0, new BoardState((StartMove) this.model.moves().get(0)));
+			this.model = new ViewerModel(moves, states, Color.BLANCHEDALMOND, Color.DARKGRAY);
+
 
 			MovesPane movesPane = new MovesPane(this.model);
 

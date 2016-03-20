@@ -5,6 +5,7 @@ import be.thepieterdc.hive.components.Hexagon;
 import be.thepieterdc.hive.helpers.moves.StartMove;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Represents a state of the board.
@@ -23,6 +24,10 @@ public class BoardState {
 	public static BoardState calculate(BoardState previous, Move move) {
 		System.out.println("TODO WRITE");
 		return previous;
+	}
+
+	public static HashMap<Integer, BoardState> unmarshall(List<Move> moves) {
+		return null;
 	}
 
 	public HashMap<Coordinate, Hexagon> state() {
