@@ -50,17 +50,17 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		Unit p1Q = new Unit(Color.WHITE, UnitType.QUEEN);
 		Unit p1S1 = new Unit(Color.WHITE, UnitType.SPIDER, 1);
 		Unit p1S2 = new Unit(Color.WHITE, UnitType.SPIDER, 2);
-		this.unitHexagons.put(p1A1, new UnitPaneItem(new UnitHexagon(p1A1, 5), 0, 0));
-		this.unitHexagons.put(p1A2, new UnitPaneItem(new UnitHexagon(p1A2, 5), 0, 1));
-		this.unitHexagons.put(p1A3, new UnitPaneItem(new UnitHexagon(p1A3, 5), 0, 2));
-		this.unitHexagons.put(p1B1, new UnitPaneItem(new UnitHexagon(p1B1, 5), 0, 3));
-		this.unitHexagons.put(p1B2, new UnitPaneItem(new UnitHexagon(p1B2, 5), 0, 4));
-		this.unitHexagons.put(p1G1, new UnitPaneItem(new UnitHexagon(p1G1, 5), 0, 5));
-		this.unitHexagons.put(p1G2, new UnitPaneItem(new UnitHexagon(p1G2, 5), 0, 6));
-		this.unitHexagons.put(p1G3, new UnitPaneItem(new UnitHexagon(p1G3, 5), 0, 7));
-		this.unitHexagons.put(p1Q, new UnitPaneItem(new UnitHexagon(p1Q, 5), 0, 8));
-		this.unitHexagons.put(p1S1, new UnitPaneItem(new UnitHexagon(p1S1, 5), 0, 9));
-		this.unitHexagons.put(p1S2, new UnitPaneItem(new UnitHexagon(p1S2, 5), 0, 10));
+		this.unitHexagons.put(p1A1, new UnitPaneItem(new UnitHexagon(p1A1, 4), 0, 0));
+		this.unitHexagons.put(p1A2, new UnitPaneItem(new UnitHexagon(p1A2, 4), 0, 1));
+		this.unitHexagons.put(p1A3, new UnitPaneItem(new UnitHexagon(p1A3, 4), 0, 2));
+		this.unitHexagons.put(p1B1, new UnitPaneItem(new UnitHexagon(p1B1, 4), 0, 3));
+		this.unitHexagons.put(p1B2, new UnitPaneItem(new UnitHexagon(p1B2, 4), 0, 4));
+		this.unitHexagons.put(p1G1, new UnitPaneItem(new UnitHexagon(p1G1, 4), 0, 5));
+		this.unitHexagons.put(p1G2, new UnitPaneItem(new UnitHexagon(p1G2, 4), 0, 6));
+		this.unitHexagons.put(p1G3, new UnitPaneItem(new UnitHexagon(p1G3, 4), 0, 7));
+		this.unitHexagons.put(p1Q, new UnitPaneItem(new UnitHexagon(p1Q, 4), 0, 8));
+		this.unitHexagons.put(p1S1, new UnitPaneItem(new UnitHexagon(p1S1, 4), 0, 9));
+		this.unitHexagons.put(p1S2, new UnitPaneItem(new UnitHexagon(p1S2, 4), 0, 10));
 
 		Unit p2A1 = new Unit(Color.BLACK, UnitType.ANT, 1);
 		Unit p2A2 = new Unit(Color.BLACK, UnitType.ANT, 2);
@@ -73,17 +73,17 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		Unit p2Q = new Unit(Color.BLACK, UnitType.QUEEN);
 		Unit p2S1 = new Unit(Color.BLACK, UnitType.SPIDER, 1);
 		Unit p2S2 = new Unit(Color.BLACK, UnitType.SPIDER, 2);
-		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p2A1, 5), 1, 0));
-		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p2A2, 5), 1, 1));
-		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p2A3, 5), 1, 2));
-		this.unitHexagons.put(p2B1, new UnitPaneItem(new UnitHexagon(p2B1, 5), 1, 3));
-		this.unitHexagons.put(p2B2, new UnitPaneItem(new UnitHexagon(p2B2, 5), 1, 4));
-		this.unitHexagons.put(p2G1, new UnitPaneItem(new UnitHexagon(p2G1, 5), 1, 5));
-		this.unitHexagons.put(p2G2, new UnitPaneItem(new UnitHexagon(p2G2, 5), 1, 6));
-		this.unitHexagons.put(p2G3, new UnitPaneItem(new UnitHexagon(p2G3, 5), 1, 7));
-		this.unitHexagons.put(p2Q, new UnitPaneItem(new UnitHexagon(p2Q, 5), 1, 8));
-		this.unitHexagons.put(p2S1, new UnitPaneItem(new UnitHexagon(p2S1, 5), 1, 9));
-		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p2S2, 5), 1, 10));
+		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p2A1, 4), 1, 0));
+		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p2A2, 4), 1, 1));
+		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p2A3, 4), 1, 2));
+		this.unitHexagons.put(p2B1, new UnitPaneItem(new UnitHexagon(p2B1, 4), 1, 3));
+		this.unitHexagons.put(p2B2, new UnitPaneItem(new UnitHexagon(p2B2, 4), 1, 4));
+		this.unitHexagons.put(p2G1, new UnitPaneItem(new UnitHexagon(p2G1, 4), 1, 5));
+		this.unitHexagons.put(p2G2, new UnitPaneItem(new UnitHexagon(p2G2, 4), 1, 6));
+		this.unitHexagons.put(p2G3, new UnitPaneItem(new UnitHexagon(p2G3, 4), 1, 7));
+		this.unitHexagons.put(p2Q, new UnitPaneItem(new UnitHexagon(p2Q, 4), 1, 8));
+		this.unitHexagons.put(p2S1, new UnitPaneItem(new UnitHexagon(p2S1, 4), 1, 9));
+		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p2S2, 4), 1, 10));
 	}
 
 	@Override
