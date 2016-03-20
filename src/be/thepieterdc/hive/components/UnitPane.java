@@ -89,9 +89,9 @@ public class UnitPane extends GridPane implements InvalidationListener {
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
 		HashMap<Unit, GridCoordinate> state = this.model.boardState().units();
-		System.out.println(state.size());
 		for (Map.Entry<Unit, UnitPaneItem> entry : this.unitHexagons.entrySet()) {
 			UnitPaneItem item = entry.getValue();
+			System.out.println(entry.getKey());
 			if(!state.containsKey(entry.getKey())) {
 				this.add(item.hexagon, item.column, item.row);
 			} else {

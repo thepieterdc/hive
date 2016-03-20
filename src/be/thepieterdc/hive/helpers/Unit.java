@@ -43,6 +43,11 @@ public class Unit {
 		return this.rank;
 	}
 
+	@Override
+	public String toString() {
+		return "Unit[player="+this.player+", type="+this.type.prettyName()+", rank="+this.rank+"]";
+	}
+
 	public UnitType type() {
 		return this.type;
 	}
