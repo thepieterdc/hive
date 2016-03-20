@@ -18,15 +18,15 @@ import java.util.Map;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class BoardState {
-	private final HashMap<Coordinate, Node> state = new HashMap<>();
+	private final HashMap<GridCoordinate, Node> state = new HashMap<>();
 
 	private BoardState(FirstMove f) {
-		this.state.put(new Coordinate(0, 0), new UnitHexagon(f.unit()));
+		this.state.put(new GridCoordinate(0, 0), new UnitHexagon(f.unit()));
 		this.state.putAll(surroundings(this.state));
 	}
 
 	private BoardState(StartMove s) {
-		this.state.put(new Coordinate(0, 0), null);
+		this.state.put(new GridCoordinate(0, 0), null);
 	}
 
 	private static BoardState calculate(BoardState previous, Move move) {
@@ -55,7 +55,7 @@ public class BoardState {
 
 		for(Map.Entry<Integer, BoardState> e : map.entrySet()) {
 			System.out.println(e.getKey()+"-----------------------------");
-			for(Map.Entry<Coordinate, Node> n : e.getValue().state.entrySet()) {
+			for(Map.Entry<GridCoordinate, Node> n : e.getValue().state.entrySet()) {
 				System.out.println(n.getKey());
 				System.out.println(n.getValue());
 			}
@@ -63,14 +63,14 @@ public class BoardState {
 		return map;
 	}
 
-	public HashMap<Coordinate, Node> state() {
+	public HashMap<GridCoordinate, Node> state() {
 		return this.state;
 	}
 
-	private static HashMap<Coordinate, Node> surroundings(HashMap<Coordinate, Node> m) {
-		HashMap<Coordinate, Node> surrounds = new HashMap<>();
-		for(Map.Entry<Coordinate, Node> entry : m.entrySet()) {
-			Coordinate c = entry.getKey();
+	private static HashMap<GridCoordinate, Node> surroundings(HashMap<GridCoordinate, Node> m) {
+		HashMap<GridCoordinate, Node> surrounds = new HashMap<>();
+		for(Map.Entry<GridCoordinate, Node> entry : m.entrySet()) {
+			GridCoordinate c = entry.getKey();
 			if(entry.getValue() != null) {
 				surrounds.put(entry.getKey(), entry.getValue());
 			}

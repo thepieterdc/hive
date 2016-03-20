@@ -16,6 +16,11 @@ public class GridCoordinate {
 		this.y = y;
 	}
 
+	@Override
+	public String toString() {
+		return "GridCoordinate[x="+this.x+", y="+this.y+"]";
+	}
+
 	public int x() {
 		return this.x;
 	}
