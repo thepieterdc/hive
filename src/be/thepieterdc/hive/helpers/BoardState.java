@@ -121,15 +121,6 @@ public class BoardState {
 		for(int moveIndex = 2; moveIndex < moves.size(); moveIndex++) {
 			map.put(moveIndex, calculate(map.get(moveIndex-1), moves.get(moveIndex)));
 		}
-
-		for(Map.Entry<Integer, BoardState> e : map.entrySet()) {
-			System.out.println("\n\n");
-			System.out.println(e.getKey()+"-----------------------------");
-			for(Map.Entry<GridCoordinate, Node> n : e.getValue().coordinates.entrySet()) {
-				System.out.println(n.getKey());
-				System.out.println(n.getValue());
-			}
-		}
 		return map;
 	}
 }
