@@ -1,5 +1,7 @@
 package be.thepieterdc.hive.helpers;
 
+import be.thepieterdc.hive.data.Orientation;
+
 /**
  * A coordinate on the playing grid.
  * <p>
@@ -14,6 +16,10 @@ public class GridCoordinate {
 	public GridCoordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public static GridCoordinate fromOrientation(GridCoordinate base, Orientation o) {
+		return new GridCoordinate(base.x()+o.xDelta(), base.y()+o.yDelta());
 	}
 
 	@Override

@@ -55,7 +55,6 @@ public class Main extends Application {
 
 			this.model = new ViewerModel(moves, states, Color.BLANCHEDALMOND, Color.DARKGRAY);
 
-
 			MovesPane movesPane = new MovesPane(this.model);
 
 			PlayPane playPane = new PlayPane(this.model);
