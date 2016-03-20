@@ -1,0 +1,26 @@
+package be.thepieterdc.hive.helpers;
+
+/**
+ * A coordinate on the playing grid.
+ * <p>
+ * Created at 20/03/16 14:04
+ *
+ * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
+ */
+public class GridCoordinate {
+	private final int x;
+	private final int y;
+
+	public GridCoordinate(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	public int x() {
+		return this.x;
+	}
+
+	public int y() {
+		return this.y;
+	}
+}

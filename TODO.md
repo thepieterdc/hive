@@ -1,3 +1,5 @@
+GridCoordinate class die ints gebruikt ipv doubles
+
 Overal argument checks
 
 toStrings waar mogelijk
