@@ -75,6 +75,7 @@ public class Main extends Application {
 			stage.show();
 			this.model.move(0);
 		} catch (Exception e) {
+			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}

@@ -13,8 +13,8 @@ import javafx.scene.paint.Color;
 public class DefaultHexagon extends Hexagon {
 	public DefaultHexagon() {
 		super();
-		this.setFill(Color.GRAY);
-		this.setStroke(Color.DARKGREY);
+		this.setFill(Color.LIGHTGRAY);
+		this.setStroke(Color.DARKGRAY);
 		this.setStrokeWidth(1);
 	}
 

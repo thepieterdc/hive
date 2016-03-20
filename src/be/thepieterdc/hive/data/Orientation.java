@@ -17,10 +17,14 @@ public enum Orientation {
 
 	private final String representation;
 	private final Direction direction;
+	private final int xDelta;
+	private final int yDelta;
 
-	Orientation(String r, Direction d) {
+	Orientation(String r, Direction d, int xDelta, int yDelta) {
 		this.representation = r;
 		this.direction = d;
+		this.xDelta = xDelta;
+		this.yDelta = yDelta;
 	}
 
 	public Direction direction() {
@@ -42,5 +46,13 @@ public enum Orientation {
 
 	public String representation() {
 		return this.representation;
+	}
+
+	public int xDelta() {
+		return this.xDelta;
+	}
+
+	public int yDelta() {
+		return this.yDelta;
 	}
 }

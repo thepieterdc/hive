@@ -1,15 +1,9 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.helpers.Coordinate;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Description here
@@ -28,6 +22,7 @@ public class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
+/*
 		HashMap<Coordinate, Node> state = this.model.boardState().state();
 
 		this.getChildren().clear();
@@ -69,5 +64,6 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		}
 
 		this.getChildren().add(hexagons);
+		*/
 	}
 }
