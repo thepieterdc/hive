@@ -1,8 +1,6 @@
-GridCoordinate class die ints gebruikt ipv doubles
-
 Overal argument checks
 
-Veel opkuisen
+Heel veel opkuisen
 
 toStrings waar mogelijk
 
@@ -14,10 +12,10 @@ Overbodige imports wat wegdoen
 
 Algemene cleanup(zet alles op streng)
 
-i18n
-
 Overal jdocs
 
 Svg hertekenen(size niet juist)
 
 Remove unused methods
+
+i18n
