@@ -1,5 +1,3 @@
-Overal argument checks
-
 Heel veel opkuisen
 
 toStrings waar mogelijk
@@ -11,6 +9,8 @@ Zoveel mogelijk unittests
 Overbodige imports wat wegdoen
 
 Algemene cleanup(zet alles op streng)
+
+Overal argument checks
 
 Overal jdocs
 
