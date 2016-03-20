@@ -2,6 +2,8 @@ GridCoordinate class die ints gebruikt ipv doubles
 
 Overal argument checks
 
+Veel opkuisen
+
 toStrings waar mogelijk
 
 Move#representation() niet meer meegeven maar bepalen
