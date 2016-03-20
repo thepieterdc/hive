@@ -2,6 +2,7 @@ package be.thepieterdc.hive.helpers;
 
 import be.thepieterdc.hive.components.DefaultHexagon;
 import be.thepieterdc.hive.components.Hexagon;
+import be.thepieterdc.hive.exceptions.UnmarshallException;
 import be.thepieterdc.hive.helpers.moves.StartMove;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class BoardState {
 		return previous;
 	}
 
-	public static HashMap<Integer, BoardState> unmarshall(List<Move> moves) {
+	public static HashMap<Integer, BoardState> unmarshall(List<Move> moves) throws UnmarshallException {
 		return null;
 	}
 
