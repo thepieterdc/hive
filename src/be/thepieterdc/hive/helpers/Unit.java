@@ -25,6 +25,16 @@ public class Unit {
 		this.type = type;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Unit && ((Unit) obj).player.equals(this.player) && ((Unit) obj).type.equals(this.type) && ((Unit) obj).rank == this.rank;
+	}
+
+	@Override
+	public int hashCode() {
+		return player.hashCode() + rank + type.hashCode();
+	}
+
 	public Color player() {
 		return this.player;
 	}

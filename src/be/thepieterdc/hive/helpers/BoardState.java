@@ -2,7 +2,7 @@ package be.thepieterdc.hive.helpers;
 
 import be.thepieterdc.hive.components.DefaultHexagon;
 import be.thepieterdc.hive.components.UnitHexagon;
-import be.thepieterdc.hive.exceptions.UnmarshallException;
+import be.thepieterdc.hive.exceptions.UnmarshalException;
 import be.thepieterdc.hive.helpers.moves.FirstMove;
 import be.thepieterdc.hive.helpers.moves.StartMove;
 import javafx.scene.Node;
@@ -27,12 +27,24 @@ public class BoardState {
 		this.units.put(f.unit(), new GridCoordinate(0, 0));
 	}
 
+	private BoardState(HashMap<Unit, GridCoordinate> unitsMap) {
+		this.units.putAll(unitsMap);
+	}
+
 	private BoardState(StartMove s) {
 		this.coordinates.put(new GridCoordinate(0, 0), null);
 	}
 
 	private static BoardState calculate(BoardState previous, Move move) {
-		return previous;
+		HashMap<Unit, GridCoordinate> unitsMap = new HashMap<>(previous.units);
+		if(!unitsMap.containsKey(move.otherUnit())) {
+			for (Map.Entry<Unit, GridCoordinate> entry : unitsMap.entrySet()) {
+				System.out.println(entry.getKey().type());
+			}
+			throw new UnmarshalException("Other unit not on board: "+move.otherUnit().type());
+		}
+		unitsMap.put(move.otherUnit(), GridCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
+		return new BoardState(unitsMap);
 	}
 
 	public HashMap<GridCoordinate, Node> coordinates() {
@@ -71,9 +83,9 @@ public class BoardState {
 		return this.units;
 	}
 
-	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) throws UnmarshallException {
-		if(moves.size() == 0) throw new UnmarshallException("List of moves is empty.");
-		if(!(moves.get(0) instanceof StartMove)) throw new UnmarshallException("Start move is not instance of StartMove.");
+	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) throws UnmarshalException {
+		if(moves.size() == 0) throw new UnmarshalException("List of moves is empty.");
+		if(!(moves.get(0) instanceof StartMove)) throw new UnmarshalException("Start move is not instance of StartMove.");
 
 		HashMap<Integer, BoardState> map = new HashMap<>();
 
@@ -83,7 +95,7 @@ public class BoardState {
 			return map;
 		}
 
-		if(!(moves.get(1) instanceof FirstMove)) throw new UnmarshallException("First move is not instance of FirstMove.");
+		if(!(moves.get(1) instanceof FirstMove)) throw new UnmarshalException("First move is not instance of FirstMove.");
 
 		map.put(1, new BoardState((FirstMove) moves.get(1)));
 

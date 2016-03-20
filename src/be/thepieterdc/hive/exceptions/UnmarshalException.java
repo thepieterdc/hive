@@ -7,8 +7,8 @@ package be.thepieterdc.hive.exceptions;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class UnmarshallException extends RuntimeException {
-	public UnmarshallException(String m) {
+public class UnmarshalException extends RuntimeException {
+	public UnmarshalException(String m) {
 		super(m);
 	}
 }
