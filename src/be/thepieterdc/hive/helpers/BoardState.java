@@ -1,7 +1,6 @@
 package be.thepieterdc.hive.helpers;
 
 import be.thepieterdc.hive.components.DefaultHexagon;
-import be.thepieterdc.hive.components.Hexagon;
 import be.thepieterdc.hive.components.UnitHexagon;
 import be.thepieterdc.hive.exceptions.UnmarshallException;
 import be.thepieterdc.hive.helpers.moves.FirstMove;
@@ -24,20 +23,15 @@ public class BoardState {
 	private final HashMap<Unit, GridCoordinate> units = new HashMap<>();
 
 	private BoardState(FirstMove f) {
-		this.coordinates.putAll();
-		this.state.putAll(surroundings(new GridCoordinate(0, 0), new UnitHexagon(f.unit())));
-	}
-
-	private BoardState(HashMap<GridCoordinate, Node> state) {
-		this.state.putAll(surroundings(state));
+		this.coordinates.putAll(surroundings(new GridCoordinate(0, 0), new UnitHexagon(f.unit())));
+		this.units.put(f.unit(), new GridCoordinate(0, 0));
 	}
 
 	private BoardState(StartMove s) {
-		this.state.put(new GridCoordinate(0, 0), null);
+		this.coordinates.put(new GridCoordinate(0, 0), null);
 	}
 
 	private static BoardState calculate(BoardState previous, Move move) {
-		previous.state
 		return previous;
 	}
 
@@ -100,7 +94,7 @@ public class BoardState {
 		for(Map.Entry<Integer, BoardState> e : map.entrySet()) {
 			System.out.println("\n\n");
 			System.out.println(e.getKey()+"-----------------------------");
-			for(Map.Entry<GridCoordinate, Node> n : e.getValue().state.entrySet()) {
+			for(Map.Entry<GridCoordinate, Node> n : e.getValue().coordinates.entrySet()) {
 				System.out.println(n.getKey());
 				System.out.println(n.getValue());
 			}
