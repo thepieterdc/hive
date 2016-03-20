@@ -1,14 +1,9 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.helpers.Coordinate;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Description here
@@ -27,7 +22,8 @@ public class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		HashMap<Coordinate, Hexagon> state = this.model.boardState().state();
+/*
+		HashMap<Coordinate, Node> state = this.model.boardState().state();
 
 		this.getChildren().clear();
 
@@ -38,7 +34,7 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		double minY = Integer.MAX_VALUE;
 		double maxY = Integer.MIN_VALUE;
 
-		for (Map.Entry<Coordinate, Hexagon> child : state.entrySet()) {
+		for (Map.Entry<Coordinate, Node> child : state.entrySet()) {
 			Coordinate coord = child.getKey();
 			minX = Math.min(minX, coord.x());
 			maxX = Math.max(maxX, coord.x());
@@ -55,16 +51,19 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		double maxSizePieces = (Math.min(widthScreen, heightScreen) / Math.max(widthPieces, heightPieces) - 30)/20;
 
 
-		for (Map.Entry<Coordinate, Hexagon> child : state.entrySet()) {
+		for (Map.Entry<Coordinate, Node> child : state.entrySet()) {
 			Coordinate coord = child.getKey();
-			Hexagon hex = child.getValue();
+
+			Node hex = child.getValue();
 			hex.setLayoutX(coord.x());
 			hex.setLayoutX(coord.y());
 			hex.setScaleX(maxSizePieces);
 			hex.setScaleY(maxSizePieces);
+
 			hexagons.getChildren().addAll(hex);
 		}
 
 		this.getChildren().add(hexagons);
+		*/
 	}
 }
