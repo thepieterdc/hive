@@ -71,7 +71,7 @@ public class BoardState {
 		return this.units;
 	}
 
-	public static HashMap<Integer, BoardState> unmarshall(List<Move> moves) throws UnmarshallException {
+	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) throws UnmarshallException {
 		if(moves.size() == 0) throw new UnmarshallException("List of moves is empty.");
 		if(!(moves.get(0) instanceof StartMove)) throw new UnmarshallException("Start move is not instance of StartMove.");
 

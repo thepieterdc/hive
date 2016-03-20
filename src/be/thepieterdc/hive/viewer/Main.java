@@ -46,7 +46,7 @@ public class Main extends Application {
 			try {
 				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
 				moves = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
-				states = BoardState.unmarshall(moves);
+				states = BoardState.unmarshal(moves);
 			} catch(IOException e) {
 				throw new Exception("Inputdata was not found or is unreadable.");
 			} catch(MalformedMoveException e) {
