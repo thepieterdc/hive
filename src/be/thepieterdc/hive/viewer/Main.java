@@ -1,28 +1,27 @@
 package be.thepieterdc.hive.viewer;
 
 import be.thepieterdc.hive.components.MovesPane;
-import be.thepieterdc.hive.components.UnitHexagon;
+import be.thepieterdc.hive.components.PlayPane;
 import be.thepieterdc.hive.components.UnitPane;
-import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.exceptions.MalformedMoveException;
+import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.Orientation;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Main application
@@ -42,34 +41,23 @@ public class Main extends Application {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
 			}
 			List<String> parameters = args.getRaw();
+			List<Move> moves;
+			HashMap<Integer, BoardState> states;
 			try {
 				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
-				List<Move> movesMove = new ArrayList<>();
-				for(String s : movesString) {
-					movesMove.add(Move.fromRepresentation(s));
-				}
-				this.model = new ViewerModel(movesMove, Color.BLACK, Color.WHITE);
+				moves = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
+				states = BoardState.unmarshal(moves);
 			} catch(IOException e) {
 				throw new Exception("Inputdata was not found or is unreadable.");
 			} catch(MalformedMoveException e) {
 				throw new Exception("Invalid move: "+e.move());
 			}
 
+			this.model = new ViewerModel(moves, states, Color.BLANCHEDALMOND, Color.DARKGRAY);
+
 			MovesPane movesPane = new MovesPane(this.model);
 
-			UnitHexagon hexOne = new UnitHexagon(UnitType.BEATLE, Color.TURQUOISE);
-			hexOne.scale(10);
-			hexOne.setTranslateX(-200);
-			UnitHexagon hexTwo = new UnitHexagon(UnitType.LADYBUG, Color.MEDIUMAQUAMARINE);
-			hexTwo.scale(10);
-			UnitHexagon hexThree = new UnitHexagon(UnitType.QUEEN, Color.BLANCHEDALMOND);
-			hexThree.scale(10);
-			hexThree.setTranslateX(200);
-
-			Group hexagons = new Group();
-			hexagons.getChildren().addAll(hexOne, hexTwo, hexThree);
-
-			StackPane playPane = new StackPane(hexagons);
+			PlayPane playPane = new PlayPane(this.model);
 
 			SplitPane mainPane = new SplitPane(movesPane, playPane);
 			mainPane.setDividerPositions(0.0);
@@ -77,18 +65,16 @@ public class Main extends Application {
 			//TILEPANE//
 			UnitPane bottomPane = new UnitPane(this.model);
 
-			SplitPane root = new SplitPane(mainPane, bottomPane);
-			root.setDividerPositions(100.0);
-			root.setOrientation(Orientation.VERTICAL);
+			VBox root = new VBox(mainPane, bottomPane);
 			root.setPrefSize(800, 500);
-
-			this.model.move(0);
 
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.setTitle("Hive Viewer");
 			stage.show();
+			this.model.move(0);
 		} catch (Exception e) {
+			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}

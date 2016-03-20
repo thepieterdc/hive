@@ -1,8 +1,7 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.data.UnitType;
+import be.thepieterdc.hive.helpers.Unit;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -14,25 +13,28 @@ import javafx.scene.shape.SVGPath;
  */
 public class UnitHexagon extends StackPane {
 	private final Hexagon hexagon;
-	private final SVGPath unit;
+	private final Unit unit;
+	private final SVGPath unitSvg;
 
-	public UnitHexagon(UnitType unit, Color color, double beginScale) {
-		this(unit, color);
+	public UnitHexagon(Unit u, double beginScale) {
+		this(u);
 		this.scale(beginScale);
 	}
 
-	public UnitHexagon(UnitType unit, Color color) {
-		this.hexagon = new Hexagon();
-		this.hexagon.setFill(color.invert());
-		this.hexagon.setStroke(color);
+	public UnitHexagon(Unit u) {
+		this.unit = u;
 
-		this.unit = unit.path();
-		this.unit.setFill(color);
-		this.unit.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
-		this.unit.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
+		this.hexagon = new Hexagon();
+		this.hexagon.setFill(u.player().invert());
+		this.hexagon.setStroke(u.player());
+
+		this.unitSvg = u.type().path();
+		this.unitSvg.setFill(u.player());
+		this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
+		this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
 
 		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-		this.getChildren().addAll(this.hexagon, this.unit);
+		this.getChildren().addAll(this.hexagon, this.unitSvg);
 	}
 
 	public double height() {
@@ -43,6 +45,10 @@ public class UnitHexagon extends StackPane {
 		this.hexagon.setScaleX(factor);
 		this.hexagon.setScaleY(factor);
 		this.setMinSize(this.width(), this.height());
+	}
+
+	public Unit unit() {
+		return this.unit;
 	}
 
 	public double width() {

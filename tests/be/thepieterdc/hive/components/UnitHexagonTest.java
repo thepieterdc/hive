@@ -1,6 +1,7 @@
 package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.data.UnitType;
+import be.thepieterdc.hive.helpers.Unit;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -15,14 +16,14 @@ import javafx.scene.paint.Color;
 public class UnitHexagonTest extends ComponentTest {
 	@Override
 	protected Parent component() {
-		UnitHexagon antHexagon = new UnitHexagon(UnitType.ANT, Color.BLACK);
-		UnitHexagon beatleHexagon = new UnitHexagon(UnitType.BEATLE, Color.TURQUOISE);
-		UnitHexagon grasshopperHexagon = new UnitHexagon(UnitType.GRASSHOPPER, Color.YELLOW);
-		UnitHexagon ladybugHexagon = new UnitHexagon(UnitType.LADYBUG, Color.GREEN);
-		UnitHexagon mosquitoHexagon = new UnitHexagon(UnitType.MOSQUITO, Color.BLANCHEDALMOND);
-		UnitHexagon pillbugHexagon = new UnitHexagon(UnitType.PILLBUG, Color.MEDIUMAQUAMARINE);
-		UnitHexagon queenHexagon = new UnitHexagon(UnitType.QUEEN, Color.RED);
-		UnitHexagon spiderHexagon = new UnitHexagon(UnitType.SPIDER, Color.PURPLE);
+		UnitHexagon antHexagon = new UnitHexagon(new Unit(Color.BLACK, UnitType.ANT));
+		UnitHexagon beatleHexagon = new UnitHexagon(new Unit(Color.TURQUOISE, UnitType.BEATLE));
+		UnitHexagon grasshopperHexagon = new UnitHexagon(new Unit(Color.YELLOW, UnitType.GRASSHOPPER));
+		UnitHexagon ladybugHexagon = new UnitHexagon(new Unit(Color.GREEN, UnitType.LADYBUG));
+		UnitHexagon mosquitoHexagon = new UnitHexagon(new Unit(Color.BLANCHEDALMOND, UnitType.MOSQUITO));
+		UnitHexagon pillbugHexagon = new UnitHexagon(new Unit(Color.MEDIUMAQUAMARINE, UnitType.PILLBUG));
+		UnitHexagon queenHexagon = new UnitHexagon(new Unit(Color.RED, UnitType.QUEEN));
+		UnitHexagon spiderHexagon = new UnitHexagon(new Unit(Color.PURPLE, UnitType.SPIDER));
 
 		antHexagon.scale(15);
 		beatleHexagon.scale(15);

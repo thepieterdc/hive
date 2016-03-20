@@ -1,6 +1,3 @@
 start
 wQ
 bA1 wQ-
-wA1 wQ/
-bA2 bA1\
-wS1 /bA2
