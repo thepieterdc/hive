@@ -22,6 +22,7 @@ public class BoardState {
 
 	private BoardState(FirstMove f) {
 		this.state.put(new Coordinate(0, 0), new UnitHexagon(f.unit()));
+		this.state.putAll(surroundings(this.state));
 	}
 
 	private BoardState(StartMove s) {
@@ -64,5 +65,19 @@ public class BoardState {
 
 	public HashMap<Coordinate, Node> state() {
 		return this.state;
+	}
+
+	private static HashMap<Coordinate, Node> surroundings(HashMap<Coordinate, Node> m) {
+		HashMap<Coordinate, Node> surrounds = new HashMap<>();
+		for(Map.Entry<Coordinate, Node> entry : m.entrySet()) {
+			Coordinate c = entry.getKey();
+			if(entry.getValue() != null) {
+				surrounds.put(entry.getKey(), entry.getValue());
+			}
+			for(int y = c.y()-1; y <= c.y()+1; y++) {
+
+			}
+		}
+		return surrounds;
 	}
 }

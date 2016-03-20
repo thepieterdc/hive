@@ -11,16 +11,16 @@ import java.util.List;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class Coordinate {
-	private final double x;
-	private final double y;
+	private final int x;
+	private final int y;
 
-	public Coordinate(double x, double y) {
+	public Coordinate(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
 	public List<Double> asList() {
-		return Arrays.asList(this.x, this.y);
+		return Arrays.asList((double) this.x, (double) this.y);
 	}
 
 	@Override
@@ -28,11 +28,11 @@ public class Coordinate {
 		return "Coordinate[x="+this.x+", y="+this.y+"]";
 	}
 
-	public double x() {
+	public int x() {
 		return this.x;
 	}
 
-	public double y() {
+	public int y() {
 		return this.y;
 	}
 }
