@@ -21,16 +21,11 @@ public class ViewerModel extends Model {
 	private int moveIndex;
 	private final List<Move> moves;
 
-	private final Color player1;
-	private final Color player2;
-
 	private final int totalMoves;
 
 	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states, Color player1Color, Color player2Color) {
 		this.boardStates = states;
 		this.moves = moves;
-		this.player1 = player1Color;
-		this.player2 = player2Color;
 		this.totalMoves = this.moves.size();
 	}
 
@@ -65,14 +60,6 @@ public class ViewerModel extends Model {
 
 	public List<Move> moves() {
 		return this.moves;
-	}
-
-	public Color player1() {
-		return this.player1;
-	}
-
-	public Color player2() {
-		return this.player2;
 	}
 
 	public int totalMoves() {

@@ -7,6 +7,7 @@ import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,17 +39,17 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
-		Unit p1A1 = new Unit(this.model.player1(), UnitType.ANT, 1);
-		Unit p1A2 = new Unit(this.model.player1(), UnitType.ANT, 2);
-		Unit p1A3 = new Unit(this.model.player1(), UnitType.ANT, 3);
-		Unit p1B1 = new Unit(this.model.player1(), UnitType.BEATLE, 1);
-		Unit p1B2 = new Unit(this.model.player1(), UnitType.BEATLE, 2);
-		Unit p1G1 = new Unit(this.model.player1(), UnitType.GRASSHOPPER, 1);
-		Unit p1G2 = new Unit(this.model.player1(), UnitType.GRASSHOPPER, 2);
-		Unit p1G3 = new Unit(this.model.player1(), UnitType.GRASSHOPPER, 3);
-		Unit p1Q = new Unit(this.model.player1(), UnitType.QUEEN);
-		Unit p1S1 = new Unit(this.model.player1(), UnitType.SPIDER, 1);
-		Unit p1S2 = new Unit(this.model.player1(), UnitType.SPIDER, 2);
+		Unit p1A1 = new Unit(Color.WHITE, UnitType.ANT, 1);
+		Unit p1A2 = new Unit(Color.WHITE, UnitType.ANT, 2);
+		Unit p1A3 = new Unit(Color.WHITE, UnitType.ANT, 3);
+		Unit p1B1 = new Unit(Color.WHITE, UnitType.BEATLE, 1);
+		Unit p1B2 = new Unit(Color.WHITE, UnitType.BEATLE, 2);
+		Unit p1G1 = new Unit(Color.WHITE, UnitType.GRASSHOPPER, 1);
+		Unit p1G2 = new Unit(Color.WHITE, UnitType.GRASSHOPPER, 2);
+		Unit p1G3 = new Unit(Color.WHITE, UnitType.GRASSHOPPER, 3);
+		Unit p1Q = new Unit(Color.WHITE, UnitType.QUEEN);
+		Unit p1S1 = new Unit(Color.WHITE, UnitType.SPIDER, 1);
+		Unit p1S2 = new Unit(Color.WHITE, UnitType.SPIDER, 2);
 		this.unitHexagons.put(p1A1, new UnitPaneItem(new UnitHexagon(p1A1, 5), 0, 0));
 		this.unitHexagons.put(p1A2, new UnitPaneItem(new UnitHexagon(p1A2, 5), 0, 1));
 		this.unitHexagons.put(p1A3, new UnitPaneItem(new UnitHexagon(p1A3, 5), 0, 2));
@@ -61,17 +62,17 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		this.unitHexagons.put(p1S1, new UnitPaneItem(new UnitHexagon(p1S1, 5), 0, 9));
 		this.unitHexagons.put(p1S2, new UnitPaneItem(new UnitHexagon(p1S2, 5), 0, 10));
 
-		Unit p2A1 = new Unit(this.model.player2(), UnitType.ANT, 1);
-		Unit p2A2 = new Unit(this.model.player2(), UnitType.ANT, 2);
-		Unit p2A3 = new Unit(this.model.player2(), UnitType.ANT, 3);
-		Unit p2B1 = new Unit(this.model.player2(), UnitType.BEATLE, 1);
-		Unit p2B2 = new Unit(this.model.player2(), UnitType.BEATLE, 2);
-		Unit p2G1 = new Unit(this.model.player2(), UnitType.GRASSHOPPER, 1);
-		Unit p2G2 = new Unit(this.model.player2(), UnitType.GRASSHOPPER, 2);
-		Unit p2G3 = new Unit(this.model.player2(), UnitType.GRASSHOPPER, 3);
-		Unit p2Q = new Unit(this.model.player2(), UnitType.QUEEN);
-		Unit p2S1 = new Unit(this.model.player2(), UnitType.SPIDER, 1);
-		Unit p2S2 = new Unit(this.model.player2(), UnitType.SPIDER, 2);
+		Unit p2A1 = new Unit(Color.BLACK, UnitType.ANT, 1);
+		Unit p2A2 = new Unit(Color.BLACK, UnitType.ANT, 2);
+		Unit p2A3 = new Unit(Color.BLACK, UnitType.ANT, 3);
+		Unit p2B1 = new Unit(Color.BLACK, UnitType.BEATLE, 1);
+		Unit p2B2 = new Unit(Color.BLACK, UnitType.BEATLE, 2);
+		Unit p2G1 = new Unit(Color.BLACK, UnitType.GRASSHOPPER, 1);
+		Unit p2G2 = new Unit(Color.BLACK, UnitType.GRASSHOPPER, 2);
+		Unit p2G3 = new Unit(Color.BLACK, UnitType.GRASSHOPPER, 3);
+		Unit p2Q = new Unit(Color.BLACK, UnitType.QUEEN);
+		Unit p2S1 = new Unit(Color.BLACK, UnitType.SPIDER, 1);
+		Unit p2S2 = new Unit(Color.BLACK, UnitType.SPIDER, 2);
 		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p2A1, 5), 1, 0));
 		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p2A2, 5), 1, 1));
 		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p2A3, 5), 1, 2));
@@ -91,11 +92,8 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		HashMap<Unit, GridCoordinate> state = this.model.boardState().units();
 		for (Map.Entry<Unit, UnitPaneItem> entry : this.unitHexagons.entrySet()) {
 			UnitPaneItem item = entry.getValue();
-			System.out.println(entry.getKey());
 			if(!state.containsKey(entry.getKey())) {
 				this.add(item.hexagon, item.column, item.row);
-			} else {
-				System.out.println("Test");
 			}
 		}
 	}
