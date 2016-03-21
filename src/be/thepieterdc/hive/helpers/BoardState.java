@@ -34,7 +34,7 @@ public class BoardState {
 
 	//TODO: parameter verwijderen?
 	private BoardState(StartMove s) {
-		this.coordinates.put(new GridCoordinate(0, 0), null);
+		this.coordinates.put(new GridCoordinate(0, 0), new DefaultHexagon());
 	}
 
 	private static BoardState calculate(BoardState previous, Move move) {

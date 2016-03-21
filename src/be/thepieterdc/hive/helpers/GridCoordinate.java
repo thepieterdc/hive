@@ -23,6 +23,16 @@ public class GridCoordinate {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof GridCoordinate && ((GridCoordinate) obj).x == this.x && ((GridCoordinate) obj).y == this.y;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) (this.x * 100 + this.y);
+	}
+
+	@Override
 	public String toString() {
 		return "GridCoordinate[x="+this.x+", y="+this.y+"]";
 	}
