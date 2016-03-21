@@ -24,6 +24,16 @@ public class Coordinate {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Coordinate && ((Coordinate) obj).x == this.x && ((Coordinate) obj).y == this.y;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) (this.x * 100 + this.y);
+	}
+
+	@Override
 	public String toString() {
 		return "Coordinate[x="+this.x+", y="+this.y+"]";
 	}
