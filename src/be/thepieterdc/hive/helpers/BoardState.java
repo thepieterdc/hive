@@ -23,6 +23,7 @@ public class BoardState {
 	private final HashMap<Unit, GridCoordinate> units = new HashMap<>();
 
 	private BoardState(FirstMove f) {
+		//Hermaken//
 		this.coordinates.putAll(surroundings(new GridCoordinate(0, 0), new UnitHexagon(f.unit())));
 		this.units.put(f.unit(), new GridCoordinate(0, 0));
 	}
@@ -65,11 +66,11 @@ public class BoardState {
 
 			for(int y = c.y()-1; y <= c.y()+1; y++) {
 				GridCoordinate left = new GridCoordinate(c.x()-1, y);
-				if(!m.containsKey(left)) {
+				if(!m.containsValue(left)) {
 					surrounds.put(left, new DefaultHexagon());
 				}
-				GridCoordinate right = new GridCoordinate(c.x()-1, y);
-				if(!m.containsKey(right)) {
+				GridCoordinate right = new GridCoordinate(c.x()+1, y);
+				if(!m.containsValue(right)) {
 					surrounds.put(right, new DefaultHexagon());
 				}
 			}
@@ -89,7 +90,7 @@ public class BoardState {
 				if(!m.containsKey(left)) {
 					surrounds.put(left, new DefaultHexagon());
 				}
-				GridCoordinate right = new GridCoordinate(c.x()-1, y);
+				GridCoordinate right = new GridCoordinate(c.x()+1, y);
 				if(!m.containsKey(right)) {
 					surrounds.put(right, new DefaultHexagon());
 				}
