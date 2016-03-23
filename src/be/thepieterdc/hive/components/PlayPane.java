@@ -37,6 +37,7 @@ public class PlayPane extends StackPane implements InvalidationListener {
 			h.setTranslateX(c.x()*5);
 			h.setTranslateY(c.y()*5);
 			if(h instanceof UnitHexagon) {
+				((UnitHexagon) h).scale(5);
 				System.out.println("Unit hex:");
 				System.out.println(((UnitHexagon) h).width());
 				System.out.println(((UnitHexagon) h).height());

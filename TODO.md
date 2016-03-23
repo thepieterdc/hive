@@ -1,5 +1,7 @@
 Heel veel opkuisen
 
+Hexagon stroke checken
+
 toStrings waar mogelijk
 
 Move#representation() niet meer meegeven maar bepalen
