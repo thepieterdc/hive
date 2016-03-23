@@ -14,7 +14,7 @@ Overal argument checks
 
 Overal jdocs
 
-Svg hertekenen(size niet juist)
+Ranks toevoegen aan units
 
 Remove unused methods
 

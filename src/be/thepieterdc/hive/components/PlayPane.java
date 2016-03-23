@@ -34,11 +34,19 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			HexCoordinate c = gridCoordinateNodeEntry.getKey();
 			Node h = gridCoordinateNodeEntry.getValue();
-			h.setScaleX(5);
-			h.setScaleY(5);
 			h.setTranslateX(c.x()*5);
 			h.setTranslateY(c.y()*5);
-			System.out.println("Hex: x="+h.getTranslateX()+", y="+h.getTranslateY());
+			if(h instanceof UnitHexagon) {
+				System.out.println("Unit hex:");
+				System.out.println(((UnitHexagon) h).width());
+				System.out.println(((UnitHexagon) h).height());
+			} else if(h instanceof DefaultHexagon) {
+				System.out.println("Regular hex:");
+				h.setScaleX(5);
+				h.setScaleY(5);
+				System.out.println(((DefaultHexagon) h).width());
+				System.out.println(((DefaultHexagon) h).height());
+			}
 			g.getChildren().add(h);
 		}
 		this.getChildren().add(g);

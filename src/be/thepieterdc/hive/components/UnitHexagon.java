@@ -27,14 +27,14 @@ public class UnitHexagon extends StackPane {
 		this.hexagon = new Hexagon();
 		this.hexagon.setFill(u.player().invert());
 		this.hexagon.setStroke(u.player());
+		this.hexagon.setStrokeWidth(1);
 
 		this.unitSvg = u.type().path();
-		this.unitSvg.setFill(u.player());
-		this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
-		this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
+//		this.unitSvg.setFill(u.player());
+//		this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
+//		this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
 
-		this.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-		this.getChildren().addAll(this.hexagon, this.unitSvg);
+		this.getChildren().addAll(this.hexagon/*, this.unitSvg*/);
 	}
 
 	public double height() {
@@ -44,7 +44,8 @@ public class UnitHexagon extends StackPane {
 	public void scale(double factor) {
 		this.hexagon.setScaleX(factor);
 		this.hexagon.setScaleY(factor);
-		this.setMinSize(this.width(), this.height());
+		this.setMinSize(width(), height());
+		this.setMaxSize(width(), height());
 	}
 
 	public Unit unit() {
