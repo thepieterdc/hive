@@ -63,7 +63,8 @@ public class BoardState {
 		HashMap<HexCoordinate, Node> surrounds = new HashMap<>();
 		for(Map.Entry<Unit, HexCoordinate> entry : m.entrySet()) {
 			HexCoordinate c = entry.getValue();
-			surrounds.put(c, new UnitHexagon(entry.getKey()));
+			//surrounds.put(c, new UnitHexagon(entry.getKey()));
+			surrounds.put(c, new DefaultHexagon());
 
 			for(Orientation o : Orientation.values()) {
 				HexCoordinate coord = HexCoordinate.fromOrientation(c, o);

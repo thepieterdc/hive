@@ -36,8 +36,9 @@ public class PlayPane extends StackPane implements InvalidationListener {
 			Node h = gridCoordinateNodeEntry.getValue();
 			h.setScaleX(5);
 			h.setScaleY(5);
-			h.setTranslateX(c.x()*100);
-			h.setTranslateY(c.y()*100);
+			h.setTranslateX(c.x()*5);
+			h.setTranslateY(c.y()*5);
+			System.out.println("Hex: x="+h.getTranslateX()+", y="+h.getTranslateY());
 			g.getChildren().add(h);
 		}
 		this.getChildren().add(g);

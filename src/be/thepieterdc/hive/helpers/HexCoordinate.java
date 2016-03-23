@@ -12,6 +12,7 @@ import be.thepieterdc.hive.data.Orientation;
 public class HexCoordinate {
 	private final int column;
 	private final int row;
+	private final static double SQRTTHREE = Math.sqrt(3);
 
 	public HexCoordinate(int row, int col) {
 		this.column = col;
@@ -45,11 +46,11 @@ public class HexCoordinate {
 		return "HexCoordinate[row="+this.row+", column="+this.column+"]";
 	}
 
-	public int x() {
-		return this.column;
+	public double x() {
+		return 10 * SQRTTHREE * (this.column + this.row/2) + 9*this.row;
 	}
 
-	public int y() {
-		return this.row;
+	public double y() {
+		return 10 * 3/2 * this.row;
 	}
 }
