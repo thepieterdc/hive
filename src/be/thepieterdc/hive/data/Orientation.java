@@ -8,23 +8,27 @@ package be.thepieterdc.hive.data;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum Orientation {
-	LEFTMIDDLE("-", Direction.LEFT, -1, 0),
-	LEFTUPPER("\\", Direction.LEFT, -1, 1),
-	LEFTUNDER("/", Direction.LEFT, -1, -1),
-	RIGHTMIDDLE("-", Direction.RIGHT, 1, 0),
-	RIGHTUPPER("/", Direction.RIGHT, 1, 1),
-	RIGHTUNDER("\\", Direction.RIGHT, 1, -1);
+	LEFTMIDDLE("-", Direction.LEFT, 0, -1),
+	LEFTUPPER("\\", Direction.LEFT, -1, 0),
+	LEFTUNDER("/", Direction.LEFT, 1, -1),
+	RIGHTMIDDLE("-", Direction.RIGHT, 0, 1),
+	RIGHTUPPER("/", Direction.RIGHT, -1, 1),
+	RIGHTUNDER("\\", Direction.RIGHT, 1, 0);
 
 	private final String representation;
 	private final Direction direction;
-	private final int xDelta;
-	private final int yDelta;
+	private final int rowDelta;
+	private final int colDelta;
 
-	Orientation(String r, Direction d, int xDelta, int yDelta) {
+	Orientation(String r, Direction d, int rowDelta, int colDelta) {
 		this.representation = r;
 		this.direction = d;
-		this.xDelta = xDelta;
-		this.yDelta = yDelta;
+		this.rowDelta = rowDelta;
+		this.colDelta = colDelta;
+	}
+
+	public int columnDelta() {
+		return this.colDelta;
 	}
 
 	public Direction direction() {
@@ -48,11 +52,7 @@ public enum Orientation {
 		return this.representation;
 	}
 
-	public int xDelta() {
-		return this.xDelta;
-	}
-
-	public int yDelta() {
-		return this.yDelta;
+	public int rowDelta() {
+		return this.rowDelta;
 	}
 }
