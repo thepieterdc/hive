@@ -2,6 +2,7 @@ package be.thepieterdc.hive.helpers;
 
 import be.thepieterdc.hive.components.DefaultHexagon;
 import be.thepieterdc.hive.components.UnitHexagon;
+import be.thepieterdc.hive.data.Orientation;
 import be.thepieterdc.hive.exceptions.UnmarshalException;
 import be.thepieterdc.hive.helpers.moves.FirstMove;
 import be.thepieterdc.hive.helpers.moves.StartMove;
@@ -64,14 +65,10 @@ public class BoardState {
 			GridCoordinate c = entry.getValue();
 			surrounds.put(c, new UnitHexagon(entry.getKey()));
 
-			for(int y = c.y()-1; y <= c.y()+1; y++) {
-				GridCoordinate left = new GridCoordinate(c.x()-1, y);
-				if(!m.containsValue(left)) {
-					surrounds.put(left, new DefaultHexagon());
-				}
-				GridCoordinate right = new GridCoordinate(c.x()+1, y);
-				if(!m.containsValue(right)) {
-					surrounds.put(right, new DefaultHexagon());
+			for(Orientation o : Orientation.values()) {
+				GridCoordinate coord = GridCoordinate.fromOrientation(c, o);
+				if(!m.containsValue(coord)) {
+					surrounds.put(coord, new DefaultHexagon());
 				}
 			}
 		}
@@ -85,14 +82,11 @@ public class BoardState {
 			if(entry.getValue() != null) {
 				surrounds.put(entry.getKey(), entry.getValue());
 			}
-			for(int y = c.y()-1; y <= c.y()+1; y++) {
-				GridCoordinate left = new GridCoordinate(c.x()-1, y);
-				if(!m.containsKey(left)) {
-					surrounds.put(left, new DefaultHexagon());
-				}
-				GridCoordinate right = new GridCoordinate(c.x()+1, y);
-				if(!m.containsKey(right)) {
-					surrounds.put(right, new DefaultHexagon());
+
+			for(Orientation o : Orientation.values()) {
+				GridCoordinate coord = GridCoordinate.fromOrientation(c, o);
+				if(!m.containsKey(coord)) {
+					surrounds.put(coord, new DefaultHexagon());
 				}
 			}
 		}

@@ -10,38 +10,38 @@ import be.thepieterdc.hive.data.Orientation;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class GridCoordinate {
-	private final int x;
-	private final int y;
+	private final int column;
+	private final int row;
 
-	public GridCoordinate(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public GridCoordinate(int row, int col) {
+		this.column = col;
+		this.row = row;
+	}
+
+	public int column() {
+		return this.column;
 	}
 
 	public static GridCoordinate fromOrientation(GridCoordinate base, Orientation o) {
-		return new GridCoordinate(base.x()+o.xDelta(), base.y()+o.yDelta());
+		return new GridCoordinate(base.row+o.rowDelta(), base.column+o.columnDelta());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof GridCoordinate && ((GridCoordinate) obj).x == this.x && ((GridCoordinate) obj).y == this.y;
+		return obj instanceof GridCoordinate && ((GridCoordinate) obj).row == this.row && ((GridCoordinate) obj).column == this.column;
 	}
 
 	@Override
 	public int hashCode() {
-		return (int) (this.x * 100 + this.y);
+		return this.row * 100 + this.column;
+	}
+
+	public int row() {
+		return this.row;
 	}
 
 	@Override
 	public String toString() {
-		return "GridCoordinate[x="+this.x+", y="+this.y+"]";
-	}
-
-	public int x() {
-		return this.x;
-	}
-
-	public int y() {
-		return this.y;
+		return "GridCoordinate[row="+this.row+", column="+this.column+"]";
 	}
 }
