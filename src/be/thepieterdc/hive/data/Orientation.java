@@ -8,12 +8,12 @@ package be.thepieterdc.hive.data;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum Orientation {
-	LEFTMIDDLE("-", Direction.LEFT, -1, 0),
-	LEFTUPPER("\\", Direction.LEFT, -1, 1),
-	LEFTUNDER("/", Direction.LEFT, -1, -1),
-	RIGHTMIDDLE("-", Direction.RIGHT, 1, 0),
-	RIGHTUPPER("/", Direction.RIGHT, 1, 1),
-	RIGHTUNDER("\\", Direction.RIGHT, 1, -1);
+	LEFTMIDDLE("-", Direction.LEFT, 0, -1),
+	LEFTUPPER("\\", Direction.LEFT, -1, 0),
+	LEFTUNDER("/", Direction.LEFT, 1, -1),
+	RIGHTMIDDLE("-", Direction.RIGHT, 0, 1),
+	RIGHTUPPER("/", Direction.RIGHT, -1, 1),
+	RIGHTUNDER("\\", Direction.RIGHT, 1, 0);
 
 	private final String representation;
 	private final Direction direction;
