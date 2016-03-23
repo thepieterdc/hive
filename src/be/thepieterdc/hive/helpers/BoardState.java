@@ -20,53 +20,53 @@ import java.util.Map;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class BoardState {
-	private final HashMap<GridCoordinate, Node> coordinates = new HashMap<>();
-	private final HashMap<Unit, GridCoordinate> units = new HashMap<>();
+	private final HashMap<HexCoordinate, Node> coordinates = new HashMap<>();
+	private final HashMap<Unit, HexCoordinate> units = new HashMap<>();
 
 	private BoardState(FirstMove f) {
 		//Hermaken//
-		this.coordinates.putAll(surroundings(new GridCoordinate(0, 0), new UnitHexagon(f.unit())));
-		this.units.put(f.unit(), new GridCoordinate(0, 0));
+		this.coordinates.putAll(surroundings(new HexCoordinate(0, 0), new UnitHexagon(f.unit())));
+		this.units.put(f.unit(), new HexCoordinate(0, 0));
 	}
 
-	private BoardState(HashMap<Unit, GridCoordinate> unitsMap) {
+	private BoardState(HashMap<Unit, HexCoordinate> unitsMap) {
 		this.coordinates.putAll(surroundingsFromUnits(unitsMap));
 		this.units.putAll(unitsMap);
 	}
 
 	//TODO: parameter verwijderen?
 	private BoardState(StartMove s) {
-		this.coordinates.put(new GridCoordinate(0, 0), new DefaultHexagon());
+		this.coordinates.put(new HexCoordinate(0, 0), new DefaultHexagon());
 	}
 
 	private static BoardState calculate(BoardState previous, Move move) {
-		HashMap<Unit, GridCoordinate> unitsMap = new HashMap<>(previous.units);
+		HashMap<Unit, HexCoordinate> unitsMap = new HashMap<>(previous.units);
 		if(!unitsMap.containsKey(move.otherUnit())) {
 			throw new UnmarshalException("Other unit not on board: "+move.otherUnit().type());
 		}
-		unitsMap.put(move.unit(), GridCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
+		unitsMap.put(move.unit(), HexCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
 		return new BoardState(unitsMap);
 	}
 
-	public HashMap<GridCoordinate, Node> coordinates() {
+	public HashMap<HexCoordinate, Node> coordinates() {
 		return this.coordinates;
 	}
 
 	//TODO misschien(zeker) omwisselen; dat deze surroundings alles berekent//
-	private static HashMap<GridCoordinate, Node> surroundings(GridCoordinate c, Node n) {
-		HashMap<GridCoordinate, Node> m = new HashMap<>();
+	private static HashMap<HexCoordinate, Node> surroundings(HexCoordinate c, Node n) {
+		HashMap<HexCoordinate, Node> m = new HashMap<>();
 		m.put(c, n);
 		return surroundingsFromCoords(m);
 	}
 
-	private static HashMap<GridCoordinate, Node> surroundingsFromUnits(HashMap<Unit, GridCoordinate> m) {
-		HashMap<GridCoordinate, Node> surrounds = new HashMap<>();
-		for(Map.Entry<Unit, GridCoordinate> entry : m.entrySet()) {
-			GridCoordinate c = entry.getValue();
+	private static HashMap<HexCoordinate, Node> surroundingsFromUnits(HashMap<Unit, HexCoordinate> m) {
+		HashMap<HexCoordinate, Node> surrounds = new HashMap<>();
+		for(Map.Entry<Unit, HexCoordinate> entry : m.entrySet()) {
+			HexCoordinate c = entry.getValue();
 			surrounds.put(c, new UnitHexagon(entry.getKey()));
 
 			for(Orientation o : Orientation.values()) {
-				GridCoordinate coord = GridCoordinate.fromOrientation(c, o);
+				HexCoordinate coord = HexCoordinate.fromOrientation(c, o);
 				if(!m.containsValue(coord)) {
 					surrounds.put(coord, new DefaultHexagon());
 				}
@@ -75,16 +75,16 @@ public class BoardState {
 		return surrounds;
 	}
 
-	private static HashMap<GridCoordinate, Node> surroundingsFromCoords(HashMap<GridCoordinate, Node> m) {
-		HashMap<GridCoordinate, Node> surrounds = new HashMap<>();
-		for(Map.Entry<GridCoordinate, Node> entry : m.entrySet()) {
-			GridCoordinate c = entry.getKey();
+	private static HashMap<HexCoordinate, Node> surroundingsFromCoords(HashMap<HexCoordinate, Node> m) {
+		HashMap<HexCoordinate, Node> surrounds = new HashMap<>();
+		for(Map.Entry<HexCoordinate, Node> entry : m.entrySet()) {
+			HexCoordinate c = entry.getKey();
 			if(entry.getValue() != null) {
 				surrounds.put(entry.getKey(), entry.getValue());
 			}
 
 			for(Orientation o : Orientation.values()) {
-				GridCoordinate coord = GridCoordinate.fromOrientation(c, o);
+				HexCoordinate coord = HexCoordinate.fromOrientation(c, o);
 				if(!m.containsKey(coord)) {
 					surrounds.put(coord, new DefaultHexagon());
 				}
@@ -93,7 +93,7 @@ public class BoardState {
 		return surrounds;
 	}
 
-	public HashMap<Unit, GridCoordinate> units() {
+	public HashMap<Unit, HexCoordinate> units() {
 		return this.units;
 	}
 

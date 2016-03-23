@@ -1,10 +1,10 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.helpers.GridCoordinate;
-import be.thepieterdc.hive.helpers.Unit;
+import be.thepieterdc.hive.helpers.HexCoordinate;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
@@ -28,17 +28,32 @@ public class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
+		this.getChildren().clear();
+		Group g = new Group();
+		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
+		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
+			HexCoordinate c = gridCoordinateNodeEntry.getKey();
+			Node h = gridCoordinateNodeEntry.getValue();
+			h.setScaleX(5);
+			h.setScaleY(5);
+			h.setTranslateX(c.x()*100);
+			h.setTranslateY(c.y()*100);
+			g.getChildren().add(h);
+		}
+		this.getChildren().add(g);
+		/*
 		System.out.println("------------------------------------------------------");
 		System.out.println("---[ Coords ] ---");
-		HashMap<GridCoordinate, Node> state = this.model.boardState().coordinates();
-		for (Map.Entry<GridCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
+		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
+		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			System.out.println(gridCoordinateNodeEntry.getKey()+" - "+gridCoordinateNodeEntry.getValue());
 		}
 		System.out.println("------------------------------------------------------");
 		System.out.println("---[ Units ] ---");
-		HashMap<Unit, GridCoordinate> units = this.model.boardState().units();
-		for (Map.Entry<Unit, GridCoordinate> unitGridCoordinateEntry : units.entrySet()) {
+		HashMap<Unit, HexCoordinate> units = this.model.boardState().units();
+		for (Map.Entry<Unit, HexCoordinate> unitGridCoordinateEntry : units.entrySet()) {
 			System.out.println(unitGridCoordinateEntry.getKey()+" @ "+unitGridCoordinateEntry.getValue());
 		}
+		*/
 	}
 }

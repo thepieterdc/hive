@@ -3,17 +3,17 @@ package be.thepieterdc.hive.helpers;
 import be.thepieterdc.hive.data.Orientation;
 
 /**
- * A coordinate on the playing grid.
+ * An axial hexagon coordinate.
  * <p>
  * Created at 20/03/16 14:04
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class GridCoordinate {
+public class HexCoordinate {
 	private final int column;
 	private final int row;
 
-	public GridCoordinate(int row, int col) {
+	public HexCoordinate(int row, int col) {
 		this.column = col;
 		this.row = row;
 	}
@@ -22,13 +22,13 @@ public class GridCoordinate {
 		return this.column;
 	}
 
-	public static GridCoordinate fromOrientation(GridCoordinate base, Orientation o) {
-		return new GridCoordinate(base.row+o.rowDelta(), base.column+o.columnDelta());
+	public static HexCoordinate fromOrientation(HexCoordinate base, Orientation o) {
+		return new HexCoordinate(base.row+o.rowDelta(), base.column+o.columnDelta());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof GridCoordinate && ((GridCoordinate) obj).row == this.row && ((GridCoordinate) obj).column == this.column;
+		return obj instanceof HexCoordinate && ((HexCoordinate) obj).row == this.row && ((HexCoordinate) obj).column == this.column;
 	}
 
 	@Override
@@ -42,6 +42,14 @@ public class GridCoordinate {
 
 	@Override
 	public String toString() {
-		return "GridCoordinate[row="+this.row+", column="+this.column+"]";
+		return "HexCoordinate[row="+this.row+", column="+this.column+"]";
+	}
+
+	public int x() {
+		return this.column;
+	}
+
+	public int y() {
+		return this.row;
 	}
 }

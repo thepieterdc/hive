@@ -1,7 +1,7 @@
 package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.data.UnitType;
-import be.thepieterdc.hive.helpers.GridCoordinate;
+import be.thepieterdc.hive.helpers.HexCoordinate;
 import be.thepieterdc.hive.helpers.Unit;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
@@ -89,7 +89,7 @@ public class UnitPane extends GridPane implements InvalidationListener {
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
-		HashMap<Unit, GridCoordinate> state = this.model.boardState().units();
+		HashMap<Unit, HexCoordinate> state = this.model.boardState().units();
 		for (Map.Entry<Unit, UnitPaneItem> entry : this.unitHexagons.entrySet()) {
 			UnitPaneItem item = entry.getValue();
 			if(!state.containsKey(entry.getKey())) {
