@@ -15,11 +15,5 @@ public class DefaultHexagon extends Hexagon {
 		super();
 		this.setFill(Color.LIGHTGRAY);
 		this.setStroke(Color.DARKGRAY);
-		this.setStrokeWidth(1);
-	}
-
-	public void scale(double factor) {
-		this.setScaleX(factor);
-		this.setScaleY(factor);
 	}
 }

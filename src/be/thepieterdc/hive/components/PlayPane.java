@@ -1,10 +1,11 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.helpers.GridCoordinate;
-import be.thepieterdc.hive.helpers.Unit;
+import be.thepieterdc.hive.data.Orientation;
+import be.thepieterdc.hive.helpers.HexCoordinate;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
@@ -28,17 +29,30 @@ public class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		System.out.println("------------------------------------------------------");
-		System.out.println("---[ Coords ] ---");
-		HashMap<GridCoordinate, Node> state = this.model.boardState().coordinates();
-		for (Map.Entry<GridCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
-			System.out.println(gridCoordinateNodeEntry.getKey()+" - "+gridCoordinateNodeEntry.getValue());
+		this.getChildren().clear();
+		Group g = new Group();
+		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
+		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
+			HexCoordinate c = gridCoordinateNodeEntry.getKey();
+			Node h = gridCoordinateNodeEntry.getValue();
+			h.setTranslateX(c.x()*5);
+			h.setTranslateY(c.y()*5);
+			h.setOnMouseClicked(event -> System.out.println(c));
+			if(h instanceof UnitHexagon) {
+				((UnitHexagon) h).scale(5);
+				System.out.println(HexCoordinate.fromOrientation(c, Orientation.RIGHTUPPER));
+				System.out.println("Unit hex:");
+				System.out.println(((UnitHexagon) h).width());
+				System.out.println(((UnitHexagon) h).height());
+			} else if(h instanceof DefaultHexagon) {
+				System.out.println("Regular hex:");
+				h.setScaleX(5);
+				h.setScaleY(5);
+				System.out.println(((DefaultHexagon) h).width());
+				System.out.println(((DefaultHexagon) h).height());
+			}
+			g.getChildren().add(h);
 		}
-		System.out.println("------------------------------------------------------");
-		System.out.println("---[ Units ] ---");
-		HashMap<Unit, GridCoordinate> units = this.model.boardState().units();
-		for (Map.Entry<Unit, GridCoordinate> unitGridCoordinateEntry : units.entrySet()) {
-			System.out.println(unitGridCoordinateEntry.getKey()+" @ "+unitGridCoordinateEntry.getValue());
-		}
+		this.getChildren().add(g);
 	}
 }

@@ -1,3 +1,5 @@
+Wat moet er nog gebeuren bepalen
+
 Heel veel opkuisen
 
 toStrings waar mogelijk
@@ -14,7 +16,7 @@ Overal argument checks
 
 Overal jdocs
 
-Svg hertekenen(size niet juist)
+Ranks toevoegen aan units
 
 Remove unused methods
 
