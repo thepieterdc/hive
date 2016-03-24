@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Model implements Observable {
+public abstract class Model implements Observable {
 	private final ArrayList<InvalidationListener> listeners = new ArrayList<>();
 
 	@Override

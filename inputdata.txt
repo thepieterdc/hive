@@ -1,3 +1,6 @@
 start
 wQ
 bA1 wQ-
+wS1 \wQ
+bB1 bA1-
+wG1 -wQ

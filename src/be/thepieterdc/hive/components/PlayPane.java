@@ -1,15 +1,12 @@
 package be.thepieterdc.hive.components;
 
+import be.thepieterdc.hive.data.Orientation;
 import be.thepieterdc.hive.helpers.HexCoordinate;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Description here
@@ -30,14 +27,17 @@ public class PlayPane extends StackPane implements InvalidationListener {
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
 		Group g = new Group();
+		/*
 		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
 		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			HexCoordinate c = gridCoordinateNodeEntry.getKey();
 			Node h = gridCoordinateNodeEntry.getValue();
 			h.setTranslateX(c.x()*5);
 			h.setTranslateY(c.y()*5);
+			h.setOnMouseClicked(event -> System.out.println(c));
 			if(h instanceof UnitHexagon) {
 				((UnitHexagon) h).scale(5);
+				System.out.println(HexCoordinate.fromOrientation(c, Orientation.RIGHTUPPER));
 				System.out.println("Unit hex:");
 				System.out.println(((UnitHexagon) h).width());
 				System.out.println(((UnitHexagon) h).height());
@@ -50,20 +50,17 @@ public class PlayPane extends StackPane implements InvalidationListener {
 			}
 			g.getChildren().add(h);
 		}
-		this.getChildren().add(g);
-		/*
-		System.out.println("------------------------------------------------------");
-		System.out.println("---[ Coords ] ---");
-		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
-		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
-			System.out.println(gridCoordinateNodeEntry.getKey()+" - "+gridCoordinateNodeEntry.getValue());
-		}
-		System.out.println("------------------------------------------------------");
-		System.out.println("---[ Units ] ---");
-		HashMap<Unit, HexCoordinate> units = this.model.boardState().units();
-		for (Map.Entry<Unit, HexCoordinate> unitGridCoordinateEntry : units.entrySet()) {
-			System.out.println(unitGridCoordinateEntry.getKey()+" @ "+unitGridCoordinateEntry.getValue());
-		}
 		*/
+		HexCoordinate test = new HexCoordinate(0, 0);
+		for(int i = 0; i < 5; i++) {
+			DefaultHexagon h = new DefaultHexagon();
+			h.setTranslateX(test.x()*5);
+			h.setTranslateY(test.y()*5);
+			h.setScaleX(5);
+			h.setScaleY(5);
+			g.getChildren().add(h);
+			test = HexCoordinate.fromOrientation(test, Orientation.LEFTUPPER);
+		}
+		this.getChildren().add(g);
 	}
 }
