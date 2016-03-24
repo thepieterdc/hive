@@ -46,10 +46,10 @@ public class HexCoordinate {
 	}
 
 	public double x() {
-		return 10 * Math.sqrt(3) * (this.column + this.row) - 8.5*this.row;
+		return 11 * Math.sqrt(3) * (this.column + this.row) - 9.5*this.row;
 	}
 
 	public double y() {
-		return 10 * 3/2 * this.row;
+		return 11 * 3/2 * this.row;
 	}
 }
