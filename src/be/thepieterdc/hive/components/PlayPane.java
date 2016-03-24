@@ -6,7 +6,11 @@ import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description here
@@ -27,7 +31,6 @@ public class PlayPane extends StackPane implements InvalidationListener {
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
 		Group g = new Group();
-		/*
 		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
 		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			HexCoordinate c = gridCoordinateNodeEntry.getKey();
@@ -49,17 +52,6 @@ public class PlayPane extends StackPane implements InvalidationListener {
 				System.out.println(((DefaultHexagon) h).height());
 			}
 			g.getChildren().add(h);
-		}
-		*/
-		HexCoordinate test = new HexCoordinate(0, 0);
-		for(int i = 0; i < 5; i++) {
-			DefaultHexagon h = new DefaultHexagon();
-			h.setTranslateX(test.x()*5);
-			h.setTranslateY(test.y()*5);
-			h.setScaleX(5);
-			h.setScaleY(5);
-			g.getChildren().add(h);
-			test = HexCoordinate.fromOrientation(test, Orientation.LEFTUPPER);
 		}
 		this.getChildren().add(g);
 	}

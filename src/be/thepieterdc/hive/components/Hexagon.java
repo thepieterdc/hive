@@ -2,6 +2,7 @@ package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.helpers.Coordinate;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.StrokeType;
 
 /**
  * Hexagon component.
@@ -21,6 +22,9 @@ public class Hexagon extends Polygon {
 		this.bottomLeft = bottomLeft();
 		this.top = top();
 		this.topRight = topRight();
+
+		this.setStrokeType(StrokeType.INSIDE);
+		this.setStrokeWidth(1);
 
 		this.getPoints().addAll(this.top.asList());
 		this.getPoints().addAll(this.topRight.asList());

@@ -24,10 +24,9 @@ public class UnitHexagon extends Group {
 	public UnitHexagon(Unit u) {
 		this.unit = u;
 
-		this.hexagon = new Hexagon();
+		this.hexagon = new DefaultHexagon();
 		this.hexagon.setFill(u.player().invert());
-		//this.hexagon.setStroke(u.player());
-		//this.hexagon.setStrokeWidth(0.2);
+		this.hexagon.setStroke(u.player());
 
 		this.unitSvg = u.type().path();
 		this.unitSvg.setFill(u.player());

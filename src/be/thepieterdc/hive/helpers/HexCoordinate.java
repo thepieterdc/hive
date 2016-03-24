@@ -46,7 +46,7 @@ public class HexCoordinate {
 	}
 
 	public double x() {
-		return 10 * Math.sqrt(3) * (this.column + this.row) - 9*this.row;
+		return 10 * Math.sqrt(3) * (this.column + this.row) - 8.5*this.row;
 	}
 
 	public double y() {
