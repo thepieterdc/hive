@@ -1,6 +1,6 @@
-Heel veel opkuisen
+Wat moet er nog gebeuren bepalen
 
-Hexagon stroke checken
+Heel veel opkuisen
 
 toStrings waar mogelijk
 
