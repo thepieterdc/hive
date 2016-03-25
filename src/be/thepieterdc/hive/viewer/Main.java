@@ -3,14 +3,12 @@ package be.thepieterdc.hive.viewer;
 import be.thepieterdc.hive.components.HivePane;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
-import be.thepieterdc.hive.data.Player;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -44,13 +42,15 @@ public class Main extends Application {
 
 			Scene scene = new Scene(new HivePane(model));
 			stage.setScene(scene);
-			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmodus]":""));
+			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmode]":""));
 			stage.show();
 
 			model.move(args.getRaw().size() == 2 ? model.totalMoves()-1:0);
 
 			if(args.getRaw().size() == 2) {
 				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
+				System.out.println("[Hive Testmode] Units");
+				model.boardState().transferPieces().forEach(System.out::println);
 			}
 
 		} catch (Exception e) {

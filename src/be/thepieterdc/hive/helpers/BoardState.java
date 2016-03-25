@@ -99,7 +99,7 @@ public class BoardState {
 		for (Map.Entry<Unit, HexCoordinate> unitHexCoordinateEntry : this.units.entrySet()) {
 			Unit u = unitHexCoordinateEntry.getKey();
 			HexCoordinate c = unitHexCoordinateEntry.getValue();
-			//lijst.add(new TransferPiece(u.type().abbreviation(), null, null, null));
+			lijst.add(new TransferPiece(u.type().abbreviation(), u.player().id(), 0, 0));
 		}
 		return lijst;
 	}
