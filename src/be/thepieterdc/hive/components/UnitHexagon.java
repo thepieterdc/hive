@@ -39,6 +39,7 @@ public class UnitHexagon extends Group implements Scalable {
 		return this.hexagon;
 	}
 
+	@Override
 	public double height() {
 		return this.hexagon.height();
 	}
@@ -46,12 +47,16 @@ public class UnitHexagon extends Group implements Scalable {
 	@Override
 	public void scale(double factor) {
 		this.hexagon.scale(factor);
+		this.unitSvg.setScaleX(factor*1.5);
+		this.unitSvg.setScaleY(factor*1.5);
+		this.unitSvg.setTranslateX(this.width()/2-factor*2.4*this.unitSvg.getLayoutBounds().getWidth());
 	}
 
 	public Unit unit() {
 		return this.unit;
 	}
 
+	@Override
 	public double width() {
 		return this.hexagon.width();
 	}

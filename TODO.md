@@ -4,6 +4,8 @@ Testmodus: moves uitschrijven maken
 
 Heel veel opkuisen
 
+Play/stop button
+
 toStrings waar mogelijk
 
 Move#representation() niet meer meegeven maar bepalen

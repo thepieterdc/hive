@@ -16,7 +16,7 @@ public class Unit {
 	private final UnitType type;
 
 	public Unit(Color player, UnitType type) {
-		this(player, type, 0);
+		this(player, type, 1);
 	}
 
 	public Unit(Color player, UnitType type, int rank) {

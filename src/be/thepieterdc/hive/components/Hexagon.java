@@ -47,6 +47,7 @@ public class Hexagon extends Polygon implements Scalable {
 		return new Coordinate(Math.sqrt(75), -5);
 	}
 
+	@Override
 	public double height() {
 		return this.getScaleX() * (this.top.y() - this.bottom.y() + this.getStrokeWidth());
 	}
@@ -69,6 +70,7 @@ public class Hexagon extends Polygon implements Scalable {
 		return new Coordinate(Math.sqrt(75), 5);
 	}
 
+	@Override
 	public double width() {
 		return this.getScaleX() * (this.topRight.x() - this.bottomLeft.x() + this.getStrokeWidth());
 	}
