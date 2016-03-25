@@ -7,9 +7,13 @@ import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -29,8 +33,8 @@ public class Main extends Application {
 	public void start(Stage stage) {
 		Parameters args = this.getParameters();
 		try {
-			if(args == null || args.getRaw().size() != 1) {
-				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
+			if(args == null || args.getRaw().size() == 0 || args.getRaw().size() > 2) {
+				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext [test]");
 			}
 			List<String> parameters = args.getRaw();
 
@@ -41,10 +45,18 @@ public class Main extends Application {
 
 			Scene scene = new Scene(new HivePane(model));
 			stage.setScene(scene);
-			stage.setTitle("Hive Viewer");
+			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmodus]":""));
 			stage.show();
 
-			model.move(0);
+			if(args.getRaw().size() == 2) {
+				model.move(model.totalMoves()-1);
+				WritableImage screenshot = scene.snapshot(null);
+
+				File outFile = Paths.get(args.getRaw().get(1), "screenshot.png").toFile();
+				ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null), "png", outFile);
+			} else {
+				model.move(0);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());

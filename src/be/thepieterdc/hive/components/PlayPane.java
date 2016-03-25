@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Description here
+ * The playing field of the game.
  * <p>
  * Created at 19/03/16 22:17
  *
