@@ -1,7 +1,7 @@
 package be.thepieterdc.hive.components;
 
-import be.thepieterdc.hive.data.Orientation;
 import be.thepieterdc.hive.helpers.HexCoordinate;
+import be.thepieterdc.hive.interfaces.Scalable;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Description here
+ * The playing field of the game.
  * <p>
  * Created at 19/03/16 22:17
  *
@@ -35,22 +35,9 @@ public class PlayPane extends StackPane implements InvalidationListener {
 		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			HexCoordinate c = gridCoordinateNodeEntry.getKey();
 			Node h = gridCoordinateNodeEntry.getValue();
-			h.setTranslateX(c.x()*5);
-			h.setTranslateY(c.y()*5);
-			h.setOnMouseClicked(event -> System.out.println(c));
-			if(h instanceof UnitHexagon) {
-				((UnitHexagon) h).scale(5);
-				System.out.println(HexCoordinate.fromOrientation(c, Orientation.RIGHTUPPER));
-				System.out.println("Unit hex:");
-				System.out.println(((UnitHexagon) h).width());
-				System.out.println(((UnitHexagon) h).height());
-			} else if(h instanceof DefaultHexagon) {
-				System.out.println("Regular hex:");
-				h.setScaleX(5);
-				h.setScaleY(5);
-				System.out.println(((DefaultHexagon) h).width());
-				System.out.println(((DefaultHexagon) h).height());
-			}
+			h.setTranslateX(c.x() * 5);
+			h.setTranslateY(c.y() * 5);
+			((Scalable) h).scale(5);
 			g.getChildren().add(h);
 		}
 		this.getChildren().add(g);

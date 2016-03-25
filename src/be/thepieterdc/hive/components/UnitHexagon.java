@@ -1,6 +1,7 @@
 package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.helpers.Unit;
+import be.thepieterdc.hive.interfaces.Scalable;
 import javafx.scene.Group;
 import javafx.scene.shape.SVGPath;
 
@@ -11,7 +12,7 @@ import javafx.scene.shape.SVGPath;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class UnitHexagon extends Group {
+public class UnitHexagon extends Group implements Scalable {
 	private final Hexagon hexagon;
 	private final Unit unit;
 	private final SVGPath unitSvg;
@@ -30,8 +31,6 @@ public class UnitHexagon extends Group {
 
 		this.unitSvg = u.type().path();
 		this.unitSvg.setFill(u.player());
-		this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
-		this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
 
 		this.getChildren().addAll(this.hexagon, this.unitSvg);
 	}
@@ -44,9 +43,9 @@ public class UnitHexagon extends Group {
 		return this.hexagon.height();
 	}
 
+	@Override
 	public void scale(double factor) {
-		this.hexagon.setScaleX(factor);
-		this.hexagon.setScaleY(factor);
+		this.hexagon.scale(factor);
 	}
 
 	public Unit unit() {

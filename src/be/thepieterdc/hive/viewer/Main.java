@@ -1,17 +1,17 @@
 package be.thepieterdc.hive.viewer;
 
 import be.thepieterdc.hive.components.HivePane;
-import be.thepieterdc.hive.exceptions.MalformedMoveException;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import javax.imageio.ImageIO;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Main application
+ * Main application.
  * <p>
  * Created at 16/03/16 19:16
  *
@@ -31,30 +31,27 @@ public class Main extends Application {
 	public void start(Stage stage) {
 		Parameters args = this.getParameters();
 		try {
-			if(args == null || args.getRaw().size() != 1) {
-				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
+			if(args == null || args.getRaw().size() == 0 || args.getRaw().size() > 2) {
+				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext [test]");
 			}
 			List<String> parameters = args.getRaw();
-			List<Move> moves;
-			HashMap<Integer, BoardState> states;
-			try {
-				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
-				moves = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
-				states = BoardState.unmarshal(moves);
-			} catch(IOException e) {
-				throw new Exception("Inputdata was not found or is unreadable.");
-			} catch(MalformedMoveException e) {
-				throw new Exception("Invalid move: "+e.move());
-			}
+
+			List<Move> moves = Files.readAllLines(Paths.get(parameters.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
+			HashMap<Integer, BoardState> states = BoardState.unmarshal(moves);
 
 			ViewerModel model = new ViewerModel(moves, states);
 
 			Scene scene = new Scene(new HivePane(model));
 			stage.setScene(scene);
-			stage.setTitle("Hive Viewer");
+			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmodus]":""));
 			stage.show();
 
-			model.move(0);
+			model.move(args.getRaw().size() == 2 ? model.totalMoves()-1:0);
+
+			if(args.getRaw().size() == 2) {
+				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());

@@ -1,6 +1,4 @@
-Wat moet er nog gebeuren bepalen
-
-Variable colors toelaten
+Variable colors toelaten -> player klasse
 
 Heel veel opkuisen
 
