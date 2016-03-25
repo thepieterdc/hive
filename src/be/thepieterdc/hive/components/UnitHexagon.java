@@ -30,8 +30,9 @@ public class UnitHexagon extends Group {
 
 		this.unitSvg = u.type().path();
 		this.unitSvg.setFill(u.player());
-		this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.8));
-		this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.8));
+		//this.unitSvg.scaleXProperty().bind(this.hexagon.scaleXProperty().multiply(1.5));
+		//this.unitSvg.scaleYProperty().bind(this.hexagon.scaleYProperty().multiply(1.5));
+		System.out.println(unitSvg);
 
 		this.getChildren().addAll(this.hexagon, this.unitSvg);
 	}
