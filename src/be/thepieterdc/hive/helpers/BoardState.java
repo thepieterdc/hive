@@ -8,10 +8,7 @@ import be.thepieterdc.hive.helpers.moves.FirstMove;
 import be.thepieterdc.hive.helpers.moves.StartMove;
 import javafx.scene.Node;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a state of the board.
@@ -99,8 +96,9 @@ public class BoardState {
 		for (Map.Entry<Unit, HexCoordinate> unitHexCoordinateEntry : this.units.entrySet()) {
 			Unit u = unitHexCoordinateEntry.getKey();
 			HexCoordinate c = unitHexCoordinateEntry.getValue();
-			lijst.add(new TransferPiece(u.type().abbreviation(), u.player().id(), 0, 0));
+			lijst.add(new TransferPiece(u.type().abbreviation(), u.player().id(), u.rank(), c.row(), c.column()));
 		}
+		Collections.sort(lijst);
 		return lijst;
 	}
 

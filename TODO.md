@@ -1,5 +1,3 @@
-Testmodus: moves uitschrijven maken
-
 Play/stop button
 
 Nice ding maken van PlayPane
