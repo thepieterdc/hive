@@ -22,3 +22,5 @@ Overal jdocs
 Remove unused methods
 
 i18n
+
+e.printStackTrace() in main verwijderen

@@ -18,7 +18,7 @@ public class HivePane extends VBox {
 		PlayPane playPane = new PlayPane(model);
 
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
-		mainPane.setDividerPositions(0.0);
+		mainPane.setDividerPositions(0);
 
 		UnitPane bottomPane = new UnitPane(model);
 
