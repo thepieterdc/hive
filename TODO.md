@@ -1,5 +1,7 @@
 Variable colors toelaten -> player klasse
 
+Testmodus: moves uitschrijven maken
+
 Heel veel opkuisen
 
 toStrings waar mogelijk
