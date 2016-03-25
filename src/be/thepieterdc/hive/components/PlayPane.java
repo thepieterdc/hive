@@ -1,6 +1,7 @@
 package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.helpers.HexCoordinate;
+import be.thepieterdc.hive.interfaces.Scalable;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -36,12 +37,7 @@ public class PlayPane extends StackPane implements InvalidationListener {
 			Node h = gridCoordinateNodeEntry.getValue();
 			h.setTranslateX(c.x()*5);
 			h.setTranslateY(c.y()*5);
-			if(h instanceof UnitHexagon) {
-				((UnitHexagon) h).scale(5);
-			} else if(h instanceof DefaultHexagon) {
-				h.setScaleX(5);
-				h.setScaleY(5);
-			}
+			((Scalable) h).scale(5);
 			g.getChildren().add(h);
 		}
 		this.getChildren().add(g);

@@ -1,6 +1,7 @@
 package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.helpers.Coordinate;
+import be.thepieterdc.hive.interfaces.Scalable;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeType;
 
@@ -11,7 +12,7 @@ import javafx.scene.shape.StrokeType;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Hexagon extends Polygon {
+public class Hexagon extends Polygon implements Scalable {
 	private final Coordinate bottom;
 	private final Coordinate bottomLeft;
 	private final Coordinate top;
@@ -48,6 +49,12 @@ public class Hexagon extends Polygon {
 
 	public double height() {
 		return this.getScaleX() * (this.top.y() - this.bottom.y() + this.getStrokeWidth());
+	}
+
+	@Override
+	public void scale(double factor) {
+		this.setScaleX(factor);
+		this.setScaleY(factor);
 	}
 
 	public static Coordinate top() {

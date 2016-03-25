@@ -9,5 +9,5 @@ package be.thepieterdc.hive.interfaces;
  */
 public interface Scalable {
 
-	void scale(int factor);
+	void scale(double factor);
 }
