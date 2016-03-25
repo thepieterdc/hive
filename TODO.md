@@ -1,5 +1,3 @@
-Variable colors toelaten -> player klasse
-
 Testmodus: moves uitschrijven maken
 
 Play/stop button

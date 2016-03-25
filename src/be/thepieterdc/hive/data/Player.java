@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
  */
 public enum Player {
 	ONE("b", Color.BLANCHEDALMOND),
-	TWO("w", Color.AQUAMARINE);
+	TWO("w", Color.BLANCHEDALMOND.invert());
 
 	private final Color color;
 	private final String id;
