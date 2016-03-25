@@ -3,12 +3,14 @@ package be.thepieterdc.hive.viewer;
 import be.thepieterdc.hive.components.HivePane;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
+import be.thepieterdc.hive.helpers.Player;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
@@ -38,7 +40,7 @@ public class Main extends Application {
 
 			List<Move> moves = Files.readAllLines(Paths.get(parameters.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
 
-			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
+			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves), new Player("b", Color.BLANCHEDALMOND), new Player("w", Color.AQUAMARINE));
 
 			Scene scene = new Scene(new HivePane(model));
 			stage.setScene(scene);

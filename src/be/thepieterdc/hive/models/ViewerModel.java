@@ -3,6 +3,7 @@ package be.thepieterdc.hive.models;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
+import be.thepieterdc.hive.helpers.Player;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +20,16 @@ public class ViewerModel extends Model {
 	private Move move = null;
 	private int moveIndex;
 	private final List<Move> moves;
+	private final Player player1;
+	private final Player player2;
 
 	private final int totalMoves;
 
-	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states) {
+	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states, final Player player1, final Player player2) {
 		this.boardStates = states;
 		this.moves = moves;
+		this.player1 = player1;
+		this.player2 = player2;
 		this.totalMoves = this.moves.size();
 	}
 
@@ -59,6 +64,23 @@ public class ViewerModel extends Model {
 
 	public List<Move> moves() {
 		return this.moves;
+	}
+
+	public Player player(String id) {
+		if(this.player1.id().equals(id)) {
+			return this.player1;
+		} else if(this.player2.id().equals(id)) {
+			return this.player2;
+		}
+		throw new IllegalArgumentException("Player not found for id: "+id);
+	}
+
+	public Player player1() {
+		return this.player1;
+	}
+
+	public Player player2() {
+		return this.player2;
 	}
 
 	public int totalMoves() {
