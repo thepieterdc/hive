@@ -28,15 +28,15 @@ public class UnitHexagon extends Group implements Scalable {
 		this.unit = u;
 
 		this.hexagon = new Hexagon();
-		this.hexagon.setFill(this.unit.player().invert());
-		this.hexagon.setStroke(this.unit.player());
+		this.hexagon.setFill(this.unit.player().color().invert());
+		this.hexagon.setStroke(this.unit.player().color());
 
 		this.unitSvg = this.unit.type().path();
-		this.unitSvg.setFill(this.unit.player());
+		this.unitSvg.setFill(this.unit.player().color());
 
 		this.ranks = new Circle[this.unit.rank()];
 		for(int i = 0; i < this.ranks.length; i++) {
-			this.ranks[i] = new Circle(1, this.unit.player());
+			this.ranks[i] = new Circle(1, this.unit.player().color());
 		}
 
 		this.getChildren().addAll(this.hexagon, this.unitSvg);

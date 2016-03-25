@@ -1,5 +1,6 @@
 package be.thepieterdc.hive.helpers;
 
+import be.thepieterdc.hive.data.Player;
 import be.thepieterdc.hive.data.UnitType;
 
 /**

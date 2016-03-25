@@ -2,11 +2,11 @@ package be.thepieterdc.hive.helpers;
 
 import be.thepieterdc.hive.data.Direction;
 import be.thepieterdc.hive.data.Orientation;
+import be.thepieterdc.hive.data.Player;
 import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.exceptions.MalformedMoveException;
 import be.thepieterdc.hive.helpers.moves.FirstMove;
 import be.thepieterdc.hive.helpers.moves.StartMove;
-import javafx.scene.paint.Color;
 
 /**
  * Represents a move.
@@ -36,10 +36,10 @@ public class Move {
 				return new StartMove();
 			}
 
-			Color thisCol = String.valueOf(r.charAt(0)).equals("b") ? Color.BLACK : Color.WHITE;
+			Player thisPlayer = Player.fromId(String.valueOf(r.charAt(0)));
 			UnitType thisType = UnitType.fromAbbreviation(r.charAt(1));
 			int thisRank = thisType.equals(UnitType.QUEEN) ? 0 : r.charAt(2) - 48;
-			Unit thisUnit = new Unit(thisCol, thisType, thisRank);
+			Unit thisUnit = new Unit(thisPlayer, thisType, thisRank);
 
 			if (!r.contains(" ")) {
 				return new FirstMove(thisUnit, original);
@@ -62,11 +62,11 @@ public class Move {
 				orientationPos = 3;
 			}
 
-			Color otherCol = String.valueOf(r.charAt(colorPos)).equals("b") ? Color.BLACK : Color.WHITE;
+			Player otherPlayer = Player.fromId(String.valueOf(r.charAt(colorPos)));
 			UnitType otherType = UnitType.fromAbbreviation(r.charAt(typePos));
 			int otherRank = otherType.equals(UnitType.QUEEN) ? 0 : r.charAt(rankPos) - 48;
 
-			Unit otherUnit = new Unit(otherCol, otherType, otherRank);
+			Unit otherUnit = new Unit(otherPlayer, otherType, otherRank);
 
 			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(r.charAt(otherType.equals(UnitType.QUEEN) ? orientationPos-1:orientationPos), Direction.RIGHT), original);
 		} catch(Exception e) {

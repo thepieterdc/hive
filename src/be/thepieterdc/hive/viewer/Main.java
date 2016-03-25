@@ -3,7 +3,7 @@ package be.thepieterdc.hive.viewer;
 import be.thepieterdc.hive.components.HivePane;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
-import be.thepieterdc.hive.helpers.Player;
+import be.thepieterdc.hive.data.Player;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.application.Application;
@@ -40,7 +40,7 @@ public class Main extends Application {
 
 			List<Move> moves = Files.readAllLines(Paths.get(parameters.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
 
-			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves), new Player("b", Color.BLANCHEDALMOND), new Player("w", Color.AQUAMARINE));
+			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
 
 			Scene scene = new Scene(new HivePane(model));
 			stage.setScene(scene);
