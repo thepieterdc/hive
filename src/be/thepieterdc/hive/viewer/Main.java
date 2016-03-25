@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +33,12 @@ public class Main extends Application {
 			if(args == null || args.getRaw().size() == 0 || args.getRaw().size() > 2) {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext [test]");
 			}
+
 			List<String> parameters = args.getRaw();
 
 			List<Move> moves = Files.readAllLines(Paths.get(parameters.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
-			HashMap<Integer, BoardState> states = BoardState.unmarshal(moves);
 
-			ViewerModel model = new ViewerModel(moves, states);
+			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
 
 			Scene scene = new Scene(new HivePane(model));
 			stage.setScene(scene);
