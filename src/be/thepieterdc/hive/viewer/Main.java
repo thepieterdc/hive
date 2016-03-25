@@ -9,11 +9,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
-import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -21,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Main application
+ * Main application.
  * <p>
  * Created at 16/03/16 19:16
  *
@@ -48,15 +46,12 @@ public class Main extends Application {
 			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmodus]":""));
 			stage.show();
 
-			if(args.getRaw().size() == 2) {
-				model.move(model.totalMoves()-1);
-				WritableImage screenshot = scene.snapshot(null);
+			model.move(args.getRaw().size() == 2 ? model.totalMoves()-1:0);
 
-				File outFile = Paths.get(args.getRaw().get(1), "screenshot.png").toFile();
-				ImageIO.write(SwingFXUtils.fromFXImage(screenshot, null), "png", outFile);
-			} else {
-				model.move(0);
+			if(args.getRaw().size() == 2) {
+				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
