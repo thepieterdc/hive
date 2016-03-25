@@ -3,7 +3,6 @@ package be.thepieterdc.hive.models;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
-import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +22,7 @@ public class ViewerModel extends Model {
 
 	private final int totalMoves;
 
-	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states, Color player1Color, Color player2Color) {
+	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states) {
 		this.boardStates = states;
 		this.moves = moves;
 		this.totalMoves = this.moves.size();

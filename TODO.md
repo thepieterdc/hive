@@ -1,5 +1,7 @@
 Wat moet er nog gebeuren bepalen
 
+Variable colors toelaten
+
 Heel veel opkuisen
 
 toStrings waar mogelijk
