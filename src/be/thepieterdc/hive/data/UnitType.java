@@ -25,17 +25,13 @@ public enum UnitType {
 		this.path = p;
 	}
 
-	public String abbreviation() {
-		return this.name().substring(0, 1);
+	public char abbreviation() {
+		return this.name().charAt(0);
 	}
 
 	public static UnitType fromAbbreviation(char a) {
-		return fromAbbreviation(String.valueOf(a));
-	}
-
-	public static UnitType fromAbbreviation(String a) {
 		for(UnitType u : UnitType.values()) {
-			if(u.abbreviation().equals(a.toUpperCase())) {
+			if(u.abbreviation() == a) {
 				return u;
 			}
 		}

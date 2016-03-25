@@ -8,6 +8,7 @@ import be.thepieterdc.hive.helpers.moves.FirstMove;
 import be.thepieterdc.hive.helpers.moves.StartMove;
 import javafx.scene.Node;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,16 @@ public class BoardState {
 			}
 		}
 		return surrounds;
+	}
+
+	public List<TransferPiece> transferPieces() {
+		List<TransferPiece> lijst = new ArrayList<>();
+		for (Map.Entry<Unit, HexCoordinate> unitHexCoordinateEntry : this.units.entrySet()) {
+			Unit u = unitHexCoordinateEntry.getKey();
+			HexCoordinate c = unitHexCoordinateEntry.getValue();
+			//lijst.add(new TransferPiece(u.type().abbreviation(), null, null, null));
+		}
+		return lijst;
 	}
 
 	public HashMap<Unit, HexCoordinate> units() {

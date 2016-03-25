@@ -31,7 +31,6 @@ public class Move {
 	public static Move fromRepresentation(String r) throws MalformedMoveException {
 		String original = r;
 		try {
-			r = r.toLowerCase();
 			if (r.equals("start")) {
 				return new StartMove();
 			}
