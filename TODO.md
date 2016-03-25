@@ -2,12 +2,12 @@ Variable colors toelaten -> player klasse
 
 Testmodus: moves uitschrijven maken
 
-Heel veel opkuisen
-
 Play/stop button
 
 Nice ding maken van PlayPane
 -> potentieel unithexagon wat herschrijven voor translations enzo
+
+Heel veel opkuisen
 
 toStrings waar mogelijk
 
