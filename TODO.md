@@ -6,6 +6,9 @@ Heel veel opkuisen
 
 Play/stop button
 
+Nice ding maken van PlayPane
+-> potentieel unithexagon wat herschrijven voor translations enzo
+
 toStrings waar mogelijk
 
 Move#representation() niet meer meegeven maar bepalen
@@ -19,8 +22,6 @@ Algemene cleanup(zet alles op streng)
 Overal argument checks
 
 Overal jdocs
-
-Ranks toevoegen aan units
 
 Remove unused methods
 

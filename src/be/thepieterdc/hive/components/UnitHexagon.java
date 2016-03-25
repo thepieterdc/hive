@@ -3,6 +3,7 @@ package be.thepieterdc.hive.components;
 import be.thepieterdc.hive.helpers.Unit;
 import be.thepieterdc.hive.interfaces.Scalable;
 import javafx.scene.Group;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -14,6 +15,7 @@ import javafx.scene.shape.SVGPath;
  */
 public class UnitHexagon extends Group implements Scalable {
 	private final Hexagon hexagon;
+	private final Circle[] ranks;
 	private final Unit unit;
 	private final SVGPath unitSvg;
 
@@ -26,13 +28,19 @@ public class UnitHexagon extends Group implements Scalable {
 		this.unit = u;
 
 		this.hexagon = new Hexagon();
-		this.hexagon.setFill(u.player().invert());
-		this.hexagon.setStroke(u.player());
+		this.hexagon.setFill(this.unit.player().invert());
+		this.hexagon.setStroke(this.unit.player());
 
-		this.unitSvg = u.type().path();
-		this.unitSvg.setFill(u.player());
+		this.unitSvg = this.unit.type().path();
+		this.unitSvg.setFill(this.unit.player());
+
+		this.ranks = new Circle[this.unit.rank()];
+		for(int i = 0; i < this.ranks.length; i++) {
+			this.ranks[i] = new Circle(1, this.unit.player());
+		}
 
 		this.getChildren().addAll(this.hexagon, this.unitSvg);
+		this.getChildren().addAll(this.ranks);
 	}
 
 	public Hexagon hexagon() {
@@ -50,6 +58,12 @@ public class UnitHexagon extends Group implements Scalable {
 		this.unitSvg.setScaleX(factor*1.5);
 		this.unitSvg.setScaleY(factor*1.5);
 		this.unitSvg.setTranslateX(this.width()/2-factor*2.4*this.unitSvg.getLayoutBounds().getWidth());
+		for(int i = 0; i < this.ranks.length; i++) {
+			this.ranks[i].setScaleX(factor*0.8);
+			this.ranks[i].setScaleY(factor*0.8);
+			this.ranks[i].setTranslateX(0.60*this.width()/2);
+			this.ranks[i].setTranslateY(-this.height()/(2*factor)+i*3*factor);
+		}
 	}
 
 	public Unit unit() {
