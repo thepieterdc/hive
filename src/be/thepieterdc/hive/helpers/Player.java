@@ -22,7 +22,22 @@ public class Player {
 		return this.color;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Player && ((Player) obj).id.equals(this.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return this.id.hashCode();
+	}
+
 	public String id() {
 		return this.id;
+	}
+
+	@Override
+	public String toString() {
+		return "Player[id="+this.id+", color="+this.color+"]";
 	}
 }
