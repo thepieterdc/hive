@@ -1,7 +1,6 @@
 package be.thepieterdc.hive.viewer;
 
 import be.thepieterdc.hive.components.HivePane;
-import be.thepieterdc.hive.exceptions.MalformedMoveException;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.messages.ErrorMessage;
@@ -11,7 +10,6 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -35,17 +33,9 @@ public class Main extends Application {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext");
 			}
 			List<String> parameters = args.getRaw();
-			List<Move> moves;
-			HashMap<Integer, BoardState> states;
-			try {
-				List<String> movesString = Files.readAllLines(Paths.get(parameters.get(0)));
-				moves = movesString.stream().map(Move::fromRepresentation).collect(Collectors.toList());
-				states = BoardState.unmarshal(moves);
-			} catch(IOException e) {
-				throw new Exception("Inputdata was not found or is unreadable.");
-			} catch(MalformedMoveException e) {
-				throw new Exception("Invalid move: "+e.move());
-			}
+
+			List<Move> moves = Files.readAllLines(Paths.get(parameters.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
+			HashMap<Integer, BoardState> states = BoardState.unmarshal(moves);
 
 			ViewerModel model = new ViewerModel(moves, states);
 
