@@ -31,12 +31,11 @@ public class Move {
 	public static Move fromRepresentation(String r) throws MalformedMoveException {
 		String original = r;
 		try {
-			r = r.toLowerCase();
 			if (r.equals("start")) {
 				return new StartMove();
 			}
 
-			Player thisPlayer = Player.fromId(String.valueOf(r.charAt(0)));
+			Player thisPlayer = Player.fromId(r.charAt(0));
 			UnitType thisType = UnitType.fromAbbreviation(r.charAt(1));
 			int thisRank = thisType.equals(UnitType.QUEEN) ? 0 : r.charAt(2) - 48;
 			Unit thisUnit = new Unit(thisPlayer, thisType, thisRank);
@@ -62,7 +61,7 @@ public class Move {
 				orientationPos = 3;
 			}
 
-			Player otherPlayer = Player.fromId(String.valueOf(r.charAt(colorPos)));
+			Player otherPlayer = Player.fromId(r.charAt(colorPos));
 			UnitType otherType = UnitType.fromAbbreviation(r.charAt(typePos));
 			int otherRank = otherType.equals(UnitType.QUEEN) ? 0 : r.charAt(rankPos) - 48;
 

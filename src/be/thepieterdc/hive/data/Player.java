@@ -10,13 +10,13 @@ import javafx.scene.paint.Color;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum Player {
-	ONE("b", Color.BLANCHEDALMOND),
-	TWO("w", Color.BLANCHEDALMOND.invert());
+	ONE('b', Color.BLANCHEDALMOND),
+	TWO('w', Color.BLANCHEDALMOND.invert());
 
 	private final Color color;
-	private final String id;
+	private final char id;
 
-	Player(String id, Color col) {
+	Player(char id, Color col) {
 		this.color = col;
 		this.id = id;
 	}
@@ -25,16 +25,16 @@ public enum Player {
 		return this.color;
 	}
 
-	public static Player fromId(String i) {
+	public static Player fromId(char i) {
 		for(Player p : Player.values()) {
-			if(p.id.equals(i)) {
+			if(p.id == i) {
 				return p;
 			}
 		}
 		throw new IllegalArgumentException("Player not found for identifier: "+i);
 	}
 
-	public String id() {
+	public char id() {
 		return this.id;
 	}
 
