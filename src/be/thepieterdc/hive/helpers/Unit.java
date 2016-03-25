@@ -1,7 +1,7 @@
 package be.thepieterdc.hive.helpers;
 
+import be.thepieterdc.hive.data.Player;
 import be.thepieterdc.hive.data.UnitType;
-import javafx.scene.paint.Color;
 
 /**
  * A playable unit.
@@ -11,15 +11,15 @@ import javafx.scene.paint.Color;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class Unit {
-	private final Color player;
+	private final Player player;
 	private final int rank;
 	private final UnitType type;
 
-	public Unit(Color player, UnitType type) {
+	public Unit(Player player, UnitType type) {
 		this(player, type, 0);
 	}
 
-	public Unit(Color player, UnitType type, int rank) {
+	public Unit(Player player, UnitType type, int rank) {
 		this.player = player;
 		this.rank = rank;
 		this.type = type;
@@ -35,7 +35,7 @@ public class Unit {
 		return player.hashCode() + rank + type.hashCode();
 	}
 
-	public Color player() {
+	public Player player() {
 		return this.player;
 	}
 

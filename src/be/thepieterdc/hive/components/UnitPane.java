@@ -1,5 +1,6 @@
 package be.thepieterdc.hive.components;
 
+import be.thepieterdc.hive.data.Player;
 import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.helpers.HexCoordinate;
 import be.thepieterdc.hive.helpers.Unit;
@@ -7,7 +8,6 @@ import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,17 +39,17 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
-		Unit p1A1 = new Unit(Color.WHITE, UnitType.ANT, 1);
-		Unit p1A2 = new Unit(Color.WHITE, UnitType.ANT, 2);
-		Unit p1A3 = new Unit(Color.WHITE, UnitType.ANT, 3);
-		Unit p1B1 = new Unit(Color.WHITE, UnitType.BEATLE, 1);
-		Unit p1B2 = new Unit(Color.WHITE, UnitType.BEATLE, 2);
-		Unit p1G1 = new Unit(Color.WHITE, UnitType.GRASSHOPPER, 1);
-		Unit p1G2 = new Unit(Color.WHITE, UnitType.GRASSHOPPER, 2);
-		Unit p1G3 = new Unit(Color.WHITE, UnitType.GRASSHOPPER, 3);
-		Unit p1Q = new Unit(Color.WHITE, UnitType.QUEEN);
-		Unit p1S1 = new Unit(Color.WHITE, UnitType.SPIDER, 1);
-		Unit p1S2 = new Unit(Color.WHITE, UnitType.SPIDER, 2);
+		Unit p1A1 = new Unit(Player.ONE, UnitType.ANT, 1);
+		Unit p1A2 = new Unit(Player.ONE, UnitType.ANT, 2);
+		Unit p1A3 = new Unit(Player.ONE, UnitType.ANT, 3);
+		Unit p1B1 = new Unit(Player.ONE, UnitType.BEATLE, 1);
+		Unit p1B2 = new Unit(Player.ONE, UnitType.BEATLE, 2);
+		Unit p1G1 = new Unit(Player.ONE, UnitType.GRASSHOPPER, 1);
+		Unit p1G2 = new Unit(Player.ONE, UnitType.GRASSHOPPER, 2);
+		Unit p1G3 = new Unit(Player.ONE, UnitType.GRASSHOPPER, 3);
+		Unit p1Q = new Unit(Player.ONE, UnitType.QUEEN);
+		Unit p1S1 = new Unit(Player.ONE, UnitType.SPIDER, 1);
+		Unit p1S2 = new Unit(Player.ONE, UnitType.SPIDER, 2);
 		this.unitHexagons.put(p1A1, new UnitPaneItem(new UnitHexagon(p1A1, 4), 0, 0));
 		this.unitHexagons.put(p1A2, new UnitPaneItem(new UnitHexagon(p1A2, 4), 0, 1));
 		this.unitHexagons.put(p1A3, new UnitPaneItem(new UnitHexagon(p1A3, 4), 0, 2));
@@ -62,17 +62,17 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		this.unitHexagons.put(p1S1, new UnitPaneItem(new UnitHexagon(p1S1, 4), 0, 9));
 		this.unitHexagons.put(p1S2, new UnitPaneItem(new UnitHexagon(p1S2, 4), 0, 10));
 
-		Unit p2A1 = new Unit(Color.BLACK, UnitType.ANT, 1);
-		Unit p2A2 = new Unit(Color.BLACK, UnitType.ANT, 2);
-		Unit p2A3 = new Unit(Color.BLACK, UnitType.ANT, 3);
-		Unit p2B1 = new Unit(Color.BLACK, UnitType.BEATLE, 1);
-		Unit p2B2 = new Unit(Color.BLACK, UnitType.BEATLE, 2);
-		Unit p2G1 = new Unit(Color.BLACK, UnitType.GRASSHOPPER, 1);
-		Unit p2G2 = new Unit(Color.BLACK, UnitType.GRASSHOPPER, 2);
-		Unit p2G3 = new Unit(Color.BLACK, UnitType.GRASSHOPPER, 3);
-		Unit p2Q = new Unit(Color.BLACK, UnitType.QUEEN);
-		Unit p2S1 = new Unit(Color.BLACK, UnitType.SPIDER, 1);
-		Unit p2S2 = new Unit(Color.BLACK, UnitType.SPIDER, 2);
+		Unit p2A1 = new Unit(Player.TWO, UnitType.ANT, 1);
+		Unit p2A2 = new Unit(Player.TWO, UnitType.ANT, 2);
+		Unit p2A3 = new Unit(Player.TWO, UnitType.ANT, 3);
+		Unit p2B1 = new Unit(Player.TWO, UnitType.BEATLE, 1);
+		Unit p2B2 = new Unit(Player.TWO, UnitType.BEATLE, 2);
+		Unit p2G1 = new Unit(Player.TWO, UnitType.GRASSHOPPER, 1);
+		Unit p2G2 = new Unit(Player.TWO, UnitType.GRASSHOPPER, 2);
+		Unit p2G3 = new Unit(Player.TWO, UnitType.GRASSHOPPER, 3);
+		Unit p2Q = new Unit(Player.TWO, UnitType.QUEEN);
+		Unit p2S1 = new Unit(Player.TWO, UnitType.SPIDER, 1);
+		Unit p2S2 = new Unit(Player.TWO, UnitType.SPIDER, 2);
 		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p2A1, 4), 1, 0));
 		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p2A2, 4), 1, 1));
 		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p2A3, 4), 1, 2));
