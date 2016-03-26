@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
- * Main application.
+ * Main viewer application.
  * <p>
  * Created at 16/03/16 19:16
  *
@@ -63,6 +63,10 @@ public final class Main extends Application {
 		}
 	}
 
+	/**
+	 * Starts the application.
+	 * @param args command line arguments
+	 */
 	public static void main(String... args) {
 		launch(args);
 	}

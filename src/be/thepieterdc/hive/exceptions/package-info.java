@@ -1,5 +1,5 @@
 /**
- * Exceptions that are thrown in the program.
+ * Custom exceptions.
  * <p>
  * Created at 19/03/16 18:06
  *
