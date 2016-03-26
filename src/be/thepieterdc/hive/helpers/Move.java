@@ -80,7 +80,7 @@ public class Move {
 	}
 
 	public String representation() {
-		return "";
+		return this.unit.representation() + " " + (this.orientation.direction().equals(Direction.LEFT) ? this.orientation.representation()+this.otherUnit.representation():this.otherUnit.representation()+this.orientation.representation());
 	}
 
 	public Unit unit() {
