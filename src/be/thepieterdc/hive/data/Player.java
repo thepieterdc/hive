@@ -26,6 +26,9 @@ public enum Player {
 	}
 
 	public static Player fromId(char i) {
+		if(i == 0) {
+			throw new IllegalArgumentException("Parameter \"i\" is empty.");
+		}
 		for (Player p : Player.values()) {
 			if (p.id() == i) {
 				return p;

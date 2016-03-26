@@ -25,6 +25,9 @@ public final class UnitHexagon extends Group implements Scalable {
 	}
 
 	public UnitHexagon(Unit u) {
+		if(u == null) {
+			throw new IllegalArgumentException("Parameter \"u\" is null.");
+		}
 		this.unit = u;
 
 		this.hexagon = new Hexagon();
@@ -50,6 +53,9 @@ public final class UnitHexagon extends Group implements Scalable {
 
 	@Override
 	public void scale(double factor) {
+		if(factor <= 0) {
+			throw new IllegalArgumentException("Parameter \"factor\" is negative or equal to zero.");
+		}
 		this.hexagon.scale(factor);
 		this.unitSvg.setScaleX(factor * 1.5);
 		this.unitSvg.setScaleY(factor * 1.5);

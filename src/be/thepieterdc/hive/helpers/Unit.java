@@ -16,6 +16,15 @@ public final class Unit {
 	private final UnitType type;
 
 	public Unit(Player p, UnitType t, int r) {
+		if(p == null) {
+			throw new IllegalArgumentException("Parameter \"p\" is null.");
+		}
+		if(t == null) {
+			throw new IllegalArgumentException("Parameter \"t\" is null.");
+		}
+		if(r <= 0) {
+			throw new IllegalArgumentException("Parameter \"r\" is negative or zero.");
+		}
 		this.player = p;
 		this.rank = r;
 		this.type = t;
@@ -27,6 +36,9 @@ public final class Unit {
 	}
 
 	static Unit fromRepresentation(String r) {
+		if(r == null) {
+			throw new IllegalArgumentException("Parameter \"r\" is null.");
+		}
 		UnitType t = UnitType.fromAbbreviation(r.charAt(1));
 		return new Unit(Player.fromId(r.charAt(0)), t, t == UnitType.QUEEN ? 1 : r.charAt(2) - 48);
 	}

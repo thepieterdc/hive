@@ -89,6 +89,9 @@ public final class BoardState {
 	}
 
 	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) {
+		if(moves == null) {
+			throw new IllegalArgumentException("Parameter \"moves\" is null.");
+		}
 		if (moves.isEmpty()) {
 			throw new UnmarshalException("List of moves is empty.");
 		}

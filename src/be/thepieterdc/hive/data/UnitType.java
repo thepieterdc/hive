@@ -36,6 +36,9 @@ public enum UnitType {
 	}
 
 	public static UnitType fromAbbreviation(char a) {
+		if(a == 0) {
+			throw new IllegalArgumentException("Parameter \"a\" is empty.");
+		}
 		for (UnitType u : UnitType.values()) {
 			if (u.abbreviation() == a) {
 				return u;

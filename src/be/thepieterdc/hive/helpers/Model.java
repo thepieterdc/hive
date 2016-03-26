@@ -17,8 +17,11 @@ public abstract class Model implements Observable {
 	private final List<InvalidationListener> listeners = new ArrayList<>(4);
 
 	@Override
-	public void addListener(InvalidationListener listener) {
-		this.listeners.add(listener);
+	public void addListener(InvalidationListener l) {
+		if(l == null) {
+			throw new IllegalArgumentException("Parameter \"l\" is null.");
+		}
+		this.listeners.add(l);
 	}
 
 	protected void notifyListeners() {
@@ -28,7 +31,10 @@ public abstract class Model implements Observable {
 	}
 
 	@Override
-	public void removeListener(InvalidationListener listener) {
-		this.listeners.remove(listener);
+	public void removeListener(InvalidationListener l) {
+		if(l == null) {
+			throw new IllegalArgumentException("Parameter \"l\" is null.");
+		}
+		this.listeners.remove(l);
 	}
 }

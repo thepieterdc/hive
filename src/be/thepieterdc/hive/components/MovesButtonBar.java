@@ -32,6 +32,9 @@ final class MovesButtonBar extends HBox implements InvalidationListener {
 	private final Timeline timeline;
 
 	MovesButtonBar(ViewerModel m) {
+		if(m == null) {
+			throw new IllegalArgumentException("Parameter \"m\" is null.");
+		}
 		this.model = m;
 		this.model.addListener(this);
 

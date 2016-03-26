@@ -12,6 +12,9 @@ import javafx.scene.control.Button;
  */
 final class MovesButton extends Button {
 	MovesButton(Svg lbl) {
+		if(lbl == null) {
+			throw new IllegalArgumentException("Parameter \"lbl\" is null.");
+		}
 		this.setGraphic(lbl.path());
 	}
 

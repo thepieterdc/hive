@@ -29,6 +29,15 @@ final class UnitPane extends GridPane implements InvalidationListener {
 		private final int row;
 
 		UnitPaneItem(UnitHexagon uh, int r, int c) {
+			if(uh == null) {
+				throw new IllegalArgumentException("Parameter \"uh\" is null.");
+			}
+			if(r < 0) {
+				throw new IllegalArgumentException("Parameter \"r\" is negative.");
+			}
+			if(c < 0) {
+				throw new IllegalArgumentException("Parameter \"c\" is negative.");
+			}
 			this.column = c;
 			this.hexagon = uh;
 			this.row = r;
@@ -48,6 +57,9 @@ final class UnitPane extends GridPane implements InvalidationListener {
 	}
 
 	UnitPane(ViewerModel m) {
+		if(m == null) {
+			throw new IllegalArgumentException("Parameter \"m\" is null.");
+		}
 		this.model = m;
 		this.model.addListener(this);
 

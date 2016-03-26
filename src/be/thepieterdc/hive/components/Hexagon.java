@@ -46,6 +46,9 @@ class Hexagon extends Polygon implements Scalable {
 
 	@Override
 	public void scale(double factor) {
+		if(factor <= 0) {
+			throw new IllegalArgumentException("Parameter \"factor\" is negative or equal to zero.");
+		}
 		this.setScaleX(factor);
 		this.setScaleY(factor);
 	}

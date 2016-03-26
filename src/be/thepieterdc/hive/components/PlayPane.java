@@ -22,6 +22,9 @@ final class PlayPane extends StackPane implements InvalidationListener {
 	private final ViewerModel model;
 
 	PlayPane(ViewerModel m) {
+		if(m == null) {
+			throw new IllegalArgumentException("Parameter \"m\" is null.");
+		}
 		this.model = m;
 		this.model.addListener(this);
 

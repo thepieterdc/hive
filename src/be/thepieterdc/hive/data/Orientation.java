@@ -36,6 +36,12 @@ public enum Orientation {
 	}
 
 	public static Orientation fromRepresentation(String rep, Direction dir) {
+		if(rep == null) {
+			throw new IllegalArgumentException("Parameter \"rep\" is null.");
+		}
+		if(dir == null) {
+			throw new IllegalArgumentException("Parameter \"dir\" is null.");
+		}
 		for (Orientation o : Orientation.values()) {
 			if (o.direction() == dir && rep.contains(o.representation())) {
 				return o;

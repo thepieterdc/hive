@@ -23,6 +23,12 @@ public final class HexCoordinate {
 	}
 
 	static HexCoordinate fromOrientation(HexCoordinate base, Orientation o) {
+		if(base == null) {
+			throw new IllegalArgumentException("Parameter \"base\" is null.");
+		}
+		if(o == null) {
+			throw new IllegalArgumentException("Parameter \"o\" is null.");
+		}
 		return new HexCoordinate(base.row()+o.rowDelta(), base.column()+o.columnDelta());
 	}
 

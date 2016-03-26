@@ -28,6 +28,12 @@ public final class ViewerModel extends Model {
 	private final Unit[] units = new Unit[22];
 
 	public ViewerModel(List<Move> moveList, HashMap<Integer, BoardState> states) {
+		if(moveList == null) {
+			throw new IllegalArgumentException("Parameter \"moveList\" is null.");
+		}
+		if(states == null) {
+			throw new IllegalArgumentException("Parameter \"states\" is null.");
+		}
 		this.boardStates = new HashMap<>(states);
 		this.moves = new ArrayList<>(moveList);
 		this.totalMoves = this.moves.size();
@@ -52,6 +58,9 @@ public final class ViewerModel extends Model {
 	}
 
 	public void move(int index) {
+		if(index < 0 || index >= this.moves.size()) {
+			throw new IllegalArgumentException("Parameter \"index\" is out of bounds.");
+		}
 		Move m = this.moves.get(index);
 		if (!m.equals(this.move)) {
 			this.moveIndex = index;
@@ -61,6 +70,9 @@ public final class ViewerModel extends Model {
 	}
 
 	public void move(Move m) {
+		if(m == null) {
+			throw new IllegalArgumentException("Parameter \"move\" is null.");
+		}
 		this.move(this.moves.indexOf(m));
 	}
 
