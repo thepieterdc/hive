@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test for be.thepieterdc.data.Direction.
+ * Tests for be.thepieterdc.data.Direction.
  * <p>
  * Created at 26/03/16 22:34
  *
