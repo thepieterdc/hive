@@ -7,7 +7,9 @@ import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +22,8 @@ import java.util.Map;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 final class UnitPane extends GridPane implements InvalidationListener {
+	private static final ColumnConstraints COLUMN_CONSTRAINTS = new ColumnConstraints(9, 9, Double.MAX_VALUE);
+
 	private final ViewerModel model;
 	private final Map<Unit, UnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
 
@@ -29,15 +33,6 @@ final class UnitPane extends GridPane implements InvalidationListener {
 		private final int row;
 
 		UnitPaneItem(UnitHexagon uh, int r, int c) {
-			if(uh == null) {
-				throw new IllegalArgumentException("Parameter \"uh\" is null.");
-			}
-			if(r < 0) {
-				throw new IllegalArgumentException("Parameter \"r\" is negative.");
-			}
-			if(c < 0) {
-				throw new IllegalArgumentException("Parameter \"c\" is negative.");
-			}
 			this.column = c;
 			this.hexagon = uh;
 			this.row = r;
@@ -69,6 +64,10 @@ final class UnitPane extends GridPane implements InvalidationListener {
 			i++;
 		}
 
+		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
+		for(int c = 0; c < 11; c++) {
+			this.getColumnConstraints().add(COLUMN_CONSTRAINTS);
+		}
 		this.setAlignment(Pos.CENTER);
 		this.setMaxWidth(Integer.MAX_VALUE);
 		this.setMinHeight(168);
