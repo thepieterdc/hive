@@ -7,6 +7,8 @@ import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.Unit;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,22 +21,22 @@ import java.util.List;
  */
 public class ViewerModel extends Model {
 	private final HashMap<Integer, BoardState> boardStates;
-	private Move move = null;
+	private Move move;
 	private int moveIndex;
 	private final List<Move> moves;
 	private final int totalMoves;
 	private final Unit[] units = new Unit[22];
 
-	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states) {
-		this.boardStates = states;
-		this.moves = moves;
+	public ViewerModel(List<Move> moveList, HashMap<Integer, BoardState> states) {
+		this.boardStates = new HashMap<>(states);
+		this.moves = new ArrayList<>(moveList);
 		this.totalMoves = this.moves.size();
 		this.addUnits();
 	}
 
 	private void addUnits() {
 		int i = 0;
-		for(Player p : Player.values()) {
+		for (Player p : Player.values()) {
 			for (UnitType u : UnitType.values()) {
 				int capacity = u.capacity();
 				for (int c = 0; c < capacity; c++) {
@@ -45,12 +47,8 @@ public class ViewerModel extends Model {
 		}
 	}
 
-	public BoardState boardState(int index) {
-		return this.boardStates.get(index);
-	}
-
 	public BoardState boardState() {
-		return this.boardState(this.moveIndex);
+		return this.boardStates.get(this.moveIndex);
 	}
 
 	public void move(int index) {
@@ -75,12 +73,12 @@ public class ViewerModel extends Model {
 	}
 
 	public List<Move> moves() {
-		return this.moves;
+		return Collections.unmodifiableList(this.moves);
 	}
 
 	@Override
 	public String toString() {
-		return "ViewerModel[boardStates="+this.boardStates.size()+", move="+this.move.representation()+", moveIndex="+this.moveIndex+", totalmoves="+this.totalMoves+"]";
+		return "ViewerModel[boardStates=" + this.boardStates.size() + ", move=" + this.move.representation() + ", moveIndex=" + this.moveIndex + ", totalmoves=" + this.totalMoves + ']';
 	}
 
 	public int totalMoves() {
