@@ -2,9 +2,14 @@ package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.data.Svg;
 import be.thepieterdc.hive.models.ViewerModel;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 /**
  * A bar that contains the MoveButtons.
@@ -16,20 +21,31 @@ import javafx.scene.layout.HBox;
 public class MovesButtonBar extends HBox implements InvalidationListener {
 	private final ViewerModel model;
 
+	private final MovesButton btnBackward = new MovesButton(Svg.MOVEBUTTON_BACKWARD);
 	private final MovesButton btnBegin = new MovesButton(Svg.MOVEBUTTON_BEGIN);
-	private final MovesButton btnPrevious = new MovesButton(Svg.MOVEBUTTON_PREVIOUS);
-	private final MovesButton btnPlay = new MovesButton(Svg.MOVEBUTTON_PLAY);
-	private final MovesButton btnNext = new MovesButton(Svg.MOVEBUTTON_NEXT);
 	private final MovesButton btnEnd = new MovesButton(Svg.MOVEBUTTON_END);
+	private final MovesButton btnForward = new MovesButton(Svg.MOVEBUTTON_FORWARD);
+	private final MovesButton btnPlay = new MovesButton(Svg.MOVEBUTTON_PLAY);
+
+	private final Timeline timeline;
 
 	public MovesButtonBar(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
 
-		this.btnBegin.setOnAction(event -> model.move(0));
-		this.btnPrevious.setOnAction(event -> model.move(model.moveIndex()-1));
-		this.btnNext.setOnAction(event -> model.move(model.moveIndex()+1));
-		this.btnEnd.setOnAction(event -> model.move(model.totalMoves()-1));
+		this.btnBegin.setOnAction(e -> this.model.move(0));
+		this.btnEnd.setOnAction(e -> this.model.move(this.model.totalMoves()-1));
+		this.btnNext.setOnAction(e -> this.model.move(this.model.moveIndex()+1));
+		this.btnPrevious.setOnAction(e -> this.model.move(this.model.moveIndex()-1));
+		this.btnPlay.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				btnPlay.setGraphic(Svg.MOVEBUTTON_STOP.path());
+				timeline.setCycleCount(model.totalMoves()-model.moveIndex()-1);
+			}
+		});
+
+		this.timeline = new Timeline(new KeyFrame(Duration.seconds(1)));
 
 		this.getChildren().addAll(this.btnBegin, this.btnPrevious, this.btnPlay, this.btnNext, this.btnEnd);
 	}
@@ -37,8 +53,8 @@ public class MovesButtonBar extends HBox implements InvalidationListener {
 	@Override
 	public void invalidated(Observable observable) {
 		this.btnBegin.setDisable(this.model.moveIndex()-1 < 0);
-		this.btnPrevious.setDisable(this.model.moveIndex()-1 < 0);
-		this.btnNext.setDisable(this.model.moveIndex()+1 > this.model.totalMoves()-1);
 		this.btnEnd.setDisable(this.model.moveIndex()+1 > this.model.totalMoves()-1);
+		this.btnNext.setDisable(this.model.moveIndex()+1 > this.model.totalMoves()-1);
+		this.btnPrevious.setDisable(this.model.moveIndex()-1 < 0);
 	}
 }
