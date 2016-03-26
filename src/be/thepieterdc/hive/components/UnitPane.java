@@ -88,6 +88,7 @@ public class UnitPane extends GridPane implements InvalidationListener {
 
 		this.setAlignment(Pos.CENTER);
 		this.setMaxWidth(Integer.MAX_VALUE);
+		this.setMinHeight(168);
 	}
 
 	@Override

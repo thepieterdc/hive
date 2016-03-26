@@ -21,7 +21,6 @@ public class HivePane extends VBox {
 
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
 		mainPane.setDividerPositions(0);
-		mainPane.setMaxHeight(Integer.MAX_VALUE);
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		UnitPane bottomPane = new UnitPane(model);
