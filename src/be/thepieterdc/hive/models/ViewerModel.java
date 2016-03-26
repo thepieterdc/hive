@@ -1,8 +1,11 @@
 package be.thepieterdc.hive.models;
 
+import be.thepieterdc.hive.data.Player;
+import be.thepieterdc.hive.data.UnitType;
 import be.thepieterdc.hive.helpers.BoardState;
 import be.thepieterdc.hive.helpers.Model;
 import be.thepieterdc.hive.helpers.Move;
+import be.thepieterdc.hive.helpers.Unit;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +23,26 @@ public class ViewerModel extends Model {
 	private int moveIndex;
 	private final List<Move> moves;
 	private final int totalMoves;
+	private final Unit[] units = new Unit[22];
 
 	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states) {
 		this.boardStates = states;
 		this.moves = moves;
 		this.totalMoves = this.moves.size();
+		this.addUnits();
+	}
+
+	private void addUnits() {
+		int i = 0;
+		for(Player p : Player.values()) {
+			for (UnitType u : UnitType.values()) {
+				int capacity = u.capacity();
+				for (int c = 0; c < capacity; c++) {
+					this.units[i] = new Unit(p, u, c + 1);
+					i++;
+				}
+			}
+		}
 	}
 
 	public BoardState boardState(int index) {
@@ -67,5 +85,9 @@ public class ViewerModel extends Model {
 
 	public int totalMoves() {
 		return this.totalMoves;
+	}
+
+	public Unit[] units() {
+		return this.units.clone();
 	}
 }

@@ -35,7 +35,7 @@ public class Move {
 
 			Player thisPlayer = Player.fromId(r.charAt(0));
 			UnitType thisType = UnitType.fromAbbreviation(r.charAt(1));
-			int thisRank = thisType.equals(UnitType.QUEEN) ? 0 : r.charAt(2) - 48;
+			int thisRank = thisType.equals(UnitType.QUEEN) ? 1 : r.charAt(2) - 48;
 			Unit thisUnit = new Unit(thisPlayer, thisType, thisRank);
 
 			if (!r.contains(" ")) {
@@ -61,7 +61,7 @@ public class Move {
 
 			Player otherPlayer = Player.fromId(r.charAt(colorPos));
 			UnitType otherType = UnitType.fromAbbreviation(r.charAt(typePos));
-			int otherRank = otherType.equals(UnitType.QUEEN) ? 0 : r.charAt(rankPos) - 48;
+			int otherRank = otherType.equals(UnitType.QUEEN) ? 1 : r.charAt(rankPos) - 48;
 
 			Unit otherUnit = new Unit(otherPlayer, otherType, otherRank);
 

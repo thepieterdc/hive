@@ -15,10 +15,6 @@ public class Unit {
 	private final int rank;
 	private final UnitType type;
 
-	public Unit(Player player, UnitType type) {
-		this(player, type, 0);
-	}
-
 	public Unit(Player player, UnitType type, int rank) {
 		this.player = player;
 		this.rank = rank;

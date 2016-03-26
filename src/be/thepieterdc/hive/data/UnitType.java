@@ -10,23 +10,29 @@ import javafx.scene.shape.SVGPath;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum UnitType {
-	ANT(Svg.UNIT_ANT),
-	BEATLE(Svg.UNIT_BEATLE),
-	GRASSHOPPER(Svg.UNIT_GRASSHOPPER),
-	LADYBUG(Svg.UNIT_LADYBUG),
-	MOSQUITO(Svg.UNIT_MOSQUITO),
-	PILLBUG(Svg.UNIT_PILLBUG),
-	QUEEN(Svg.UNIT_QUEEN),
-	SPIDER(Svg.UNIT_SPIDER);
+	ANT(3, Svg.UNIT_ANT),
+	BEATLE(2, Svg.UNIT_BEATLE),
+	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER),
+	LADYBUG(0, Svg.UNIT_LADYBUG),
+	MOSQUITO(0, Svg.UNIT_MOSQUITO),
+	PILLBUG(0, Svg.UNIT_PILLBUG),
+	QUEEN(1, Svg.UNIT_QUEEN),
+	SPIDER(2, Svg.UNIT_SPIDER);
 
+	private final int cap;
 	private final Svg path;
 
-	UnitType(Svg p) {
+	UnitType(int c, Svg p) {
+		this.cap = c;
 		this.path = p;
 	}
 
 	public char abbreviation() {
 		return this.name().charAt(0);
+	}
+
+	public int capacity() {
+		return this.cap;
 	}
 
 	public static UnitType fromAbbreviation(char a) {
@@ -48,6 +54,6 @@ public enum UnitType {
 
 	@Override
 	public String toString() {
-		return "UnitType[abbreviation="+this.abbreviation()+", prettyName="+this.prettyName()+"]";
+		return "UnitType[abbreviation="+this.abbreviation()+", capacity="+this.cap+", prettyName="+this.prettyName()+"]";
 	}
 }
