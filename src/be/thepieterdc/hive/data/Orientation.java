@@ -37,7 +37,7 @@ public enum Orientation {
 
 	public static Orientation fromRepresentation(String rep, Direction dir) {
 		for (Orientation o : Orientation.values()) {
-			if (o.direction() == dir && o.representation().equals(rep)) {
+			if (o.direction() == dir && rep.contains(o.representation())) {
 				return o;
 			}
 		}

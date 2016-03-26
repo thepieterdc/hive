@@ -26,6 +26,11 @@ public final class Unit {
 		return obj instanceof Unit && ((Unit) obj).player() == this.player && ((Unit) obj).type() == this.type && ((Unit) obj).rank() == this.rank;
 	}
 
+	static Unit fromRepresentation(String r) {
+		UnitType t = UnitType.fromAbbreviation(r.charAt(1));
+		return new Unit(Player.fromId(r.charAt(0)), t, t == UnitType.QUEEN ? 1 : r.charAt(2) - 48);
+	}
+
 	@Override
 	public int hashCode() {
 		return player.hashCode() + rank + type.hashCode();

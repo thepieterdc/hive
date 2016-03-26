@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class ViewerModel extends Model {
+public final class ViewerModel extends Model {
 	private final HashMap<Integer, BoardState> boardStates;
 	private Move move;
 	private int moveIndex;

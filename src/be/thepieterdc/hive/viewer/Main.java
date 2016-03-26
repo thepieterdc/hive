@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Main extends Application {
+public final class Main extends Application {
 
 	@Override
 	public void start(Stage stage) {
