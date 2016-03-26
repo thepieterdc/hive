@@ -13,12 +13,12 @@ import be.thepieterdc.hive.helpers.moves.StartMove;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class Move {
+public class Move {
 	private final Orientation orientation;
 	private final Unit otherUnit;
 	private final Unit unit;
 
-	private Move(Unit u, Unit ot, Orientation or) {
+	protected Move(Unit u, Unit ot, Orientation or) {
 		this.orientation = or;
 		this.otherUnit = ot;
 		this.unit = u;
@@ -29,7 +29,7 @@ public final class Move {
 			return new StartMove();
 		}
 		try {
-			Unit thisUnit = Unit.fromRepresentation(r.substring(0, 2));
+			Unit thisUnit = Unit.fromRepresentation(r);
 
 			if (!r.contains(" ")) {
 				return new FirstMove(thisUnit, r);
@@ -42,8 +42,8 @@ public final class Move {
 			Unit otherUnit = Unit.fromRepresentation(rep.replace(o.representation(), ""));
 
 			return new Move(thisUnit, otherUnit, o);
-		} catch(RuntimeException ignored) {
-			throw new MalformedMoveException(r);
+		} catch(RuntimeException e) {
+			throw new MalformedMoveException(r, e);
 		}
 	}
 
@@ -64,7 +64,7 @@ public final class Move {
 		return "Move[orientation="+this.orientation+", otherUnit="+this.otherUnit+", representation="+this.representation()+", unit="+this.unit+ ']';
 	}
 
-	Unit unit() {
+	protected Unit unit() {
 		return this.unit;
 	}
 }

@@ -11,8 +11,8 @@ public final class MalformedMoveException extends RuntimeException {
 
 	private final String move;
 
-	public MalformedMoveException(String m) {
-		super("The following move is invalid: " + m);
+	public MalformedMoveException(String m, Throwable c) {
+		super("The following move is invalid: " + m, c);
 		this.move = m;
 	}
 
