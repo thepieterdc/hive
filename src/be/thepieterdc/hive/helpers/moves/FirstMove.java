@@ -19,4 +19,9 @@ public class FirstMove extends Move {
 	public String representation() {
 		return this.unit().representation();
 	}
+
+	@Override
+	public String toString() {
+		return "FirstMove["+this.unit().representation()+"]";
+	}
 }

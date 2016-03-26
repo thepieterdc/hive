@@ -18,4 +18,9 @@ public class StartMove extends Move {
 	public String representation() {
 		return "Start";
 	}
+
+	@Override
+	public String toString() {
+		return "StartMove[]";
+	}
 }
