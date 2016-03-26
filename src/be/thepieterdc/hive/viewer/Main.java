@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 /**
@@ -27,12 +28,14 @@ import java.util.stream.Collectors;
  */
 public final class Main extends Application {
 
+	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("be/thepieterdc/hive/i18n");
+
 	@Override
 	public void start(Stage stage) {
 		Application.Parameters args = this.getParameters();
 		try {
 			if(args == null || args.getRaw().isEmpty() || args.getRaw().size() > 2) {
-				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext [test]");
+				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
 			List<String> parameters = args.getRaw();
@@ -44,14 +47,14 @@ public final class Main extends Application {
 			Scene scene = new Scene(new HivePane(model));
 
 			stage.setScene(scene);
-			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmode]":""));
+			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " ["+BUNDLE.getString("testmode")+ ']' :""));
 			stage.show();
 
 			model.move(args.getRaw().size() == 2 ? model.totalMoves()-1:0);
 
 			if(args.getRaw().size() == 2) {
 				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
-				System.out.println("[Hive Testmode] Units");
+				System.out.println("[Hive "+BUNDLE.getString("testmode")+"] "+BUNDLE.getString("pieces"));
 				model.boardState().transferPieces().forEach(System.out::println);
 			}
 		} catch (IOException | IllegalArgumentException e) {
