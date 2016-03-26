@@ -41,6 +41,7 @@ public class Main extends Application {
 			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
 
 			Scene scene = new Scene(new HivePane(model));
+
 			stage.setScene(scene);
 			stage.setTitle("Hive Viewer"+(args.getRaw().size() == 2 ? " [Testmode]":""));
 			stage.show();
@@ -54,7 +55,7 @@ public class Main extends Application {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); //TODO REMOVE ON FINAL//
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}

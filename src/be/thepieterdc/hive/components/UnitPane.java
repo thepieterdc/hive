@@ -7,6 +7,7 @@ import be.thepieterdc.hive.helpers.Unit;
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
 import java.util.HashMap;
@@ -84,6 +85,10 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		this.unitHexagons.put(p2Q, new UnitPaneItem(new UnitHexagon(p2Q, 4), 1, 8));
 		this.unitHexagons.put(p2S1, new UnitPaneItem(new UnitHexagon(p2S1, 4), 1, 9));
 		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p2S2, 4), 1, 10));
+
+		this.setAlignment(Pos.CENTER);
+		this.setMaxWidth(Integer.MAX_VALUE);
+		this.setMinHeight(168);
 	}
 
 	@Override

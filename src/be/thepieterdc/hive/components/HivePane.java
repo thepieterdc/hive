@@ -2,6 +2,7 @@ package be.thepieterdc.hive.components;
 
 import be.thepieterdc.hive.models.ViewerModel;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -14,16 +15,17 @@ import javafx.scene.layout.VBox;
 public class HivePane extends VBox {
 	public HivePane(ViewerModel model) {
 		MovesPane movesPane = new MovesPane(model);
+		SplitPane.setResizableWithParent(movesPane, false);
 
 		PlayPane playPane = new PlayPane(model);
 
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
-		mainPane.setDividerPositions(0.0);
+		mainPane.setDividerPositions(0);
+		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		UnitPane bottomPane = new UnitPane(model);
 
-		this.setPrefSize(800, 500);
-
 		this.getChildren().addAll(mainPane, bottomPane);
+		this.setMinSize(800, 600);
 	}
 }

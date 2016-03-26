@@ -1,7 +1,7 @@
-Play/stop button
+Layout afwerken
+    -> bij opkuisen: elke hex in UnitPane maxWidth MAXVALUE geven
 
-Nice ding maken van PlayPane
--> potentieel unithexagon wat herschrijven voor translations enzo
+Play/stop button
 
 Heel veel opkuisen
 
@@ -22,3 +22,5 @@ Overal jdocs
 Remove unused methods
 
 i18n
+
+e.printStackTrace() in main verwijderen

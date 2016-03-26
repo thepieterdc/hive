@@ -25,21 +25,44 @@ public class PlayPane extends StackPane implements InvalidationListener {
 	public PlayPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
+
+		this.heightProperty().addListener(this);
+		this.widthProperty().addListener(this);
 	}
 
 	@Override
 	public void invalidated(Observable observable) {
+		System.out.println("resize");
 		this.getChildren().clear();
 		Group g = new Group();
 		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
+
+		int horizMin = Integer.MAX_VALUE;
+		int horizMax = Integer.MIN_VALUE;
+		int vertMin = Integer.MAX_VALUE;
+		int vertMax = Integer.MIN_VALUE;
+
+		for (HexCoordinate h : state.keySet()) {
+			horizMin = Math.min(horizMin, h.row());
+			horizMax = Math.max(horizMax, h.row());
+			vertMin = Math.min(vertMin, h.column());
+			vertMax = Math.max(vertMax, h.column());
+		}
+		int a = Math.min(horizMax-horizMin+1,vertMax-vertMin+1);
+
+		double b = Math.min(this.getWidth(), this.getHeight());
+
+		double factor = b/a/25;
+
 		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			HexCoordinate c = gridCoordinateNodeEntry.getKey();
 			Node h = gridCoordinateNodeEntry.getValue();
-			h.setTranslateX(c.x() * 5);
-			h.setTranslateY(c.y() * 5);
-			((Scalable) h).scale(5);
+			h.setTranslateX(c.x() * factor);
+			h.setTranslateY(c.y() * factor);
+			((Scalable) h).scale(factor);
 			g.getChildren().add(h);
 		}
+
 		this.getChildren().add(g);
 	}
 }

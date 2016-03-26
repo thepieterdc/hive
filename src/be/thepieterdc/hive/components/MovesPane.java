@@ -7,6 +7,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
@@ -39,6 +40,7 @@ public class MovesPane extends VBox implements InvalidationListener {
 		this.movesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			model.move(newValue);
 		});
+		VBox.setVgrow(this.movesList, Priority.ALWAYS);
 
 		MovesButtonBar movesButtonBar = new MovesButtonBar(this.model);
 
