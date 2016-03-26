@@ -43,6 +43,10 @@ public class Unit {
 		return this.rank;
 	}
 
+	public String representation() {
+		return String.valueOf(this.player.id()) + this.type.abbreviation() + (this.rank != 0 ? this.rank : "");
+	}
+
 	@Override
 	public String toString() {
 		return "Unit[player="+this.player+", type="+this.type.prettyName()+", rank="+this.rank+"]";

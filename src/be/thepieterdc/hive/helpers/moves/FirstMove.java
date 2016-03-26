@@ -17,6 +17,6 @@ public class FirstMove extends Move {
 
 	@Override
 	public String representation() {
-		return String.valueOf(this.unit().player().id()) + this.unit().type().abbreviation() + (this.unit().rank() != 0 ? this.unit().rank() : "");
+		return this.unit().representation();
 	}
 }
