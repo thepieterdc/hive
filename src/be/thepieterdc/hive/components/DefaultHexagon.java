@@ -17,6 +17,6 @@ public final class DefaultHexagon extends Hexagon {
 
 	@Override
 	public String toString() {
-		return "DefaultHexagon[x="+ this.getTranslateX()+", y="+ this.getTranslateY()+ ']';
+		return "DefaultHexagon[x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
 	}
 }
