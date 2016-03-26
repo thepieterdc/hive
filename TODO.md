@@ -1,4 +1,5 @@
 Layout afwerken
+    -> bij opkuisen: elke hex in UnitPane maxWidth MAXVALUE geven
 
 Play/stop button
 

@@ -87,7 +87,7 @@ public class UnitPane extends GridPane implements InvalidationListener {
 		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p2S2, 4), 1, 10));
 
 		this.setAlignment(Pos.CENTER);
-		this.setHgap(2.5);
+		this.setMaxWidth(Integer.MAX_VALUE);
 	}
 
 	@Override
