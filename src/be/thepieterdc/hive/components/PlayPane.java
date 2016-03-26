@@ -25,10 +25,14 @@ public class PlayPane extends StackPane implements InvalidationListener {
 	public PlayPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
+
+		this.heightProperty().addListener(this);
+		this.widthProperty().addListener(this);
 	}
 
 	@Override
 	public void invalidated(Observable observable) {
+		System.out.println("resize");
 		this.getChildren().clear();
 		Group g = new Group();
 		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();

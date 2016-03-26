@@ -26,6 +26,6 @@ public class HivePane extends VBox {
 		UnitPane bottomPane = new UnitPane(model);
 
 		this.getChildren().addAll(mainPane, bottomPane);
-		this.setPrefSize(800, 500);
+		this.setMinSize(800, 600);
 	}
 }
