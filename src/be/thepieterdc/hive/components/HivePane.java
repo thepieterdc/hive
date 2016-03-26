@@ -15,18 +15,18 @@ import javafx.scene.layout.VBox;
 public class HivePane extends VBox {
 	public HivePane(ViewerModel model) {
 		MovesPane movesPane = new MovesPane(model);
-		SplitPane.setResizableWithParent(movesPane, false);
+		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 
 		PlayPane playPane = new PlayPane(model);
 
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
-		mainPane.setDividerPositions(0);
+		mainPane.setDividerPositions(0.0);
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		UnitPane bottomPane = new UnitPane(model);
 
 		this.getChildren().addAll(mainPane, bottomPane);
-		this.setMinSize(800, 600);
+		this.setMinSize(800.0, 600.0);
 	}
 
 	@Override
