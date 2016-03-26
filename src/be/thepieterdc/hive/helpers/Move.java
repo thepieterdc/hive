@@ -51,7 +51,7 @@ public class Move {
 			int typePos = 2;
 			int rankPos = 3;
 			try {
-				o = Orientation.fromRepresentation(r.charAt(0), Direction.LEFT);
+				o = Orientation.fromRepresentation(String.valueOf(r.charAt(0)), Direction.LEFT);
 			} catch (IllegalArgumentException e) {
 				colorPos--;
 				typePos--;
@@ -65,7 +65,7 @@ public class Move {
 
 			Unit otherUnit = new Unit(otherPlayer, otherType, otherRank);
 
-			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(r.charAt(otherType.equals(UnitType.QUEEN) ? orientationPos-1:orientationPos), Direction.RIGHT));
+			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(String.valueOf(r.charAt(otherType.equals(UnitType.QUEEN) ? orientationPos-1:orientationPos)), Direction.RIGHT));
 		} catch(Exception e) {
 			throw new MalformedMoveException(original);
 		}

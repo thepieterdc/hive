@@ -13,18 +13,14 @@ import javafx.scene.control.Alert;
 public abstract class Message extends Alert {
 	private final boolean shutDown;
 
-	public Message(String message, AlertType type) {
-		this(message, type, false);
-	}
-
-	public Message(String message, AlertType type, boolean shutDown) {
+	protected Message(String message, Alert.AlertType type, boolean s) {
 		super(type, message);
-		this.shutDown = shutDown;
+		this.shutDown = s;
 	}
 
 	public void render() {
 		this.showAndWait();
-		if(this.shutDown) {
+		if (this.shutDown) {
 			Platform.exit();
 		}
 	}

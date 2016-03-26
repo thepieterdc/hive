@@ -4,6 +4,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class that represents a model.
@@ -13,14 +14,14 @@ import java.util.ArrayList;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public abstract class Model implements Observable {
-	private final ArrayList<InvalidationListener> listeners = new ArrayList<>();
+	private final List<InvalidationListener> listeners = new ArrayList<>(4);
 
 	@Override
 	public void addListener(InvalidationListener listener) {
 		this.listeners.add(listener);
 	}
 
-	public void notifyListeners() {
+	protected void notifyListeners() {
 		for(InvalidationListener l : this.listeners) {
 			l.invalidated(this);
 		}

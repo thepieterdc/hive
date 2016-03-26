@@ -15,15 +15,15 @@ public class Unit {
 	private final int rank;
 	private final UnitType type;
 
-	public Unit(Player player, UnitType type, int rank) {
-		this.player = player;
-		this.rank = rank;
-		this.type = type;
+	public Unit(Player p, UnitType t, int r) {
+		this.player = p;
+		this.rank = r;
+		this.type = t;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof Unit && ((Unit) obj).player.equals(this.player) && ((Unit) obj).type.equals(this.type) && ((Unit) obj).rank == this.rank;
+		return obj instanceof Unit && ((Unit) obj).player() == this.player && ((Unit) obj).type() == this.type && ((Unit) obj).rank() == this.rank;
 	}
 
 	@Override
@@ -40,12 +40,12 @@ public class Unit {
 	}
 
 	public String representation() {
-		return String.valueOf(this.player.id()) + this.type.abbreviation() + (this.rank != 0 ? this.rank : "");
+		return String.valueOf(this.player.id()) + this.type.abbreviation() + (this.type == UnitType.QUEEN ? "" : Integer.valueOf(this.rank));
 	}
 
 	@Override
 	public String toString() {
-		return "Unit[player="+this.player+", type="+this.type.prettyName()+", rank="+this.rank+", representation="+this.representation()+"]";
+		return "Unit[player=" + this.player + ", type=" + this.type.prettyName() + ", rank=" + this.rank + ", representation=" + this.representation() + ']';
 	}
 
 	public UnitType type() {
