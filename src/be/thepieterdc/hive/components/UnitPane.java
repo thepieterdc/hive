@@ -20,85 +20,78 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class UnitPane extends GridPane implements InvalidationListener {
+class UnitPane extends GridPane implements InvalidationListener {
 	private final ViewerModel model;
-	private final HashMap<Unit, UnitPaneItem> unitHexagons = new HashMap<>();
+	private final Map<Unit, UnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
 
-	private class UnitPaneItem {
+	private static class UnitPaneItem {
 		private final int column;
 		private final UnitHexagon hexagon;
 		private final int row;
 
-		UnitPaneItem(UnitHexagon uh, int row, int col) {
-			this.column = col;
+		UnitPaneItem(UnitHexagon uh, int r, int c) {
+			this.column = c;
 			this.hexagon = uh;
-			this.row = row;
+			this.row = r;
+		}
+
+		int column() {
+			return this.column;
+		}
+
+		UnitHexagon hexagon() {
+			return this.hexagon;
+		}
+
+		int row() {
+			return this.row;
 		}
 	}
 
-	public UnitPane(ViewerModel m) {
+	UnitPane(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
 
-		Unit p1A1 = new Unit(Player.ONE, UnitType.ANT, 1);
-		Unit p1A2 = new Unit(Player.ONE, UnitType.ANT, 2);
-		Unit p1A3 = new Unit(Player.ONE, UnitType.ANT, 3);
-		Unit p1B1 = new Unit(Player.ONE, UnitType.BEATLE, 1);
-		Unit p1B2 = new Unit(Player.ONE, UnitType.BEATLE, 2);
-		Unit p1G1 = new Unit(Player.ONE, UnitType.GRASSHOPPER, 1);
-		Unit p1G2 = new Unit(Player.ONE, UnitType.GRASSHOPPER, 2);
-		Unit p1G3 = new Unit(Player.ONE, UnitType.GRASSHOPPER, 3);
-		Unit p1Q = new Unit(Player.ONE, UnitType.QUEEN);
-		Unit p1S1 = new Unit(Player.ONE, UnitType.SPIDER, 1);
-		Unit p1S2 = new Unit(Player.ONE, UnitType.SPIDER, 2);
-		this.unitHexagons.put(p1A1, new UnitPaneItem(new UnitHexagon(p1A1, 4), 0, 0));
-		this.unitHexagons.put(p1A2, new UnitPaneItem(new UnitHexagon(p1A2, 4), 0, 1));
-		this.unitHexagons.put(p1A3, new UnitPaneItem(new UnitHexagon(p1A3, 4), 0, 2));
-		this.unitHexagons.put(p1B1, new UnitPaneItem(new UnitHexagon(p1B1, 4), 0, 3));
-		this.unitHexagons.put(p1B2, new UnitPaneItem(new UnitHexagon(p1B2, 4), 0, 4));
-		this.unitHexagons.put(p1G1, new UnitPaneItem(new UnitHexagon(p1G1, 4), 0, 5));
-		this.unitHexagons.put(p1G2, new UnitPaneItem(new UnitHexagon(p1G2, 4), 0, 6));
-		this.unitHexagons.put(p1G3, new UnitPaneItem(new UnitHexagon(p1G3, 4), 0, 7));
-		this.unitHexagons.put(p1Q, new UnitPaneItem(new UnitHexagon(p1Q, 4), 0, 8));
-		this.unitHexagons.put(p1S1, new UnitPaneItem(new UnitHexagon(p1S1, 4), 0, 9));
-		this.unitHexagons.put(p1S2, new UnitPaneItem(new UnitHexagon(p1S2, 4), 0, 10));
-
-		Unit p2A1 = new Unit(Player.TWO, UnitType.ANT, 1);
-		Unit p2A2 = new Unit(Player.TWO, UnitType.ANT, 2);
-		Unit p2A3 = new Unit(Player.TWO, UnitType.ANT, 3);
-		Unit p2B1 = new Unit(Player.TWO, UnitType.BEATLE, 1);
-		Unit p2B2 = new Unit(Player.TWO, UnitType.BEATLE, 2);
-		Unit p2G1 = new Unit(Player.TWO, UnitType.GRASSHOPPER, 1);
-		Unit p2G2 = new Unit(Player.TWO, UnitType.GRASSHOPPER, 2);
-		Unit p2G3 = new Unit(Player.TWO, UnitType.GRASSHOPPER, 3);
-		Unit p2Q = new Unit(Player.TWO, UnitType.QUEEN);
-		Unit p2S1 = new Unit(Player.TWO, UnitType.SPIDER, 1);
-		Unit p2S2 = new Unit(Player.TWO, UnitType.SPIDER, 2);
-		this.unitHexagons.put(p2A1, new UnitPaneItem(new UnitHexagon(p2A1, 4), 1, 0));
-		this.unitHexagons.put(p2A2, new UnitPaneItem(new UnitHexagon(p2A2, 4), 1, 1));
-		this.unitHexagons.put(p2A3, new UnitPaneItem(new UnitHexagon(p2A3, 4), 1, 2));
-		this.unitHexagons.put(p2B1, new UnitPaneItem(new UnitHexagon(p2B1, 4), 1, 3));
-		this.unitHexagons.put(p2B2, new UnitPaneItem(new UnitHexagon(p2B2, 4), 1, 4));
-		this.unitHexagons.put(p2G1, new UnitPaneItem(new UnitHexagon(p2G1, 4), 1, 5));
-		this.unitHexagons.put(p2G2, new UnitPaneItem(new UnitHexagon(p2G2, 4), 1, 6));
-		this.unitHexagons.put(p2G3, new UnitPaneItem(new UnitHexagon(p2G3, 4), 1, 7));
-		this.unitHexagons.put(p2Q, new UnitPaneItem(new UnitHexagon(p2Q, 4), 1, 8));
-		this.unitHexagons.put(p2S1, new UnitPaneItem(new UnitHexagon(p2S1, 4), 1, 9));
-		this.unitHexagons.put(p2S2, new UnitPaneItem(new UnitHexagon(p2S2, 4), 1, 10));
-
+		this.addUnits(Player.ONE, 0);
+		this.addUnits(Player.TWO, 1);
 		this.setAlignment(Pos.CENTER);
 		this.setMaxWidth(Integer.MAX_VALUE);
 		this.setMinHeight(168);
 	}
 
+	private void addUnits(Player p, int r) {
+		Unit A1 = new Unit(p, UnitType.ANT, 1);
+		Unit A2 = new Unit(p, UnitType.ANT, 2);
+		Unit A3 = new Unit(p, UnitType.ANT, 3);
+		Unit B1 = new Unit(p, UnitType.BEATLE, 1);
+		Unit B2 = new Unit(p, UnitType.BEATLE, 2);
+		Unit G1 = new Unit(p, UnitType.GRASSHOPPER, 1);
+		Unit G2 = new Unit(p, UnitType.GRASSHOPPER, 2);
+		Unit G3 = new Unit(p, UnitType.GRASSHOPPER, 3);
+		Unit Q = new Unit(p, UnitType.QUEEN);
+		Unit S1 = new Unit(p, UnitType.SPIDER, 1);
+		Unit S2 = new Unit(p, UnitType.SPIDER, 2);
+		this.unitHexagons.put(A1, new UnitPane.UnitPaneItem(new UnitHexagon(A1, 4), r, 0));
+		this.unitHexagons.put(A2, new UnitPane.UnitPaneItem(new UnitHexagon(A2, 4), r, 1));
+		this.unitHexagons.put(A3, new UnitPane.UnitPaneItem(new UnitHexagon(A3, 4), r, 2));
+		this.unitHexagons.put(B1, new UnitPane.UnitPaneItem(new UnitHexagon(B1, 4), r, 3));
+		this.unitHexagons.put(B2, new UnitPane.UnitPaneItem(new UnitHexagon(B2, 4), r, 4));
+		this.unitHexagons.put(G1, new UnitPane.UnitPaneItem(new UnitHexagon(G1, 4), r, 5));
+		this.unitHexagons.put(G2, new UnitPane.UnitPaneItem(new UnitHexagon(G2, 4), r, 6));
+		this.unitHexagons.put(G3, new UnitPane.UnitPaneItem(new UnitHexagon(G3, 4), r, 7));
+		this.unitHexagons.put(Q, new UnitPane.UnitPaneItem(new UnitHexagon(Q, 4), r, 8));
+		this.unitHexagons.put(S1, new UnitPane.UnitPaneItem(new UnitHexagon(S1, 4), r, 9));
+		this.unitHexagons.put(S2, new UnitPane.UnitPaneItem(new UnitHexagon(S2, 4), r, 10));
+	}
+
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
-		HashMap<Unit, HexCoordinate> state = this.model.boardState().units();
-		for (Map.Entry<Unit, UnitPaneItem> entry : this.unitHexagons.entrySet()) {
-			UnitPaneItem item = entry.getValue();
-			if(!state.containsKey(entry.getKey())) {
-				this.add(item.hexagon, item.column, item.row);
+		Map<Unit, HexCoordinate> state = this.model.boardState().units();
+		for (Map.Entry<Unit, UnitPane.UnitPaneItem> entry : this.unitHexagons.entrySet()) {
+			UnitPane.UnitPaneItem item = entry.getValue();
+			if (!state.containsKey(entry.getKey())) {
+				this.add(item.hexagon(), item.column(), item.row());
 			}
 		}
 	}

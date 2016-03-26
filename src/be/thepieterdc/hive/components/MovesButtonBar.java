@@ -18,7 +18,7 @@ import javafx.util.Duration;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class MovesButtonBar extends HBox implements InvalidationListener {
+class MovesButtonBar extends HBox implements InvalidationListener {
 	private final MovesButton btnBackward = new MovesButton(Svg.MOVEBUTTON_BACKWARD);
 	private final MovesButton btnBegin = new MovesButton(Svg.MOVEBUTTON_BEGIN);
 	private final MovesButton btnEnd = new MovesButton(Svg.MOVEBUTTON_END);
@@ -27,29 +27,29 @@ public class MovesButtonBar extends HBox implements InvalidationListener {
 
 	private final ViewerModel model;
 
-	private boolean playing = false;
+	private boolean playing;
 
 	private final Timeline timeline;
 
-	public MovesButtonBar(ViewerModel m) {
+	MovesButtonBar(ViewerModel m) {
 		this.model = m;
 		this.model.addListener(this);
 
-		this.btnBackward.setOnAction(e -> this.model.move(this.model.moveIndex()-1));
+		this.btnBackward.setOnAction(e -> this.model.move(this.model.moveIndex() - 1));
 		this.btnBegin.setOnAction(e -> this.model.move(0));
-		this.btnEnd.setOnAction(e -> this.model.move(this.model.totalMoves()-1));
-		this.btnForward.setOnAction(e -> this.model.move(this.model.moveIndex()+1));
+		this.btnEnd.setOnAction(e -> this.model.move(this.model.totalMoves() - 1));
+		this.btnForward.setOnAction(e -> this.model.move(this.model.moveIndex() + 1));
 		this.btnPlay.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				btnPlay.setGraphic(Svg.MOVEBUTTON_STOP.path());
 				playing = true;
-				timeline.setCycleCount(model.totalMoves()-model.moveIndex()-1);
+				timeline.setCycleCount(model.totalMoves() - model.moveIndex() - 1);
 				timeline.play();
 			}
 		});
 
-		this.timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> this.model.move(this.model.moveIndex()+1)));
+		this.timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> this.model.move(this.model.moveIndex() + 1)));
 		this.timeline.setOnFinished(e -> {
 			this.btnPlay.setGraphic(Svg.MOVEBUTTON_PLAY.path());
 			this.playing = false;
@@ -60,14 +60,14 @@ public class MovesButtonBar extends HBox implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		this.btnBackward.setDisable(!this.playing && this.model.moveIndex()-1 < 0);
-		this.btnBegin.setDisable(!this.playing && this.model.moveIndex()-1 < 0);
-		this.btnEnd.setDisable(!this.playing && this.model.moveIndex()+1 > this.model.totalMoves()-1);
-		this.btnForward.setDisable(!this.playing && this.model.moveIndex()+1 > this.model.totalMoves()-1);
+		this.btnBackward.setDisable(!this.playing && this.model.moveIndex() - 1 < 0);
+		this.btnBegin.setDisable(!this.playing && this.model.moveIndex() - 1 < 0);
+		this.btnEnd.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
+		this.btnForward.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
 	}
 
 	@Override
 	public String toString() {
-		return "MovesButtonBar[playing="+this.playing+"]";
+		return "MovesButtonBar[playing=" + this.playing + ']';
 	}
 }
