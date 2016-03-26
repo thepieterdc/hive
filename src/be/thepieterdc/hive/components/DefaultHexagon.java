@@ -1,6 +1,5 @@
 package be.thepieterdc.hive.components;
 
-
 import javafx.scene.paint.Color;
 
 /**
@@ -10,15 +9,14 @@ import javafx.scene.paint.Color;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class DefaultHexagon extends Hexagon {
+public final class DefaultHexagon extends Hexagon {
 	public DefaultHexagon() {
-		super();
 		this.setFill(Color.LIGHTGRAY);
 		this.setStroke(Color.DARKGRAY);
 	}
 
 	@Override
 	public String toString() {
-		return "DefaultHexagon[x="+this.getTranslateX()+", y="+this.getTranslateY()+"]";
+		return "DefaultHexagon[x="+ this.getTranslateX()+", y="+ this.getTranslateY()+ ']';
 	}
 }

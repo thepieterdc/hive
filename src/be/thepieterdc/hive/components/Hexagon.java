@@ -24,15 +24,14 @@ public class Hexagon extends Polygon implements Scalable {
 		this.top = top();
 		this.topRight = topRight();
 
-		this.setStrokeType(StrokeType.INSIDE);
-		this.setStrokeWidth(1);
-
 		this.getPoints().addAll(this.top.asList());
 		this.getPoints().addAll(this.topRight.asList());
 		this.getPoints().addAll(bottomRight().asList());
 		this.getPoints().addAll(this.bottom.asList());
 		this.getPoints().addAll(this.bottomLeft.asList());
 		this.getPoints().addAll(topLeft().asList());
+		this.setStrokeType(StrokeType.INSIDE);
+		this.setStrokeWidth(1);
 	}
 
 	public static Coordinate bottom() {

@@ -34,7 +34,7 @@ public class BoardState {
 
 	//TODO: parameter verwijderen?
 	private BoardState(StartMove s) {
-		this.coordinates.put(new HexCoordinate(0, 0), new DefaultHexagon());
+		this.coordinates.put(new HexCoordinate(0, 0), DefaultHexagon.createDefaultHexagon());
 	}
 
 	private static BoardState calculate(BoardState previous, Move move) {
@@ -66,7 +66,7 @@ public class BoardState {
 			for(Orientation o : Orientation.values()) {
 				HexCoordinate coord = HexCoordinate.fromOrientation(c, o);
 				if(!m.containsValue(coord)) {
-					surrounds.put(coord, new DefaultHexagon());
+					surrounds.put(coord, DefaultHexagon.createDefaultHexagon());
 				}
 			}
 		}
@@ -84,7 +84,7 @@ public class BoardState {
 			for(Orientation o : Orientation.values()) {
 				HexCoordinate coord = HexCoordinate.fromOrientation(c, o);
 				if(!m.containsKey(coord)) {
-					surrounds.put(coord, new DefaultHexagon());
+					surrounds.put(coord, DefaultHexagon.createDefaultHexagon());
 				}
 			}
 		}
