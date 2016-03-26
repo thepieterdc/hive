@@ -19,11 +19,20 @@ public final class UnitHexagon extends Group implements Scalable {
 	private final Unit unit;
 	private final SVGPath unitSvg;
 
+	/**
+	 * UnitHexagon constructor.
+	 * @param u the unit
+	 * @param beginScale the initial scale
+	 */
 	UnitHexagon(Unit u, double beginScale) {
 		this(u);
 		this.scale(beginScale);
 	}
 
+	/**
+	 * UnitHexagon constructor.
+	 * @param u the unit
+	 */
 	public UnitHexagon(Unit u) {
 		if(u == null) {
 			throw new IllegalArgumentException("Parameter \"u\" is null.");

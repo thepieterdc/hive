@@ -1,1 +1,10 @@
+be.thepieterdc.hive
 be.thepieterdc.hive.components
+be.thepieterdc.hive.data
+be.thepieterdc.hive.exceptions
+be.thepieterdc.hive.helpers
+be.thepieterdc.hive.helpers.messages
+be.thepieterdc.hive.helpers.moves
+be.thepieterdc.hive.interfaces
+be.thepieterdc.hive.models
+be.thepieterdc.hive.viewer

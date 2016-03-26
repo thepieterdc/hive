@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Grid that holds all playable units.
+ * UnitPane component - a horizontal bar that contains all playable units.
  * <p>
  * Created at 19/03/16 9:28
  *
@@ -32,25 +32,44 @@ final class UnitPane extends GridPane implements InvalidationListener {
 		private final UnitHexagon hexagon;
 		private final int row;
 
+		/**
+		 * UnitPaneItem constructor.
+		 * @param uh the UnitHexagon
+		 * @param r the row to place it
+		 * @param c the column to place it
+		 */
 		UnitPaneItem(UnitHexagon uh, int r, int c) {
 			this.column = c;
 			this.hexagon = uh;
 			this.row = r;
 		}
 
+		/**
+		 * @return the column to place the UnitHexagon.
+		 */
 		int column() {
 			return this.column;
 		}
 
+		/**
+		 * @return the UnitHexagon.
+		 */
 		UnitHexagon hexagon() {
 			return this.hexagon;
 		}
 
+		/**
+		 * @return the row to place the UnitHexagon.
+		 */
 		int row() {
 			return this.row;
 		}
 	}
 
+	/**
+	 * UnitPane constructor.
+	 * @param m the model
+	 */
 	UnitPane(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");

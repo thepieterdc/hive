@@ -6,13 +6,17 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
- * Component that holds the entire UI.
+ * HivePane component. Holds the entire UI.
  * <p>
  * Created at 25/03/16 9:03
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class HivePane extends VBox {
+	/**
+	 * HivePane constructor.
+	 * @param model the model
+	 */
 	public HivePane(ViewerModel model) {
 		if(model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");

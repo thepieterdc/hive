@@ -11,7 +11,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
- * Panel that contains the list of moves and the button bar to navigate through them.
+ * MovesPane component - contains a list of moves and a MovesButtonBar to navigate through those moves.
  * <p>
  * Created at 18/03/16 9:40
  *
@@ -22,6 +22,10 @@ final class MovesPane extends VBox implements InvalidationListener {
 
 	private final ListView<Move> movesList;
 
+	/**
+	 * MovesPane constructor.
+	 * @param m the model
+	 */
 	MovesPane(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");

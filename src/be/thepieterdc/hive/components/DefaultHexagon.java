@@ -3,13 +3,16 @@ package be.thepieterdc.hive.components;
 import javafx.scene.paint.Color;
 
 /**
- * A default Hexagon on the play field; an empty "square".
+ * DefaultHexagon component. An empty square on the playfield.
  * <p>
  * Created at 19/03/16 22:04
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class DefaultHexagon extends Hexagon {
+	/**
+	 * DefaultHexagon constructor.
+	 */
 	public DefaultHexagon() {
 		this.setFill(Color.LIGHTGRAY);
 		this.setStroke(Color.DARKGRAY);

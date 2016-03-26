@@ -1,5 +1,5 @@
 /**
- * All the custom components used in this program.
+ * Custom components.
  * <p>
  * Created at 16/03/16 19:58
  *

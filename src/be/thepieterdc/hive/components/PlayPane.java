@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import java.util.Map;
 
 /**
- * The playing field of the game.
+ * PlayPane component. The playing field of the game.
  * <p>
  * Created at 19/03/16 22:17
  *
@@ -21,6 +21,10 @@ import java.util.Map;
 final class PlayPane extends StackPane implements InvalidationListener {
 	private final ViewerModel model;
 
+	/**
+	 * PlayPane constructor.
+	 * @param m the model
+	 */
 	PlayPane(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");

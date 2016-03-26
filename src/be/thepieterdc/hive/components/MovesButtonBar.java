@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
 /**
- * A bar that contains the MoveButtons.
+ * MovesButtonBar component. Contains the 5 MovesButtons.
  * <p>
  * Created at 17/03/16 17:05
  *
@@ -31,6 +31,10 @@ final class MovesButtonBar extends HBox implements InvalidationListener {
 
 	private final Timeline timeline;
 
+	/**
+	 * MovesButtonBar constructor.
+	 * @param m the model
+	 */
 	MovesButtonBar(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
