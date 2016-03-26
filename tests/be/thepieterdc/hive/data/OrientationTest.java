@@ -58,6 +58,35 @@ public class OrientationTest {
 	}
 
 	/**
+	 * Tests Orientation#fromRepresentation() with invalid parameter: rep (null).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testFromRepresentationRepNull() throws Exception {
+		Orientation.fromRepresentation(null, Direction.LEFT);
+	}
+
+	/**
+	 * Tests Orientation#fromRepresentation() with invalid parameter: rep (fake).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testFromRepresentationRepFake() throws Exception {
+		Orientation.fromRepresentation("@", Direction.LEFT);
+	}
+
+	/**
+	 * Tests Orientation#fromRepresentation() with invalid parameter: dir (null).
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testFromRepresentationDirNull() throws Exception {
+		Orientation.fromRepresentation("/", null);
+	}
+
+	/**
 	 * Tests Orientation#representation().
 	 *
 	 * @throws Exception

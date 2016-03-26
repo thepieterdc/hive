@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class DirectionTest {
 	/**
 	 * Tests Direction#toString().
+	 *
 	 * @throws Exception
 	 */
 	@Test
