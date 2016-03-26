@@ -3,7 +3,7 @@ package be.thepieterdc.hive.data;
 import javafx.scene.shape.SVGPath;
 
 /**
- * Enum that contains all svg vectors used in the program.
+ * Svg enum; contains all the vector graphics used in this program.
  * <p>
  * Created at 16/03/16 9:51
  *
@@ -28,10 +28,17 @@ public enum Svg {
 
 	private final String rawPath;
 
+	/**
+	 * Svg constructor.
+	 * @param p the vector
+	 */
 	Svg(String p) {
 		this.rawPath = p;
 	}
 
+	/**
+	 * @return the vector as an SVGPath; usable by JavaFX
+	 */
 	public SVGPath path() {
 		SVGPath path = new SVGPath();
 		path.setContent(this.rawPath);

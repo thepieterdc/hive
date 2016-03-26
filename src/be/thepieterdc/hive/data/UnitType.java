@@ -3,7 +3,7 @@ package be.thepieterdc.hive.data;
 import javafx.scene.shape.SVGPath;
 
 /**
- * Unit types used in the game.
+ * UnitType enum; contains all the unit types used in this game.
  * <p>
  * Created at 15/03/16 16:31
  *
@@ -22,19 +22,35 @@ public enum UnitType {
 	private final int cap;
 	private final Svg path;
 
+	/**
+	 * UnitType constructor.
+	 * @param c the start capacity of this unit
+	 * @param p the vector image of this unit
+	 */
 	UnitType(int c, Svg p) {
 		this.cap = c;
 		this.path = p;
 	}
 
+	/**
+	 * @return the abbreviation
+	 */
 	public char abbreviation() {
 		return this.name().charAt(0);
 	}
 
+	/**
+	 * @return the start capacity of this unit
+	 */
 	public int capacity() {
 		return this.cap;
 	}
 
+	/**
+	 * Returns a UnitType from a given abbreviation.
+	 * @param a the abbreviation
+	 * @return the UnitType found
+	 */
 	public static UnitType fromAbbreviation(char a) {
 		if(a == 0) {
 			throw new IllegalArgumentException("Parameter \"a\" is empty.");
@@ -47,10 +63,16 @@ public enum UnitType {
 		throw new IllegalArgumentException("UnitType not found: " + a);
 	}
 
+	/**
+	 * @return the vector path of this unit
+	 */
 	public SVGPath path() {
 		return this.path.path();
 	}
 
+	/**
+	 * @return a pretty formatted name of the unit; for nice printing
+	 */
 	public String prettyName() {
 		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
 	}

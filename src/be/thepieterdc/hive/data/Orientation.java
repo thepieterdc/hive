@@ -1,7 +1,7 @@
 package be.thepieterdc.hive.data;
 
 /**
- * An orientation on the hexagonal grid.
+ * Orientation enum; describes an orientation on the hexagonal grid.
  * <p>
  * Created at 19/03/16 12:43
  *
@@ -20,6 +20,13 @@ public enum Orientation {
 	private final int rowDelta;
 	private final int colDelta;
 
+	/**
+	 * Orientation constructor.
+	 * @param r the representation
+	 * @param d the direction
+	 * @param rD the rowDelta
+	 * @param cD the columnDelta
+	 */
 	Orientation(String r, Direction d, int rD, int cD) {
 		this.representation = r;
 		this.direction = d;
@@ -27,14 +34,26 @@ public enum Orientation {
 		this.colDelta = cD;
 	}
 
+	/**
+	 * @return the column delta
+	 */
 	public int columnDelta() {
 		return this.colDelta;
 	}
 
+	/**
+	 * @return the direction
+	 */
 	public Direction direction() {
 		return this.direction;
 	}
 
+	/**
+	 * Returns an Orientation from a given representation and direction.
+	 * @param rep the representation
+	 * @param dir the direction
+	 * @return the Orientation identified
+	 */
 	public static Orientation fromRepresentation(String rep, Direction dir) {
 		if(rep == null) {
 			throw new IllegalArgumentException("Parameter \"rep\" is null.");
@@ -50,10 +69,16 @@ public enum Orientation {
 		throw new IllegalArgumentException("Orientation not found: " + rep);
 	}
 
+	/**
+	 * @return the string representation of the orientation
+	 */
 	public String representation() {
 		return this.representation;
 	}
 
+	/**
+	 * @return the row delta
+	 */
 	public int rowDelta() {
 		return this.rowDelta;
 	}

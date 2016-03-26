@@ -1,7 +1,7 @@
 package be.thepieterdc.hive.data;
 
 /**
- * A direction.
+ * Direction enum.
  * <p>
  * Created at 19/03/16 14:25
  *
