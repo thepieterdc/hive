@@ -10,6 +10,7 @@ package be.thepieterdc.hive.exceptions;
 public final class UnmarshalException extends RuntimeException {
 	/**
 	 * UnmarshalException constructor.
+	 *
 	 * @param m the string representation
 	 */
 	public UnmarshalException(String m) {

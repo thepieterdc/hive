@@ -22,8 +22,9 @@ public enum Orientation {
 
 	/**
 	 * Orientation constructor.
-	 * @param r the representation
-	 * @param d the direction
+	 *
+	 * @param r  the representation
+	 * @param d  the direction
 	 * @param rD the rowDelta
 	 * @param cD the columnDelta
 	 */
@@ -50,15 +51,16 @@ public enum Orientation {
 
 	/**
 	 * Returns an Orientation from a given representation and direction.
+	 *
 	 * @param rep the representation
 	 * @param dir the direction
 	 * @return the Orientation identified
 	 */
 	public static Orientation fromRepresentation(String rep, Direction dir) {
-		if(rep == null) {
+		if (rep == null) {
 			throw new IllegalArgumentException("Parameter \"rep\" is null.");
 		}
-		if(dir == null) {
+		if (dir == null) {
 			throw new IllegalArgumentException("Parameter \"dir\" is null.");
 		}
 		for (Orientation o : Orientation.values()) {

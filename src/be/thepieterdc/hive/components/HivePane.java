@@ -15,10 +15,11 @@ import javafx.scene.layout.VBox;
 public final class HivePane extends VBox {
 	/**
 	 * HivePane constructor.
+	 *
 	 * @param model the model
 	 */
 	public HivePane(ViewerModel model) {
-		if(model == null) {
+		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
 		MovesPane movesPane = new MovesPane(model);

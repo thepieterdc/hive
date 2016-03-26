@@ -20,7 +20,8 @@ public class Move {
 
 	/**
 	 * Move constructor.
-	 * @param u the base unit
+	 *
+	 * @param u  the base unit
 	 * @param ot the other unit
 	 * @param or the Orientation of the move
 	 */
@@ -32,11 +33,12 @@ public class Move {
 
 	/**
 	 * Returns a Move from a given representation.
+	 *
 	 * @param r the string representation
 	 * @return the Move found
 	 */
 	public static Move fromRepresentation(String r) {
-		if(r == null) {
+		if (r == null) {
 			throw new IllegalArgumentException("Parameter \"r\" is null.");
 		}
 		if ("start".equals(r.toLowerCase())) {
@@ -56,7 +58,7 @@ public class Move {
 			Unit otherUnit = Unit.fromRepresentation(rep.replace(o.representation(), ""));
 
 			return new Move(thisUnit, otherUnit, o);
-		} catch(RuntimeException e) {
+		} catch (RuntimeException e) {
 			throw new MalformedMoveException(r, e);
 		}
 	}
@@ -79,12 +81,12 @@ public class Move {
 	 * @return the string representation of the move
 	 */
 	public String representation() {
-		return this.unit.representation() + ' ' + (this.orientation.direction() == Direction.LEFT ? this.orientation.representation()+this.otherUnit.representation():this.otherUnit.representation()+this.orientation.representation());
+		return this.unit.representation() + ' ' + (this.orientation.direction() == Direction.LEFT ? this.orientation.representation() + this.otherUnit.representation() : this.otherUnit.representation() + this.orientation.representation());
 	}
 
 	@Override
 	public String toString() {
-		return "Move[orientation="+this.orientation+", otherUnit="+this.otherUnit+", representation="+this.representation()+", unit="+this.unit+ ']';
+		return "Move[orientation=" + this.orientation + ", otherUnit=" + this.otherUnit + ", representation=" + this.representation() + ", unit=" + this.unit + ']';
 	}
 
 	/**

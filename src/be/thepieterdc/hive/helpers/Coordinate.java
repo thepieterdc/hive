@@ -16,6 +16,7 @@ public final class Coordinate {
 
 	/**
 	 * Coordinate constructor.
+	 *
 	 * @param xCoord the x-coordinate
 	 * @param yCoord the y-coordinate
 	 */
@@ -43,7 +44,7 @@ public final class Coordinate {
 
 	@Override
 	public String toString() {
-		return "Coordinate[x="+this.x+", y="+this.y+ ']';
+		return "Coordinate[x=" + this.x + ", y=" + this.y + ']';
 	}
 
 	/**

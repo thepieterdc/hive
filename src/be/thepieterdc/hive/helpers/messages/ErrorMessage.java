@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 public final class ErrorMessage extends Message {
 	/**
 	 * ErrorMessage constructor.
+	 *
 	 * @param message the error message
 	 */
 	public ErrorMessage(String message) {

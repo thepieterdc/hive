@@ -29,14 +29,15 @@ public final class ViewerModel extends Model {
 
 	/**
 	 * ViewerModel constructor.
+	 *
 	 * @param moveList the list of moves
-	 * @param states the list of BoardStates
+	 * @param states   the list of BoardStates
 	 */
 	public ViewerModel(List<Move> moveList, HashMap<Integer, BoardState> states) {
-		if(moveList == null) {
+		if (moveList == null) {
 			throw new IllegalArgumentException("Parameter \"moveList\" is null.");
 		}
-		if(states == null) {
+		if (states == null) {
 			throw new IllegalArgumentException("Parameter \"states\" is null.");
 		}
 		this.boardStates = new HashMap<>(states);
@@ -70,10 +71,11 @@ public final class ViewerModel extends Model {
 
 	/**
 	 * Sets the current move to a new index.
+	 *
 	 * @param index the new move
 	 */
 	public void move(int index) {
-		if(index < 0 || index >= this.moves.size()) {
+		if (index < 0 || index >= this.moves.size()) {
 			throw new IllegalArgumentException("Parameter \"index\" is out of bounds.");
 		}
 		Move m = this.moves.get(index);
@@ -86,10 +88,11 @@ public final class ViewerModel extends Model {
 
 	/**
 	 * Sets the current move to a new move.
+	 *
 	 * @param m the new move
 	 */
 	public void move(Move m) {
-		if(m == null) {
+		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 		this.move(this.moves.indexOf(m));

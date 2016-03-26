@@ -33,10 +33,11 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 
 	/**
 	 * MovesButtonBar constructor.
+	 *
 	 * @param m the model
 	 */
 	public MovesButtonBar(ViewerModel m) {
-		if(m == null) {
+		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
 		this.model = m;

@@ -24,6 +24,7 @@ public enum UnitType {
 
 	/**
 	 * UnitType constructor.
+	 *
 	 * @param c the start capacity of this unit
 	 * @param p the vector image of this unit
 	 */
@@ -48,11 +49,12 @@ public enum UnitType {
 
 	/**
 	 * Returns a UnitType from a given abbreviation.
+	 *
 	 * @param a the abbreviation
 	 * @return the UnitType found
 	 */
 	public static UnitType fromAbbreviation(char a) {
-		if(a == 0) {
+		if (a == 0) {
 			throw new IllegalArgumentException("Parameter \"a\" is empty.");
 		}
 		for (UnitType u : UnitType.values()) {

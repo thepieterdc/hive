@@ -23,6 +23,7 @@ public final class BoardState {
 
 	/**
 	 * BoardState constructor.
+	 *
 	 * @param f the first move
 	 */
 	private BoardState(FirstMove f) {
@@ -34,6 +35,7 @@ public final class BoardState {
 
 	/**
 	 * BoardState constructor.
+	 *
 	 * @param u a map of the units and their coordinates
 	 */
 	private BoardState(Map<Unit, HexCoordinate> u) {
@@ -52,8 +54,9 @@ public final class BoardState {
 
 	/**
 	 * Calculates the next BoardState from a given BoardState.
+	 *
 	 * @param previous the previous(current) BoardState
-	 * @param move the move to apply to the given BoardState
+	 * @param move     the move to apply to the given BoardState
 	 * @return the next BoardState
 	 */
 	private static BoardState calculate(BoardState previous, Move move) {
@@ -74,6 +77,7 @@ public final class BoardState {
 
 	/**
 	 * Calculates the surrounding hexagons for a given "center" hexagon.
+	 *
 	 * @param c the hexagonal coordinate
 	 * @return the surrounding hexagons of the given hexagonal coordinate
 	 */
@@ -87,6 +91,7 @@ public final class BoardState {
 
 	/**
 	 * Calculates the surrounding hexagons for a given swarm of hexagons.
+	 *
 	 * @param m the map of hexagons
 	 * @return a map of hexagonal coordinates and their surroudings
 	 */
@@ -106,6 +111,7 @@ public final class BoardState {
 
 	/**
 	 * Converts a BoardState to a list of TransferPieces.
+	 *
 	 * @return the list of TransferPiece objects
 	 */
 	public List<TransferPiece> transferPieces() {
@@ -128,11 +134,12 @@ public final class BoardState {
 
 	/**
 	 * Unmarshals a list of moves.
+	 *
 	 * @param moves the list of moves
 	 * @return a map of BoardStates for every move
 	 */
 	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) {
-		if(moves == null) {
+		if (moves == null) {
 			throw new IllegalArgumentException("Parameter \"moves\" is null.");
 		}
 		if (moves.isEmpty()) {

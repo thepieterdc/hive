@@ -17,18 +17,19 @@ public final class Unit {
 
 	/**
 	 * Unit constructor.
+	 *
 	 * @param p the player
 	 * @param t the unit type
 	 * @param r the rank
 	 */
 	public Unit(Player p, UnitType t, int r) {
-		if(p == null) {
+		if (p == null) {
 			throw new IllegalArgumentException("Parameter \"p\" is null.");
 		}
-		if(t == null) {
+		if (t == null) {
 			throw new IllegalArgumentException("Parameter \"t\" is null.");
 		}
-		if(r <= 0) {
+		if (r <= 0) {
 			throw new IllegalArgumentException("Parameter \"r\" is negative or zero.");
 		}
 		this.player = p;
@@ -43,11 +44,12 @@ public final class Unit {
 
 	/**
 	 * Returns a Unit from a given representation.
+	 *
 	 * @param r the representation
 	 * @return the Unit found
 	 */
 	public static Unit fromRepresentation(CharSequence r) {
-		if(r == null) {
+		if (r == null) {
 			throw new IllegalArgumentException("Parameter \"r\" is null.");
 		}
 		UnitType t = UnitType.fromAbbreviation(r.charAt(1));

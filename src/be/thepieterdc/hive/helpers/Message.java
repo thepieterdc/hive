@@ -15,9 +15,10 @@ public abstract class Message extends Alert {
 
 	/**
 	 * Message constructor.
+	 *
 	 * @param message the message text
-	 * @param type the message type
-	 * @param s true to shutdown the application after the message has been shown
+	 * @param type    the message type
+	 * @param s       true to shutdown the application after the message has been shown
 	 */
 	protected Message(String message, Alert.AlertType type, boolean s) {
 		super(type, message);

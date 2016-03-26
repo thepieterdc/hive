@@ -13,6 +13,7 @@ public final class MalformedMoveException extends RuntimeException {
 
 	/**
 	 * MalformedMoveException constructor.
+	 *
 	 * @param m the representation of the move
 	 * @param c the cause for the exception
 	 */

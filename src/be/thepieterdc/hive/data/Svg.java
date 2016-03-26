@@ -30,6 +30,7 @@ public enum Svg {
 
 	/**
 	 * Svg constructor.
+	 *
 	 * @param p the vector
 	 */
 	Svg(String p) {
@@ -47,6 +48,6 @@ public enum Svg {
 
 	@Override
 	public String toString() {
-		return "Svg[path="+this.rawPath+ ']';
+		return "Svg[path=" + this.rawPath + ']';
 	}
 }

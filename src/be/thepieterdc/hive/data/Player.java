@@ -18,7 +18,8 @@ public enum Player {
 
 	/**
 	 * Player constructor.
-	 * @param i the player's identifier
+	 *
+	 * @param i   the player's identifier
 	 * @param col the player's color
 	 */
 	Player(char i, Color col) {
@@ -35,11 +36,12 @@ public enum Player {
 
 	/**
 	 * Returns a Player from a given identification.
+	 *
 	 * @param i the identification character
 	 * @return the Player found
 	 */
 	public static Player fromId(char i) {
-		if(i == 0) {
+		if (i == 0) {
 			throw new IllegalArgumentException("Parameter \"i\" is empty.");
 		}
 		for (Player p : Player.values()) {

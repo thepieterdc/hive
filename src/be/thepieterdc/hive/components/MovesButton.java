@@ -13,10 +13,11 @@ import javafx.scene.control.Button;
 public final class MovesButton extends Button {
 	/**
 	 * MovesButton constructor.
+	 *
 	 * @param lbl the svg path to show as button label
 	 */
 	public MovesButton(Svg lbl) {
-		if(lbl == null) {
+		if (lbl == null) {
 			throw new IllegalArgumentException("Parameter \"lbl\" is null.");
 		}
 		this.setGraphic(lbl.path());

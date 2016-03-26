@@ -18,7 +18,7 @@ public abstract class Model implements Observable {
 
 	@Override
 	public void addListener(InvalidationListener l) {
-		if(l == null) {
+		if (l == null) {
 			throw new IllegalArgumentException("Parameter \"l\" is null.");
 		}
 		this.listeners.add(l);
@@ -28,14 +28,14 @@ public abstract class Model implements Observable {
 	 * Notifies all registered listeners that the model has been updated.
 	 */
 	protected void notifyListeners() {
-		for(InvalidationListener l : this.listeners) {
+		for (InvalidationListener l : this.listeners) {
 			l.invalidated(this);
 		}
 	}
 
 	@Override
 	public void removeListener(InvalidationListener l) {
-		if(l == null) {
+		if (l == null) {
 			throw new IllegalArgumentException("Parameter \"l\" is null.");
 		}
 		this.listeners.remove(l);

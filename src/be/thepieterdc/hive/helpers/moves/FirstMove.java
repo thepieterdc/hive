@@ -13,6 +13,7 @@ import be.thepieterdc.hive.helpers.Unit;
 public final class FirstMove extends Move {
 	/**
 	 * FirstMove constructor.
+	 *
 	 * @param u the unit
 	 */
 	public FirstMove(Unit u) {

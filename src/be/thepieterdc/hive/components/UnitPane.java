@@ -34,9 +34,10 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 
 		/**
 		 * UnitPaneItem constructor.
+		 *
 		 * @param uh the UnitHexagon
-		 * @param r the row to place it
-		 * @param c the column to place it
+		 * @param r  the row to place it
+		 * @param c  the column to place it
 		 */
 		public UnitPaneItem(UnitHexagon uh, int r, int c) {
 			this.column = c;
@@ -68,10 +69,11 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 
 	/**
 	 * UnitPane constructor.
+	 *
 	 * @param m the model
 	 */
 	public UnitPane(ViewerModel m) {
-		if(m == null) {
+		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
 		this.model = m;
@@ -84,7 +86,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 		}
 
 		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
-		for(int c = 0; c < 11; c++) {
+		for (int c = 0; c < 11; c++) {
 			this.getColumnConstraints().add(COLUMN_CONSTRAINTS);
 		}
 		this.setAlignment(Pos.CENTER);

@@ -24,10 +24,11 @@ public final class MovesPane extends VBox implements InvalidationListener {
 
 	/**
 	 * MovesPane constructor.
+	 *
 	 * @param m the model
 	 */
 	public MovesPane(ViewerModel m) {
-		if(m == null) {
+		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
 		this.model = m;

@@ -23,10 +23,11 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 	/**
 	 * PlayPane constructor.
+	 *
 	 * @param m the model
 	 */
 	public PlayPane(ViewerModel m) {
-		if(m == null) {
+		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
 		this.model = m;
@@ -58,7 +59,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 		double factor = Math.min(this.getWidth(), this.getHeight()) / Math.min(horizMax - horizMin + 1, vertMax - vertMin + 1) / 25.0;
 
-		if(factor > 0) {
+		if (factor > 0) {
 			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 				HexCoordinate c = gridCoordinateNodeEntry.getKey();
 				Node h = gridCoordinateNodeEntry.getValue();
