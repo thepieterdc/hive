@@ -16,4 +16,9 @@ public class DefaultHexagon extends Hexagon {
 		this.setFill(Color.LIGHTGRAY);
 		this.setStroke(Color.DARKGRAY);
 	}
+
+	@Override
+	public String toString() {
+		return "DefaultHexagon[x="+this.getTranslateX()+", y="+this.getTranslateY()+"]";
+	}
 }

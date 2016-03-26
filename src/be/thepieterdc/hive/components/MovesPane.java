@@ -51,4 +51,9 @@ public class MovesPane extends VBox implements InvalidationListener {
 	public void invalidated(Observable observable) {
 		this.movesList.getSelectionModel().select(this.model.move());
 	}
+
+	@Override
+	public String toString() {
+		return "MovesPane[]";
+	}
 }

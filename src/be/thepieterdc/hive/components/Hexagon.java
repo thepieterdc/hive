@@ -71,6 +71,11 @@ public class Hexagon extends Polygon implements Scalable {
 	}
 
 	@Override
+	public String toString() {
+		return "Hexagon[x="+this.getTranslateX()+", y="+this.getTranslateY()+"]";
+	}
+
+	@Override
 	public double width() {
 		return this.getScaleX() * (this.topRight.x() - this.bottomLeft.x() + this.getStrokeWidth());
 	}

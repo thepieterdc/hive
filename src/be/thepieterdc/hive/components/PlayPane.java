@@ -64,4 +64,9 @@ public class PlayPane extends StackPane implements InvalidationListener {
 
 		this.getChildren().add(g);
 	}
+
+	@Override
+	public String toString() {
+		return "PlayPane[]";
+	}
 }

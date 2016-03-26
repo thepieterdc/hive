@@ -28,4 +28,9 @@ public class HivePane extends VBox {
 		this.getChildren().addAll(mainPane, bottomPane);
 		this.setMinSize(800, 600);
 	}
+
+	@Override
+	public String toString() {
+		return "HivePane[]";
+	}
 }

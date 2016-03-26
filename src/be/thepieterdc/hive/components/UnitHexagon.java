@@ -66,6 +66,11 @@ public class UnitHexagon extends Group implements Scalable {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "UnitHexagon[unit="+this.unit.representation()+", x="+this.getTranslateX()+", y="+this.getTranslateY()+"]";
+	}
+
 	public Unit unit() {
 		return this.unit;
 	}

@@ -18,4 +18,9 @@ public class MovesButton extends Button {
 	public MovesButton(Svg lbl) {
 		this.setGraphic(lbl.path());
 	}
+
+	@Override
+	public String toString() {
+		return "MovesButton[text="+this.getText()+"]";
+	}
 }

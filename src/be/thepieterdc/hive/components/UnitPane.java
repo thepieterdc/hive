@@ -102,4 +102,9 @@ public class UnitPane extends GridPane implements InvalidationListener {
 			}
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "UnitPane[]";
+	}
 }
