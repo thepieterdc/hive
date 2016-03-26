@@ -18,20 +18,18 @@ import be.thepieterdc.hive.helpers.moves.StartMove;
 public class Move {
 	private final Orientation orientation;
 	private final Unit otherUnit;
-	private final String repr;
 	private final Unit unit;
 
-	public Move(Unit u, Unit other, Orientation o, String r) {
+	public Move(Unit u, Unit other, Orientation o) {
 		this.orientation = o;
 		this.otherUnit = other;
-		this.repr = r;
 		this.unit = u;
 	}
 
 	public static Move fromRepresentation(String r) throws MalformedMoveException {
 		String original = r;
 		try {
-			if (r.equals("start")) {
+			if (r.toLowerCase().equals("start")) {
 				return new StartMove();
 			}
 
@@ -67,7 +65,7 @@ public class Move {
 
 			Unit otherUnit = new Unit(otherPlayer, otherType, otherRank);
 
-			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(r.charAt(otherType.equals(UnitType.QUEEN) ? orientationPos-1:orientationPos), Direction.RIGHT), original);
+			return new Move(thisUnit, otherUnit, o != null ? o : Orientation.fromRepresentation(r.charAt(otherType.equals(UnitType.QUEEN) ? orientationPos-1:orientationPos), Direction.RIGHT));
 		} catch(Exception e) {
 			throw new MalformedMoveException(original);
 		}
@@ -82,7 +80,7 @@ public class Move {
 	}
 
 	public String representation() {
-		return this.repr;
+		return "";
 	}
 
 	public Unit unit() {

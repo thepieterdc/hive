@@ -12,6 +12,6 @@ import be.thepieterdc.hive.helpers.Unit;
  */
 public class FirstMove extends Move {
 	public FirstMove(Unit u, String r) {
-		super(u, null, null, r);
+		super(u, null, null);
 	}
 }

@@ -11,6 +11,11 @@ import be.thepieterdc.hive.helpers.Move;
  */
 public class StartMove extends Move {
 	public StartMove() {
-		super(null, null, null, "start");
+		super(null, null, null);
+	}
+
+	@Override
+	public String representation() {
+		return "Start";
 	}
 }
