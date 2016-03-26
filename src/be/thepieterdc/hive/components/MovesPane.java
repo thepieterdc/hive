@@ -17,12 +17,15 @@ import javafx.scene.layout.VBox;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class MovesPane extends VBox implements InvalidationListener {
+final class MovesPane extends VBox implements InvalidationListener {
 	private final ViewerModel model;
 
 	private final ListView<Move> movesList;
 
-	public MovesPane(ViewerModel m) {
+	MovesPane(ViewerModel m) {
+		if(m == null) {
+			throw new IllegalArgumentException("Parameter \"m\" is null.");
+		}
 		this.model = m;
 		this.model.addListener(this);
 
@@ -32,7 +35,7 @@ public class MovesPane extends VBox implements InvalidationListener {
 			@Override
 			protected void updateItem(Move t, boolean b) {
 				super.updateItem(t, b);
-				if(t != null) {
+				if (t != null) {
 					this.setText(t.representation());
 				}
 			}

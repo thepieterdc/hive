@@ -12,71 +12,66 @@ import javafx.scene.shape.StrokeType;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Hexagon extends Polygon implements Scalable {
-	private final Coordinate bottom;
-	private final Coordinate bottomLeft;
-	private final Coordinate top;
-	private final Coordinate topRight;
+class Hexagon extends Polygon implements Scalable {
+	private static final double RADIUS = 10.0;
+	private static final double SQRT75 = 8.660254037844387;
 
-	public Hexagon() {
-		this.bottom = bottom();
-		this.bottomLeft = bottomLeft();
-		this.top = top();
-		this.topRight = topRight();
-
-		this.setStrokeType(StrokeType.INSIDE);
-		this.setStrokeWidth(1);
-
-		this.getPoints().addAll(this.top.asList());
-		this.getPoints().addAll(this.topRight.asList());
+	Hexagon() {
+		this.getPoints().addAll(top().asList());
+		this.getPoints().addAll(topRight().asList());
 		this.getPoints().addAll(bottomRight().asList());
-		this.getPoints().addAll(this.bottom.asList());
-		this.getPoints().addAll(this.bottomLeft.asList());
+		this.getPoints().addAll(bottom().asList());
+		this.getPoints().addAll(bottomLeft().asList());
 		this.getPoints().addAll(topLeft().asList());
+		this.setStrokeType(StrokeType.INSIDE);
+		this.setStrokeWidth(1.0);
 	}
 
-	public static Coordinate bottom() {
-		return new Coordinate(0, -10);
+	private static Coordinate bottom() {
+		return new Coordinate(0.0, -RADIUS);
 	}
 
-	public static Coordinate bottomLeft() {
-		return new Coordinate(-Math.sqrt(75), -5);
+	private static Coordinate bottomLeft() {
+		return new Coordinate(-SQRT75, -RADIUS / 2.0);
 	}
 
-	public static Coordinate bottomRight() {
-		return new Coordinate(Math.sqrt(75), -5);
+	private static Coordinate bottomRight() {
+		return new Coordinate(SQRT75, -RADIUS / 2.0);
 	}
 
 	@Override
 	public double height() {
-		return this.getScaleX() * (this.top.y() - this.bottom.y() + this.getStrokeWidth());
+		return this.getScaleX() * (top().y() - bottom().y() + this.getStrokeWidth());
 	}
 
 	@Override
 	public void scale(double factor) {
+		if(factor <= 0) {
+			throw new IllegalArgumentException("Parameter \"factor\" is negative or equal to zero.");
+		}
 		this.setScaleX(factor);
 		this.setScaleY(factor);
 	}
 
-	public static Coordinate top() {
-		return new Coordinate(0, 10);
+	private static Coordinate top() {
+		return new Coordinate(0.0, RADIUS);
 	}
 
-	public static Coordinate topLeft() {
-		return new Coordinate(-Math.sqrt(75), 5);
+	private static Coordinate topLeft() {
+		return new Coordinate(-SQRT75, RADIUS / 2.0);
 	}
 
-	public static Coordinate topRight() {
-		return new Coordinate(Math.sqrt(75), 5);
+	private static Coordinate topRight() {
+		return new Coordinate(SQRT75, RADIUS / 2.0);
 	}
 
 	@Override
 	public String toString() {
-		return "Hexagon[x="+this.getTranslateX()+", y="+this.getTranslateY()+"]";
+		return "Hexagon[x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
 	}
 
 	@Override
 	public double width() {
-		return this.getScaleX() * (this.topRight.x() - this.bottomLeft.x() + this.getStrokeWidth());
+		return this.getScaleX() * (topRight().x() - bottomLeft().x() + this.getStrokeWidth());
 	}
 }

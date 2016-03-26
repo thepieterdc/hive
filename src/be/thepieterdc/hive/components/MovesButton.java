@@ -10,17 +10,16 @@ import javafx.scene.control.Button;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class MovesButton extends Button {
-	public MovesButton(String lbl) {
-		this.setText(lbl);
-	}
-
-	public MovesButton(Svg lbl) {
+final class MovesButton extends Button {
+	MovesButton(Svg lbl) {
+		if(lbl == null) {
+			throw new IllegalArgumentException("Parameter \"lbl\" is null.");
+		}
 		this.setGraphic(lbl.path());
 	}
 
 	@Override
 	public String toString() {
-		return "MovesButton[text="+this.getText()+"]";
+		return "MovesButton[text=" + this.getText() + ']';
 	}
 }

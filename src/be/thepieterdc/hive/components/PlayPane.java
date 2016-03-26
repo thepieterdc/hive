@@ -9,7 +9,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,10 +18,13 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class PlayPane extends StackPane implements InvalidationListener {
+final class PlayPane extends StackPane implements InvalidationListener {
 	private final ViewerModel model;
 
-	public PlayPane(ViewerModel m) {
+	PlayPane(ViewerModel m) {
+		if(m == null) {
+			throw new IllegalArgumentException("Parameter \"m\" is null.");
+		}
 		this.model = m;
 		this.model.addListener(this);
 
@@ -33,8 +35,10 @@ public class PlayPane extends StackPane implements InvalidationListener {
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
+
 		Group g = new Group();
-		HashMap<HexCoordinate, Node> state = this.model.boardState().coordinates();
+
+		Map<HexCoordinate, Node> state = this.model.boardState().coordinates();
 
 		int horizMin = Integer.MAX_VALUE;
 		int horizMax = Integer.MIN_VALUE;
@@ -47,11 +51,8 @@ public class PlayPane extends StackPane implements InvalidationListener {
 			vertMin = Math.min(vertMin, h.column());
 			vertMax = Math.max(vertMax, h.column());
 		}
-		int a = Math.min(horizMax-horizMin+1,vertMax-vertMin+1);
 
-		double b = Math.min(this.getWidth(), this.getHeight());
-
-		double factor = b/a/25;
+		double factor = Math.min(this.getWidth(), this.getHeight()) / Math.min(horizMax - horizMin + 1, vertMax - vertMin + 1) / 25.0;
 
 		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 			HexCoordinate c = gridCoordinateNodeEntry.getKey();

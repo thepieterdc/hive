@@ -20,11 +20,11 @@ public enum Orientation {
 	private final int rowDelta;
 	private final int colDelta;
 
-	Orientation(String r, Direction d, int rowDelta, int colDelta) {
+	Orientation(String r, Direction d, int rD, int cD) {
 		this.representation = r;
 		this.direction = d;
-		this.rowDelta = rowDelta;
-		this.colDelta = colDelta;
+		this.rowDelta = rD;
+		this.colDelta = cD;
 	}
 
 	public int columnDelta() {
@@ -35,17 +35,19 @@ public enum Orientation {
 		return this.direction;
 	}
 
-	public static Orientation fromRepresentation(char rep, Direction dir) {
-		return fromRepresentation(String.valueOf(rep), dir);
-	}
-
 	public static Orientation fromRepresentation(String rep, Direction dir) {
-		for(Orientation o : Orientation.values()) {
-			if(o.direction.equals(dir) && o.representation.equals(rep)) {
+		if(rep == null) {
+			throw new IllegalArgumentException("Parameter \"rep\" is null.");
+		}
+		if(dir == null) {
+			throw new IllegalArgumentException("Parameter \"dir\" is null.");
+		}
+		for (Orientation o : Orientation.values()) {
+			if (o.direction() == dir && rep.contains(o.representation())) {
 				return o;
 			}
 		}
-		throw new IllegalArgumentException("Orientation not found: "+rep);
+		throw new IllegalArgumentException("Orientation not found: " + rep);
 	}
 
 	public String representation() {
@@ -58,6 +60,6 @@ public enum Orientation {
 
 	@Override
 	public String toString() {
-		return "Orientation[columnDelta="+this.colDelta+", direction="+this.direction+", representation="+this.representation+", rowDelta="+this.rowDelta+"]";
+		return "Orientation[columnDelta=" + this.colDelta + ", direction=" + this.direction + ", representation=" + this.representation + ", rowDelta=" + this.rowDelta + ']';
 	}
 }

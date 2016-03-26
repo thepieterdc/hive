@@ -13,18 +13,21 @@ import javafx.scene.shape.SVGPath;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class UnitHexagon extends Group implements Scalable {
+public final class UnitHexagon extends Group implements Scalable {
 	private final Hexagon hexagon;
 	private final Circle[] ranks;
 	private final Unit unit;
 	private final SVGPath unitSvg;
 
-	public UnitHexagon(Unit u, double beginScale) {
+	UnitHexagon(Unit u, double beginScale) {
 		this(u);
 		this.scale(beginScale);
 	}
 
 	public UnitHexagon(Unit u) {
+		if(u == null) {
+			throw new IllegalArgumentException("Parameter \"u\" is null.");
+		}
 		this.unit = u;
 
 		this.hexagon = new Hexagon();
@@ -35,16 +38,12 @@ public class UnitHexagon extends Group implements Scalable {
 		this.unitSvg.setFill(this.unit.player().color());
 
 		this.ranks = new Circle[this.unit.rank()];
-		for(int i = 0; i < this.ranks.length; i++) {
+		for (int i = 0; i < this.ranks.length; i++) {
 			this.ranks[i] = new Circle(1, this.unit.player().color());
 		}
 
 		this.getChildren().addAll(this.hexagon, this.unitSvg);
 		this.getChildren().addAll(this.ranks);
-	}
-
-	public Hexagon hexagon() {
-		return this.hexagon;
 	}
 
 	@Override
@@ -54,25 +53,24 @@ public class UnitHexagon extends Group implements Scalable {
 
 	@Override
 	public void scale(double factor) {
+		if(factor <= 0) {
+			throw new IllegalArgumentException("Parameter \"factor\" is negative or equal to zero.");
+		}
 		this.hexagon.scale(factor);
-		this.unitSvg.setScaleX(factor*1.5);
-		this.unitSvg.setScaleY(factor*1.5);
-		this.unitSvg.setTranslateX(this.width()/2-factor*2.4*this.unitSvg.getLayoutBounds().getWidth());
-		for(int i = 0; i < this.ranks.length; i++) {
-			this.ranks[i].setScaleX(factor*0.8);
-			this.ranks[i].setScaleY(factor*0.8);
-			this.ranks[i].setTranslateX(0.60*this.width()/2);
-			this.ranks[i].setTranslateY(-this.height()/(2*factor)+i*3*factor);
+		this.unitSvg.setScaleX(factor * 1.5);
+		this.unitSvg.setScaleY(factor * 1.5);
+		this.unitSvg.setTranslateX(this.width() / 2 - factor * 2.4 * this.unitSvg.getLayoutBounds().getWidth());
+		for (int i = 0; i < this.ranks.length; i++) {
+			this.ranks[i].setScaleX(factor * 0.8);
+			this.ranks[i].setScaleY(factor * 0.8);
+			this.ranks[i].setTranslateX(0.60 * this.width() / 2);
+			this.ranks[i].setTranslateY(-this.height() / (2 * factor) + i * 3 * factor);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "UnitHexagon[unit="+this.unit.representation()+", x="+this.getTranslateX()+", y="+this.getTranslateY()+"]";
-	}
-
-	public Unit unit() {
-		return this.unit;
+		return "UnitHexagon[unit=" + this.unit.representation() + ", x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
 	}
 
 	@Override

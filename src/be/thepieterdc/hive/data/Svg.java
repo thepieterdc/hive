@@ -38,12 +38,8 @@ public enum Svg {
 		return path;
 	}
 
-	public String rawPath() {
-		return this.rawPath;
-	}
-
 	@Override
 	public String toString() {
-		return "Svg[path="+this.rawPath+"]";
+		return "Svg[path="+this.rawPath+ ']';
 	}
 }

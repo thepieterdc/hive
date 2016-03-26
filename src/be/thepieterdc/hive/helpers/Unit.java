@@ -10,24 +10,37 @@ import be.thepieterdc.hive.data.UnitType;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Unit {
+public final class Unit {
 	private final Player player;
 	private final int rank;
 	private final UnitType type;
 
-	public Unit(Player player, UnitType type) {
-		this(player, type, 0);
-	}
-
-	public Unit(Player player, UnitType type, int rank) {
-		this.player = player;
-		this.rank = rank;
-		this.type = type;
+	public Unit(Player p, UnitType t, int r) {
+		if(p == null) {
+			throw new IllegalArgumentException("Parameter \"p\" is null.");
+		}
+		if(t == null) {
+			throw new IllegalArgumentException("Parameter \"t\" is null.");
+		}
+		if(r <= 0) {
+			throw new IllegalArgumentException("Parameter \"r\" is negative or zero.");
+		}
+		this.player = p;
+		this.rank = r;
+		this.type = t;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof Unit && ((Unit) obj).player.equals(this.player) && ((Unit) obj).type.equals(this.type) && ((Unit) obj).rank == this.rank;
+		return obj instanceof Unit && ((Unit) obj).player() == this.player && ((Unit) obj).type() == this.type && ((Unit) obj).rank() == this.rank;
+	}
+
+	static Unit fromRepresentation(String r) {
+		if(r == null) {
+			throw new IllegalArgumentException("Parameter \"r\" is null.");
+		}
+		UnitType t = UnitType.fromAbbreviation(r.charAt(1));
+		return new Unit(Player.fromId(r.charAt(0)), t, t == UnitType.QUEEN ? 1 : r.charAt(2) - 48);
 	}
 
 	@Override
@@ -44,12 +57,12 @@ public class Unit {
 	}
 
 	public String representation() {
-		return String.valueOf(this.player.id()) + this.type.abbreviation() + (this.rank != 0 ? this.rank : "");
+		return String.valueOf(this.player.id()) + this.type.abbreviation() + (this.type == UnitType.QUEEN ? "" : Integer.valueOf(this.rank));
 	}
 
 	@Override
 	public String toString() {
-		return "Unit[player="+this.player+", type="+this.type.prettyName()+", rank="+this.rank+", representation="+this.representation()+"]";
+		return "Unit[player=" + this.player + ", type=" + this.type.prettyName() + ", rank=" + this.rank + ", representation=" + this.representation() + ']';
 	}
 
 	public UnitType type() {

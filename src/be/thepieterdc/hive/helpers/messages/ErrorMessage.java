@@ -1,6 +1,7 @@
 package be.thepieterdc.hive.helpers.messages;
 
 import be.thepieterdc.hive.helpers.Message;
+import javafx.scene.control.Alert;
 
 /**
  * An error message; shutting down the application.
@@ -9,8 +10,8 @@ import be.thepieterdc.hive.helpers.Message;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class ErrorMessage extends Message {
+public final class ErrorMessage extends Message {
 	public ErrorMessage(String message) {
-		super(message, AlertType.ERROR, true);
+		super(message, Alert.AlertType.ERROR, true);
 	}
 }

@@ -10,13 +10,13 @@ import java.util.List;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Coordinate {
+public final class Coordinate {
 	private final double x;
 	private final double y;
 
-	public Coordinate(double x, double y) {
-		this.x = x;
-		this.y = y;
+	public Coordinate(double xCoord, double yCoord) {
+		this.x = xCoord;
+		this.y = yCoord;
 	}
 
 	public List<Double> asList() {
@@ -25,7 +25,7 @@ public class Coordinate {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof Coordinate && ((Coordinate) obj).x == this.x && ((Coordinate) obj).y == this.y;
+		return obj instanceof Coordinate && ((Coordinate) obj).x() == this.x && ((Coordinate) obj).y() == this.y;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class Coordinate {
 
 	@Override
 	public String toString() {
-		return "Coordinate[x="+this.x+", y="+this.y+"]";
+		return "Coordinate[x="+this.x+", y="+this.y+ ']';
 	}
 
 	public double x() {

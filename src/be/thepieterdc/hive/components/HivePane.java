@@ -12,21 +12,24 @@ import javafx.scene.layout.VBox;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class HivePane extends VBox {
+public final class HivePane extends VBox {
 	public HivePane(ViewerModel model) {
+		if(model == null) {
+			throw new IllegalArgumentException("Parameter \"model\" is null.");
+		}
 		MovesPane movesPane = new MovesPane(model);
-		SplitPane.setResizableWithParent(movesPane, false);
+		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 
 		PlayPane playPane = new PlayPane(model);
 
 		SplitPane mainPane = new SplitPane(movesPane, playPane);
-		mainPane.setDividerPositions(0);
+		mainPane.setDividerPositions(0.0);
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		UnitPane bottomPane = new UnitPane(model);
 
 		this.getChildren().addAll(mainPane, bottomPane);
-		this.setMinSize(800, 600);
+		this.setMinSize(800.0, 600.0);
 	}
 
 	@Override

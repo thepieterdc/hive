@@ -16,9 +16,9 @@ public enum Player {
 	private final Color color;
 	private final char id;
 
-	Player(char id, Color col) {
+	Player(char i, Color col) {
 		this.color = col;
-		this.id = id;
+		this.id = i;
 	}
 
 	public Color color() {
@@ -26,12 +26,15 @@ public enum Player {
 	}
 
 	public static Player fromId(char i) {
-		for(Player p : Player.values()) {
-			if(p.id == i) {
+		if(i == 0) {
+			throw new IllegalArgumentException("Parameter \"i\" is empty.");
+		}
+		for (Player p : Player.values()) {
+			if (p.id() == i) {
 				return p;
 			}
 		}
-		throw new IllegalArgumentException("Player not found for identifier: "+i);
+		throw new IllegalArgumentException("Player not found for identifier: " + i);
 	}
 
 	public char id() {
@@ -40,6 +43,6 @@ public enum Player {
 
 	@Override
 	public String toString() {
-		return "Player[color="+this.color+", id="+this.id+"]";
+		return "Player[color=" + this.color + ", id=" + this.id + ']';
 	}
 }

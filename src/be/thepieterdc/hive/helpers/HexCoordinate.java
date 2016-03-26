@@ -9,26 +9,32 @@ import be.thepieterdc.hive.data.Orientation;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class HexCoordinate {
+public final class HexCoordinate {
 	private final int column;
 	private final int row;
 
-	public HexCoordinate(int row, int col) {
-		this.column = col;
-		this.row = row;
+	HexCoordinate(int r, int c) {
+		this.column = c;
+		this.row = r;
 	}
 
 	public int column() {
 		return this.column;
 	}
 
-	public static HexCoordinate fromOrientation(HexCoordinate base, Orientation o) {
-		return new HexCoordinate(base.row+o.rowDelta(), base.column+o.columnDelta());
+	static HexCoordinate fromOrientation(HexCoordinate base, Orientation o) {
+		if(base == null) {
+			throw new IllegalArgumentException("Parameter \"base\" is null.");
+		}
+		if(o == null) {
+			throw new IllegalArgumentException("Parameter \"o\" is null.");
+		}
+		return new HexCoordinate(base.row()+o.rowDelta(), base.column()+o.columnDelta());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof HexCoordinate && ((HexCoordinate) obj).row == this.row && ((HexCoordinate) obj).column == this.column;
+		return obj instanceof HexCoordinate && ((HexCoordinate) obj).row() == this.row && ((HexCoordinate) obj).column() == this.column;
 	}
 
 	@Override
@@ -42,14 +48,14 @@ public class HexCoordinate {
 
 	@Override
 	public String toString() {
-		return "HexCoordinate[column="+this.column+", row="+this.row+"]";
+		return "HexCoordinate[column="+this.column+", row="+this.row+ ']';
 	}
 
 	public double x() {
-		return 11 * Math.sqrt(3) * (this.column + this.row) - 9.5*this.row;
+		return 11 * 1.7320508075688772 * (this.column + this.row) - 9.5*this.row;
 	}
 
 	public double y() {
-		return 11 * 3/2 * this.row;
+		return 11 * 1.5 * this.row;
 	}
 }

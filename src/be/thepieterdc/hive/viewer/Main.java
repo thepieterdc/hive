@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -24,13 +25,13 @@ import java.util.stream.Collectors;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Main extends Application {
+public final class Main extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		Parameters args = this.getParameters();
+		Application.Parameters args = this.getParameters();
 		try {
-			if(args == null || args.getRaw().size() == 0 || args.getRaw().size() > 2) {
+			if(args == null || args.getRaw().isEmpty() || args.getRaw().size() > 2) {
 				throw new IllegalArgumentException("Syntax: viewer.jar inputdata.ext [test]");
 			}
 
@@ -53,14 +54,13 @@ public class Main extends Application {
 				System.out.println("[Hive Testmode] Units");
 				model.boardState().transferPieces().forEach(System.out::println);
 			}
-
-		} catch (Exception e) {
+		} catch (IOException | IllegalArgumentException e) {
 			e.printStackTrace(); //TODO REMOVE ON FINAL//
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String... args) {
 		launch(args);
 	}
 }

@@ -7,12 +7,13 @@ package be.thepieterdc.hive.exceptions;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class MalformedMoveException extends RuntimeException {
+public final class MalformedMoveException extends RuntimeException {
+
 	private final String move;
 
-	public MalformedMoveException(String move) {
-		super("The following move is invalid: "+move);
-		this.move = move;
+	public MalformedMoveException(String m, Throwable c) {
+		super("The following move is invalid: " + m, c);
+		this.move = m;
 	}
 
 	public String move() {

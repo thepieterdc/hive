@@ -10,7 +10,7 @@ import be.thepieterdc.hive.helpers.Unit;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class FirstMove extends Move {
+public final class FirstMove extends Move {
 	public FirstMove(Unit u, String r) {
 		super(u, null, null);
 	}
@@ -22,6 +22,6 @@ public class FirstMove extends Move {
 
 	@Override
 	public String toString() {
-		return "FirstMove["+this.unit().representation()+"]";
+		return "FirstMove[" + this.unit().representation() + ']';
 	}
 }
