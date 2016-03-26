@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-class UnitPane extends GridPane implements InvalidationListener {
+final class UnitPane extends GridPane implements InvalidationListener {
 	private final ViewerModel model;
 	private final Map<Unit, UnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
 

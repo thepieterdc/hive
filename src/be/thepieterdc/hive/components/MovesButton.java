@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-class MovesButton extends Button {
+final class MovesButton extends Button {
 	MovesButton(Svg lbl) {
 		this.setGraphic(lbl.path());
 	}

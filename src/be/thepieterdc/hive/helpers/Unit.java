@@ -10,7 +10,7 @@ import be.thepieterdc.hive.data.UnitType;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Unit {
+public final class Unit {
 	private final Player player;
 	private final int rank;
 	private final UnitType type;

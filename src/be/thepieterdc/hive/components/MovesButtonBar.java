@@ -18,7 +18,7 @@ import javafx.util.Duration;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-class MovesButtonBar extends HBox implements InvalidationListener {
+final class MovesButtonBar extends HBox implements InvalidationListener {
 	private final MovesButton btnBackward = new MovesButton(Svg.MOVEBUTTON_BACKWARD);
 	private final MovesButton btnBegin = new MovesButton(Svg.MOVEBUTTON_BEGIN);
 	private final MovesButton btnEnd = new MovesButton(Svg.MOVEBUTTON_END);

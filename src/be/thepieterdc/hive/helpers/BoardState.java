@@ -40,28 +40,28 @@ public final class BoardState {
 
 	private static BoardState calculate(BoardState previous, Move move) {
 		HashMap<Unit, HexCoordinate> unitsMap = new HashMap<>(previous.units());
-		if(!unitsMap.containsKey(move.otherUnit())) {
-			throw new UnmarshalException("Other unit not on board: "+move.otherUnit().type());
+		if (!unitsMap.containsKey(move.otherUnit())) {
+			throw new UnmarshalException("Other unit not on board: " + move.otherUnit().type());
 		}
 		unitsMap.put(move.unit(), HexCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
 		return new BoardState(unitsMap);
 	}
 
-	public Map<HexCoordinate,Node> coordinates() {
+	public Map<HexCoordinate, Node> coordinates() {
 		return Collections.unmodifiableMap(this.coordinates);
 	}
 
 	private static Map<HexCoordinate, Node> surroundings(HexCoordinate c) {
 		Map<HexCoordinate, Node> surrounds = new HashMap<>(7);
-		for(Orientation o : Orientation.values()) {
+		for (Orientation o : Orientation.values()) {
 			surrounds.put(HexCoordinate.fromOrientation(c, o), new DefaultHexagon());
 		}
 		return surrounds;
 	}
 
 	private static Map<HexCoordinate, Node> surroundings(Map<Unit, HexCoordinate> m) {
-		Map<HexCoordinate, Node> surrounds = new HashMap<>(m.size()*7);
-		for(Map.Entry<Unit, HexCoordinate> e : m.entrySet()) {
+		Map<HexCoordinate, Node> surrounds = new HashMap<>(m.size() * 7);
+		for (Map.Entry<Unit, HexCoordinate> e : m.entrySet()) {
 			surrounds.put(e.getValue(), new UnitHexagon(e.getKey()));
 			surroundings(e.getValue()).forEach(surrounds::putIfAbsent);
 		}
@@ -70,7 +70,7 @@ public final class BoardState {
 
 	@Override
 	public String toString() {
-		return "BoardState[hexagons="+this.coordinates.size()+", units="+this.units.size()+ ']';
+		return "BoardState[hexagons=" + this.coordinates.size() + ", units=" + this.units.size() + ']';
 	}
 
 	public List<TransferPiece> transferPieces() {
@@ -89,29 +89,29 @@ public final class BoardState {
 	}
 
 	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) {
-		if(moves.isEmpty()) {
+		if (moves.isEmpty()) {
 			throw new UnmarshalException("List of moves is empty.");
 		}
-		if(!(moves.get(0) instanceof StartMove)) {
+		if (!(moves.get(0) instanceof StartMove)) {
 			throw new UnmarshalException("Start move is not instance of StartMove.");
 		}
 
 		HashMap<Integer, BoardState> boardStates = new HashMap<>(50);
 		boardStates.put(0, new BoardState());
 
-		if(moves.size() == 1) {
+		if (moves.size() == 1) {
 			return boardStates;
 		}
 
-		if(!(moves.get(1) instanceof FirstMove)) {
+		if (!(moves.get(1) instanceof FirstMove)) {
 			throw new UnmarshalException("First move is not instance of FirstMove.");
 		}
 
 		boardStates.put(1, new BoardState((FirstMove) moves.get(1)));
 
 		int totalMoves = moves.size();
-		for(int moveIndex = 2; moveIndex < totalMoves; moveIndex++) {
-			boardStates.put(moveIndex, calculate(boardStates.get(moveIndex-1), moves.get(moveIndex)));
+		for (int moveIndex = 2; moveIndex < totalMoves; moveIndex++) {
+			boardStates.put(moveIndex, calculate(boardStates.get(moveIndex - 1), moves.get(moveIndex)));
 		}
 		return boardStates;
 	}

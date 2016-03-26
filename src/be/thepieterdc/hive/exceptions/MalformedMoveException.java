@@ -7,7 +7,7 @@ package be.thepieterdc.hive.exceptions;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class MalformedMoveException extends RuntimeException {
+public final class MalformedMoveException extends RuntimeException {
 
 	private final String move;
 

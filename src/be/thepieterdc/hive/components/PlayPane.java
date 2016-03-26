@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-class PlayPane extends StackPane implements InvalidationListener {
+final class PlayPane extends StackPane implements InvalidationListener {
 	private final ViewerModel model;
 
 	PlayPane(ViewerModel m) {

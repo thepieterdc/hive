@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-class MovesPane extends VBox implements InvalidationListener {
+final class MovesPane extends VBox implements InvalidationListener {
 	private final ViewerModel model;
 
 	private final ListView<Move> movesList;

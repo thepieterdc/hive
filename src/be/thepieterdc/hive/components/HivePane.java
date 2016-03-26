@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class HivePane extends VBox {
+public final class HivePane extends VBox {
 	public HivePane(ViewerModel model) {
 		MovesPane movesPane = new MovesPane(model);
 		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);

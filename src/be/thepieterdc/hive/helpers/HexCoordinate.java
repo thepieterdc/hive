@@ -9,7 +9,7 @@ import be.thepieterdc.hive.data.Orientation;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class HexCoordinate {
+public final class HexCoordinate {
 	private final int column;
 	private final int row;
 

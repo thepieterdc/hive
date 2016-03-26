@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Coordinate {
+public final class Coordinate {
 	private final double x;
 	private final double y;
 

@@ -10,7 +10,7 @@ import javafx.scene.control.Alert;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class ErrorMessage extends Message {
+public final class ErrorMessage extends Message {
 	public ErrorMessage(String message) {
 		super(message, Alert.AlertType.ERROR, true);
 	}
