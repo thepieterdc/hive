@@ -36,12 +36,12 @@ public enum UnitType {
 	}
 
 	public static UnitType fromAbbreviation(char a) {
-		for(UnitType u : UnitType.values()) {
-			if(u.abbreviation() == a) {
+		for (UnitType u : UnitType.values()) {
+			if (u.abbreviation() == a) {
 				return u;
 			}
 		}
-		throw new IllegalArgumentException("UnitType not found: "+a);
+		throw new IllegalArgumentException("UnitType not found: " + a);
 	}
 
 	public SVGPath path() {
@@ -54,6 +54,6 @@ public enum UnitType {
 
 	@Override
 	public String toString() {
-		return "UnitType[abbreviation="+this.abbreviation()+", capacity="+this.cap+", prettyName="+this.prettyName()+"]";
+		return "UnitType[abbreviation=" + this.abbreviation() + ", capacity=" + this.cap + ", prettyName=" + this.prettyName() + ']';
 	}
 }

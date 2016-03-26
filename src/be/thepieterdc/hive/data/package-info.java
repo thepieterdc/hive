@@ -1,5 +1,5 @@
 /**
- * Datasets, mostly enums.
+ * Data enums.
  * <p>
  * Created at 16/03/16 18:47
  *
