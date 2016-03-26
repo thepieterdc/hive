@@ -1,3 +1,5 @@
+Layout afwerken
+
 Play/stop button
 
 Nice ding maken van PlayPane
