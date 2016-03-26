@@ -40,6 +40,6 @@ public enum Player {
 
 	@Override
 	public String toString() {
-		return "Player[id="+this.id+", color="+this.color+"]";
+		return "Player[color="+this.color+", id="+this.id+"]";
 	}
 }

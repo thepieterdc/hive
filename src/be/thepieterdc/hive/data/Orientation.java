@@ -55,4 +55,9 @@ public enum Orientation {
 	public int rowDelta() {
 		return this.rowDelta;
 	}
+
+	@Override
+	public String toString() {
+		return "Orientation[columnDelta="+this.colDelta+", direction="+this.direction+", representation="+this.representation+", rowDelta="+this.rowDelta+"]";
+	}
 }
