@@ -42,7 +42,7 @@ public class HexCoordinate {
 
 	@Override
 	public String toString() {
-		return "HexCoordinate[row="+this.row+", column="+this.column+"]";
+		return "HexCoordinate[column="+this.column+", row="+this.row+"]";
 	}
 
 	public double x() {

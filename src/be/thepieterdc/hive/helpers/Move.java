@@ -83,6 +83,11 @@ public class Move {
 		return this.unit.representation() + " " + (this.orientation.direction().equals(Direction.LEFT) ? this.orientation.representation()+this.otherUnit.representation():this.otherUnit.representation()+this.orientation.representation());
 	}
 
+	@Override
+	public String toString() {
+		return "Move[orientation="+this.orientation+", otherUnit="+this.otherUnit+", representation="+this.representation()+", unit="+this.unit+"]";
+	}
+
 	public Unit unit() {
 		return this.unit;
 	}

@@ -19,7 +19,6 @@ public class ViewerModel extends Model {
 	private Move move = null;
 	private int moveIndex;
 	private final List<Move> moves;
-
 	private final int totalMoves;
 
 	public ViewerModel(final List<Move> moves, final HashMap<Integer, BoardState> states) {
@@ -59,6 +58,11 @@ public class ViewerModel extends Model {
 
 	public List<Move> moves() {
 		return this.moves;
+	}
+
+	@Override
+	public String toString() {
+		return "ViewerModel[boardStates="+this.boardStates.size()+", move="+this.move.representation()+", moveIndex="+this.moveIndex+", totalmoves="+this.totalMoves+"]";
 	}
 
 	public int totalMoves() {

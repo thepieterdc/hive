@@ -91,6 +91,11 @@ public class BoardState {
 		return surrounds;
 	}
 
+	@Override
+	public String toString() {
+		return "BoardState[hexagons="+this.coordinates.size()+", units="+this.units.size()+"]";
+	}
+
 	public List<TransferPiece> transferPieces() {
 		List<TransferPiece> lijst = new ArrayList<>();
 		for (Map.Entry<Unit, HexCoordinate> unitHexCoordinateEntry : this.units.entrySet()) {
