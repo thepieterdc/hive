@@ -27,6 +27,11 @@ public final class ViewerModel extends Model {
 	private final int totalMoves;
 	private final Unit[] units = new Unit[22];
 
+	/**
+	 * ViewerModel constructor.
+	 * @param moveList the list of moves
+	 * @param states the list of BoardStates
+	 */
 	public ViewerModel(List<Move> moveList, HashMap<Integer, BoardState> states) {
 		if(moveList == null) {
 			throw new IllegalArgumentException("Parameter \"moveList\" is null.");
@@ -40,6 +45,9 @@ public final class ViewerModel extends Model {
 		this.addUnits();
 	}
 
+	/**
+	 * Adds all units to the list of units.
+	 */
 	private void addUnits() {
 		int i = 0;
 		for (Player p : Player.values()) {
@@ -53,10 +61,17 @@ public final class ViewerModel extends Model {
 		}
 	}
 
+	/**
+	 * @return the current BoardState.
+	 */
 	public BoardState boardState() {
 		return this.boardStates.get(this.moveIndex);
 	}
 
+	/**
+	 * Sets the current move to a new index.
+	 * @param index the new move
+	 */
 	public void move(int index) {
 		if(index < 0 || index >= this.moves.size()) {
 			throw new IllegalArgumentException("Parameter \"index\" is out of bounds.");
@@ -69,6 +84,10 @@ public final class ViewerModel extends Model {
 		}
 	}
 
+	/**
+	 * Sets the current move to a new move.
+	 * @param m the new move
+	 */
 	public void move(Move m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
@@ -76,14 +95,23 @@ public final class ViewerModel extends Model {
 		this.move(this.moves.indexOf(m));
 	}
 
+	/**
+	 * @return the current move
+	 */
 	public Move move() {
 		return this.move;
 	}
 
+	/**
+	 * @return the index of the current move
+	 */
 	public int moveIndex() {
 		return this.moveIndex;
 	}
 
+	/**
+	 * @return a list containing all the moves
+	 */
 	public List<Move> moves() {
 		return Collections.unmodifiableList(this.moves);
 	}
@@ -93,10 +121,16 @@ public final class ViewerModel extends Model {
 		return "ViewerModel[boardStates=" + this.boardStates.size() + ", move=" + this.move.representation() + ", moveIndex=" + this.moveIndex + ", totalmoves=" + this.totalMoves + ']';
 	}
 
+	/**
+	 * @return the total amount of moves
+	 */
 	public int totalMoves() {
 		return this.totalMoves;
 	}
 
+	/**
+	 * @return an array of all the playable units
+	 */
 	public Unit[] units() {
 		return this.units.clone();
 	}

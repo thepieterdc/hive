@@ -1,5 +1,5 @@
 /**
- * Contains all the models; following the MVC pattern.
+ * MVC pattern models.
  * <p>
  * Created at 16/03/16 23:08
  *
