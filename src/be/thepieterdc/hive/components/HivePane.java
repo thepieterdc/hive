@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 public class HivePane extends VBox {
 	public HivePane(ViewerModel model) {
 		MovesPane movesPane = new MovesPane(model);
+		SplitPane.setResizableWithParent(movesPane, false);
 
 		PlayPane playPane = new PlayPane(model);
 
