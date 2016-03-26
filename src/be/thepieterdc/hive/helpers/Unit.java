@@ -49,7 +49,7 @@ public class Unit {
 
 	@Override
 	public String toString() {
-		return "Unit[player="+this.player+", type="+this.type.prettyName()+", rank="+this.rank+"]";
+		return "Unit[player="+this.player+", type="+this.type.prettyName()+", rank="+this.rank+", representation="+this.representation()+"]";
 	}
 
 	public UnitType type() {
