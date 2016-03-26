@@ -54,13 +54,15 @@ final class PlayPane extends StackPane implements InvalidationListener {
 
 		double factor = Math.min(this.getWidth(), this.getHeight()) / Math.min(horizMax - horizMin + 1, vertMax - vertMin + 1) / 25.0;
 
-		for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
-			HexCoordinate c = gridCoordinateNodeEntry.getKey();
-			Node h = gridCoordinateNodeEntry.getValue();
-			h.setTranslateX(c.x() * factor);
-			h.setTranslateY(c.y() * factor);
-			((Scalable) h).scale(factor);
-			g.getChildren().add(h);
+		if(factor > 0) {
+			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
+				HexCoordinate c = gridCoordinateNodeEntry.getKey();
+				Node h = gridCoordinateNodeEntry.getValue();
+				h.setTranslateX(c.x() * factor);
+				h.setTranslateY(c.y() * factor);
+				((Scalable) h).scale(factor);
+				g.getChildren().add(h);
+			}
 		}
 
 		this.getChildren().add(g);

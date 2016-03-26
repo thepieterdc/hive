@@ -19,15 +19,6 @@ public class Move {
 	private final Unit unit;
 
 	protected Move(Unit u, Unit ot, Orientation or) {
-		if(u == null) {
-			throw new IllegalArgumentException("Parameter \"u\" is null.");
-		}
-		if(ot == null) {
-			throw new IllegalArgumentException("Parameter \"ot\" is null.");
-		}
-		if(or == null) {
-			throw new IllegalArgumentException("Parameter \"or\" is null.");
-		}
 		this.orientation = or;
 		this.otherUnit = ot;
 		this.unit = u;
