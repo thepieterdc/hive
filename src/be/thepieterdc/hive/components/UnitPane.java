@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-final class UnitPane extends GridPane implements InvalidationListener {
+public final class UnitPane extends GridPane implements InvalidationListener {
 	private static final ColumnConstraints COLUMN_CONSTRAINTS = new ColumnConstraints(9, 9, Double.MAX_VALUE);
 
 	private final ViewerModel model;
@@ -38,7 +38,7 @@ final class UnitPane extends GridPane implements InvalidationListener {
 		 * @param r the row to place it
 		 * @param c the column to place it
 		 */
-		UnitPaneItem(UnitHexagon uh, int r, int c) {
+		public UnitPaneItem(UnitHexagon uh, int r, int c) {
 			this.column = c;
 			this.hexagon = uh;
 			this.row = r;
@@ -47,21 +47,21 @@ final class UnitPane extends GridPane implements InvalidationListener {
 		/**
 		 * @return the column to place the UnitHexagon.
 		 */
-		int column() {
+		public int column() {
 			return this.column;
 		}
 
 		/**
 		 * @return the UnitHexagon.
 		 */
-		UnitHexagon hexagon() {
+		public UnitHexagon hexagon() {
 			return this.hexagon;
 		}
 
 		/**
 		 * @return the row to place the UnitHexagon.
 		 */
-		int row() {
+		public int row() {
 			return this.row;
 		}
 	}
@@ -70,7 +70,7 @@ final class UnitPane extends GridPane implements InvalidationListener {
 	 * UnitPane constructor.
 	 * @param m the model
 	 */
-	UnitPane(ViewerModel m) {
+	public UnitPane(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

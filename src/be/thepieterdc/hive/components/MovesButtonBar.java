@@ -18,7 +18,7 @@ import javafx.util.Duration;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-final class MovesButtonBar extends HBox implements InvalidationListener {
+public final class MovesButtonBar extends HBox implements InvalidationListener {
 	private final MovesButton btnBackward = new MovesButton(Svg.MOVEBUTTON_BACKWARD);
 	private final MovesButton btnBegin = new MovesButton(Svg.MOVEBUTTON_BEGIN);
 	private final MovesButton btnEnd = new MovesButton(Svg.MOVEBUTTON_END);
@@ -35,7 +35,7 @@ final class MovesButtonBar extends HBox implements InvalidationListener {
 	 * MovesButtonBar constructor.
 	 * @param m the model
 	 */
-	MovesButtonBar(ViewerModel m) {
+	public MovesButtonBar(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

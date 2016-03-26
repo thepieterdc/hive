@@ -24,7 +24,7 @@ public final class UnitHexagon extends Group implements Scalable {
 	 * @param u the unit
 	 * @param beginScale the initial scale
 	 */
-	UnitHexagon(Unit u, double beginScale) {
+	public UnitHexagon(Unit u, double beginScale) {
 		this(u);
 		this.scale(beginScale);
 	}

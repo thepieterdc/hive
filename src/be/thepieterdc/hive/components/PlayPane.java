@@ -18,14 +18,14 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-final class PlayPane extends StackPane implements InvalidationListener {
+public final class PlayPane extends StackPane implements InvalidationListener {
 	private final ViewerModel model;
 
 	/**
 	 * PlayPane constructor.
 	 * @param m the model
 	 */
-	PlayPane(ViewerModel m) {
+	public PlayPane(ViewerModel m) {
 		if(m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

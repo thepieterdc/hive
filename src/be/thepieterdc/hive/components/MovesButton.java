@@ -10,12 +10,12 @@ import javafx.scene.control.Button;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-final class MovesButton extends Button {
+public final class MovesButton extends Button {
 	/**
 	 * MovesButton constructor.
 	 * @param lbl the svg path to show as button label
 	 */
-	MovesButton(Svg lbl) {
+	public MovesButton(Svg lbl) {
 		if(lbl == null) {
 			throw new IllegalArgumentException("Parameter \"lbl\" is null.");
 		}

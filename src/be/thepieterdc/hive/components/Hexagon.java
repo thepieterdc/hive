@@ -12,14 +12,14 @@ import javafx.scene.shape.StrokeType;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-class Hexagon extends Polygon implements Scalable {
+public class Hexagon extends Polygon implements Scalable {
 	private static final double RADIUS = 10.0;
 	private static final double SQRT75 = 8.660254037844387;
 
 	/**
 	 * Hexagon constructor.
 	 */
-	Hexagon() {
+	public Hexagon() {
 		this.getPoints().addAll(top().asList());
 		this.getPoints().addAll(topRight().asList());
 		this.getPoints().addAll(bottomRight().asList());
