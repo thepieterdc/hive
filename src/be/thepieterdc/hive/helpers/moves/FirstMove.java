@@ -4,14 +4,18 @@ import be.thepieterdc.hive.helpers.Move;
 import be.thepieterdc.hive.helpers.Unit;
 
 /**
- * The first move.
+ * The first actual move of the game, 1 unit.
  * <p>
  * Created at 19/03/16 13:17
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class FirstMove extends Move {
-	public FirstMove(Unit u, String r) {
+	/**
+	 * FirstMove constructor.
+	 * @param u the unit
+	 */
+	public FirstMove(Unit u) {
 		super(u, null, null);
 	}
 

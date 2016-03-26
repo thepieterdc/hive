@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Represents a coordinate.
+ * A cartesian coordinate.
  * <p>
  * Created at 16/03/16 19:19
  *
@@ -14,11 +14,19 @@ public final class Coordinate {
 	private final double x;
 	private final double y;
 
+	/**
+	 * Coordinate constructor.
+	 * @param xCoord the x-coordinate
+	 * @param yCoord the y-coordinate
+	 */
 	public Coordinate(double xCoord, double yCoord) {
 		this.x = xCoord;
 		this.y = yCoord;
 	}
 
+	/**
+	 * @return a list of the coordinates as doubles; for convenient usage in Polygon classes
+	 */
 	public List<Double> asList() {
 		return Arrays.asList(this.x, this.y);
 	}
@@ -38,10 +46,16 @@ public final class Coordinate {
 		return "Coordinate[x="+this.x+", y="+this.y+ ']';
 	}
 
+	/**
+	 * @return the x-coordinate
+	 */
 	public double x() {
 		return this.x;
 	}
 
+	/**
+	 * @return the y-coordinate
+	 */
 	public double y() {
 		return this.y;
 	}
