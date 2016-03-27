@@ -86,7 +86,7 @@ public class Move {
 
 	@Override
 	public String toString() {
-		return "Move[orientation=" + this.orientation + ", otherUnit=" + this.otherUnit + ", representation=" + this.representation() + ", unit=" + this.unit + ']';
+		return "Move[orientation=" + this.orientation.direction() + this.orientation.representation() + ", otherUnit=" + this.otherUnit.representation() + ", representation=" + this.representation() + ", unit=" + this.unit.representation() + ']';
 	}
 
 	/**

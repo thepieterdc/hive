@@ -21,11 +21,21 @@ public class ErrorMessageTest {
 
 	private ErrorMessage msg;
 
+	/**
+	 * Set-up the test environment.
+	 *
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		this.msg = new ErrorMessage("Test");
 	}
 
+	/**
+	 * Tear-down the test environment.
+	 *
+	 * @throws Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		this.msg = null;
