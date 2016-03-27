@@ -32,7 +32,7 @@ public class JavaFXThreadingRule implements TestRule {
     @Override
     public Statement apply(Statement statement, Description description) {
         
-        return new OnJFXThreadStatement(statement);
+        return new JavaFXThreadingRule.OnJFXThreadStatement(statement);
     }
 
     private static class OnJFXThreadStatement extends Statement {
@@ -49,24 +49,22 @@ public class JavaFXThreadingRule implements TestRule {
         public void evaluate() throws Throwable {
             
             if(!jfxIsSetup) {
-                setupJavaFX();
+	            OnJFXThreadStatement.setupJavaFX();
                 
                 jfxIsSetup = true;
             }
-            
+
             final CountDownLatch countDownLatch = new CountDownLatch(1);
-            
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        statement.evaluate();
-                    } catch (Throwable e) {
-                        rethrownException = e;
-                    }
-                    countDownLatch.countDown();
-                }});
-            
+
+            Platform.runLater(() -> {
+                try {
+                    statement.evaluate();
+                } catch (Throwable e) {
+                    rethrownException = e;
+                }
+                countDownLatch.countDown();
+            });
+
             countDownLatch.await();
             
             // if an exception was thrown by the statement during evaluation,
@@ -76,24 +74,18 @@ public class JavaFXThreadingRule implements TestRule {
             }
         }
 
-        protected void setupJavaFX() throws InterruptedException {
-            
-            long timeMillis = System.currentTimeMillis();
-            
-            final CountDownLatch latch = new CountDownLatch(1);
-            
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    // initializes JavaFX environment
-                    new JFXPanel(); 
-                    
-                    latch.countDown();
-                }
+        protected static void setupJavaFX() throws InterruptedException {
+
+	        final CountDownLatch latch = new CountDownLatch(1);
+
+            SwingUtilities.invokeLater(() -> {
+                // initializes JavaFX environment
+                new JFXPanel();
+
+                latch.countDown();
             });
-            
-            System.out.println("javafx initialising...");
+
             latch.await();
-            System.out.println("javafx is initialised in " + (System.currentTimeMillis() - timeMillis) + "ms");
         }
         
     }

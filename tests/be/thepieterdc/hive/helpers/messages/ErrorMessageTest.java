@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Description here
+ * Tests for be.thepieterdc.helpers.messages.ErrorMessageTest.
  * <p>
  * Created at 27/03/16 14:01
  *
