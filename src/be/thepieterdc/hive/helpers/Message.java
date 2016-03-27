@@ -29,7 +29,7 @@ public abstract class Message extends Alert {
 	 * Renders the message to the screen.
 	 */
 	public void render() {
-		this.showAndWait();
+		this.show();
 		if (this.shutDown) {
 			Platform.exit();
 		}

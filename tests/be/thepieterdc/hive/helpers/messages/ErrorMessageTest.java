@@ -32,6 +32,16 @@ public class ErrorMessageTest {
 	}
 
 	/**
+	 * Tests Message#render().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testRender() throws Exception {
+		this.msg.render();
+	}
+
+	/**
 	 * Tests Message#shutdown().
 	 *
 	 * @throws Exception
