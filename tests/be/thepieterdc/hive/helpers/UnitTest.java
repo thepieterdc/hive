@@ -48,9 +48,25 @@ public class UnitTest {
 		assertEquals(this.wG2, new Unit(Player.TWO, UnitType.GRASSHOPPER, 2));
 	}
 
+	/**
+	 * Tests Unit#fromRepresentation().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testFromRepresentation() throws Exception {
+		assertEquals(this.bQ, Unit.fromRepresentation("bQ"));
+		assertEquals(this.wG2, Unit.fromRepresentation("wG2"));
+	}
 
+	/**
+	 * Tests Unit#fromRepresentation() with invalid parameter: r (null).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testFromRepresentationRNull() throws Exception {
+		Unit.fromRepresentation(null);
 	}
 
 	/**
@@ -60,8 +76,8 @@ public class UnitTest {
 	 */
 	@Test
 	public void testHashCode() throws Exception {
-		assertEquals(1412790638, this.bQ.hashCode());
-		assertEquals(-1573457426, this.wG2.hashCode());
+		assertEquals(this.bQ.player().hashCode() + 1 + this.bQ.type().hashCode(), this.bQ.hashCode());
+		assertEquals(this.wG2.player().hashCode() + 2 + this.wG2.type().hashCode(), this.wG2.hashCode());
 	}
 
 	/**
@@ -75,24 +91,77 @@ public class UnitTest {
 		assertEquals(Player.TWO, this.wG2.player());
 	}
 
+	/**
+	 * Tests Unit#rank().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testRank() throws Exception {
-
+		assertEquals(1, this.bQ.rank());
+		assertEquals(2, this.wG2.rank());
 	}
 
+	/**
+	 * Tests Unit#representation().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testRepresentation() throws Exception {
-
+		assertEquals("bQ", this.bQ.representation());
+		assertEquals("wG2", this.wG2.representation());
 	}
 
+	/**
+	 * Tests Unit#toString().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testToString() throws Exception {
-
+		assertEquals("Unit[player=Player[color=0xffebcdff, id=b], type=Queen, rank=1, representation=bQ]", this.bQ.toString());
+		assertEquals("Unit[player=Player[color=0x001432ff, id=w], type=Grasshopper, rank=2, representation=wG2]", this.wG2.toString());
 	}
 
+	/**
+	 * Tests Unit#type().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testType() throws Exception {
-
+		assertEquals(UnitType.QUEEN, this.bQ.type());
+		assertEquals(UnitType.GRASSHOPPER, this.wG2.type());
 	}
 
+	/**
+	 * Tests Unit constructor with invalid parameter: p (null).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorPNull() throws Exception {
+		new Unit(null, UnitType.ANT, 0);
+	}
+
+	/**
+	 * Tests Unit constructor with invalid parameter: t (null).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorTNull() throws Exception {
+		new Unit(Player.ONE, null, 0);
+	}
+
+	/**
+	 * Tests Unit constructor with invalid parameter: r (<0).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorRNegative() throws Exception {
+		new Unit(Player.ONE, UnitType.ANT, -5000);
+	}
 }
