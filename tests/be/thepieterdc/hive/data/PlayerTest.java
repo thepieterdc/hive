@@ -42,7 +42,7 @@ public class PlayerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testFromIdIZero() throws Exception {
-		Player.fromId('0');
+		Player.fromId('\0');
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class PlayerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testFromIdIFake() throws Exception {
-		Player.fromId('\0');
+		Player.fromId('@');
 	}
 
 	/**

@@ -2,7 +2,7 @@ package be.thepieterdc.hive.data;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Tests for be.thepieterdc.data.Svg.
