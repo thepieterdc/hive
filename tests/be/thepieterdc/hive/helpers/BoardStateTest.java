@@ -36,7 +36,7 @@ public class BoardStateTest {
 		assertTrue(threeMoves.get(1).coordinates().size() == 7);
 		Collection<HexCoordinate> surrounds = new ArrayList<>(7);
 		surrounds.add(center);
-		for(Orientation o : Orientation.values()) {
+		for (Orientation o : Orientation.values()) {
 			surrounds.add(HexCoordinate.fromOrientation(center, o));
 		}
 		surrounds.forEach(h -> assertTrue(threeMoves.get(1).coordinates().containsKey(h)));
@@ -59,7 +59,7 @@ public class BoardStateTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testUnmarshalMovesNull() throws Exception {
 		BoardState.unmarshal(null);
 	}
@@ -69,7 +69,7 @@ public class BoardStateTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=UnmarshalException.class)
+	@Test(expected = UnmarshalException.class)
 	public void testUnmarshalMovesEmpty() throws Exception {
 		BoardState.unmarshal(new ArrayList<>(0));
 	}
@@ -79,7 +79,7 @@ public class BoardStateTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=UnmarshalException.class)
+	@Test(expected = UnmarshalException.class)
 	public void testUnmarshalIllegalFirstMove() throws Exception {
 		BoardState.unmarshal(Collections.singletonList(Move.fromRepresentation("bQ")));
 	}
@@ -89,7 +89,7 @@ public class BoardStateTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=UnmarshalException.class)
+	@Test(expected = UnmarshalException.class)
 	public void testUnmarshalIllegalSecondMove() throws Exception {
 		BoardState.unmarshal(Arrays.asList(new StartMove(), new StartMove()));
 	}
@@ -99,7 +99,7 @@ public class BoardStateTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=UnmarshalException.class)
+	@Test(expected = UnmarshalException.class)
 	public void testUnmarshalIllegalUnit() throws Exception {
 		BoardState.unmarshal(Arrays.asList(new StartMove(), Move.fromRepresentation("bQ"), Move.fromRepresentation("bA1 wQ-")));
 	}
