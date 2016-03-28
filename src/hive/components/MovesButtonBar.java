@@ -74,6 +74,13 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 		this.btnForward.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
 	}
 
+	/**
+	 * @return true if the autoplay is active.
+	 */
+	public boolean playing() {
+		return this.playing;
+	}
+
 	@Override
 	public String toString() {
 		return "MovesButtonBar[playing=" + this.playing + ']';

@@ -72,9 +72,11 @@ public class HivePaneTest {
 
 	/**
 	 * Tests HivePane#toString().
+	 *
+	 * @throws Exception
 	 */
 	@Test
-	public void testToString() {
+	public void testToString() throws Exception {
 		assertEquals("HivePane[]", this.hP.toString());
 	}
 

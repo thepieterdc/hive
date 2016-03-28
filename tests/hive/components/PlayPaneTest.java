@@ -5,6 +5,9 @@ import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.moves.StartMove;
 import hive.models.ViewerModel;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -44,6 +47,16 @@ public class PlayPaneTest {
 		this.model = new ViewerModel(this.moves, this.states);
 
 		this.pP = new PlayPane(this.model);
+
+		Application a = new Application() {
+			@Override
+			public void start(Stage s) throws Exception {
+				Scene sc = new Scene(pP);
+				s.setScene(sc);
+				s.show();
+			}
+		};
+		a.start(new Stage());
 	}
 
 	/**
@@ -60,10 +73,12 @@ public class PlayPaneTest {
 	}
 
 	/**
-	 * Tests PlayPane#toString().
+	 * Tests MovesButtonBar#toString().
+	 *
+	 * @throws Exception
 	 */
 	@Test
-	public void testToString() {
+	public void testToString() throws Exception {
 		assertEquals("PlayPane[]", this.pP.toString());
 	}
 
