@@ -120,7 +120,7 @@ public class ViewerModelTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testMoveIInvalid() throws Exception {
 		this.model.move(4);
 		this.model.move(-1);
@@ -131,7 +131,7 @@ public class ViewerModelTest {
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testMoveMNull() throws Exception {
 		this.model.move(null);
 	}
@@ -168,7 +168,7 @@ public class ViewerModelTest {
 	public void testRemoveListener() throws Exception {
 		int count = this.listener.called();
 		this.model.removeListener(this.listener);
-		this.model.move(this.model.moveIndex()+1);
+		this.model.move(this.model.moveIndex() + 1);
 		assertEquals(count, this.listener.called());
 		this.model.addListener(this.listener);
 	}
@@ -240,7 +240,7 @@ public class ViewerModelTest {
 	/**
 	 * Tests ViewerModel constructor with invalid parameter: model (null).
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorMovesNull() {
 		new ViewerModel(null, this.states);
 	}
@@ -248,7 +248,7 @@ public class ViewerModelTest {
 	/**
 	 * Tests ViewerModel constructor with invalid parameter: states (null).
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorStatesNull() {
 		new ViewerModel(this.moves, null);
 	}
