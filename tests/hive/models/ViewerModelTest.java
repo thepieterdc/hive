@@ -1,11 +1,10 @@
 package hive.models;
 
+import hive.TestListener;
 import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.Unit;
 import hive.helpers.moves.StartMove;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,38 +24,10 @@ import static org.junit.Assert.assertEquals;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class ViewerModelTest {
-	private ViewerModelTest.TestListener listener;
+	private TestListener listener;
 	private ViewerModel model;
 	private List<Move> moves;
 	private HashMap<Integer, BoardState> states;
-
-	/**
-	 * TestListener class.
-	 */
-	private static class TestListener implements InvalidationListener {
-		private int called;
-
-		/**
-		 * TestListener constructor.
-		 *
-		 * @param m the model
-		 */
-		public TestListener(Observable m) {
-			m.addListener(this);
-		}
-
-		/**
-		 * @return the amount of times that the invalidated() was called.
-		 */
-		public int called() {
-			return this.called;
-		}
-
-		@Override
-		public void invalidated(Observable observable) {
-			this.called++;
-		}
-	}
 
 	/**
 	 * Set-up the test environment.
@@ -68,7 +39,7 @@ public class ViewerModelTest {
 		this.moves = Arrays.asList(new StartMove(), Move.fromRepresentation("wQ"), Move.fromRepresentation("bA1 wQ-"));
 		this.states = BoardState.unmarshal(this.moves);
 		this.model = new ViewerModel(this.moves, this.states);
-		this.listener = new ViewerModelTest.TestListener(this.model);
+		this.listener = new TestListener(this.model);
 	}
 
 	/**

@@ -7,10 +7,7 @@ import hive.helpers.Model;
 import hive.helpers.Move;
 import hive.helpers.Unit;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Model for the Viewer part.
@@ -20,7 +17,7 @@ import java.util.List;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class ViewerModel extends Model {
-	private final HashMap<Integer, BoardState> boardStates;
+	private final Map<Integer, BoardState> boardStates;
 	private Move move;
 	private int moveIndex;
 	private final List<Move> moves;
@@ -33,7 +30,7 @@ public final class ViewerModel extends Model {
 	 * @param moveList the list of moves
 	 * @param states   the list of BoardStates
 	 */
-	public ViewerModel(List<Move> moveList, HashMap<Integer, BoardState> states) {
+	public ViewerModel(List<Move> moveList, Map<Integer, BoardState> states) {
 		if (moveList == null) {
 			throw new IllegalArgumentException("Parameter \"moveList\" is null.");
 		}
