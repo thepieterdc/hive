@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  */
 public final class Hive extends Application {
 
-	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("be/thepieterdc/hive/i18n");
+	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("hive/i18n");
 
 	@Override
 	public void start(Stage stage) {
