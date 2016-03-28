@@ -93,24 +93,70 @@ public class ViewerModelTest {
 		this.states = null;
 	}
 
+	/**
+	 * Tests ViewerModel#boardState().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testBoardState() throws Exception {
-
+		this.model.move(this.moves.get(2));
+		assertEquals(this.states.get(2), this.model.boardState());
 	}
 
+	/**
+	 * Tests ViewerModel#move().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testMove() throws Exception {
-
+		this.model.move(1);
+		assertEquals("wQ", this.model.move().representation());
 	}
 
+	/**
+	 * Tests ViewerModel#move(int) with invalid parameter: i (too high).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testMoveIInvalid() throws Exception {
+		this.model.move(4);
+		this.model.move(-1);
+	}
+
+	/**
+	 * Tests ViewerModel#move(Move) with invalid parameter: m (null).
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testMoveMNull() throws Exception {
+		this.model.move(null);
+	}
+
+	/**
+	 * Tests ViewerModel#moveIndex().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testMoveIndex() throws Exception {
-
+		this.model.move(this.moves.get(1));
+		assertEquals(1, this.model.moveIndex());
 	}
 
+	/**
+	 * Tests ViewerModel#moves().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testMoves() throws Exception {
-
+		assertEquals("Start", this.model.moves().get(0).representation());
+		assertEquals("wQ", this.model.moves().get(1).representation());
+		assertEquals("bA1 wQ-", this.model.moves().get(2).representation());
 	}
 
 	/**
@@ -137,9 +183,15 @@ public class ViewerModelTest {
 		this.model.removeListener(null);
 	}
 
+	/**
+	 * Tests ViewerModel#toString().
+	 *
+	 * @throws Exception
+	 */
 	@Test
 	public void testToString() throws Exception {
-
+		this.model.move(0);
+		assertEquals("ViewerModel[boardStates=3, move=Start, moveIndex=0, totalmoves=3]", this.model.toString());
 	}
 
 	/**
@@ -185,4 +237,19 @@ public class ViewerModelTest {
 		assertArrayEquals(units, this.model.units());
 	}
 
+	/**
+	 * Tests ViewerModel constructor with invalid parameter: model (null).
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorMovesNull() {
+		new ViewerModel(null, this.states);
+	}
+
+	/**
+	 * Tests ViewerModel constructor with invalid parameter: states (null).
+	 */
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructorStatesNull() {
+		new ViewerModel(this.moves, null);
+	}
 }
