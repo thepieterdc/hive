@@ -66,7 +66,7 @@ public class HivePaneTest {
 	@Test
 	public void testListeners() throws Exception {
 		TestListener l = new TestListener(this.model);
-		this.model.move(1);
+		this.model.move(2);
 		assertEquals(1, l.called());
 	}
 

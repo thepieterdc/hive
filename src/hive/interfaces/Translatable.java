@@ -3,7 +3,7 @@ package hive.interfaces;
 /**
  * A translatable node.
  * <p>
- * Created at 25/03/16 9:52
+ * Created at 28/03/16 14:35
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */

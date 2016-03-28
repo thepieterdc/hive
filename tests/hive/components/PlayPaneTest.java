@@ -9,9 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +23,6 @@ import static org.junit.Assert.assertEquals;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(PlayPane.class)
 public class PlayPaneTest {
 	@Rule
 	public final JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
@@ -47,7 +42,8 @@ public class PlayPaneTest {
 		this.moves = Arrays.asList(new StartMove(), Move.fromRepresentation("bQ"), Move.fromRepresentation("bA1 -bQ"));
 		this.states = BoardState.unmarshal(this.moves);
 		this.model = new ViewerModel(this.moves, this.states);
-		this.pP = new MockPlayPane(this.model);
+
+		this.pP = new PlayPane(this.model);
 	}
 
 	/**
@@ -61,17 +57,6 @@ public class PlayPaneTest {
 		this.moves = null;
 		this.states = null;
 		this.pP = null;
-	}
-
-	/**
-	 * Tests PlayPane#invalidated().
-	 *
-	 * @throws Exception
-	 */
-	@Test
-	public void testInvalidated() throws Exception {
-		this.model.move(2);
-		assertEquals(7, this.pP.getChildren().size());
 	}
 
 	/**

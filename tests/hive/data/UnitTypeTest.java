@@ -20,7 +20,7 @@ public class UnitTypeTest {
 	@Test
 	public void testAbbreviation() throws Exception {
 		assertEquals('A', UnitType.ANT.abbreviation());
-		assertEquals('B', UnitType.BEATLE.abbreviation());
+		assertEquals('B', UnitType.BEETLE.abbreviation());
 		assertEquals('G', UnitType.GRASSHOPPER.abbreviation());
 		assertEquals('L', UnitType.LADYBUG.abbreviation());
 		assertEquals('M', UnitType.MOSQUITO.abbreviation());
@@ -37,7 +37,7 @@ public class UnitTypeTest {
 	@Test
 	public void testCapacity() throws Exception {
 		assertEquals(3, UnitType.ANT.capacity());
-		assertEquals(2, UnitType.BEATLE.capacity());
+		assertEquals(2, UnitType.BEETLE.capacity());
 		assertEquals(3, UnitType.GRASSHOPPER.capacity());
 		assertEquals(0, UnitType.LADYBUG.capacity());
 		assertEquals(0, UnitType.MOSQUITO.capacity());
@@ -54,7 +54,7 @@ public class UnitTypeTest {
 	@Test
 	public void testFromAbbreviation() throws Exception {
 		assertEquals(UnitType.ANT, UnitType.fromAbbreviation('A'));
-		assertEquals(UnitType.BEATLE, UnitType.fromAbbreviation('B'));
+		assertEquals(UnitType.BEETLE, UnitType.fromAbbreviation('B'));
 		assertEquals(UnitType.GRASSHOPPER, UnitType.fromAbbreviation('G'));
 		assertEquals(UnitType.MOSQUITO, UnitType.fromAbbreviation('M'));
 		assertEquals(UnitType.LADYBUG, UnitType.fromAbbreviation('L'));
@@ -91,7 +91,7 @@ public class UnitTypeTest {
 	@Test
 	public void testPath() throws Exception {
 		assertEquals(Svg.UNIT_ANT.path().getContent(), UnitType.ANT.path().getContent());
-		assertEquals(Svg.UNIT_BEATLE.path().getContent(), UnitType.BEATLE.path().getContent());
+		assertEquals(Svg.UNIT_BEETLE.path().getContent(), UnitType.BEETLE.path().getContent());
 		assertEquals(Svg.UNIT_GRASSHOPPER.path().getContent(), UnitType.GRASSHOPPER.path().getContent());
 		assertEquals(Svg.UNIT_LADYBUG.path().getContent(), UnitType.LADYBUG.path().getContent());
 		assertEquals(Svg.UNIT_MOSQUITO.path().getContent(), UnitType.MOSQUITO.path().getContent());
@@ -108,7 +108,7 @@ public class UnitTypeTest {
 	@Test
 	public void testPrettyName() throws Exception {
 		assertEquals("Ant", UnitType.ANT.prettyName());
-		assertEquals("Beatle", UnitType.BEATLE.prettyName());
+		assertEquals("Beetle", UnitType.BEETLE.prettyName());
 		assertEquals("Grasshopper", UnitType.GRASSHOPPER.prettyName());
 		assertEquals("Ladybug", UnitType.LADYBUG.prettyName());
 		assertEquals("Mosquito", UnitType.MOSQUITO.prettyName());
@@ -125,7 +125,7 @@ public class UnitTypeTest {
 	@Test
 	public void testToString() throws Exception {
 		assertEquals("UnitType[abbreviation=A, capacity=3, prettyName=Ant]", UnitType.ANT.toString());
-		assertEquals("UnitType[abbreviation=B, capacity=2, prettyName=Beatle]", UnitType.BEATLE.toString());
+		assertEquals("UnitType[abbreviation=B, capacity=2, prettyName=Beetle]", UnitType.BEETLE.toString());
 		assertEquals("UnitType[abbreviation=G, capacity=3, prettyName=Grasshopper]", UnitType.GRASSHOPPER.toString());
 		assertEquals("UnitType[abbreviation=L, capacity=0, prettyName=Ladybug]", UnitType.LADYBUG.toString());
 		assertEquals("UnitType[abbreviation=M, capacity=0, prettyName=Mosquito]", UnitType.MOSQUITO.toString());

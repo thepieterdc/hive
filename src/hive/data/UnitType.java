@@ -11,7 +11,7 @@ import javafx.scene.shape.SVGPath;
  */
 public enum UnitType {
 	ANT(3, Svg.UNIT_ANT),
-	BEATLE(2, Svg.UNIT_BEATLE),
+	BEETLE(2, Svg.UNIT_BEETLE),
 	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER),
 	LADYBUG(0, Svg.UNIT_LADYBUG),
 	MOSQUITO(0, Svg.UNIT_MOSQUITO),
