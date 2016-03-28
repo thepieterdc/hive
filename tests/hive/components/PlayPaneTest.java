@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,8 @@ import static org.junit.Assert.assertEquals;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest()
 public class PlayPaneTest {
 	@Rule
 	public final JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
@@ -31,26 +35,6 @@ public class PlayPaneTest {
 	private List<Move> moves;
 	private Map<Integer, BoardState> states;
 	private PlayPane pP;
-
-	/**
-	 * MockPlayPane class.
-	 */
-	private static class MockPlayPane extends PlayPane {
-
-		/**
-		 * MockPlayPane constructor.
-		 *
-		 * @param model
-		 */
-		public MockPlayPane(ViewerModel model) {
-			super(model);
-		}
-
-		@Override
-		public double getWidth() {
-
-		}
-	}
 
 	/**
 	 * Set-up the test environment
