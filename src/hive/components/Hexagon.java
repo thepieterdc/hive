@@ -59,7 +59,7 @@ public class Hexagon extends Polygon implements Scalable {
 
 	@Override
 	public final double height() {
-		return this.getScaleX() * (top().y() - bottom().y() + this.getStrokeWidth());
+		return this.getScaleX() * (top().y() - bottom().y());
 	}
 
 	@Override
@@ -105,6 +105,6 @@ public class Hexagon extends Polygon implements Scalable {
 
 	@Override
 	public final double width() {
-		return this.getScaleX() * (topRight().x() - bottomLeft().x() + this.getStrokeWidth());
+		return this.getScaleX() * (topRight().x() - bottomLeft().x());
 	}
 }

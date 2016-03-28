@@ -2,6 +2,7 @@ package hive.components;
 
 import hive.helpers.HexCoordinate;
 import hive.interfaces.Scalable;
+import hive.interfaces.Translatable;
 import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -63,9 +64,8 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 				HexCoordinate c = gridCoordinateNodeEntry.getKey();
 				Node h = gridCoordinateNodeEntry.getValue();
-				h.setTranslateX(c.x() * factor);
-				h.setTranslateY(c.y() * factor);
 				((Scalable) h).scale(factor);
+				((Translatable) h).translate(c.x() * factor, c.y() * factor);
 				g.getChildren().add(h);
 			}
 		}
