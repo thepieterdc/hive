@@ -1,5 +1,6 @@
 package hive.helpers;
 
+import hive.TransferPiece;
 import hive.components.DefaultHexagon;
 import hive.components.UnitHexagon;
 import hive.data.Orientation;

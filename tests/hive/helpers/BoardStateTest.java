@@ -1,5 +1,6 @@
 package hive.helpers;
 
+import hive.TransferPiece;
 import hive.data.Orientation;
 import hive.exceptions.UnmarshalException;
 import hive.helpers.moves.StartMove;

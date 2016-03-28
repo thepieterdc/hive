@@ -1,13 +1,13 @@
-package hive.helpers;
+package hive;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for hive.helpers.TransferPiece.
+ * Tests for hive.TransferPiece.
  * <p>
  * <i>For the sake of Coverage.</i>
  * Created at 27/03/16 13:45

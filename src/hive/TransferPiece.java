@@ -1,4 +1,4 @@
-package hive.helpers;
+package hive;
 
 /**
  * Deze klasse mag niet aangepast worden.
