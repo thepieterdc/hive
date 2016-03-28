@@ -2,6 +2,7 @@ package hive.components;
 
 import hive.helpers.Unit;
 import hive.interfaces.Scalable;
+import hive.interfaces.Translatable;
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
@@ -13,7 +14,7 @@ import javafx.scene.shape.SVGPath;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class UnitHexagon extends Group implements Scalable {
+public final class UnitHexagon extends Group implements Scalable, Translatable {
 	private final Hexagon hexagon;
 	private final Circle[] ranks;
 	private final Unit unit;
@@ -82,6 +83,12 @@ public final class UnitHexagon extends Group implements Scalable {
 	@Override
 	public String toString() {
 		return "UnitHexagon[unit=" + this.unit.representation() + ", x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
+	}
+
+	@Override
+	public void translate(double x, double y) {
+		this.setTranslateX(x);
+		this.setTranslateY(y);
 	}
 
 	@Override
