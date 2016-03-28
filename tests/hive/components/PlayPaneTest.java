@@ -1,7 +1,6 @@
 package hive.components;
 
 import hive.JavaFXThreadingRule;
-import hive.TestListener;
 import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.moves.StartMove;
@@ -15,23 +14,43 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Tests for hive.components.HivePane.
+ * Tests for hive.components.PlayPane.
  * <p>
- * Created at 28/03/16 13:17.
+ * Created at 28/03/16 13:44.
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class HivePaneTest {
+public class PlayPaneTest {
 	@Rule
 	public final JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
-	private HivePane hP;
 	private ViewerModel model;
 	private List<Move> moves;
 	private Map<Integer, BoardState> states;
+	private PlayPane pP;
+
+	/**
+	 * MockPlayPane class.
+	 */
+	private static class MockPlayPane extends PlayPane {
+
+		/**
+		 * MockPlayPane constructor.
+		 *
+		 * @param model
+		 */
+		public MockPlayPane(ViewerModel model) {
+			super(model);
+		}
+
+		@Override
+		public double getWidth() {
+
+		}
+	}
 
 	/**
 	 * Set-up the test environment
@@ -43,7 +62,7 @@ public class HivePaneTest {
 		this.moves = Arrays.asList(new StartMove(), Move.fromRepresentation("bQ"), Move.fromRepresentation("bA1 -bQ"));
 		this.states = BoardState.unmarshal(this.moves);
 		this.model = new ViewerModel(this.moves, this.states);
-		this.hP = new HivePane(this.model);
+		this.pP = new MockPlayPane(this.model);
 	}
 
 	/**
@@ -53,38 +72,38 @@ public class HivePaneTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		this.hP = null;
 		this.model = null;
 		this.moves = null;
 		this.states = null;
+		this.pP = null;
 	}
 
 	/**
-	 * Calls the invalidated() listener on all components.
+	 * Tests PlayPane#invalidated().
+	 *
 	 * @throws Exception
 	 */
 	@Test
-	public void testListeners() throws Exception {
-		TestListener l = new TestListener(this.model);
-		this.model.move(1);
-		assertEquals(1, l.called());
+	public void testInvalidated() throws Exception {
+		this.model.move(2);
+		assertEquals(7, this.pP.getChildren().size());
 	}
 
 	/**
-	 * Tests HivePane#toString().
+	 * Tests PlayPane#toString().
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("HivePane[]", this.hP.toString());
+		assertEquals("PlayPane[]", this.pP.toString());
 	}
 
 	/**
-	 * Tests HivePane constructor with invalid parameter: model (null).
+	 * Tests PlayPane constructor with invalid parameter: model (null).
 	 *
 	 * @throws Exception
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorModelNull() throws Exception {
-		new HivePane(null);
+		new PlayPane(null);
 	}
 }
