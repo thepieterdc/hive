@@ -58,7 +58,6 @@ public final class Hive extends Application {
 				model.boardState().transferPieces().forEach(System.out::println);
 			}
 		} catch (IOException | IllegalArgumentException e) {
-			e.printStackTrace(); //TODO REMOVE ON FINAL//
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}
