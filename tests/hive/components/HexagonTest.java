@@ -48,15 +48,47 @@ public class HexagonTest {
 	}
 
 	/**
+	 * Tests Hexagon#scale() with invalid parameter: scale(<=0)
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testScaleFactorNegativeZero() throws Exception {
+		this.hex.scale(0);
+		this.hex.scale(-5.0);
+	}
+
+	/**
+	 * Tests DefaultHexagon#translate().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testTranslate() throws Exception {
+		this.hex.translate(5.0, 8.0);
+		assertEquals(5.0, this.hex.getTranslateX(), 0);
+		assertEquals(8.0, this.hex.getTranslateY(), 0);
+	}
+
+	/**
 	 * Tests DefaultHexagon#toString().
 	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void testToString() throws Exception {
-		this.hex.setTranslateX(0);
-		this.hex.setTranslateY(0);
-		assertEquals("Hexagon[x=0.0, y=-0.0]", this.hex.toString());
+		this.hex.translate(0.0, 0.0);
+		assertEquals("Hexagon[x=0.0, y=0.0]", this.hex.toString());
 	}
 
+	/**
+	 * Tests Hexagon#width().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testWidth() throws Exception {
+		this.hex.scale(1);
+		assertEquals(2 * Math.sqrt(75), this.hex.width(), 0);
+	}
 }
