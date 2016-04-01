@@ -38,23 +38,27 @@ public final class Hive extends Application {
 				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
-			List<Move> moves = Files.readAllLines(Paths.get(args.getRaw().get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
+			if(args.getRaw().isEmpty()) {
+				//
+			} else {
+				List<Move> moves = Files.readAllLines(Paths.get(args.getRaw().get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
 
-			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
+				ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
 
-			Scene scene = new Scene(new HivePane(model));
+				Scene scene = new Scene(new HivePane(model));
 
-			stage.setScene(scene);
-			stage.setTitle("Hive Viewer" + (args.getRaw().size() == 2 ? " [" + BUNDLE.getString("main_testmode") + ']' : ""));
-			stage.show();
+				stage.setScene(scene);
+				stage.setTitle("Hive Viewer" + (args.getRaw().size() == 2 ? " [" + BUNDLE.getString("main_testmode") + ']' : ""));
 
-			model.move(args.getRaw().size() == 2 ? model.totalMoves() - 1 : 0);
+				model.move(args.getRaw().size() == 2 ? model.totalMoves() - 1 : 0);
 
-			if (args.getRaw().size() == 2) {
-				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
-				System.out.println("[Hive " + BUNDLE.getString("main_testmode") + "] " + BUNDLE.getString("main_pieces"));
-				model.boardState().transferPieces().forEach(System.out::println);
+				if (args.getRaw().size() == 2) {
+					ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
+					System.out.println("[Hive " + BUNDLE.getString("main_testmode") + "] " + BUNDLE.getString("main_pieces"));
+					model.boardState().transferPieces().forEach(System.out::println);
+				}
 			}
+			stage.show();
 		} catch (IOException e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage() + ' ' + BUNDLE.getString("main_filenotfound")).render());
 		} catch (Exception e) {
