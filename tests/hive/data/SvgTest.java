@@ -19,7 +19,7 @@ public class SvgTest {
 	 */
 	@Test
 	public void testPath() throws Exception {
-		assertEquals("m143 1649.6v13.75q0 0.2539-0.18555 0.4395-0.18 0.2-0.43 0.2h-13.75q-0.25391 0-0.43945-0.1855-0.19-0.2-0.19-0.4v-13.75q0-0.2539 0.18555-0.4395 0.18-0.2 0.43-0.2h13.75q0.25391 0 0.43945 0.1855 0.19 0.2 0.19 0.4z", Svg.MOVEBUTTON_STOP.path().getContent());
+		assertEquals("m324.29 388.08-111.81-120.64 48.57-157.14 160.38-36.509 111.8 120.64-48.57 157.14z", Svg.LOGO_HEXAGON.path().getContent());
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class SvgTest {
 	 */
 	@Test
 	public void testToString() throws Exception {
-		assertEquals("Svg[path=m143 1649.6v13.75q0 0.2539-0.18555 0.4395-0.18 0.2-0.43 0.2h-13.75q-0.25391 0-0.43945-0.1855-0.19-0.2-0.19-0.4v-13.75q0-0.2539 0.18555-0.4395 0.18-0.2 0.43-0.2h13.75q0.25391 0 0.43945 0.1855 0.19 0.2 0.19 0.4z]", Svg.MOVEBUTTON_STOP.toString());
+		assertEquals("Svg[path=m324.29 388.08-111.81-120.64 48.57-157.14 160.38-36.509 111.8 120.64-48.57 157.14z]", Svg.LOGO_HEXAGON.toString());
 	}
 
 }
