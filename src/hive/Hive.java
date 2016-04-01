@@ -54,6 +54,7 @@ public final class Hive extends Application {
 				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
 				System.out.println("[Hive " + BUNDLE.getString("testmode") + "] " + BUNDLE.getString("pieces"));
 				model.boardState().transferPieces().forEach(System.out::println);
+				stage.close();
 			}
 		} catch (IOException | IllegalArgumentException e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
