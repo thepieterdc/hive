@@ -45,17 +45,19 @@ public final class Hive extends Application {
 			Scene scene = new Scene(new HivePane(model));
 
 			stage.setScene(scene);
-			stage.setTitle("Hive Viewer" + (args.getRaw().size() == 2 ? " [" + BUNDLE.getString("testmode") + ']' : ""));
+			stage.setTitle("Hive Viewer" + (args.getRaw().size() == 2 ? " [" + BUNDLE.getString("main_testmode") + ']' : ""));
 			stage.show();
 
 			model.move(args.getRaw().size() == 2 ? model.totalMoves() - 1 : 0);
 
 			if (args.getRaw().size() == 2) {
 				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
-				System.out.println("[Hive " + BUNDLE.getString("testmode") + "] " + BUNDLE.getString("pieces"));
+				System.out.println("[Hive " + BUNDLE.getString("main_testmode") + "] " + BUNDLE.getString("main_pieces"));
 				model.boardState().transferPieces().forEach(System.out::println);
 			}
-		} catch (IOException | IllegalArgumentException e) {
+		} catch (IOException e) {
+			Platform.runLater(() -> new ErrorMessage(e.getMessage() + ' ' + BUNDLE.getString("main_filenotfound")).render());
+		} catch (Exception e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}

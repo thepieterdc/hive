@@ -22,6 +22,7 @@ public abstract class Message extends Alert {
 	 */
 	protected Message(String message, Alert.AlertType type, boolean s) {
 		super(type, message);
+		this.getDialogPane().setMinWidth(500);
 		this.shutDown = s;
 	}
 
@@ -29,7 +30,7 @@ public abstract class Message extends Alert {
 	 * Renders the message to the screen.
 	 */
 	public void render() {
-		this.show();
+		this.showAndWait();
 		if (this.shutDown) {
 			Platform.exit();
 		}
