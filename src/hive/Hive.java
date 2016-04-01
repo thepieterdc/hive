@@ -34,7 +34,7 @@ public final class Hive extends Application {
 	public void start(Stage stage) {
 		Application.Parameters args = this.getParameters();
 		try {
-			if (args == null || args.getRaw().isEmpty() || args.getRaw().size() > 2) {
+			if (args == null || args.getRaw().size() > 2) {
 				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
