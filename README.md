@@ -1,2 +1,2 @@
 # hive2
-MVC version of Hive (final)
+Programmeren II Project.

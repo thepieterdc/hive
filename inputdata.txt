@@ -1,6 +1,12 @@
-Start
 wQ
-bA1 wQ-
-wS1 \wQ
-bB1 bA1-
-wG1 -wQ
+bS1 \wQ
+wA1 wQ-
+bG1 \bS1
+wA2 /wQ
+bQ -bS1
+wA2 bQ\
+bG1 /wA1
+wB1 /wA2
+bQ -wA2
+wB1 /bQ
+bS1 \wB1

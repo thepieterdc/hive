@@ -38,9 +38,7 @@ public final class Hive extends Application {
 				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
-			List<String> parameters = args.getRaw();
-
-			List<Move> moves = Files.readAllLines(Paths.get(parameters.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
+			List<Move> moves = Files.readAllLines(Paths.get(args.getRaw().get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
 
 			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
 

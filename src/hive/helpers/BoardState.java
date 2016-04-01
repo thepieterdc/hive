@@ -147,7 +147,7 @@ public final class BoardState {
 			throw new UnmarshalException("List of moves is empty.");
 		}
 		if (!(moves.get(0) instanceof StartMove)) {
-			throw new UnmarshalException("Start move is not instance of StartMove.");
+			moves.add(0, new StartMove());
 		}
 
 		HashMap<Integer, BoardState> boardStates = new HashMap<>(50);
