@@ -52,11 +52,19 @@ public final class Hive extends Application {
 
 				model.move(args.getRaw().size() == 2 ? model.totalMoves() - 1 : 0);
 
+<<<<<<< HEAD
+			if (args.getRaw().size() == 2) {
+				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
+				System.out.println("[Hive " + BUNDLE.getString("testmode") + "] " + BUNDLE.getString("pieces"));
+				model.boardState().transferPieces().forEach(System.out::println);
+				stage.close();
+=======
 				if (args.getRaw().size() == 2) {
 					ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
 					System.out.println("[Hive " + BUNDLE.getString("main_testmode") + "] " + BUNDLE.getString("main_pieces"));
 					model.boardState().transferPieces().forEach(System.out::println);
 				}
+>>>>>>> master
 			}
 			stage.show();
 		} catch (IOException e) {
