@@ -3,6 +3,8 @@ package hive.modes;
 import hive.helpers.Mode;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 /**
  * Opens the application in Play(game)-mode.
  * <p>
@@ -12,8 +14,8 @@ import javafx.stage.Stage;
  */
 public final class PlayMode extends Mode {
 	@Override
-	public void start(Stage s, String... p) {
-
+	public void start(Stage s, List<String> p) throws Exception {
+		System.out.println("Startmode");
 	}
 
 	@Override

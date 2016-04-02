@@ -3,6 +3,8 @@ package hive.helpers;
 import hive.interfaces.Validatable;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 /**
  * A mode to use the application.
  * <p>
@@ -16,6 +18,7 @@ public abstract class Mode implements Validatable<Integer> {
 	 *
 	 * @param s the stage
 	 * @param p the passed parameters
+	 * @throws Exception any errors that might occur
 	 */
-	public abstract void start(Stage s, String... p);
+	public abstract void start(Stage s, List<String> p) throws Exception;
 }
