@@ -8,9 +8,11 @@ import hive.helpers.Move;
 import hive.helpers.messages.ErrorMessage;
 import hive.models.ViewerModel;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 import static hive.Hive.BUNDLE;
 
 /**
- * Opens the application in Viewer-mode.
+ * Opens the application in Viewer(and test)-mode.
  * <p>
  * Created at 2/04/16 15:14
  *
@@ -37,10 +39,17 @@ public final class ViewerMode extends Mode {
 			Scene scene = new Scene(new HivePane(model));
 
 			s.setScene(scene);
-			s.setTitle("Hive Viewer");
+			s.setTitle("Hive Viewer" + (p.size() == 2 ? " [" + BUNDLE.getString("main_testmode") + ']' : ""));
 			s.show();
 
-			model.move(0);
+			model.move(p.size() == 2 ? model.totalMoves() - 1 : 0);
+
+			if (p.size() == 2) {
+				ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(p.get(1), "screenshot.png").toFile());
+				System.out.println("[Hive " + BUNDLE.getString("main_testmode") + "] " + BUNDLE.getString("main_pieces"));
+				model.boardState().transferPieces().forEach(System.out::println);
+				s.close();
+			}
 		} catch (IOException e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage() + ' ' + BUNDLE.getString("main_filenotfound")).render());
 		} catch (UnmarshalException | RuntimeException e) {
@@ -50,6 +59,6 @@ public final class ViewerMode extends Mode {
 
 	@Override
 	public boolean valid(Integer args) {
-		return args == 1;
+		return args != 0;
 	}
 }

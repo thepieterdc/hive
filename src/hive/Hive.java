@@ -2,7 +2,6 @@ package hive;
 
 import hive.helpers.messages.ErrorMessage;
 import hive.modes.PlayMode;
-import hive.modes.TestMode;
 import hive.modes.ViewerMode;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -30,7 +29,7 @@ public final class Hive extends Application {
 				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
-			Arrays.asList(new PlayMode(), new ViewerMode(), new TestMode()).stream().filter(m -> m.valid(args.getRaw().size())).findFirst().ifPresent(m -> m.start(stage, args.getRaw()));
+			Arrays.asList(new PlayMode(), new ViewerMode()).stream().filter(m -> m.valid(args.getRaw().size())).findFirst().ifPresent(m -> m.start(stage, args.getRaw()));
 		} catch (Exception e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
