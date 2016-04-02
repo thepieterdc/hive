@@ -1,28 +1,15 @@
 package hive;
 
-import hive.components.HivePane;
-import hive.components.play.SplashScreen;
-import hive.helpers.BoardState;
-import hive.helpers.Move;
 import hive.helpers.messages.ErrorMessage;
-import hive.models.ViewerModel;
 import hive.modes.PlayMode;
 import hive.modes.TestMode;
 import hive.modes.ViewerMode;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 /**
  * Viewer application.
@@ -33,7 +20,7 @@ import java.util.stream.Collectors;
  */
 public final class Hive extends Application {
 
-	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("hive/i18n");
+	public static final ResourceBundle BUNDLE = ResourceBundle.getBundle("hive/i18n");
 
 	@Override
 	public void start(Stage stage) {

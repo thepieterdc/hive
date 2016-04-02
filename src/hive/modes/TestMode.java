@@ -14,7 +14,7 @@ import java.util.List;
  */
 public final class TestMode extends Mode {
 	@Override
-	public void start(Stage s, List<String> p) throws Exception {
+	public void start(Stage s, List<String> p) {
 		System.out.println("Testmode");
 	}
 

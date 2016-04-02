@@ -18,7 +18,6 @@ public abstract class Mode implements Validatable<Integer> {
 	 *
 	 * @param s the stage
 	 * @param p the passed parameters
-	 * @throws Exception any errors that might occur
 	 */
-	public abstract void start(Stage s, List<String> p) throws Exception;
+	public abstract void start(Stage s, List<String> p);
 }
