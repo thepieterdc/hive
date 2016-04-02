@@ -1,6 +1,7 @@
 package hive;
 
 import hive.components.HivePane;
+import hive.components.play.SplashScreen;
 import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.messages.ErrorMessage;
@@ -39,8 +40,9 @@ public final class Hive extends Application {
 			}
 
 			if(args.getRaw().isEmpty()) {
-				//
+				SplashScreen s = new SplashScreen();
 			} else {
+
 				List<Move> moves = Files.readAllLines(Paths.get(args.getRaw().get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
 
 				ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
