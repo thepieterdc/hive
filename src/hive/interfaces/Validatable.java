@@ -7,9 +7,12 @@ package hive.interfaces;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public interface Validatable {
+public interface Validatable<P> {
 	/**
-	 * @return true if this class is valid.
+	 * Validates the class.
+	 *
+	 * @param param a required parameter to validate the class
+	 * @return true if the class is valid
 	 */
-	boolean valid();
+	boolean valid(P param);
 }

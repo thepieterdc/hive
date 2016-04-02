@@ -1,5 +1,5 @@
 /**
- * Helper classes, utilities.
+ * Helper classes, utilities and abstract classes.
  * <p>
  * Created at 16/03/16 19:19
  *
