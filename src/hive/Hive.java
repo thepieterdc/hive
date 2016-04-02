@@ -1,23 +1,14 @@
 package hive;
 
-import hive.components.HivePane;
-import hive.helpers.BoardState;
-import hive.helpers.Move;
 import hive.helpers.messages.ErrorMessage;
-import hive.models.ViewerModel;
+import hive.modes.PlayMode;
+import hive.modes.ViewerMode;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 /**
  * Viewer application.
@@ -28,7 +19,7 @@ import java.util.stream.Collectors;
  */
 public final class Hive extends Application {
 
-	private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("hive/i18n");
+	public static final ResourceBundle BUNDLE = ResourceBundle.getBundle("hive/i18n");
 
 	@Override
 	public void start(Stage stage) {
@@ -38,30 +29,7 @@ public final class Hive extends Application {
 				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
-			if(args.getRaw().isEmpty()) {
-				//
-			} else {
-				List<Move> moves = Files.readAllLines(Paths.get(args.getRaw().get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
-
-				ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
-
-				Scene scene = new Scene(new HivePane(model));
-
-				stage.setScene(scene);
-				stage.setTitle("Hive Viewer" + (args.getRaw().size() == 2 ? " [" + BUNDLE.getString("main_testmode") + ']' : ""));
-				stage.show();
-
-				model.move(args.getRaw().size() == 2 ? model.totalMoves() - 1 : 0);
-
-				if (args.getRaw().size() == 2) {
-					ImageIO.write(SwingFXUtils.fromFXImage(scene.snapshot(null), null), "png", Paths.get(args.getRaw().get(1), "screenshot.png").toFile());
-					System.out.println("[Hive " + BUNDLE.getString("main_testmode") + "] " + BUNDLE.getString("main_pieces"));
-					model.boardState().transferPieces().forEach(System.out::println);
-					stage.close();
-				}
-			}
-		} catch (IOException e) {
-			Platform.runLater(() -> new ErrorMessage(e.getMessage() + ' ' + BUNDLE.getString("main_filenotfound")).render());
+			Arrays.asList(new PlayMode(), new ViewerMode()).stream().filter(m -> m.valid(args.getRaw().size())).findFirst().ifPresent(m -> m.start(stage, args.getRaw()));
 		} catch (Exception e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}

@@ -59,8 +59,9 @@ public final class BoardState {
 	 * @param previous the previous(current) BoardState
 	 * @param move     the move to apply to the given BoardState
 	 * @return the next BoardState
+	 * @throws UnmarshalException the moves could not be translated to game states
 	 */
-	private static BoardState calculate(BoardState previous, Move move) {
+	private static BoardState calculate(BoardState previous, Move move) throws UnmarshalException {
 		HashMap<Unit, HexCoordinate> unitsMap = new HashMap<>(previous.units());
 		if (!unitsMap.containsKey(move.otherUnit())) {
 			throw new UnmarshalException("Other unit not on board: " + move.otherUnit().type());
@@ -138,8 +139,9 @@ public final class BoardState {
 	 *
 	 * @param moves the list of moves
 	 * @return a map of BoardStates for every move
+	 * @throws UnmarshalException the moves could not be translated to game states
 	 */
-	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) {
+	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) throws UnmarshalException {
 		if (moves == null) {
 			throw new IllegalArgumentException("Parameter \"moves\" is null.");
 		}
