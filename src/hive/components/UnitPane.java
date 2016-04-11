@@ -1,6 +1,6 @@
 package hive.components;
 
-import hive.data.Player;
+import hive.data.Players;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Unit;
 import hive.models.ViewerModel;
@@ -81,7 +81,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 
 		int i = 0;
 		for (Unit u : this.model.units()) {
-			this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player() == Player.ONE ? 0 : 1, i % 11));
+			this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().equals(Players.BLACK.player()) ? 0 : 1, i % 11));
 			i++;
 		}
 
