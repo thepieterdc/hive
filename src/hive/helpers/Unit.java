@@ -1,6 +1,6 @@
 package hive.helpers;
 
-import hive.data.Player;
+import hive.data.Players;
 import hive.data.UnitType;
 
 /**
@@ -53,7 +53,7 @@ public final class Unit {
 			throw new IllegalArgumentException("Parameter \"r\" is null.");
 		}
 		UnitType t = UnitType.fromAbbreviation(r.charAt(1));
-		return new Unit(Player.fromId(r.charAt(0)), t, t == UnitType.QUEEN ? 1 : r.charAt(2) - 48);
+		return new Unit(Players.fromId(r.charAt(0)), t, t == UnitType.QUEEN ? 1 : r.charAt(2) - 48);
 	}
 
 	@Override

@@ -28,6 +28,16 @@ public class Player {
 		return this.color;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof Player && this.id == ((Player) obj).id() && this.color.equals(((Player) obj).color()) && this.name.equals(((Player) obj).name());
+	}
+
+	@Override
+	public int hashCode() {
+		return this.id + this.color.hashCode() + this.name.hashCode();
+	}
+
 	public char id() {
 		return this.id;
 	}

@@ -1,11 +1,8 @@
 package hive.models;
 
-import hive.data.Player;
+import hive.data.Players;
 import hive.data.UnitType;
-import hive.helpers.BoardState;
-import hive.helpers.Model;
-import hive.helpers.Move;
-import hive.helpers.Unit;
+import hive.helpers.*;
 
 import java.util.*;
 
@@ -48,11 +45,11 @@ public final class ViewerModel extends Model {
 	 */
 	private void addUnits() {
 		int i = 0;
-		for (Player p : Player.values()) {
+		for (Players p : Players.values()) {
 			for (UnitType u : UnitType.values()) {
 				int capacity = u.capacity();
 				for (int c = 0; c < capacity; c++) {
-					this.units[i] = new Unit(p, u, c + 1);
+					this.units[i] = new Unit(p.player(), u, c + 1);
 					i++;
 				}
 			}
