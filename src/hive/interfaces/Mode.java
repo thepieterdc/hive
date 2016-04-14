@@ -1,6 +1,5 @@
-package hive.helpers;
+package hive.interfaces;
 
-import hive.interfaces.Validatable;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -12,12 +11,12 @@ import java.util.List;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public abstract class Mode implements Validatable<Integer> {
+public interface Mode extends Validatable<Integer> {
 	/**
 	 * Start this application mode.
 	 *
 	 * @param s the stage
 	 * @param p the passed parameters
 	 */
-	public abstract void start(Stage s, List<String> p);
+	void start(Stage s, List<String> p);
 }

@@ -1,11 +1,9 @@
 package hive.modes;
 
 import hive.components.HivePane;
-import hive.exceptions.UnmarshalException;
-import hive.helpers.BoardState;
-import hive.helpers.Mode;
 import hive.helpers.Move;
 import hive.helpers.messages.ErrorMessage;
+import hive.interfaces.Mode;
 import hive.models.ViewerModel;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
@@ -28,13 +26,13 @@ import static hive.Hive.BUNDLE;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class ViewerMode extends Mode {
+public final class ViewerMode implements Mode {
 	@Override
 	public void start(Stage s, List<String> p) {
 		try {
 			List<Move> moves = Files.readAllLines(Paths.get(p.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
 
-			ViewerModel model = new ViewerModel(moves, BoardState.unmarshal(moves));
+			ViewerModel model = new ViewerModel(moves);
 
 			Scene scene = new Scene(new HivePane(model));
 
@@ -52,7 +50,7 @@ public final class ViewerMode extends Mode {
 			}
 		} catch (IOException e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage() + ' ' + BUNDLE.getString("main_filenotfound")).render());
-		} catch (UnmarshalException | RuntimeException e) {
+		} catch (RuntimeException e) {
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}

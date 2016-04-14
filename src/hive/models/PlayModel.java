@@ -1,7 +1,11 @@
 package hive.models;
 
+import hive.exceptions.UnmarshalException;
 import hive.helpers.Player;
+import hive.helpers.moves.StartMove;
 import javafx.scene.paint.Color;
+
+import java.util.Collections;
 
 /**
  * Model for the Play part.
@@ -15,7 +19,8 @@ public final class PlayModel extends HiveModel {
 	private final Player player1;
 	private final Player player2;
 
-	public PlayModel(String p1, String p2) {
+	public PlayModel(String p1, String p2) throws UnmarshalException {
+		super(Collections.singletonList(new StartMove()));
 		this.player1 = new Player('b', Color.BLANCHEDALMOND, p1);
 		this.player2 = new Player('w', Color.BLANCHEDALMOND.invert(), p2);
 	}

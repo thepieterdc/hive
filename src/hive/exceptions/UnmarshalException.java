@@ -7,7 +7,7 @@ package hive.exceptions;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class UnmarshalException extends Exception {
+public final class UnmarshalException extends RuntimeException {
 	/**
 	 * UnmarshalException constructor.
 	 *

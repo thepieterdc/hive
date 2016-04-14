@@ -2,7 +2,6 @@ package hive.components;
 
 import hive.data.Players;
 import hive.helpers.HexCoordinate;
-import hive.helpers.Model;
 import hive.helpers.Unit;
 import hive.models.HiveModel;
 import javafx.beans.InvalidationListener;

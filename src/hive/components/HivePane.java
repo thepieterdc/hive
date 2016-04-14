@@ -28,6 +28,10 @@ public final class HivePane extends VBox {
 
 		this.getChildren().addAll(bottomPane);
 		this.setMinSize(800.0, 600.0);
+		this.setPrefSize(800.0, 600.0);
+		this.setMaxSize(800.0, 600.0);
+
+		model.move(0);
 	}
 
 	/**
