@@ -24,7 +24,10 @@ public final class HivePane extends VBox {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
 
-		System.out.println("jeeeeeeeeeeeeeeeeeeeeeeeej");
+		UnitPane bottomPane = new UnitPane(model);
+
+		this.getChildren().addAll(bottomPane);
+		this.setMinSize(800.0, 600.0);
 	}
 
 	/**
