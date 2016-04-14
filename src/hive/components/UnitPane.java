@@ -2,8 +2,9 @@ package hive.components;
 
 import hive.data.Players;
 import hive.helpers.HexCoordinate;
+import hive.helpers.Model;
 import hive.helpers.Unit;
-import hive.models.ViewerModel;
+import hive.models.HiveModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
@@ -24,7 +25,7 @@ import java.util.Map;
 public final class UnitPane extends GridPane implements InvalidationListener {
 	private static final ColumnConstraints COLUMN_CONSTRAINTS = new ColumnConstraints(9, 9, Double.MAX_VALUE);
 
-	private final ViewerModel model;
+	private final HiveModel model;
 	private final Map<Unit, UnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
 
 	private static class UnitPaneItem {
@@ -72,7 +73,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	 *
 	 * @param m the model
 	 */
-	public UnitPane(ViewerModel m) {
+	public UnitPane(HiveModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

@@ -1,6 +1,5 @@
 package hive.models;
 
-import hive.helpers.Model;
 import hive.helpers.Player;
 import javafx.scene.paint.Color;
 
@@ -11,7 +10,7 @@ import javafx.scene.paint.Color;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class PlayModel extends Model {
+public final class PlayModel extends HiveModel {
 
 	private final Player player1;
 	private final Player player2;
