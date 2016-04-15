@@ -13,6 +13,7 @@ import javafx.scene.layout.Priority;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 /**
  * UnitPane component - a horizontal bar that contains all playable units.
@@ -86,9 +87,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 		}
 
 		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
-		for (int c = 0; c < 11; c++) {
-			this.getColumnConstraints().add(COLUMN_CONSTRAINTS);
-		}
+		IntStream.range(0, 11).forEach(v -> this.getColumnConstraints().add(COLUMN_CONSTRAINTS));
 		this.setAlignment(Pos.CENTER);
 		this.setMaxWidth(Integer.MAX_VALUE);
 		this.setMinHeight(168);
