@@ -1,7 +1,6 @@
 package hive.components;
 
-import hive.models.PlayModel;
-import hive.models.ViewerModel;
+import hive.models.HiveModel;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -19,27 +18,7 @@ public final class HivePane extends VBox {
 	 *
 	 * @param model the model
 	 */
-	public HivePane(PlayModel model) {
-		if (model == null) {
-			throw new IllegalArgumentException("Parameter \"model\" is null.");
-		}
-
-		UnitPane bottomPane = new UnitPane(model);
-
-		this.getChildren().addAll(bottomPane);
-		this.setMinSize(800.0, 600.0);
-		this.setPrefSize(800.0, 600.0);
-		this.setMaxSize(800.0, 600.0);
-
-		model.move(0);
-	}
-
-	/**
-	 * HivePane constructor.
-	 *
-	 * @param model the model
-	 */
-	public HivePane(ViewerModel model) {
+	public HivePane(HiveModel model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
@@ -56,6 +35,8 @@ public final class HivePane extends VBox {
 
 		this.getChildren().addAll(mainPane, bottomPane);
 		this.setMinSize(800.0, 600.0);
+
+		model.move(0);
 	}
 
 	@Override

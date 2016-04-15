@@ -3,7 +3,7 @@ package hive.components;
 import hive.helpers.HexCoordinate;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
-import hive.models.ViewerModel;
+import hive.models.HiveModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
@@ -20,14 +20,14 @@ import java.util.Map;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayPane extends StackPane implements InvalidationListener {
-	private final ViewerModel model;
+	private final HiveModel model;
 
 	/**
 	 * PlayPane constructor.
 	 *
 	 * @param m the model
 	 */
-	public PlayPane(ViewerModel m) {
+	public PlayPane(HiveModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

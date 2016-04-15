@@ -1,7 +1,7 @@
 package hive.components;
 
 import hive.data.Svg;
-import hive.models.ViewerModel;
+import hive.models.HiveModel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
@@ -25,7 +25,7 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 	private final MovesButton btnForward = new MovesButton(Svg.MOVEBUTTON_FORWARD);
 	private final MovesButton btnPlay = new MovesButton(Svg.MOVEBUTTON_PLAY);
 
-	private final ViewerModel model;
+	private final HiveModel model;
 
 	private boolean playing;
 
@@ -36,7 +36,7 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 	 *
 	 * @param m the model
 	 */
-	public MovesButtonBar(ViewerModel m) {
+	public MovesButtonBar(HiveModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

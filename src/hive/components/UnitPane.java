@@ -1,7 +1,6 @@
 package hive.components;
 
 import hive.data.Players;
-import hive.helpers.HexCoordinate;
 import hive.helpers.Unit;
 import hive.models.HiveModel;
 import javafx.beans.InvalidationListener;
@@ -11,8 +10,10 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
@@ -80,14 +81,12 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
-		int i = 0;
-		for (Unit u : this.model.units()) {
-			this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().equals(Players.BLACK.player()) ? 0 : 1, i % 11));
-			i++;
-		}
+		AtomicInteger i = new AtomicInteger(0);
+		Arrays.stream(this.model.units()).forEach(u -> this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().equals(Players.BLACK.player()) ? 0 : 1, i.getAndIncrement() % 11)));
 
 		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
 		IntStream.range(0, 11).forEach(v -> this.getColumnConstraints().add(COLUMN_CONSTRAINTS));
+
 		this.setAlignment(Pos.CENTER);
 		this.setMaxWidth(Integer.MAX_VALUE);
 		this.setMinHeight(168);
@@ -96,13 +95,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
-		Map<Unit, HexCoordinate> state = this.model.boardState().units();
-		for (Map.Entry<Unit, UnitPane.UnitPaneItem> entry : this.unitHexagons.entrySet()) {
-			UnitPane.UnitPaneItem item = entry.getValue();
-			if (!state.containsKey(entry.getKey())) {
-				this.add(item.hexagon(), item.column(), item.row());
-			}
-		}
+		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(u.getValue().hexagon(), u.getValue().column(), u.getValue().row()));
 	}
 
 	@Override

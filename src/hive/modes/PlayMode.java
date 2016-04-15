@@ -33,7 +33,7 @@ public final class PlayMode implements Mode {
 		s.setScene(new Scene(new VBox(b), 200, 200));
 		s.show();
 		*/
-		s.setScene(new Scene(new HivePane(new PlayModel("Pieter","Tobiah"))));
+		s.setScene(new Scene(new HivePane(new PlayModel("Pieter","Jeej"))));
 		s.show();
 	}
 
