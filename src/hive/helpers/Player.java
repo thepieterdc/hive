@@ -1,5 +1,6 @@
 package hive.helpers;
 
+import hive.data.Players;
 import javafx.scene.paint.Color;
 
 /**
@@ -22,6 +23,10 @@ public class Player {
 		this.color = col;
 		this.id = i;
 		this.name = n;
+	}
+
+	public Player(Players p, String n) {
+		this(p.player().id(), p.player().color(), n);
 	}
 
 	public Color color() {

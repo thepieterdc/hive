@@ -1,9 +1,8 @@
 package hive.models;
 
-import hive.exceptions.UnmarshalException;
+import hive.data.Players;
 import hive.helpers.Player;
 import hive.helpers.moves.StartMove;
-import javafx.scene.paint.Color;
 
 import java.util.Collections;
 
@@ -19,10 +18,10 @@ public final class PlayModel extends HiveModel {
 	private final Player player1;
 	private final Player player2;
 
-	public PlayModel(String p1, String p2) throws UnmarshalException {
+	public PlayModel(String p1, String p2) {
 		super(Collections.singletonList(new StartMove()));
-		this.player1 = new Player('b', Color.BLANCHEDALMOND, p1);
-		this.player2 = new Player('w', Color.BLANCHEDALMOND.invert(), p2);
+		this.player1 = new Player(Players.BLACK, p1);
+		this.player2 = new Player(Players.WHITE, p2);
 	}
 
 	public Player player1() {
@@ -31,5 +30,9 @@ public final class PlayModel extends HiveModel {
 
 	public Player player2() {
 		return this.player2;
+	}
+
+	public Player turn() {
+		return this.totalMoves % 2 == 0 ? this.player1 : this.player2;
 	}
 }

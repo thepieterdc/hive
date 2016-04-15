@@ -2,7 +2,6 @@ package hive.models;
 
 import hive.data.Players;
 import hive.data.UnitType;
-import hive.exceptions.UnmarshalException;
 import hive.helpers.BoardState;
 import hive.helpers.Model;
 import hive.helpers.Move;
@@ -27,7 +26,7 @@ public abstract class HiveModel extends Model {
 	protected int totalMoves;
 	protected final Unit[] units = new Unit[22];
 
-	protected HiveModel(List<Move> moveList) throws UnmarshalException {
+	protected HiveModel(List<Move> moveList) {
 		this.boardStates = new HashMap<>(100);
 		this.boardStates.putAll(BoardState.unmarshal(moveList));
 
