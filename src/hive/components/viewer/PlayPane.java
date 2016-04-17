@@ -1,9 +1,9 @@
-package hive.components;
+package hive.components.viewer;
 
 import hive.helpers.HexCoordinate;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
-import hive.models.HiveModel;
+import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
@@ -13,21 +13,21 @@ import javafx.scene.layout.StackPane;
 import java.util.Map;
 
 /**
- * PlayPane component. The playing field of the game.
+ * PlayPane component for the Viewer-mode. The playing field of the game.
  * <p>
  * Created at 19/03/16 22:17
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayPane extends StackPane implements InvalidationListener {
-	private final HiveModel model;
+	private final ViewerModel model;
 
 	/**
 	 * PlayPane constructor.
 	 *
 	 * @param m the model
 	 */
-	public PlayPane(HiveModel m) {
+	public PlayPane(ViewerModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}

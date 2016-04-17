@@ -21,14 +21,14 @@ public final class HivePane extends VBox {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
-		this.hivePaneCommon(model, new PlayPane(model));
+		this.hivePaneCommon(model, new hive.components.play.PlayPane(model));
 	}
 
 	public HivePane(ViewerModel model) {
 		MovesPane movesPane = new MovesPane(model);
 		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 
-		this.hivePaneCommon(model, new SplitPane(movesPane, new PlayPane(model)));
+		this.hivePaneCommon(model, new SplitPane(movesPane, new hive.components.viewer.PlayPane(model)));
 	}
 
 	private void hivePaneCommon(HiveModel model, Parent mainPane) {
