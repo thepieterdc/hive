@@ -58,6 +58,14 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		this.getChildren().addAll(this.ranks);
 	}
 
+	public void disable() {
+		this.setOpacity(0.2);
+	}
+
+	public void enable() {
+		this.setOpacity(1);
+	}
+
 	@Override
 	public double height() {
 		return this.hexagon.height();

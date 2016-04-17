@@ -109,14 +109,13 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	}
 
 	public UnitHexagon unit(UnitHexagon uH, PlayModel m) {
-		System.out.println(m.turn());
-		System.out.println(uH.unit().player());
-		if(!uH.unit().player().equals(m.turn())) {
-			System.out.println("no");
+		if (uH.unit().player().equals(m.turn())) {
+			uH.enable();
+			uH.setOnMouseClicked(System.out::println);
 		} else {
-			System.out.println("yay");
+			uH.disable();
+			uH.setOnMouseClicked(null);
 		}
-		uH.setOnMouseClicked(System.out::println);
 		return uH;
 	}
 }
