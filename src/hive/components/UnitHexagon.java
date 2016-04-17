@@ -91,6 +91,10 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		this.setTranslateY(y);
 	}
 
+	public Unit unit() {
+		return this.unit;
+	}
+
 	@Override
 	public double width() {
 		return this.hexagon.width();

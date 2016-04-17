@@ -1,6 +1,5 @@
 package hive.components;
 
-import hive.data.Players;
 import hive.helpers.Unit;
 import hive.models.HiveModel;
 import hive.models.PlayModel;
@@ -84,7 +83,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 		this.model.addListener(this);
 
 		AtomicInteger i = new AtomicInteger(0);
-		Arrays.stream(this.model.units()).forEach(u -> this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().equals(Players.BLACK.player()) ? 0 : 1, i.getAndIncrement() % 11)));
+		Arrays.stream(this.model.units()).forEach(u -> this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().id() == 'b' ? 0 : 1, i.getAndIncrement() % 11)));
 
 		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
 		IntStream.range(0, 11).forEach(v -> this.getColumnConstraints().add(COLUMN_CONSTRAINTS));
@@ -110,7 +109,13 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	}
 
 	public UnitHexagon unit(UnitHexagon uH, PlayModel m) {
-		System.out.println("jeeeeeej");
+		System.out.println(m.turn());
+		System.out.println(uH.unit().player());
+		if(!uH.unit().player().equals(m.turn())) {
+			System.out.println("no");
+		} else {
+			System.out.println("yay");
+		}
 		uH.setOnMouseClicked(System.out::println);
 		return uH;
 	}
