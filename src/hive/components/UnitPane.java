@@ -6,7 +6,11 @@ import hive.models.PlayModel;
 import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -112,13 +116,13 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	public static UnitHexagon unit(UnitHexagon uH, PlayModel m) {
 		if (uH.unit().player().equals(m.turn())) {
 			uH.enable();
-			uH.setOnMouseClicked(event -> m.selectedUnitProperty().setValue(uH.unit()));
+			uH.setOnMouseClicked(e -> m.selectedUnitProperty().set(uH.unit()));
 		} else {
 			uH.disable();
 			uH.setOnMouseClicked(null);
 		}
-		m.selectedUnitProperty().addListener(o -> {
-			System.out.println("selected changed");
+		m.selectedUnitProperty().addListener((o, od, nw) -> {
+			uH.select(uH.unit().equals(nw));
 		});
 		return uH;
 	}

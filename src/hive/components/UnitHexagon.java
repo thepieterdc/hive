@@ -4,6 +4,8 @@ import hive.helpers.Unit;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
 import javafx.scene.Group;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 
@@ -86,6 +88,10 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 			this.ranks[i].setTranslateX(0.60 * this.width() / 2);
 			this.ranks[i].setTranslateY(-this.height() / (2 * factor) + i * 3 * factor);
 		}
+	}
+
+	public void select(boolean b) {
+		this.setEffect(b ? new DropShadow(20, Color.BLUE) : null);
 	}
 
 	@Override
