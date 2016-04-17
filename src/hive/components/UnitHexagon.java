@@ -3,8 +3,6 @@ package hive.components;
 import hive.helpers.Unit;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.scene.Group;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
@@ -16,7 +14,7 @@ import javafx.scene.shape.SVGPath;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class UnitHexagon extends Group implements InvalidationListener, Scalable, Translatable {
+public final class UnitHexagon extends Group implements Scalable, Translatable {
 	private final Hexagon hexagon;
 	private final Circle[] ranks;
 	private final Unit unit;

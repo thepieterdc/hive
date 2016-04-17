@@ -4,6 +4,7 @@ import hive.components.UnitHexagon;
 import hive.components.UnitPane;
 import hive.data.Players;
 import hive.data.UnitType;
+import hive.helpers.Move;
 import hive.helpers.Player;
 import hive.helpers.Unit;
 import hive.helpers.moves.StartMove;
@@ -42,6 +43,14 @@ public final class PlayModel extends HiveModel {
 	@Override
 	public UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH) {
 		return UnitPane.unit(uH, this);
+	}
+
+	@Override
+	public void move(Move m) {
+		if (m == null) {
+			throw new IllegalArgumentException("Parameter \"move\" is null.");
+		}
+		this.selectedUnitProperty.setValue(null);
 	}
 
 	public Player player1() {

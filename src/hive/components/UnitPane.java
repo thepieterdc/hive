@@ -7,7 +7,6 @@ import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -97,9 +96,6 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		for(Node child : this.getChildren()) {
-			this.model.;
-		}
 		this.getChildren().clear();
 		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.model.callback_UnitPane(this, u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
 	}
@@ -116,11 +112,14 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	public static UnitHexagon unit(UnitHexagon uH, PlayModel m) {
 		if (uH.unit().player().equals(m.turn())) {
 			uH.enable();
-			uH.setOnMouseClicked(System.out::println);
+			uH.setOnMouseClicked(event -> m.selectedUnitProperty().setValue(uH.unit()));
 		} else {
 			uH.disable();
 			uH.setOnMouseClicked(null);
 		}
+		m.selectedUnitProperty().addListener(o -> {
+			System.out.println("selected changed");
+		});
 		return uH;
 	}
 }

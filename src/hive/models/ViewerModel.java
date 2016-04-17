@@ -38,6 +38,14 @@ public final class ViewerModel extends HiveModel {
 	}
 
 	@Override
+	public void move(Move m) {
+		if (m == null) {
+			throw new IllegalArgumentException("Parameter \"move\" is null.");
+		}
+		this.move(this.moves.indexOf(m));
+	}
+
+	@Override
 	public String toString() {
 		return "ViewerModel[boardStates=" + this.boardStates.size() + ", move=" + this.move.representation() + ", moveIndex=" + this.moveIndex + ", totalmoves=" + this.totalMoves + ']';
 	}

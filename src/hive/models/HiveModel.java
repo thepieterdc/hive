@@ -51,12 +51,7 @@ public abstract class HiveModel extends Model {
 		}
 	}
 
-	public void move(Move m) {
-		if (m == null) {
-			throw new IllegalArgumentException("Parameter \"move\" is null.");
-		}
-		this.move(this.moves.indexOf(m));
-	}
+	public abstract void move(Move m);
 
 	public Move move() {
 		return this.move;
