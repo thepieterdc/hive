@@ -1,4 +1,4 @@
-package hive.components;
+package hive.components.viewer;
 
 import hive.data.Svg;
 import hive.models.HiveModel;
@@ -72,13 +72,6 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 		this.btnBegin.setDisable(!this.playing && this.model.moveIndex() - 1 < 0);
 		this.btnEnd.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
 		this.btnForward.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
-	}
-
-	/**
-	 * @return true if the autoplay is active.
-	 */
-	public boolean playing() {
-		return this.playing;
 	}
 
 	@Override

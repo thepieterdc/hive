@@ -1,4 +1,4 @@
-package hive.components;
+package hive.components.viewer;
 
 import hive.data.Svg;
 import javafx.scene.control.Button;

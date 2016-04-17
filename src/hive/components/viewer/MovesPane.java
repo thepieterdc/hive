@@ -1,8 +1,7 @@
-package hive.components;
+package hive.components.viewer;
 
 import hive.helpers.Move;
 import hive.models.HiveModel;
-import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;

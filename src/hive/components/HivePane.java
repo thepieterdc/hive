@@ -1,6 +1,10 @@
 package hive.components;
 
+import hive.components.viewer.MovesPane;
 import hive.models.HiveModel;
+import hive.models.PlayModel;
+import hive.models.ViewerModel;
+import javafx.scene.Parent;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -13,22 +17,26 @@ import javafx.scene.layout.VBox;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class HivePane extends VBox {
-	/**
-	 * HivePane constructor.
-	 *
-	 * @param model the model
-	 */
-	public HivePane(HiveModel model) {
+	public HivePane(PlayModel model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
+		this.hivePaneCommon(model, new PlayPane(model));
+	}
+
+	public HivePane(ViewerModel model) {
 		MovesPane movesPane = new MovesPane(model);
 		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 
-		PlayPane playPane = new PlayPane(model);
+		this.hivePaneCommon(model, new SplitPane(movesPane, new PlayPane(model)));
+	}
 
-		SplitPane mainPane = new SplitPane(movesPane, playPane);
-		mainPane.setDividerPositions(0.0);
+	private void hivePaneCommon(HiveModel model, Parent mainPane) {
+		if (model == null) {
+			throw new IllegalArgumentException("Parameter \"model\" is null.");
+		} else if (mainPane == null) {
+			throw new IllegalArgumentException("Parameter \"mainPane\" is null.");
+		}
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		UnitPane bottomPane = new UnitPane(model);
