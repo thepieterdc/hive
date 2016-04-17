@@ -8,7 +8,6 @@ import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.Player;
 import hive.helpers.Unit;
-import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -56,7 +55,7 @@ public final class PlayModel extends HiveModel {
 		this.totalMoves++;
 		this.selectedUnitProperty.setValue(null);
 
-		this.boardStates.put(this.totalMoves - 1, new BoardState((FirstMove) m));
+		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
 		this.move(this.totalMoves - 1);
 	}
 

@@ -10,6 +10,8 @@ import hive.helpers.moves.StartMove;
 import javafx.scene.Node;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * A state of the playfield; which units are on which coordinate.
@@ -56,7 +58,8 @@ public final class BoardState {
 	/**
 	 * Calculates the BoardState for the FirstMove.
 	 *
-	 * @param move the firstmove to apply to the given BoardState
+	 * @param previous the previous(current) BoardState.
+	 * @param move     the firstmove to apply to the given BoardState
 	 * @return the next BoardState
 	 */
 	public static BoardState calculate(FirstMove first) {
@@ -94,11 +97,7 @@ public final class BoardState {
 	 * @return the surrounding hexagons of the given hexagonal coordinate
 	 */
 	private static Map<HexCoordinate, Node> surroundings(HexCoordinate c) {
-		Map<HexCoordinate, Node> surrounds = new HashMap<>(7);
-		for (Orientation o : Orientation.values()) {
-			surrounds.put(HexCoordinate.fromOrientation(c, o), new DefaultHexagon());
-		}
-		return surrounds;
+		return EnumSet.allOf(Orientation.class).stream().collect(HashMap::new, (m, o) -> m.put(HexCoordinate.fromOrientation(c, o), new DefaultHexagon()), HashMap::putAll);
 	}
 
 	/**
@@ -108,12 +107,10 @@ public final class BoardState {
 	 * @return a map of hexagonal coordinates and their surroudings
 	 */
 	private static Map<HexCoordinate, Node> surroundings(Map<Unit, HexCoordinate> m) {
-		Map<HexCoordinate, Node> surrounds = new HashMap<>(m.size() * 7);
-		for (Map.Entry<Unit, HexCoordinate> e : m.entrySet()) {
-			surrounds.put(e.getValue(), new UnitHexagon(e.getKey()));
-			surroundings(e.getValue()).forEach(surrounds::putIfAbsent);
-		}
-		return surrounds;
+		return m.entrySet().stream().collect(HashMap::new, (map, e) -> {
+			map.put(e.getValue(), new UnitHexagon(e.getKey()));
+			surroundings(e.getValue()).forEach(map::putIfAbsent);
+		}, HashMap::putAll);
 	}
 
 	@Override
@@ -127,12 +124,7 @@ public final class BoardState {
 	 * @return the list of TransferPiece objects
 	 */
 	public List<TransferPiece> transferPieces() {
-		List<TransferPiece> lijst = new ArrayList<>(this.units.size());
-		for (Map.Entry<Unit, HexCoordinate> unitHexCoordinateEntry : this.units.entrySet()) {
-			Unit u = unitHexCoordinateEntry.getKey();
-			HexCoordinate c = unitHexCoordinateEntry.getValue();
-			lijst.add(new TransferPiece(u.type().abbreviation(), u.player().id(), u.rank(), c.row(), c.column()));
-		}
+		List<TransferPiece> lijst = this.units.entrySet().stream().map(e -> new TransferPiece(e.getKey().type().abbreviation(), e.getKey().player().id(), e.getKey().rank(), e.getValue().row(), e.getValue().column())).collect(Collectors.toList());
 		Collections.sort(lijst);
 		return lijst;
 	}
@@ -151,7 +143,7 @@ public final class BoardState {
 	 * @return a map of BoardStates for every move
 	 * @throws UnmarshalException the moves could not be translated to game states
 	 */
-	public static HashMap<Integer, BoardState> unmarshal(List<Move> moves) throws UnmarshalException {
+	public static Map<Integer, BoardState> unmarshal(List<Move> moves) {
 		if (moves == null) {
 			throw new IllegalArgumentException("Parameter \"moves\" is null.");
 		}
@@ -175,10 +167,8 @@ public final class BoardState {
 
 		boardStates.put(1, new BoardState((FirstMove) moves.get(1)));
 
-		int totalMoves = moves.size();
-		for (int moveIndex = 2; moveIndex < totalMoves; moveIndex++) {
-			boardStates.put(moveIndex, calculate(boardStates.get(moveIndex - 1), moves.get(moveIndex)));
-		}
+		IntStream.range(2, moves.size()).forEach(i -> boardStates.put(i, calculate(boardStates.get(i - 1), moves.get(i))));
+
 		return boardStates;
 	}
 }
