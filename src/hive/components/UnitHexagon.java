@@ -9,6 +9,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 
+import java.util.stream.IntStream;
+
 /**
  * UnitHexagon component.
  * <p>
@@ -52,9 +54,7 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		this.unitSvg.setFill(this.unit.player().color());
 
 		this.ranks = new Circle[this.unit.rank()];
-		for (int i = 0; i < this.ranks.length; i++) {
-			this.ranks[i] = new Circle(1, this.unit.player().color());
-		}
+		IntStream.range(0, this.ranks.length).forEach(i -> this.ranks[i] = new Circle(1, this.unit.player().color()));
 
 		this.getChildren().addAll(this.hexagon, this.unitSvg);
 		this.getChildren().addAll(this.ranks);
@@ -82,12 +82,12 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		this.unitSvg.setScaleX(factor * 1.5);
 		this.unitSvg.setScaleY(factor * 1.5);
 		this.unitSvg.setTranslateX(this.width() / 2 - factor * 2.4 * this.unitSvg.getLayoutBounds().getWidth());
-		for (int i = 0; i < this.ranks.length; i++) {
+		IntStream.range(0, this.ranks.length).forEach(i -> {
 			this.ranks[i].setScaleX(factor * 0.8);
 			this.ranks[i].setScaleY(factor * 0.8);
 			this.ranks[i].setTranslateX(0.60 * this.width() / 2);
 			this.ranks[i].setTranslateY(-this.height() / (2 * factor) + i * 3 * factor);
-		}
+		});
 	}
 
 	public void select(boolean b) {

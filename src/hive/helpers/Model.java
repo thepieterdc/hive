@@ -28,9 +28,7 @@ public abstract class Model implements Observable {
 	 * Notifies all registered listeners that the model has been updated.
 	 */
 	protected void notifyListeners() {
-		for (InvalidationListener l : this.listeners) {
-			l.invalidated(this);
-		}
+		this.listeners.forEach(l -> l.invalidated(this));
 	}
 
 	@Override

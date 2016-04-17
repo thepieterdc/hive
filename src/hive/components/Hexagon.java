@@ -6,6 +6,8 @@ import hive.interfaces.Translatable;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeType;
 
+import java.util.Arrays;
+
 /**
  * Hexagon component.
  * <p>
@@ -21,12 +23,7 @@ public class Hexagon extends Polygon implements Scalable, Translatable {
 	 * Hexagon constructor.
 	 */
 	public Hexagon() {
-		this.getPoints().addAll(top().asList());
-		this.getPoints().addAll(topRight().asList());
-		this.getPoints().addAll(bottomRight().asList());
-		this.getPoints().addAll(bottom().asList());
-		this.getPoints().addAll(bottomLeft().asList());
-		this.getPoints().addAll(topLeft().asList());
+		Arrays.asList(top(), topRight(), bottomRight(), bottom(), bottomLeft(), topLeft()).forEach(c -> this.getPoints().addAll(c.asList()));
 		this.setStrokeType(StrokeType.INSIDE);
 		this.setStrokeWidth(1.0);
 	}

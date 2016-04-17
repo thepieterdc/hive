@@ -27,7 +27,7 @@ public final class BoardState {
 	 *
 	 * @param f the first move
 	 */
-	public BoardState(FirstMove f) {
+	private BoardState(FirstMove f) {
 		this.coordinates = new HashMap<>(surroundings(new HexCoordinate(0, 0)));
 		this.coordinates.put(new HexCoordinate(0, 0), new UnitHexagon(f.unit()));
 
@@ -51,6 +51,16 @@ public final class BoardState {
 	private BoardState() {
 		this.coordinates = new HashMap<>(1);
 		this.coordinates.put(new HexCoordinate(0, 0), new DefaultHexagon());
+	}
+
+	/**
+	 * Calculates the BoardState for the FirstMove.
+	 *
+	 * @param move the firstmove to apply to the given BoardState
+	 * @return the next BoardState
+	 */
+	public static BoardState calculate(FirstMove first) {
+		return new BoardState(first);
 	}
 
 	/**
