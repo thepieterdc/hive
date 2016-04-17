@@ -58,6 +58,14 @@ public class Hexagon extends Polygon implements Scalable, Translatable {
 		return new Coordinate(SQRT75, -RADIUS / 2.0);
 	}
 
+	public void disable() {
+		this.setOpacity(0.2);
+	}
+
+	public void enable() {
+		this.setOpacity(1);
+	}
+
 	@Override
 	public final double height() {
 		return this.getScaleX() * (top().y() - bottom().y());

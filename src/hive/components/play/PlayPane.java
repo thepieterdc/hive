@@ -1,13 +1,16 @@
 package hive.components.play;
 
 import hive.helpers.HexCoordinate;
+import hive.helpers.moves.FirstMove;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
 import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.util.Map;
@@ -64,6 +67,18 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 				HexCoordinate c = gridCoordinateNodeEntry.getKey();
 				Node h = gridCoordinateNodeEntry.getValue();
+
+				h.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						if(model.selectedUnitProperty().getValue() != null) {
+							if (model.totalMoves() == 1) {
+								model.move(new FirstMove(model.selectedUnitProperty().getValue()));
+							}
+						}
+					}
+				});
+
 				((Scalable) h).scale(factor);
 				((Translatable) h).translate(c.x() * factor, c.y() * factor);
 				g.getChildren().add(h);

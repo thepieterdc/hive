@@ -27,7 +27,7 @@ public final class BoardState {
 	 *
 	 * @param f the first move
 	 */
-	private BoardState(FirstMove f) {
+	public BoardState(FirstMove f) {
 		this.coordinates = new HashMap<>(surroundings(new HexCoordinate(0, 0)));
 		this.coordinates.put(new HexCoordinate(0, 0), new UnitHexagon(f.unit()));
 
@@ -61,7 +61,7 @@ public final class BoardState {
 	 * @return the next BoardState
 	 * @throws UnmarshalException the moves could not be translated to game states
 	 */
-	private static BoardState calculate(BoardState previous, Move move) throws UnmarshalException {
+	public static BoardState calculate(BoardState previous, Move move) {
 		HashMap<Unit, HexCoordinate> unitsMap = new HashMap<>(previous.units());
 		if (!unitsMap.containsKey(move.otherUnit())) {
 			throw new UnmarshalException("Other unit not on board: " + move.otherUnit().type());
