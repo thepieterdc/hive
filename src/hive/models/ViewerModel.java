@@ -1,5 +1,7 @@
 package hive.models;
 
+import hive.components.UnitHexagon;
+import hive.components.UnitPane;
 import hive.helpers.Move;
 
 import java.util.List;
@@ -19,6 +21,11 @@ public final class ViewerModel extends HiveModel {
 	 */
 	public ViewerModel(List<Move> moveList) {
 		super(moveList);
+	}
+
+	@Override
+	public UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH) {
+		return u.unit(uH, this);
 	}
 
 	@Override

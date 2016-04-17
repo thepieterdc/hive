@@ -1,5 +1,7 @@
 package hive.models;
 
+import hive.components.UnitHexagon;
+import hive.components.UnitPane;
 import hive.data.Players;
 import hive.helpers.Player;
 import hive.helpers.moves.StartMove;
@@ -22,6 +24,11 @@ public final class PlayModel extends HiveModel {
 		super(Collections.singletonList(new StartMove()));
 		this.player1 = new Player(Players.BLACK, p1);
 		this.player2 = new Player(Players.WHITE, p2);
+	}
+
+	@Override
+	public UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH) {
+		return u.unit(uH, this);
 	}
 
 	public Player player1() {

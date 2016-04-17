@@ -3,6 +3,8 @@ package hive.components;
 import hive.data.Players;
 import hive.helpers.Unit;
 import hive.models.HiveModel;
+import hive.models.PlayModel;
+import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
@@ -95,11 +97,21 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
-		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(u.getValue().hexagon(), u.getValue().column(), u.getValue().row()));
+		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.model.callback_UnitPane(this, u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
 	}
 
 	@Override
 	public String toString() {
 		return "UnitPane[]";
+	}
+
+	public UnitHexagon unit(UnitHexagon uH, ViewerModel m) {
+		return uH;
+	}
+
+	public UnitHexagon unit(UnitHexagon uH, PlayModel m) {
+		System.out.println("jeeeeeej");
+		uH.setOnMouseClicked(System.out::println);
+		return uH;
 	}
 }
