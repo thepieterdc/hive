@@ -34,7 +34,7 @@ public final class ViewerModel extends HiveModel {
 
 	@Override
 	public UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH) {
-		return u.unit(uH, this);
+		return UnitPane.unit(uH, this);
 	}
 
 	@Override
