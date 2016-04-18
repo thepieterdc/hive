@@ -1,6 +1,7 @@
 package hive.components.play;
 
 import hive.helpers.HexCoordinate;
+import hive.helpers.Move;
 import hive.helpers.moves.FirstMove;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
@@ -70,6 +71,8 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 					if(model.selectedUnitProperty().getValue() != null) {
 						if (model.totalMoves() == 1) {
 							model.move(new FirstMove(model.selectedUnitProperty().getValue()));
+						} else {
+							model.move(new Move(model.selectedUnitProperty().getValue(), ));
 						}
 					}
 				});

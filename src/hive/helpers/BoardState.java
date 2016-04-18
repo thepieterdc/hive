@@ -113,6 +113,16 @@ public final class BoardState {
 		}, HashMap::putAll);
 	}
 
+	public Map<Orientation, Unit> surroundingUnits(Unit u) {
+		//TODO: If u == null of u not in hashmap -> EXCEPTION
+		return this.units.entrySet().stream().collect(HashMap::new, (m, e) -> {
+			Orientation o = Orientation.fromHexCoordinates(this.units.get(u), e.getValue());
+			if(o != null) {
+				m.put(o, e.getKey());
+				}
+			}, HashMap::putAll);
+	}
+
 	@Override
 	public String toString() {
 		return "BoardState[hexagons=" + this.coordinates.size() + ", units=" + this.units.size() + ']';

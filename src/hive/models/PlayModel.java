@@ -8,6 +8,7 @@ import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.Player;
 import hive.helpers.Unit;
+import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -44,6 +45,18 @@ public final class PlayModel extends HiveModel {
 	@Override
 	public UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH) {
 		return UnitPane.unit(uH, this);
+	}
+
+	public void move(FirstMove m) {
+		if (m == null) {
+			throw new IllegalArgumentException("Parameter \"move\" is null.");
+		}
+		this.moves.add(m);
+		this.totalMoves++;
+		this.selectedUnitProperty.setValue(null);
+
+		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(m));
+		this.move(this.totalMoves - 1);
 	}
 
 	@Override

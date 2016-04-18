@@ -1,5 +1,7 @@
 package hive.data;
 
+import hive.helpers.HexCoordinate;
+
 /**
  * Orientation enum; describes an orientation on the hexagonal grid.
  * <p>
@@ -47,6 +49,16 @@ public enum Orientation {
 	 */
 	public Direction direction() {
 		return this.direction;
+	}
+
+	public static Orientation fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
+		//THROWS NO EXCEPTION SINCE THEY CAN BE NOT NEIGHBOURING//
+		for(Orientation o : Orientation.values()) {
+			if(HexCoordinate.fromOrientation(base, o).equals(hC)) {
+				return o;
+			}
+		}
+		return null;
 	}
 
 	/**
