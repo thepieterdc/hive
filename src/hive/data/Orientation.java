@@ -54,7 +54,7 @@ public enum Orientation {
 	public static Orientation fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
 		//THROWS NO EXCEPTION SINCE THEY CAN BE NOT NEIGHBOURING//
 		for(Orientation o : Orientation.values()) {
-			if(HexCoordinate.fromOrientation(base, o).equals(hC)) {
+			if(HexCoordinate.fromOrientation(hC, o).equals(base)) {
 				return o;
 			}
 		}
