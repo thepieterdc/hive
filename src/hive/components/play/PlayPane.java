@@ -1,7 +1,9 @@
 package hive.components.play;
 
+import hive.data.Orientation;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
+import hive.helpers.Unit;
 import hive.helpers.moves.FirstMove;
 import hive.interfaces.Scalable;
 import hive.interfaces.Translatable;
@@ -68,11 +70,12 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				Node h = gridCoordinateNodeEntry.getValue();
 
 				h.setOnMouseClicked(event -> {
-					if(model.selectedUnitProperty().getValue() != null) {
-						if (model.totalMoves() == 1) {
-							model.move(new FirstMove(model.selectedUnitProperty().getValue()));
+					if(this.model.selectedUnitProperty().getValue() != null && this.model.boardState().free(c)) {
+						if (this.model.totalMoves() == 1) {
+							this.model.move(new FirstMove(this.model.selectedUnitProperty().getValue()));
 						} else {
-							model.move(new Move(model.selectedUnitProperty().getValue(), ));
+							Map.Entry<Unit, HexCoordinate> otherUnit = this.model.boardState().neighbouringUnit(c);
+							this.model.move(new Move(this.model.selectedUnitProperty().getValue(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
 						}
 					}
 				});

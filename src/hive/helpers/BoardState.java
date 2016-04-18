@@ -90,6 +90,14 @@ public final class BoardState {
 		return Collections.unmodifiableMap(this.coordinates);
 	}
 
+	public boolean free(HexCoordinate h) {
+		return !this.units.containsValue(h);
+	}
+
+	public Map.Entry<Unit, HexCoordinate> neighbouringUnit(HexCoordinate h) {
+		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).findFirst().orElse(null);
+	}
+
 	/**
 	 * Calculates the surrounding hexagons for a given "center" hexagon.
 	 *
@@ -111,16 +119,6 @@ public final class BoardState {
 			map.put(e.getValue(), new UnitHexagon(e.getKey()));
 			surroundings(e.getValue()).forEach(map::putIfAbsent);
 		}, HashMap::putAll);
-	}
-
-	public Map<Orientation, Unit> surroundingUnits(Unit u) {
-		//TODO: If u == null of u not in hashmap -> EXCEPTION
-		return this.units.entrySet().stream().collect(HashMap::new, (m, e) -> {
-			Orientation o = Orientation.fromHexCoordinates(this.units.get(u), e.getValue());
-			if(o != null) {
-				m.put(o, e.getKey());
-				}
-			}, HashMap::putAll);
 	}
 
 	@Override

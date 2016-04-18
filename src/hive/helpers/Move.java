@@ -25,7 +25,7 @@ public class Move {
 	 * @param ot the other unit
 	 * @param or the Orientation of the move
 	 */
-	protected Move(Unit u, Unit ot, Orientation or) {
+	public Move(Unit u, Unit ot, Orientation or) {
 		this.orientation = or;
 		this.otherUnit = ot;
 		this.unit = u;
