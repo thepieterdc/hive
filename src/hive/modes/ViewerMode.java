@@ -26,6 +26,7 @@ import static hive.Hive.BUNDLE;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
+@SuppressWarnings("UseOfSystemOutOrSystemErr")
 public final class ViewerMode implements Mode {
 	@Override
 	public void start(Stage s, List<String> p) {
