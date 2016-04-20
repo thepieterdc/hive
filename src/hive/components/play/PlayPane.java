@@ -44,6 +44,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
+		//TODO Misschien de listeners eens wissen//
 		this.getChildren().clear();
 
 		Group g = new Group();
@@ -70,13 +71,16 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				Node h = gridCoordinateNodeEntry.getValue();
 
 				h.setOnMouseClicked(event -> {
-					if (this.model.selectedUnitProperty().getValue() != null && this.model.boardState().free(c)) {
+					if (this.model.selectedUnitProperty().get() != null && this.model.boardState().free(c)) {
+						//TODO: Doe hier mss iets aan//
 						if (this.model.totalMoves() == 1) {
-							this.model.move(new FirstMove(this.model.selectedUnitProperty().getValue()));
+							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
 							Map.Entry<Unit, HexCoordinate> otherUnit = this.model.boardState().neighbouringUnit(c);
-							this.model.move(new Move(this.model.selectedUnitProperty().getValue(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
+							this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
 						}
+					} else {
+						this.model.selectedUnitProperty().set(this.model.boardState().unit(c));
 					}
 				});
 

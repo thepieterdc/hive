@@ -40,6 +40,8 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
+		//TODO Misschien de listeners eens wissen//
+
 		this.getChildren().clear();
 
 		Group g = new Group();

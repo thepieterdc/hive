@@ -137,6 +137,10 @@ public final class BoardState {
 		return lijst;
 	}
 
+	public Unit unit(HexCoordinate c) {
+		return this.units.entrySet().stream().filter(e -> e.getValue().equals(c)).map(Map.Entry::getKey).findFirst().orElse(null);
+	}
+
 	/**
 	 * @return the map of units on the BoardState
 	 */

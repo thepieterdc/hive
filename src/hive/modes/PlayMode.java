@@ -17,8 +17,9 @@ import java.util.List;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayMode implements Mode {
-	private String player1;
-	private String player2;
+	//TODO: Wegdoen//
+	private String player1 = "Jeej";
+	private String player2 = "Pieter";
 
 	@Override
 	public void start(Stage s, List<String> p) {
