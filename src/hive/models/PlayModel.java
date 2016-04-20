@@ -74,7 +74,7 @@ public final class PlayModel extends HiveModel {
 		this.move(this.totalMoves - 1);
 
 		//TODO VERBETEREN//
-
+		this.winnerProperty.set(this.player1);
 	}
 
 	public Player player1() {
