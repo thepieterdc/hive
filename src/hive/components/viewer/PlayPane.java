@@ -58,7 +58,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 			vertMax = Math.max(vertMax, h.column());
 		}
 
-		double factor = Math.min(this.getWidth(), this.getHeight()) / Math.min(horizMax - horizMin + 1, vertMax - vertMin + 1) / 25.0;
+		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(horizMax - horizMin + 1, vertMax - vertMin + 1), 4);
 
 		if (factor > 0) {
 			state.entrySet().forEach(e -> {

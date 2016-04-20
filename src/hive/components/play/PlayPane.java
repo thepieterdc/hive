@@ -62,7 +62,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 			vertMax = Math.max(vertMax, h.column());
 		}
 
-		double factor = Math.min(this.getWidth(), this.getHeight()) / Math.min(horizMax - horizMin + 1, vertMax - vertMin + 1) / 20.0;
+		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(horizMax - horizMin + 1, vertMax - vertMin + 1), 4);
 
 		if (factor > 0) {
 			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
@@ -70,7 +70,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				Node h = gridCoordinateNodeEntry.getValue();
 
 				h.setOnMouseClicked(event -> {
-					if(this.model.selectedUnitProperty().getValue() != null && this.model.boardState().free(c)) {
+					if (this.model.selectedUnitProperty().getValue() != null && this.model.boardState().free(c)) {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().getValue()));
 						} else {

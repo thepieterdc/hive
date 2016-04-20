@@ -35,6 +35,7 @@ public final class PlayMode implements Mode {
 		*/
 		s.setScene(new Scene(new HivePane(new PlayModel("Pieter","Jeej"))));
 		s.show();
+		s.setFullScreen(true);
 	}
 
 	@Override
