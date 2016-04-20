@@ -112,7 +112,7 @@ public final class BoardState {
 	 * Calculates the surrounding hexagons for a given swarm of hexagons.
 	 *
 	 * @param m the map of hexagons
-	 * @return a map of hexagonal coordinates and their surroudings
+	 * @return a map of hexagonal coordinates and their surroundings
 	 */
 	private static Map<HexCoordinate, Node> surroundings(Map<Unit, HexCoordinate> m) {
 		return m.entrySet().stream().collect(HashMap::new, (map, e) -> {

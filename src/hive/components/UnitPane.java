@@ -6,11 +6,7 @@ import hive.models.PlayModel;
 import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -121,9 +117,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 			uH.disable();
 			uH.setOnMouseClicked(null);
 		}
-		m.selectedUnitProperty().addListener((o, od, nw) -> {
-			uH.select(uH.unit().equals(nw));
-		});
+		m.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));
 		return uH;
 	}
 }

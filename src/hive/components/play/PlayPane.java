@@ -1,5 +1,6 @@
 package hive.components.play;
 
+import hive.components.UnitHexagon;
 import hive.data.Orientation;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
@@ -45,6 +46,8 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 	@Override
 	public void invalidated(Observable observable) {
 		//TODO Misschien de listeners eens wissen//
+
+		//TODO HEEL DIT HERSCHRIJVEN//
 		this.getChildren().clear();
 
 		Group g = new Group();
@@ -69,6 +72,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 				HexCoordinate c = gridCoordinateNodeEntry.getKey();
 				Node h = gridCoordinateNodeEntry.getValue();
+				Unit u = this.model.boardState().unit(c);
 
 				h.setOnMouseClicked(event -> {
 					if (this.model.selectedUnitProperty().get() != null && this.model.boardState().free(c)) {
@@ -79,10 +83,14 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 							Map.Entry<Unit, HexCoordinate> otherUnit = this.model.boardState().neighbouringUnit(c);
 							this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
 						}
-					} else {
-						this.model.selectedUnitProperty().set(this.model.boardState().unit(c));
+					} else if(this.model.turn().equals(u.player())){
+						this.model.selectedUnitProperty().set(u);
 					}
 				});
+
+				if(h instanceof UnitHexagon) {
+					this.model.selectedUnitProperty().addListener((o, od, nw) -> ((UnitHexagon) h).select(((UnitHexagon) h).unit().equals(nw)));
+				}
 
 				((Scalable) h).scale(factor);
 				((Translatable) h).translate(c.x() * factor, c.y() * factor);
