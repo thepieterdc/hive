@@ -9,6 +9,8 @@ package hive.interfaces;
  */
 public interface Enableable {
 	/**
+	 * Enables or disables something.
+	 *
 	 * @param b true to enable, false to disable
 	 */
 	void enable(boolean b);

@@ -10,6 +10,7 @@ package hive.interfaces;
 public interface Translatable {
 	/**
 	 * Translates the node.
+	 *
 	 * @param x the translation's x-delta
 	 * @param y the translation's y-delta
 	 */
