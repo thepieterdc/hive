@@ -42,7 +42,7 @@ public final class PlayMode implements Mode {
 
 		s.setScene(new Scene(new HivePane(model)));
 		s.show();
-		s.setFullScreen(true);
+		//s.setFullScreen(true);
 
 		model.winnerProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {

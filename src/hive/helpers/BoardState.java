@@ -131,7 +131,10 @@ public final class BoardState {
 	 * @return a map of hexagonal coordinates and their surroundings
 	 */
 	private static Set<HexCoordinate> surroundings(Map<Unit, HexCoordinate> m) {
-		return m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(surroundings(e.getValue())), HashSet::addAll);
+		HashSet<HexCoordinate> unitCoords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.add(e.getValue()), HashSet::addAll)
+		HashSet<HexCoordinate> coords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(surroundings(e.getValue())), HashSet::addAll).
+		System.out.println(coords.size());
+		return coords;
 	}
 
 	@Override

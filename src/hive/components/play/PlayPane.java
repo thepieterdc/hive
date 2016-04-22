@@ -2,9 +2,12 @@ package hive.components.play;
 
 import hive.components.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
+import hive.data.Orientation;
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
+import hive.helpers.Move;
 import hive.helpers.Unit;
+import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -49,7 +52,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		BoardState state = this.model.boardState();
 		BoardState.Dimensions dims = state.dimensions();
 
-		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(dims.hMax - dims.hMin + 1, dims.vMax - dims.vMin + 1), 4);
+		double factor = Math.max(this.getWidth() / this.getHeight() * 5 / Math.max(dims.hMax - dims.hMin + 1, dims.vMax - dims.vMin + 1), 3);
 		if (factor > 0) {
 			for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
 				Unit u = e.getKey();
@@ -64,6 +67,16 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 			for (HexCoordinate c : state.freeHexagons()) {
 				FreeHexagon h = new FreeHexagon();
 				h.scale(factor);
+				h.setOnMouseClicked(event -> {
+					if(model.selectedUnitProperty().get() != null) {
+						if (model.totalMoves() == 1) {
+							model.move(new FirstMove(model.selectedUnitProperty().get()));
+						} else {
+							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbouringUnit(c);
+							model.move(new Move(model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
+						}
+					}
+				});
 				h.translate(c.x() * factor, c.y() * factor);
 
 				g.getChildren().add(h);
