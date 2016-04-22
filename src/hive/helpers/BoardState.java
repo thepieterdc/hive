@@ -1,14 +1,10 @@
 package hive.helpers;
 
 import hive.TransferPiece;
-import hive.components.FreeHexagon;
-import hive.components.hexagons.Hexagon;
-import hive.components.hexagons.UnitHexagon;
 import hive.data.Orientation;
 import hive.exceptions.UnmarshalException;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
-import javafx.scene.Node;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -50,7 +46,8 @@ public final class BoardState {
 	 * <p><i>To be used for a StartMove.</i></p>
 	 */
 	private BoardState() {
-		this.freeHexagons.put(new HexCoordinate(0, 0), new FreeHexagon());
+		this.freeHexagons = new HashSet<>(1);
+		this.freeHexagons.add(new HexCoordinate(0, 0));
 	}
 
 	/**
@@ -81,15 +78,8 @@ public final class BoardState {
 		return new BoardState(unitsMap);
 	}
 
-	/**
-	 * @return a map of hexagonal coordinates and nodes
-	 */
-	public Map<HexCoordinate, Node> coordinates() {
-		return Collections.unmodifiableMap(this.coordinates);
-	}
-
-	public Map<HexCoordinate, FreeHexagon> freeHexagons(HexCoordinate h) {
-		return !this.units.containsValue(h);
+	public Set<HexCoordinate> freeHexagons() {
+		return Collections.unmodifiableSet(this.freeHexagons);
 	}
 
 	public Map.Entry<Unit, HexCoordinate> neighbouringUnit(HexCoordinate h) {
@@ -102,8 +92,8 @@ public final class BoardState {
 	 * @param c the hexagonal coordinate
 	 * @return the surrounding hexagons of the given hexagonal coordinate
 	 */
-	private static Map<HexCoordinate, Node> surroundings(HexCoordinate c) {
-		return EnumSet.allOf(Orientation.class).stream().collect(HashMap::new, (m, o) -> m.put(HexCoordinate.fromOrientation(c, o), new DefaultHexagon()), HashMap::putAll);
+	private static Set<HexCoordinate> surroundings(HexCoordinate c) {
+		return EnumSet.allOf(Orientation.class).stream().collect(HashSet::new, (h, o) -> h.add(HexCoordinate.fromOrientation(c, o)), HashSet::addAll);
 	}
 
 	/**
@@ -112,11 +102,8 @@ public final class BoardState {
 	 * @param m the map of hexagons
 	 * @return a map of hexagonal coordinates and their surroundings
 	 */
-	private static Map<HexCoordinate, Node> surroundings(Map<Unit, HexCoordinate> m) {
-		return m.entrySet().stream().collect(HashMap::new, (map, e) -> {
-			map.put(e.getValue(), new UnitHexagon(e.getKey()));
-			surroundings(e.getValue()).forEach(map::putIfAbsent);
-		}, HashMap::putAll);
+	private static Set<HexCoordinate> surroundings(Map<Unit, HexCoordinate> m) {
+		return m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(surroundings(e.getValue())), HashSet::addAll);
 	}
 
 	@Override
