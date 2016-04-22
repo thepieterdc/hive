@@ -22,9 +22,8 @@ import java.util.stream.IntStream;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class BoardState {
-	private final HashMap<HexCoordinate, Hexagon> coordinates;
-	private final HashMap<HexCoordinate, FreeHexagon> freeHexagons = new HashMap<>(132);
-	private final HashMap<Unit, HexCoordinate> units = new HashMap<>(22);
+	private final Map<HexCoordinate, FreeHexagon> freeHexagons;
+	private final Map<Unit, HexCoordinate> units = new HashMap<>(22);
 
 	/**
 	 * BoardState constructor.
@@ -32,10 +31,8 @@ public final class BoardState {
 	 * @param f the first move
 	 */
 	private BoardState(FirstMove f) {
-		this.coordinates = new HashMap<>(surroundings(new HexCoordinate(0, 0)));
-		this.coordinates.put(new HexCoordinate(0, 0), new UnitHexagon(f.unit()));
-
 		this.units.put(f.unit(), new HexCoordinate(0, 0));
+		this.freeHexagons = surroundings(new HexCoordinate(0, 0));
 	}
 
 	/**
@@ -44,8 +41,8 @@ public final class BoardState {
 	 * @param u a map of the units and their coordinates
 	 */
 	private BoardState(Map<Unit, HexCoordinate> u) {
-		this.coordinates = new HashMap<>(surroundings(u));
 		this.units.putAll(u);
+		this.freeHexagons = surroundings(this.units);
 	}
 
 	/**
@@ -53,8 +50,7 @@ public final class BoardState {
 	 * <p><i>To be used for a StartMove.</i></p>
 	 */
 	private BoardState() {
-		this.coordinates = new HashMap<>(1);
-		this.coordinates.put(new HexCoordinate(0, 0), new FreeHexagon());
+		this.freeHexagons.put(new HexCoordinate(0, 0), new FreeHexagon());
 	}
 
 	/**
