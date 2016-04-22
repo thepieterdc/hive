@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class BoardState {
-	private final Map<HexCoordinate, FreeHexagon> freeHexagons;
+	private final Set<HexCoordinate> freeHexagons;
 	private final Map<Unit, HexCoordinate> units = new HashMap<>(22);
 
 	/**
@@ -88,7 +88,7 @@ public final class BoardState {
 		return Collections.unmodifiableMap(this.coordinates);
 	}
 
-	public boolean free(HexCoordinate h) {
+	public Map<HexCoordinate, FreeHexagon> freeHexagons(HexCoordinate h) {
 		return !this.units.containsValue(h);
 	}
 
@@ -121,7 +121,7 @@ public final class BoardState {
 
 	@Override
 	public String toString() {
-		return "BoardState[hexagons=" + this.coordinates.size() + ", units=" + this.units.size() + ']';
+		return "BoardState[freeHexagons=" + this.freeHexagons.size() + ", units=" + this.units.size() + ']';
 	}
 
 	/**
@@ -140,7 +140,7 @@ public final class BoardState {
 	}
 
 	/**
-	 * @return the map of units on the BoardState
+	 * @return the map of units in the BoardState
 	 */
 	public Map<Unit, HexCoordinate> units() {
 		return Collections.unmodifiableMap(this.units);
