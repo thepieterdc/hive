@@ -26,4 +26,9 @@ public final class StartMove extends Move {
 	public String toString() {
 		return "StartMove[]";
 	}
+
+	@Override
+	public Move.MoveType type() {
+		return Move.MoveType.FIRST;
+	}
 }

@@ -50,11 +50,11 @@ public final class BoardState {
 
 	/**
 	 * BoardState constructor.
-	 * <p><i>Represents a StartMove.</i></p>
+	 * <p><i>To be used for a StartMove.</i></p>
 	 */
 	private BoardState() {
 		this.coordinates = new HashMap<>(1);
-		this.coordinates.put(new HexCoordinate(0, 0), new DefaultHexagon());
+		this.coordinates.put(new HexCoordinate(0, 0), new FreeHexagon());
 	}
 
 	/**

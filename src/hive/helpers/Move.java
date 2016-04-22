@@ -18,6 +18,8 @@ public class Move {
 	private final Unit otherUnit;
 	private final Unit unit;
 
+	public enum MoveType { START, FIRST, REGULAR }
+
 	/**
 	 * Move constructor.
 	 *
@@ -87,6 +89,10 @@ public class Move {
 	@Override
 	public String toString() {
 		return "Move[orientation=" + this.orientation.direction() + this.orientation.representation() + ", otherUnit=" + this.otherUnit.representation() + ", representation=" + this.representation() + ", unit=" + this.unit.representation() + ']';
+	}
+
+	public Move.MoveType type() {
+		return Move.MoveType.REGULAR;
 	}
 
 	/**

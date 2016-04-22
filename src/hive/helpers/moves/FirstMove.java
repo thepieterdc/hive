@@ -29,4 +29,9 @@ public final class FirstMove extends Move {
 	public String toString() {
 		return "FirstMove[Unit=" + this.unit().representation() + ']';
 	}
+
+	@Override
+	public Move.MoveType type() {
+		return Move.MoveType.FIRST;
+	}
 }
