@@ -1,5 +1,6 @@
 package hive.components;
 
+import hive.components.hexagons.UnitHexagon;
 import hive.helpers.Unit;
 import hive.models.HiveModel;
 import hive.models.PlayModel;
@@ -111,10 +112,10 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 
 	public static UnitHexagon unit(UnitHexagon uH, PlayModel m) {
 		if (uH.unit().player().equals(m.turn())) {
-			uH.enable();
+			uH.enable(true);
 			uH.setOnMouseClicked(e -> m.selectedUnitProperty().set(uH.unit()));
 		} else {
-			uH.disable();
+			uH.enable(false);
 			uH.setOnMouseClicked(null);
 		}
 		m.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));

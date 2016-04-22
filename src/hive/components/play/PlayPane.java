@@ -1,6 +1,8 @@
 package hive.components.play;
 
+import hive.components.hexagons.UnitHexagon;
 import hive.data.Orientation;
+import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
 import hive.helpers.Unit;
@@ -51,7 +53,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 		Group g = new Group();
 
-		Map<HexCoordinate, Node> state = this.model.boardState().coordinates();
+		BoardState state = this.model.boardState();
 
 		int horizMin = Integer.MAX_VALUE;
 		int horizMax = Integer.MIN_VALUE;
