@@ -18,7 +18,7 @@ public class Move {
 	private final Unit otherUnit;
 	private final Unit unit;
 
-	public enum MoveType { START, FIRST, REGULAR }
+	public enum MoveType {START, FIRST, REGULAR}
 
 	/**
 	 * Move constructor.
@@ -91,6 +91,12 @@ public class Move {
 		return "Move[orientation=" + this.orientation.direction() + this.orientation.representation() + ", otherUnit=" + this.otherUnit.representation() + ", representation=" + this.representation() + ", unit=" + this.unit.representation() + ']';
 	}
 
+	/**
+	 * Gets the type of the move.
+	 * <i>Omits the use of instance of.</i>
+	 *
+	 * @return the type of the move
+	 */
 	public Move.MoveType type() {
 		return Move.MoveType.REGULAR;
 	}

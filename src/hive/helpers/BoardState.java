@@ -164,7 +164,7 @@ public final class BoardState {
 		if (moves.isEmpty()) {
 			throw new UnmarshalException("List of moves is empty.");
 		}
-		if (!(moves.get(0) instanceof StartMove)) {
+		if (moves.get(0).type() != Move.MoveType.START) {
 			moves.add(0, new StartMove());
 		}
 
@@ -175,7 +175,7 @@ public final class BoardState {
 			return boardStates;
 		}
 
-		if (!(moves.get(1) instanceof FirstMove)) {
+		if (moves.get(1).type() != Move.MoveType.FIRST) {
 			throw new UnmarshalException("First move is not instance of FirstMove.");
 		}
 
