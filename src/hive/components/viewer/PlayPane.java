@@ -1,16 +1,9 @@
 package hive.components.viewer;
 
-import hive.helpers.HexCoordinate;
-import hive.interfaces.Scalable;
-import hive.interfaces.Translatable;
 import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
-
-import java.util.Map;
 
 /**
  * PlayPane component for the Viewer-mode. The playing field of the game.
@@ -40,7 +33,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		//TODO Misschien de listeners eens wissen//
+		/*
 
 		this.getChildren().clear();
 
@@ -73,6 +66,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		}
 
 		this.getChildren().add(g);
+		*/
 	}
 
 	@Override

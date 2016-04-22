@@ -31,6 +31,7 @@ public final class Hive extends Application {
 
 			Arrays.asList(new PlayMode(), new ViewerMode()).stream().filter(m -> m.valid(args.getRaw().size())).findFirst().ifPresent(m -> m.start(stage, args.getRaw()));
 		} catch (Exception e) {
+			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());
 		}
 	}

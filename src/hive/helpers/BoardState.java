@@ -22,16 +22,16 @@ public final class BoardState {
 	private final Map<Unit, HexCoordinate> units = new HashMap<>(22);
 
 	public static class Dimensions {
-		public final int horizontalMaximum;
-		public final int horizontalMinimum;
-		public final int verticalMaximum;
-		public final int verticalMinimum;
+		public final int hMax;
+		public final int hMin;
+		public final int vMax;
+		public final int vMin;
 
 		public Dimensions(int hMax, int hMin, int vMax, int vMin) {
-			this.horizontalMaximum = hMax;
-			this.horizontalMinimum = hMin;
-			this.verticalMaximum = vMax;
-			this.verticalMinimum = vMin;
+			this.hMax = hMax;
+			this.hMin = hMin;
+			this.vMax = vMax;
+			this.vMin = vMin;
 		}
 	}
 
@@ -148,10 +148,6 @@ public final class BoardState {
 		List<TransferPiece> lijst = this.units.entrySet().stream().map(e -> new TransferPiece(e.getKey().type().abbreviation(), e.getKey().player().id(), e.getKey().rank(), e.getValue().row(), e.getValue().column())).collect(Collectors.toList());
 		Collections.sort(lijst);
 		return lijst;
-	}
-
-	public Unit unit(HexCoordinate c) {
-		return this.units.entrySet().stream().filter(e -> e.getValue().equals(c)).map(Map.Entry::getKey).findFirst().orElse(null);
 	}
 
 	/**

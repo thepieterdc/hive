@@ -1,19 +1,13 @@
 package hive.components.play;
 
 import hive.components.hexagons.UnitHexagon;
-import hive.data.Orientation;
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
-import hive.helpers.Move;
 import hive.helpers.Unit;
-import hive.helpers.moves.FirstMove;
-import hive.interfaces.Scalable;
-import hive.interfaces.Translatable;
 import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 
 import java.util.Map;
@@ -46,30 +40,29 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		//TODO Misschien de listeners eens wissen//
-
-		//TODO HEEL DIT HERSCHRIJVEN//
+		//TODO De listeners eens wissen//
 		this.getChildren().clear();
 
 		Group g = new Group();
 
 		BoardState state = this.model.boardState();
+		BoardState.Dimensions dims = state.dimensions();
 
-		int horizMin = Integer.MAX_VALUE;
-		int horizMax = Integer.MIN_VALUE;
-		int vertMin = Integer.MAX_VALUE;
-		int vertMax = Integer.MIN_VALUE;
-
-		for (HexCoordinate h : state.keySet()) {
-			horizMin = Math.min(horizMin, h.row());
-			horizMax = Math.max(horizMax, h.row());
-			vertMin = Math.min(vertMin, h.column());
-			vertMax = Math.max(vertMax, h.column());
-		}
-
-		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(horizMax - horizMin + 1, vertMax - vertMin + 1), 4);
+		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(dims.hMax - dims.hMin + 1, dims.vMax - dims.vMin + 1), 4);
 
 		if (factor > 0) {
+			for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
+				Unit u = e.getKey();
+
+				HexCoordinate c = e.getValue();
+
+				UnitHexagon uH = new UnitHexagon(u);
+				uH.scale(factor);
+				uH.translate(c.x() * factor, c.y() * factor);
+				g.getChildren().add(uH);
+			}
+			/*
+
 			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
 				HexCoordinate c = gridCoordinateNodeEntry.getKey();
 				Node h = gridCoordinateNodeEntry.getValue();
@@ -97,6 +90,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				((Translatable) h).translate(c.x() * factor, c.y() * factor);
 				g.getChildren().add(h);
 			}
+			*/
 		}
 
 		this.getChildren().add(g);

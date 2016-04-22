@@ -29,6 +29,6 @@ public final class StartMove extends Move {
 
 	@Override
 	public Move.MoveType type() {
-		return Move.MoveType.FIRST;
+		return Move.MoveType.START;
 	}
 }
