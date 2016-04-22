@@ -9,9 +9,14 @@ package hive.interfaces;
  */
 public interface Selectable {
 	/**
-	 * Selects or deselects the node.
+	 * Selects or deselects the Node.
 	 *
-	 * @param b true to select the node, false to deselect it
+	 * @param b true to select the Node, false to deselect it
 	 */
 	void select(boolean b);
+
+	/**
+	 * @return true if the Node can be selected.
+	 */
+	boolean selectable();
 }

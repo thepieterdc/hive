@@ -25,6 +25,9 @@ public final class HivePane extends VBox {
 	}
 
 	public HivePane(ViewerModel model) {
+		if (model == null) {
+			throw new IllegalArgumentException("Parameter \"model\" is null.");
+		}
 		MovesPane movesPane = new MovesPane(model);
 		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 

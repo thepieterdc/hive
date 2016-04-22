@@ -1,7 +1,7 @@
 package hive.models;
 
-import hive.components.UnitHexagon;
 import hive.components.UnitPane;
+import hive.components.hexagons.UnitHexagon;
 import hive.helpers.BoardState;
 import hive.helpers.Model;
 import hive.helpers.Move;

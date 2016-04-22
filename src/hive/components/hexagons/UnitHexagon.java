@@ -1,9 +1,6 @@
-package hive.components;
+package hive.components.hexagons;
 
 import hive.helpers.Unit;
-import hive.interfaces.Scalable;
-import hive.interfaces.Translatable;
-import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -18,8 +15,7 @@ import java.util.stream.IntStream;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class UnitHexagon extends Group implements Scalable, Translatable {
-	private final Hexagon hexagon;
+public final class UnitHexagon extends Hexagon {
 	private final Circle[] ranks;
 	private final Unit unit;
 	private final SVGPath unitSvg;
@@ -46,31 +42,14 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		}
 		this.unit = u;
 
-		this.hexagon = new Hexagon();
-		this.hexagon.setFill(this.unit.player().color().invert());
-		this.hexagon.setStroke(this.unit.player().color());
-
 		this.unitSvg = this.unit.type().path();
 		this.unitSvg.setFill(this.unit.player().color());
 
 		this.ranks = new Circle[this.unit.rank()];
 		IntStream.range(0, this.ranks.length).forEach(i -> this.ranks[i] = new Circle(1, this.unit.player().color()));
 
-		this.getChildren().addAll(this.hexagon, this.unitSvg);
+		this.getChildren().addAll(this.unitSvg);
 		this.getChildren().addAll(this.ranks);
-	}
-
-	public void disable() {
-		this.setOpacity(0.2);
-	}
-
-	public void enable() {
-		this.setOpacity(1);
-	}
-
-	@Override
-	public double height() {
-		return this.hexagon.height();
 	}
 
 	@Override
@@ -78,7 +57,7 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		if (factor <= 0) {
 			throw new IllegalArgumentException("Parameter \"factor\" is negative or equal to zero.");
 		}
-		this.hexagon.scale(factor);
+		super.scale(factor);
 		this.unitSvg.setScaleX(factor * 1.5);
 		this.unitSvg.setScaleY(factor * 1.5);
 		this.unitSvg.setTranslateX(this.width() / 2 - factor * 2.4 * this.unitSvg.getLayoutBounds().getWidth());
@@ -90,8 +69,14 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		});
 	}
 
+	@Override
 	public void select(boolean b) {
 		this.setEffect(b ? new DropShadow(20, Color.BLUE) : null);
+	}
+
+	@Override
+	public boolean selectable() {
+		return true;
 	}
 
 	@Override
@@ -99,18 +84,7 @@ public final class UnitHexagon extends Group implements Scalable, Translatable {
 		return "UnitHexagon[unit=" + this.unit.representation() + ", x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
 	}
 
-	@Override
-	public void translate(double x, double y) {
-		this.setTranslateX(x);
-		this.setTranslateY(y);
-	}
-
 	public Unit unit() {
 		return this.unit;
-	}
-
-	@Override
-	public double width() {
-		return this.hexagon.width();
 	}
 }

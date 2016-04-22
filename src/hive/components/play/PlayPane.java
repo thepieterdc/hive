@@ -1,6 +1,5 @@
 package hive.components.play;
 
-import hive.components.UnitHexagon;
 import hive.data.Orientation;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
