@@ -1,7 +1,9 @@
 package hive.helpers;
 
 import hive.TransferPiece;
-import hive.components.UnitHexagon;
+import hive.components.FreeHexagon;
+import hive.components.hexagons.Hexagon;
+import hive.components.hexagons.UnitHexagon;
 import hive.data.Orientation;
 import hive.exceptions.UnmarshalException;
 import hive.helpers.moves.FirstMove;
@@ -20,7 +22,8 @@ import java.util.stream.IntStream;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class BoardState {
-	private final HashMap<HexCoordinate, Node> coordinates;
+	private final HashMap<HexCoordinate, Hexagon> coordinates;
+	private final HashMap<HexCoordinate, FreeHexagon> freeHexagons = new HashMap<>(132);
 	private final HashMap<Unit, HexCoordinate> units = new HashMap<>(22);
 
 	/**
