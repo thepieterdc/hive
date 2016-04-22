@@ -48,6 +48,8 @@ public final class UnitHexagon extends Hexagon {
 		this.ranks = new Circle[this.unit.rank()];
 		IntStream.range(0, this.ranks.length).forEach(i -> this.ranks[i] = new Circle(1, this.unit.player().color()));
 
+		this.colour(this.unit.player().color().invert(), this.unit.player().color());
+
 		this.getChildren().addAll(this.unitSvg);
 		this.getChildren().addAll(this.ranks);
 	}

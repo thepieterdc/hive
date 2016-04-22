@@ -31,6 +31,7 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 		Arrays.asList(top(),topRight(),bottomRight(), bottom(), bottomLeft(), topLeft()).forEach(coordinate -> this.hexagon.getPoints().addAll(coordinate.asList()));
 		this.hexagon.setStrokeType(StrokeType.INSIDE);
 		this.hexagon.setStrokeWidth(1.0);
+		this.getChildren().add(this.hexagon);
 	}
 
 	private static Coordinate bottom() {
@@ -62,6 +63,11 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 
 	public Polygon hexagon() {
 		return this.hexagon;
+	}
+
+	@Override
+	public double scale() {
+		return this.hexagon.getScaleX();
 	}
 
 	@Override

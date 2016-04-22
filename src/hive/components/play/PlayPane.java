@@ -1,5 +1,6 @@
 package hive.components.play;
 
+import hive.components.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
@@ -49,7 +50,6 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		BoardState.Dimensions dims = state.dimensions();
 
 		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(dims.hMax - dims.hMin + 1, dims.vMax - dims.vMin + 1), 4);
-
 		if (factor > 0) {
 			for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
 				Unit u = e.getKey();
@@ -60,6 +60,13 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				uH.scale(factor);
 				uH.translate(c.x() * factor, c.y() * factor);
 				g.getChildren().add(uH);
+			}
+			for (HexCoordinate c : state.freeHexagons()) {
+				FreeHexagon h = new FreeHexagon();
+				h.scale(factor);
+				h.translate(c.x() * factor, c.y() * factor);
+
+				g.getChildren().add(h);
 			}
 			/*
 
