@@ -121,7 +121,16 @@ public final class BoardState {
 	 * @return the surrounding hexagons of the given hexagonal coordinate
 	 */
 	private static Set<HexCoordinate> surroundings(HexCoordinate c) {
-		return EnumSet.allOf(Orientation.class).stream().collect(HashSet::new, (h, o) -> h.add(HexCoordinate.fromOrientation(c, o)), HashSet::addAll);
+		return surroundings(c, Collections.emptySet());
+	}
+
+	private static Set<HexCoordinate> surroundings(HexCoordinate c, Collection<HexCoordinate> skip) {
+		return EnumSet.allOf(Orientation.class).stream().collect(HashSet::new, (h, o) -> {
+			HexCoordinate hC = HexCoordinate.fromOrientation(c, o);
+			if(!skip.contains(hC)) {
+				h.add(hC);
+			}
+		}, HashSet::addAll);
 	}
 
 	/**
@@ -131,10 +140,8 @@ public final class BoardState {
 	 * @return a map of hexagonal coordinates and their surroundings
 	 */
 	private static Set<HexCoordinate> surroundings(Map<Unit, HexCoordinate> m) {
-		HashSet<HexCoordinate> unitCoords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.add(e.getValue()), HashSet::addAll)
-		HashSet<HexCoordinate> coords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(surroundings(e.getValue())), HashSet::addAll).
-		System.out.println(coords.size());
-		return coords;
+		Collection<HexCoordinate> unitCoords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.add(e.getValue()), HashSet::addAll);
+		return m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(surroundings(e.getValue(), unitCoords)), HashSet::addAll);
 	}
 
 	@Override
