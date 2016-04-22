@@ -21,14 +21,28 @@ public final class BoardState {
 	private final Set<HexCoordinate> freeHexagons;
 	private final Map<Unit, HexCoordinate> units = new HashMap<>(22);
 
+	public static class Dimensions {
+		public final int horizontalMaximum;
+		public final int horizontalMinimum;
+		public final int verticalMaximum;
+		public final int verticalMinimum;
+
+		public Dimensions(int hMax, int hMin, int vMax, int vMin) {
+			this.horizontalMaximum = hMax;
+			this.horizontalMinimum = hMin;
+			this.verticalMaximum = vMax;
+			this.verticalMinimum = vMin;
+		}
+	}
+
 	/**
 	 * BoardState constructor.
 	 *
 	 * @param f the first move
 	 */
 	private BoardState(FirstMove f) {
-		this.units.put(f.unit(), new HexCoordinate(0, 0));
 		this.freeHexagons = surroundings(new HexCoordinate(0, 0));
+		this.units.put(f.unit(), new HexCoordinate(0, 0));
 	}
 
 	/**
@@ -46,8 +60,7 @@ public final class BoardState {
 	 * <p><i>To be used for a StartMove.</i></p>
 	 */
 	private BoardState() {
-		this.freeHexagons = new HashSet<>(1);
-		this.freeHexagons.add(new HexCoordinate(0, 0));
+		this.freeHexagons = Collections.singleton(new HexCoordinate(0, 0));
 	}
 
 	/**
@@ -76,6 +89,21 @@ public final class BoardState {
 		}
 		unitsMap.put(move.unit(), HexCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
 		return new BoardState(unitsMap);
+	}
+
+	//Hexagons overlopen is genoeg aangezien units nooit op de rand kunnen staan//
+	public BoardState.Dimensions dimensions() {
+		int hMax = 0;
+		int hMin = 0;
+		int vMax = 0;
+		int vMin = 0;
+		for (HexCoordinate c : this.freeHexagons) {
+			hMax = Math.max(hMax, c.row());
+			hMin = Math.min(hMax, c.row());
+			vMax = Math.max(hMax, c.column());
+			vMin = Math.min(hMax, c.column());
+		}
+		return new BoardState.Dimensions(hMax, hMin, vMax, vMin);
 	}
 
 	public Set<HexCoordinate> freeHexagons() {
