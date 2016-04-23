@@ -49,6 +49,8 @@ public final class PlayModel extends HiveModel {
 		this.moveValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
 		//Validates that a unit cannot be moved as long as the queen is not in game yet//
 		this.moveValidators.add((u, c) -> u.location() == null || u.type() == UnitType.QUEEN || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
+		//Validates that the queen is played in the first 3 moves//
+		this.moveValidators.add((u, c) -> u.type() == UnitType.QUEEN || this.totalMoves < 5 || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
 	}
 
 	@Override
@@ -74,6 +76,7 @@ public final class PlayModel extends HiveModel {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
+		System.out.println(this.totalMoves);
 
 		for (MoveValidator v : this.moveValidators) {
 			if (!v.validate(m.unit(), HexCoordinate.fromOrientation(m.otherUnit().location(), m.orientation()))) {
