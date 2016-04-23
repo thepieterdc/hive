@@ -78,7 +78,7 @@ public final class PlayModel extends HiveModel {
 
 		HexCoordinate dest = HexCoordinate.fromOrientation(m.otherUnit().location(), m.orientation());
 
-		if(!m.unit().canMove(this.boardState(), dest)) {
+		if(m.unit().location() != null && !m.unit().canMove(this.boardState(), dest)) {
 			return false;
 		}
 
