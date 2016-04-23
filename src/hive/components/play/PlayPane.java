@@ -81,7 +81,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
-							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbouringUnit(c);
+							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(c).entrySet().stream().findAny().orElse(null);
 							this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
 						}
 					}

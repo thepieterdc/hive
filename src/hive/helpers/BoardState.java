@@ -110,8 +110,8 @@ public final class BoardState {
 		return Collections.unmodifiableSet(this.freeHexagons);
 	}
 
-	public Map.Entry<Unit, HexCoordinate> neighbouringUnit(HexCoordinate h) {
-		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).findFirst().orElse(null);
+	public Map<Unit, HexCoordinate> neighbours(HexCoordinate h) {
+		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
 
 	/**
@@ -127,7 +127,7 @@ public final class BoardState {
 	private static Set<HexCoordinate> surroundings(HexCoordinate c, Collection<HexCoordinate> skip) {
 		return EnumSet.allOf(Orientation.class).stream().collect(HashSet::new, (h, o) -> {
 			HexCoordinate hC = HexCoordinate.fromOrientation(c, o);
-			if(!skip.contains(hC)) {
+			if (!skip.contains(hC)) {
 				h.add(hC);
 			}
 		}, HashSet::addAll);

@@ -49,11 +49,11 @@ public final class PlayModel extends HiveModel {
 
 	private void addMoveValidators() {
 		//Validates placement//
-		this.moveValidators.add(new MoveValidator() {
-			@Override
-			public boolean validate(BoardState state, Move m) {
-				return
+		this.moveValidators.add((state, m) -> {
+			if(m.unit().origin() == Unit.Origin.UNITPANE) {
+
 			}
+			return true;
 		});
 	}
 
