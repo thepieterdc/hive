@@ -59,6 +59,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				HexCoordinate c = e.getValue();
 
 				UnitHexagon uH = new UnitHexagon(u);
+				uH.enable(this.model.turn().equals(u.player()));
 				uH.scale(factor);
 				uH.translate(c.x() * factor, c.y() * factor);
 
@@ -74,7 +75,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				h.scale(factor);
 				h.translate(c.x() * factor, c.y() * factor);
 
-				h.setOnMouseClicked(event -> {
+				h.setOnMouseClicked(e -> {
 					if(this.model.selectedUnitProperty().get() != null) {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));

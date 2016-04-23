@@ -11,9 +11,12 @@ import hive.data.UnitType;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class Unit {
+	private Unit.Origin origin = Unit.Origin.UNITPANE;
 	private final Player player;
 	private final int rank;
 	private final UnitType type;
+
+	public enum Origin {PLAYPANE, UNITPANE}
 
 	/**
 	 * Unit constructor.
@@ -59,6 +62,14 @@ public final class Unit {
 	@Override
 	public int hashCode() {
 		return player.hashCode() + rank + type.hashCode();
+	}
+
+	public Unit.Origin origin() {
+		return this.origin;
+	}
+
+	public void origin(Unit.Origin o) {
+		this.origin = o;
 	}
 
 	/**

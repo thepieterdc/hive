@@ -10,11 +10,10 @@ import hive.helpers.Player;
 import hive.helpers.Unit;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
+import hive.interfaces.MoveValidator;
 import javafx.beans.property.SimpleObjectProperty;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -26,6 +25,8 @@ import java.util.stream.IntStream;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayModel extends HiveModel {
+
+	private final Set<MoveValidator> moveValidators = new HashSet<>(1);
 
 	private final Player player1;
 	private final Player player2;
@@ -42,6 +43,18 @@ public final class PlayModel extends HiveModel {
 
 		AtomicInteger i = new AtomicInteger();
 		Arrays.asList(this.player1, this.player2).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p, u, c + 1))));
+
+		addMoveValidators();
+	}
+
+	private void addMoveValidators() {
+		//Validates placement//
+		this.moveValidators.add(new MoveValidator() {
+			@Override
+			public boolean validate(BoardState state, Move m) {
+				return
+			}
+		});
 	}
 
 	@Override
@@ -62,7 +75,7 @@ public final class PlayModel extends HiveModel {
 	}
 
 	@Override
-	public void move(Move m) {
+	public boolean move(Move m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
@@ -71,7 +84,11 @@ public final class PlayModel extends HiveModel {
 		this.selectedUnitProperty.setValue(null);
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
+
+
+
 		this.move(this.totalMoves - 1);
+		return true;
 	}
 
 	public Player player1() {

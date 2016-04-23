@@ -51,7 +51,7 @@ public abstract class HiveModel extends Model {
 		}
 	}
 
-	public abstract void move(Move m);
+	public abstract boolean move(Move m);
 
 	public Move move() {
 		return this.move;
