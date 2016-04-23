@@ -17,6 +17,7 @@ public final class HexCoordinate {
 
 	/**
 	 * HexCoordinate constructor.
+	 *
 	 * @param r the row
 	 * @param c the column
 	 */
@@ -33,7 +34,7 @@ public final class HexCoordinate {
 	}
 
 	public static int distance(HexCoordinate base, HexCoordinate target) {
-		return Math.abs(base.column()-target.column()) + Math.abs(base.row()-target.row());
+		return Math.max(Math.abs(base.column() - target.column()), Math.abs(base.row() - target.row()));
 	}
 
 	public int distanceTo(HexCoordinate target) {
@@ -42,18 +43,19 @@ public final class HexCoordinate {
 
 	/**
 	 * Returns a HexCoordinate from a given HexCoordinate and an Orientation.
+	 *
 	 * @param base the given HexCoordinate
-	 * @param o the Orientation
+	 * @param o    the Orientation
 	 * @return the new HexCoordinate after the Orientation deltas have been applied
 	 */
 	public static HexCoordinate fromOrientation(HexCoordinate base, Orientation o) {
-		if(base == null) {
+		if (base == null) {
 			throw new IllegalArgumentException("Parameter \"base\" is null.");
 		}
-		if(o == null) {
+		if (o == null) {
 			throw new IllegalArgumentException("Parameter \"o\" is null.");
 		}
-		return new HexCoordinate(base.row()+o.rowDelta(), base.column()+o.columnDelta());
+		return new HexCoordinate(base.row() + o.rowDelta(), base.column() + o.columnDelta());
 	}
 
 	@Override
@@ -83,14 +85,14 @@ public final class HexCoordinate {
 
 	@Override
 	public String toString() {
-		return "HexCoordinate[column="+this.column+", row="+this.row+ ']';
+		return "HexCoordinate[column=" + this.column + ", row=" + this.row + ']';
 	}
 
 	/**
 	 * @return the x(screen)-coordinate
 	 */
 	public double x() {
-		return 11 * 1.7320508075688772 * (this.column + this.row) - 9.5*this.row;
+		return 11 * 1.7320508075688772 * (this.column + this.row) - 9.5 * this.row;
 	}
 
 	/**

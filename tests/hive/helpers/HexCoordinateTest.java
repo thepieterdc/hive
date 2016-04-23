@@ -1,10 +1,13 @@
 package hive.helpers;
 
+import hive.data.Orientation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+import java.util.EnumSet;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests for hive.helpers.HexCoordinate.
@@ -15,6 +18,12 @@ import static junit.framework.TestCase.assertEquals;
  */
 public class HexCoordinateTest {
 	private HexCoordinate center;
+	private HexCoordinate leftMiddle;
+	private HexCoordinate leftUpper;
+	private HexCoordinate leftUnder;
+	private HexCoordinate rightMiddle;
+	private HexCoordinate rightUpper;
+	private HexCoordinate rightUnder;
 
 	/**
 	 * Set-up the test environment.
@@ -24,6 +33,12 @@ public class HexCoordinateTest {
 	@Before
 	public void setUp() throws Exception {
 		this.center = new HexCoordinate(0, 0);
+		this.leftMiddle = new HexCoordinate(0, -1);
+		this.leftUpper = new HexCoordinate(-1, 0);
+		this.leftUnder = new HexCoordinate(1, -1);
+		this.rightMiddle = new HexCoordinate(0, 1);
+		this.rightUpper = new HexCoordinate(-1, 1);
+		this.rightUnder = new HexCoordinate(1, 0);
 	}
 
 	/**
@@ -34,6 +49,28 @@ public class HexCoordinateTest {
 	@After
 	public void tearDown() throws Exception {
 		this.center = null;
+		this.leftMiddle = null;
+		this.leftUpper = null;
+		this.leftUnder = null;
+		this.rightMiddle = null;
+		this.rightUpper = null;
+		this.rightUnder = null;
+	}
+
+	/**
+	 * Tests HexCoordinate#column().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testColumn() throws Exception {
+		assertEquals(0, this.center.column());
+		assertEquals(-1, this.leftMiddle.column());
+		assertEquals(0, this.leftUpper.column());
+		assertEquals(-1, this.leftUnder.column());
+		assertEquals(1, this.rightMiddle.column());
+		assertEquals(1, this.rightUpper.column());
+		assertEquals(0, this.rightUnder.column());
 	}
 
 	/**
@@ -43,7 +80,22 @@ public class HexCoordinateTest {
 	 */
 	@Test
 	public void distance() throws Exception {
-		assertEquals(HexCoordinate.distance(new HexCoordinate(0, 0), new HexCoordinate(0, 1)), 1);
-		assertEquals(HexCoordinate.distance(new HexCoordinate(0, 0), new HexCoordinate(0, 1)), 1);
+		EnumSet.allOf(Orientation.class).forEach(o -> assertEquals(1,HexCoordinate.distance(this.center, HexCoordinate.fromOrientation(this.center, o)), "Distance should be 1 for base="+this.center+", target="+HexCoordinate.fromOrientation(this.center, o)+ '.'));
+	}
+
+	/**
+	 * Tests HexCoordinate#row().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testRow() throws Exception {
+		assertEquals(0, this.center.row());
+		assertEquals(0, this.leftMiddle.row());
+		assertEquals(-1, this.leftUpper.row());
+		assertEquals(1, this.leftUnder.row());
+		assertEquals(0, this.rightMiddle.row());
+		assertEquals(-1, this.rightUpper.row());
+		assertEquals(1, this.rightUnder.row());
 	}
 }
