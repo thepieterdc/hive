@@ -44,15 +44,14 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		//TODO De listeners eens wissen//
 		this.getChildren().clear();
 
 		Group g = new Group();
 
 		BoardState state = this.model.boardState();
-		BoardState.Dimensions dims = state.dimensions();
+		//BoardState.Dimensions dims = state.dimensions();
 
-		double factor = Math.max(this.getWidth() / this.getHeight() * 5 / Math.max(dims.hMax - dims.hMin + 1, dims.vMax - dims.vMin + 1), 3);
+		double factor = 4;
 		if (factor > 0) {
 			for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
 				Unit u = e.getKey();
@@ -62,55 +61,32 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				UnitHexagon uH = new UnitHexagon(u);
 				uH.scale(factor);
 				uH.translate(c.x() * factor, c.y() * factor);
+
+				if(u.player().equals(this.model.turn())) {
+					uH.setOnMouseClicked(event -> this.model.selectedUnitProperty().set(u));
+					this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(u.equals(nw)));
+				}
+
 				g.getChildren().add(uH);
 			}
 			for (HexCoordinate c : state.freeHexagons()) {
 				FreeHexagon h = new FreeHexagon();
 				h.scale(factor);
-				h.setOnMouseClicked(event -> {
-					if(model.selectedUnitProperty().get() != null) {
-						if (model.totalMoves() == 1) {
-							model.move(new FirstMove(model.selectedUnitProperty().get()));
-						} else {
-							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbouringUnit(c);
-							model.move(new Move(model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
-						}
-					}
-				});
 				h.translate(c.x() * factor, c.y() * factor);
 
-				g.getChildren().add(h);
-			}
-			/*
-
-			for (Map.Entry<HexCoordinate, Node> gridCoordinateNodeEntry : state.entrySet()) {
-				HexCoordinate c = gridCoordinateNodeEntry.getKey();
-				Node h = gridCoordinateNodeEntry.getValue();
-				Unit u = this.model.boardState().unit(c);
-
 				h.setOnMouseClicked(event -> {
-					if (this.model.selectedUnitProperty().get() != null && this.model.boardState().free(c)) {
-						//TODO: Doe hier mss iets aan//
+					if(this.model.selectedUnitProperty().get() != null) {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
-							Map.Entry<Unit, HexCoordinate> otherUnit = this.model.boardState().neighbouringUnit(c);
+							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbouringUnit(c);
 							this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
 						}
-					} else if (u != null && this.model.turn().equals(u.player())) {
-						this.model.selectedUnitProperty().set(u);
 					}
 				});
 
-				if (h instanceof UnitHexagon) {
-					this.model.selectedUnitProperty().addListener((o, od, nw) -> ((UnitHexagon) h).select(((UnitHexagon) h).unit().equals(nw)));
-				}
-
-				((Scalable) h).scale(factor);
-				((Translatable) h).translate(c.x() * factor, c.y() * factor);
 				g.getChildren().add(h);
 			}
-			*/
 		}
 
 		this.getChildren().add(g);
