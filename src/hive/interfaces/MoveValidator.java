@@ -1,16 +1,16 @@
 package hive.interfaces;
 
-import hive.helpers.BoardState;
-import hive.helpers.Move;
+import hive.helpers.HexCoordinate;
+import hive.helpers.Unit;
 
 /**
  * Validates a move.
  * <p>
- * Created at 23/04/16 13:09
+ * Created at 23/04/16 14:44
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 @FunctionalInterface
 public interface MoveValidator {
-	boolean validate(BoardState state, Move m);
+	boolean validate(Unit u, HexCoordinate dest);
 }

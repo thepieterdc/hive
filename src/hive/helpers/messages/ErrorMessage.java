@@ -17,6 +17,10 @@ public final class ErrorMessage extends Message {
 	 * @param message the error message
 	 */
 	public ErrorMessage(String message) {
-		super(message, Alert.AlertType.ERROR, true);
+		this(message, true);
+	}
+
+	public ErrorMessage(String message, boolean b) {
+		super(message, Alert.AlertType.ERROR, b);
 	}
 }

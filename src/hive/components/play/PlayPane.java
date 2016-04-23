@@ -7,6 +7,7 @@ import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
 import hive.helpers.Unit;
+import hive.helpers.messages.ErrorMessage;
 import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
@@ -82,7 +83,9 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
 							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(c).entrySet().stream().findAny().orElse(null);
-							this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())));
+							if(!this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())))) {
+								new ErrorMessage("Illegal move.", false).render();
+							}
 						}
 					}
 				});

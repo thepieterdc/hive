@@ -4,13 +4,11 @@ import hive.components.UnitPane;
 import hive.components.hexagons.UnitHexagon;
 import hive.data.Players;
 import hive.data.UnitType;
-import hive.helpers.BoardState;
-import hive.helpers.Move;
-import hive.helpers.Player;
-import hive.helpers.Unit;
+import hive.helpers.*;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import hive.interfaces.MoveValidator;
+import hive.interfaces.Validatable;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.*;
@@ -49,11 +47,17 @@ public final class PlayModel extends HiveModel {
 
 	private void addMoveValidators() {
 		//Validates placement//
-		this.moveValidators.add((state, m) -> {
-			if(m.unit().origin() == Unit.Origin.UNITPANE) {
-
+		this.moveValidators.add((u, c) -> {
+			if (u.origin() != Unit.Origin.UNITPANE) {
+				System.out.println("Not a new unit");
+				return true;
+			} else if (this.totalMoves < 3) {
+				System.out.println("totalmoves");
+				return true;
+			} else {
+				System.out.println("special rule");
 			}
-			return true;
+			return this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> e.getKey().player().equals(u.player()));
 		});
 	}
 
@@ -79,13 +83,18 @@ public final class PlayModel extends HiveModel {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
+
+		for (MoveValidator v : this.moveValidators) {
+			if (!v.validate(m.unit(), HexCoordinate.fromOrien, m.orientation()))) {
+				return false;
+			}
+		}
+
 		this.moves.add(m);
 		this.totalMoves++;
 		this.selectedUnitProperty.setValue(null);
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
-
-
 
 		this.move(this.totalMoves - 1);
 		return true;
