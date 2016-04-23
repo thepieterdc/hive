@@ -30,6 +30,14 @@ public final class HexCoordinate {
 		return this.column;
 	}
 
+	public static int distance(HexCoordinate base, HexCoordinate target) {
+		return Math.abs(base.column()-target.column()) + Math.abs(base.row()-target.row());
+	}
+
+	public int distanceTo(HexCoordinate target) {
+		return distance(this, target);
+	}
+
 	/**
 	 * Returns a HexCoordinate from a given HexCoordinate and an Orientation.
 	 * @param base the given HexCoordinate
