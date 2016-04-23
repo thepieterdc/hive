@@ -11,8 +11,8 @@ import javafx.scene.paint.Color;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum Players {
-	BLACK('b', Color.BLANCHEDALMOND),
-	WHITE('w', Color.BLANCHEDALMOND.invert());
+	BLACK('b', Color.BLANCHEDALMOND.invert()),
+	WHITE('w', Color.BLANCHEDALMOND);
 
 	private final Player player;
 

@@ -47,9 +47,10 @@ public final class PlayModel extends HiveModel {
 	private void addMoveValidators() {
 		//Validates placement//
 		this.moveValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
-
 		//Validates that a unit cannot be moved as long as the queen is not in game yet//
 		this.moveValidators.add((u, c) -> u.location() == null || u.type() == UnitType.QUEEN || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
+
+		//
 	}
 
 	@Override
@@ -58,6 +59,7 @@ public final class PlayModel extends HiveModel {
 	}
 
 	public void move(FirstMove m) {
+		System.out.println(m);
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
