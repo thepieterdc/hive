@@ -51,6 +51,15 @@ public enum Orientation {
 		return this.direction;
 	}
 
+	public static Orientation fromDeltas(int cD, int rD) {
+		for (Orientation o : Orientation.values()) {
+			if (o.columnDelta() == cD && o.rowDelta() == rD) {
+				return o;
+			}
+		}
+		throw new IllegalArgumentException("Orientation not found: colDelta=" + cD + ", rowDelta=" + rD);
+	}
+
 	public static Orientation fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
 		//THROWS NO EXCEPTION SINCE THEY CAN BE NOT NEIGHBOURING//
 		for (Orientation o : Orientation.values()) {
