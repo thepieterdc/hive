@@ -56,9 +56,9 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		if (factor > 0) {
 			for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
 				Unit u = e.getKey();
-				u.origin(Unit.Origin.PLAYPANE);
 
 				HexCoordinate c = e.getValue();
+				u.location(c);
 
 				UnitHexagon uH = new UnitHexagon(u);
 				uH.enable(this.model.turn().equals(u.player()));
