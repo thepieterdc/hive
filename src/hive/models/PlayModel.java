@@ -46,18 +46,7 @@ public final class PlayModel extends HiveModel {
 
 	private void addMoveValidators() {
 		//Validates placement//
-		this.moveValidators.add((u, c) -> {
-			if (u.location() != null) {
-				System.out.println("Not a new unit");
-				return true;
-			} else if (this.totalMoves < 3) {
-				System.out.println("totalmoves");
-				return true;
-			} else {
-				System.out.println("special rule");
-			}
-			return this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> e.getKey().player().equals(u.player()));
-		});
+		this.moveValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
 	}
 
 	@Override
