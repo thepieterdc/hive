@@ -8,7 +8,6 @@ import hive.helpers.*;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import hive.interfaces.MoveValidator;
-import hive.interfaces.Validatable;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.*;
@@ -48,7 +47,7 @@ public final class PlayModel extends HiveModel {
 	private void addMoveValidators() {
 		//Validates placement//
 		this.moveValidators.add((u, c) -> {
-			if (u.origin() != Unit.Origin.UNITPANE) {
+			if (u.location() != null) {
 				System.out.println("Not a new unit");
 				return true;
 			} else if (this.totalMoves < 3) {
@@ -85,7 +84,7 @@ public final class PlayModel extends HiveModel {
 		}
 
 		for (MoveValidator v : this.moveValidators) {
-			if (!v.validate(m.unit(), HexCoordinate.fromOrien, m.orientation()))) {
+			if (!v.validate(m.unit(), HexCoordinate.fromOrientation(m.otherUnit().location(), m.orientation()))) {
 				return false;
 			}
 		}
