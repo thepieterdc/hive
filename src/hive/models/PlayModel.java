@@ -4,7 +4,10 @@ import hive.components.UnitPane;
 import hive.components.hexagons.UnitHexagon;
 import hive.data.Players;
 import hive.data.UnitType;
-import hive.helpers.*;
+import hive.helpers.BoardState;
+import hive.helpers.Move;
+import hive.helpers.Player;
+import hive.helpers.Unit;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import javafx.beans.property.SimpleObjectProperty;
@@ -12,9 +15,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 /**
@@ -71,14 +72,6 @@ public final class PlayModel extends HiveModel {
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
 		this.move(this.totalMoves - 1);
-
-		//TODO VERBETEREN//
-		this.boardState().units().entrySet().stream().filter(e -> e.getKey().type() == UnitType.QUEEN).forEach(new Consumer<Map.Entry<Unit, HexCoordinate>>() {
-			@Override
-			public void accept(Map.Entry<Unit, HexCoordinate> e) {
-				//als geen buren die vrij zijn -> set winner//
-			}
-		});
 	}
 
 	public Player player1() {

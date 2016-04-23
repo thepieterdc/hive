@@ -47,7 +47,7 @@ public final class PlayMode implements Mode {
 		model.winnerProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
 				s.close();
-				new InfoMessage("Game ended. Congratiulations " + newValue.name() + '!').render();
+				new InfoMessage("Game ended.",newValue.name() + " has won the game in "+model.totalMoves()+" moves.").render();
 			}
 		});
 	}
