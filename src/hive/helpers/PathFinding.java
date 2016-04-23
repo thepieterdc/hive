@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class PathFinding {
 	public static boolean pathExists(HexCoordinate begin, HexCoordinate dest, BoardState state, int length) {
-		System.out.println("Distance: "+begin.distanceTo(dest));
+		System.out.println("Distance: "+length);
 		return pathExistsRecursion(begin, dest, state, length, new HashSet<>(9));
 	}
 
@@ -23,7 +23,6 @@ public class PathFinding {
 			return true;
 		} else {
 			Set<HexCoordinate> neighbours = state.freeNeighbours(begin, visited);
-			System.out.println(neighbours.size());
 			if(length == 1) {
 				return neighbours.contains(dest);
 			}
