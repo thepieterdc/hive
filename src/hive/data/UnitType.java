@@ -7,6 +7,8 @@ import hive.helpers.Unit;
 import hive.interfaces.UnitMoveValidator;
 import javafx.scene.shape.SVGPath;
 
+import java.util.List;
+
 /**
  * UnitType enum; contains all the unit types used in this game.
  * <p>
@@ -17,7 +19,15 @@ import javafx.scene.shape.SVGPath;
 public enum UnitType {
 	ANT(3, Svg.UNIT_ANT, (u, s, d) -> true),
 	BEETLE(2, Svg.UNIT_BEETLE, (u, s, d) -> u.location().distanceTo(d) == 1),
-	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, null),
+	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, new UnitMoveValidator() {
+		@Override
+		public boolean validate(Unit u, BoardState state, HexCoordinate dest) {
+			List<HexCoordinate> path = PathFinding.colinearPath(u.location(), dest);
+			//if path contains units -> false
+			//if not colinear -> false
+			return false;
+		}
+	}),
 	LADYBUG(0, Svg.UNIT_LADYBUG, (u, s, d) -> true), //Not implemented//
 	MOSQUITO(0, Svg.UNIT_MOSQUITO, (u, s, d) -> true), //Not implemented//
 	PILLBUG(0, Svg.UNIT_PILLBUG, (u, s, d) -> true), //Not implemented//

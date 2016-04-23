@@ -1,7 +1,6 @@
 package hive.helpers;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Pathfinding functions.
@@ -11,6 +10,10 @@ import java.util.Set;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class PathFinding {
+	public static List<HexCoordinate> colinearPath(HexCoordinate begin, HexCoordinate dest) {
+		return colinearPathRecursion(begin, dest, begin.distanceTo(dest), new ArrayList<>(begin.distanceTo(dest)));
+	}
+
 	public static boolean pathExists(HexCoordinate begin, HexCoordinate dest, BoardState state, int length) {
 		return pathExistsRecursion(begin, dest, state, length, new HashSet<>(9));
 	}
