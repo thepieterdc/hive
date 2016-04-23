@@ -27,7 +27,7 @@ public final class HexCoordinate {
 	}
 
 	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
-		return base.column() == target.column() || base.row() == target.row();
+		return base.column() == target.column() || base.row() == target.row() || Math.abs(base.column()-target.column()) == Math.abs(base.row()-target.row());
 	}
 
 	public boolean colinearWith(HexCoordinate target) {

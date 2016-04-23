@@ -70,6 +70,9 @@ public class HexCoordinateTest {
 		assertTrue(HexCoordinate.colinear(this.leftUnder, this.rightUnder));
 		assertTrue(HexCoordinate.colinear(this.leftMiddle, this.leftUnder));
 		assertTrue(HexCoordinate.colinear(this.leftUpper, this.center));
+		assertTrue(HexCoordinate.colinear(this.center, this.rightUnder));
+		assertTrue(HexCoordinate.colinear(this.leftUnder, this.center));
+		assertTrue(HexCoordinate.colinear(this.center, this.rightUpper));
 	}
 
 	/**
