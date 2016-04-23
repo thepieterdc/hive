@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
  */
 public final class PlayModel extends HiveModel {
 
-	private final Set<MoveValidator> moveValidators = new HashSet<>(1);
+	private final Set<MoveValidator> moveValidators = new LinkedHashSet<>(2);
 
 	private final Player player1;
 	private final Player player2;
@@ -41,12 +41,15 @@ public final class PlayModel extends HiveModel {
 		AtomicInteger i = new AtomicInteger();
 		Arrays.asList(this.player1, this.player2).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p, u, c + 1))));
 
-		addMoveValidators();
+		this.addMoveValidators();
 	}
 
 	private void addMoveValidators() {
 		//Validates placement//
 		this.moveValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
+
+		//Validates that a unit cannot be moved as long as the queen is not in game yet//
+		this.moveValidators.add((u, c) -> u.location() == null || u.type() == UnitType.QUEEN || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
 	}
 
 	@Override
