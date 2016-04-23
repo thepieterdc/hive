@@ -59,7 +59,6 @@ public final class PlayModel extends HiveModel {
 	}
 
 	public void move(FirstMove m) {
-		System.out.println(m);
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
@@ -76,10 +75,15 @@ public final class PlayModel extends HiveModel {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
-		System.out.println(this.totalMoves);
+
+		HexCoordinate dest = HexCoordinate.fromOrientation(m.otherUnit().location(), m.orientation());
+
+		if(!m.unit().canMove(this.boardState(), dest)) {
+			return false;
+		}
 
 		for (MoveValidator v : this.moveValidators) {
-			if (!v.validate(m.unit(), HexCoordinate.fromOrientation(m.otherUnit().location(), m.orientation()))) {
+			if (!v.validate(m.unit(), dest)) {
 				return false;
 			}
 		}

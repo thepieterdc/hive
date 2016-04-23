@@ -1,5 +1,9 @@
 package hive.data;
 
+import hive.helpers.BoardState;
+import hive.helpers.HexCoordinate;
+import hive.helpers.Unit;
+import hive.interfaces.UnitMoveValidator;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -10,17 +14,18 @@ import javafx.scene.shape.SVGPath;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum UnitType {
-	ANT(3, Svg.UNIT_ANT),
-	BEETLE(2, Svg.UNIT_BEETLE),
-	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER),
-	LADYBUG(0, Svg.UNIT_LADYBUG),
-	MOSQUITO(0, Svg.UNIT_MOSQUITO),
-	PILLBUG(0, Svg.UNIT_PILLBUG),
-	QUEEN(1, Svg.UNIT_QUEEN),
-	SPIDER(2, Svg.UNIT_SPIDER);
+	ANT(3, Svg.UNIT_ANT, null),
+	BEETLE(2, Svg.UNIT_BEETLE, null),
+	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, null),
+	LADYBUG(0, Svg.UNIT_LADYBUG, null),
+	MOSQUITO(0, Svg.UNIT_MOSQUITO, null),
+	PILLBUG(0, Svg.UNIT_PILLBUG, null),
+	QUEEN(1, Svg.UNIT_QUEEN, null),
+	SPIDER(2, Svg.UNIT_SPIDER, null);
 
 	private final int cap;
 	private final Svg path;
+	private final UnitMoveValidator validator;
 
 	/**
 	 * UnitType constructor.
@@ -28,9 +33,10 @@ public enum UnitType {
 	 * @param c the start capacity of this unit
 	 * @param p the vector image of this unit
 	 */
-	UnitType(int c, Svg p) {
+	UnitType(int c, Svg p, UnitMoveValidator v) {
 		this.cap = c;
 		this.path = p;
+		this.validator = v;
 	}
 
 	/**
@@ -38,6 +44,10 @@ public enum UnitType {
 	 */
 	public char abbreviation() {
 		return this.name().charAt(0);
+	}
+
+	public boolean canMove(Unit u, BoardState s, HexCoordinate dest) {
+		return this.validator.validate(u, s, dest);
 	}
 
 	/**
