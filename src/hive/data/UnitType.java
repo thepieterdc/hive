@@ -20,7 +20,7 @@ public enum UnitType {
 	LADYBUG(0, Svg.UNIT_LADYBUG, null),
 	MOSQUITO(0, Svg.UNIT_MOSQUITO, null),
 	PILLBUG(0, Svg.UNIT_PILLBUG, null),
-	QUEEN(1, Svg.UNIT_QUEEN, null),
+	QUEEN(1, Svg.UNIT_QUEEN, (u, s, d) -> u.location().distanceTo(d) == 1),
 	SPIDER(2, Svg.UNIT_SPIDER, null);
 
 	private final int cap;
