@@ -110,6 +110,10 @@ public final class BoardState {
 		return Collections.unmodifiableSet(this.freeHexagons);
 	}
 
+	public Set<HexCoordinate> freeNeighbours(HexCoordinate h) {
+		return this.freeHexagons.stream().filter(c -> this.unit(c) == null).collect(Collectors.toSet());
+	}
+
 	public Map<Unit, HexCoordinate> neighbours(HexCoordinate h) {
 		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
@@ -158,6 +162,10 @@ public final class BoardState {
 		List<TransferPiece> lijst = this.units.entrySet().stream().map(e -> new TransferPiece(e.getKey().type().abbreviation(), e.getKey().player().id(), e.getKey().rank(), e.getValue().row(), e.getValue().column())).collect(Collectors.toList());
 		Collections.sort(lijst);
 		return lijst;
+	}
+
+	public Unit unit(HexCoordinate c) {
+		return this.units.entrySet().stream().filter(e -> e.getValue().equals(c)).map(Map.Entry::getKey).findFirst().orElse(null);
 	}
 
 	/**

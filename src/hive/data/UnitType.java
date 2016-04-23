@@ -2,6 +2,7 @@ package hive.data;
 
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
+import hive.helpers.PathFinding;
 import hive.helpers.Unit;
 import hive.interfaces.UnitMoveValidator;
 import javafx.scene.shape.SVGPath;
@@ -21,7 +22,7 @@ public enum UnitType {
 	MOSQUITO(0, Svg.UNIT_MOSQUITO, (u, s, d) -> true), //Not implemented//
 	PILLBUG(0, Svg.UNIT_PILLBUG, (u, s, d) -> true), //Not implemented//
 	QUEEN(1, Svg.UNIT_QUEEN, (u, s, d) -> u.location().distanceTo(d) == 1),
-	SPIDER(2, Svg.UNIT_SPIDER, null);
+	SPIDER(2, Svg.UNIT_SPIDER, (u, state, dest) -> PathFinding.pathExists(u.location(), dest, state, 3));
 
 	private final int cap;
 	private final Svg path;
