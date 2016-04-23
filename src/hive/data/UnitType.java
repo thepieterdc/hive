@@ -14,12 +14,12 @@ import javafx.scene.shape.SVGPath;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum UnitType {
-	ANT(3, Svg.UNIT_ANT, null),
+	ANT(3, Svg.UNIT_ANT, (u, s, d) -> true),
 	BEETLE(2, Svg.UNIT_BEETLE, null),
 	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, null),
-	LADYBUG(0, Svg.UNIT_LADYBUG, null),
-	MOSQUITO(0, Svg.UNIT_MOSQUITO, null),
-	PILLBUG(0, Svg.UNIT_PILLBUG, null),
+	LADYBUG(0, Svg.UNIT_LADYBUG, (u, s, d) -> true), //Not implemented//
+	MOSQUITO(0, Svg.UNIT_MOSQUITO, (u, s, d) -> true), //Not implemented//
+	PILLBUG(0, Svg.UNIT_PILLBUG, (u, s, d) -> true), //Not implemented//
 	QUEEN(1, Svg.UNIT_QUEEN, (u, s, d) -> u.location().distanceTo(d) == 1),
 	SPIDER(2, Svg.UNIT_SPIDER, null);
 
