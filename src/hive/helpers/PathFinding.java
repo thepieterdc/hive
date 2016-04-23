@@ -12,7 +12,6 @@ import java.util.Set;
  */
 public class PathFinding {
 	public static boolean pathExists(HexCoordinate begin, HexCoordinate dest, BoardState state, int length) {
-		System.out.println("Distance: "+length);
 		return pathExistsRecursion(begin, dest, state, length, new HashSet<>(9));
 	}
 

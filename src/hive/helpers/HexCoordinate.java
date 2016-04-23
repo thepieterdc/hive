@@ -26,6 +26,14 @@ public final class HexCoordinate {
 		this.row = r;
 	}
 
+	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
+		return base.column() == target.column() || base.row() == target.row();
+	}
+
+	public boolean colinearWith(HexCoordinate target) {
+		return colinear(this, target);
+	}
+
 	/**
 	 * @return the column
 	 */

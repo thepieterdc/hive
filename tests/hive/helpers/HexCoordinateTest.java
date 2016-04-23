@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.EnumSet;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Tests for hive.helpers.HexCoordinate.
@@ -58,6 +59,20 @@ public class HexCoordinateTest {
 	}
 
 	/**
+	 * Tests HexCoordinate#colinear().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testColinear() throws Exception {
+		assertTrue(HexCoordinate.colinear(this.leftUpper, this.rightUpper));
+		assertTrue(HexCoordinate.colinear(this.leftMiddle, this.rightMiddle));
+		assertTrue(HexCoordinate.colinear(this.leftUnder, this.rightUnder));
+		assertTrue(HexCoordinate.colinear(this.leftMiddle, this.leftUnder));
+		assertTrue(HexCoordinate.colinear(this.leftUpper, this.center));
+	}
+
+	/**
 	 * Tests HexCoordinate#column().
 	 *
 	 * @throws Exception
@@ -79,7 +94,7 @@ public class HexCoordinateTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void distance() throws Exception {
+	public void testDistance() throws Exception {
 		EnumSet.allOf(Orientation.class).forEach(o -> assertEquals(1,HexCoordinate.distance(this.center, HexCoordinate.fromOrientation(this.center, o)), "Distance should be 1 for base="+this.center+", target="+HexCoordinate.fromOrientation(this.center, o)+ '.'));
 	}
 

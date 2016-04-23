@@ -16,7 +16,7 @@ import javafx.scene.shape.SVGPath;
  */
 public enum UnitType {
 	ANT(3, Svg.UNIT_ANT, (u, s, d) -> true),
-	BEETLE(2, Svg.UNIT_BEETLE, null),
+	BEETLE(2, Svg.UNIT_BEETLE, (u, s, d) -> u.location().distanceTo(d) == 1),
 	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, null),
 	LADYBUG(0, Svg.UNIT_LADYBUG, (u, s, d) -> true), //Not implemented//
 	MOSQUITO(0, Svg.UNIT_MOSQUITO, (u, s, d) -> true), //Not implemented//
