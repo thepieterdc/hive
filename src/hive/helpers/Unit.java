@@ -11,12 +11,10 @@ import hive.data.UnitType;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class Unit {
-	private Unit.Origin origin = Unit.Origin.UNITPANE;
+	private HexCoordinate location;
 	private final Player player;
 	private final int rank;
 	private final UnitType type;
-
-	public enum Origin {PLAYPANE, UNITPANE}
 
 	/**
 	 * Unit constructor.
@@ -64,12 +62,12 @@ public final class Unit {
 		return player.hashCode() + rank + type.hashCode();
 	}
 
-	public Unit.Origin origin() {
-		return this.origin;
+	public HexCoordinate location() {
+		return this.location;
 	}
 
-	public void origin(Unit.Origin o) {
-		this.origin = o;
+	public void location(HexCoordinate c) {
+		this.location = c;
 	}
 
 	/**
