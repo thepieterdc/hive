@@ -12,14 +12,15 @@ import java.util.Set;
  */
 public class PathFinding {
 	public static boolean pathExists(HexCoordinate begin, HexCoordinate dest, BoardState state, int length) {
+		System.out.println("Distance: "+begin.distanceTo(dest));
 		return pathExistsRecursion(begin, dest, state, length, new HashSet<>(9));
 	}
 
 	private static boolean pathExistsRecursion(HexCoordinate begin, HexCoordinate dest, BoardState state, int length, Set<HexCoordinate> visited) {
-		if(begin.equals(dest)) {
-			return true;
-		} else if(length == 0 || begin.distanceTo(dest) > length) {
+		if(begin.distanceTo(dest) > length) {
 			return false;
+		} else if(begin.equals(dest) && length == 0) {
+			return true;
 		} else {
 			Set<HexCoordinate> neighbours = state.freeNeighbours(begin, visited);
 			System.out.println(neighbours.size());
