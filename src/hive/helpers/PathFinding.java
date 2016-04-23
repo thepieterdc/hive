@@ -21,15 +21,13 @@ public class PathFinding {
 		} else if(length == 0 || begin.distanceTo(dest) > length) {
 			return false;
 		} else {
-			Set<HexCoordinate> neighbours = state.freeNeighbours(begin);
+			Set<HexCoordinate> neighbours = state.freeNeighbours(begin, visited);
 			System.out.println(neighbours.size());
 			if(length == 1) {
 				return neighbours.contains(dest);
 			}
-			Set<HexCoordinate> toCheck = state.freeNeighbours(begin);
-			toCheck.removeIf(visited::contains);
 
-			for(HexCoordinate n : toCheck) {
+			for(HexCoordinate n : neighbours) {
 				visited.add(begin);
 				if(pathExistsRecursion(n, dest, state, length-1, visited)) {
 					return true;

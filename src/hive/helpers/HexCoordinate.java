@@ -2,6 +2,8 @@ package hive.helpers;
 
 import hive.data.Orientation;
 
+import java.util.*;
+
 /**
  * A hexagonal (axial) coordinate.
  * <p>
@@ -69,6 +71,14 @@ public final class HexCoordinate {
 	 */
 	public int row() {
 		return this.row;
+	}
+
+	public static Set<HexCoordinate> surroundings(HexCoordinate c) {
+		return surroundings(c, Collections.emptySet());
+	}
+
+	public static Set<HexCoordinate> surroundings(HexCoordinate c, Collection<HexCoordinate> skip) {
+		return EnumSet.allOf(Orientation.class).stream().filter(o -> !skip.contains(fromOrientation(c, o))).collect(HashSet::new, (h, e) -> h.add(fromOrientation(c, e)), HashSet::addAll);
 	}
 
 	@Override

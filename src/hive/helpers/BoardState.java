@@ -41,7 +41,7 @@ public final class BoardState {
 	 * @param f the first move
 	 */
 	private BoardState(FirstMove f) {
-		this.freeHexagons = surroundings(new HexCoordinate(0, 0));
+		this.freeHexagons = HexCoordinate.surroundings(new HexCoordinate(0, 0));
 		this.units.put(f.unit(), new HexCoordinate(0, 0));
 	}
 
@@ -106,35 +106,24 @@ public final class BoardState {
 		return new BoardState.Dimensions(hMax, hMin, vMax, vMin);
 	}
 
+	public boolean free(HexCoordinate c) {
+		return this.freeHexagons.contains(c);
+	}
+
 	public Set<HexCoordinate> freeHexagons() {
 		return Collections.unmodifiableSet(this.freeHexagons);
 	}
 
-	public Set<HexCoordinate> freeNeighbours(HexCoordinate h) {
-		return this.freeHexagons.stream().filter(c -> this.unit(c) == null).collect(Collectors.toSet());
+	public Set<HexCoordinate> freeNeighbours(HexCoordinate c) {
+		return this.freeNeighbours(c, Collections.emptySet());
+	}
+
+	public Set<HexCoordinate> freeNeighbours(HexCoordinate c, Collection<HexCoordinate> skip) {
+		return HexCoordinate.surroundings(c).stream().filter(h -> freeHexagons.contains(h) && !skip.contains(h)).collect(Collectors.toSet());
 	}
 
 	public Map<Unit, HexCoordinate> neighbours(HexCoordinate h) {
 		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-	}
-
-	/**
-	 * Calculates the surrounding hexagons for a given "center" hexagon.
-	 *
-	 * @param c the hexagonal coordinate
-	 * @return the surrounding hexagons of the given hexagonal coordinate
-	 */
-	private static Set<HexCoordinate> surroundings(HexCoordinate c) {
-		return surroundings(c, Collections.emptySet());
-	}
-
-	private static Set<HexCoordinate> surroundings(HexCoordinate c, Collection<HexCoordinate> skip) {
-		return EnumSet.allOf(Orientation.class).stream().collect(HashSet::new, (h, o) -> {
-			HexCoordinate hC = HexCoordinate.fromOrientation(c, o);
-			if (!skip.contains(hC)) {
-				h.add(hC);
-			}
-		}, HashSet::addAll);
 	}
 
 	/**
@@ -145,7 +134,7 @@ public final class BoardState {
 	 */
 	private static Set<HexCoordinate> surroundings(Map<Unit, HexCoordinate> m) {
 		Collection<HexCoordinate> unitCoords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.add(e.getValue()), HashSet::addAll);
-		return m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(surroundings(e.getValue(), unitCoords)), HashSet::addAll);
+		return m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(HexCoordinate.surroundings(e.getValue(), unitCoords)), HashSet::addAll);
 	}
 
 	@Override
