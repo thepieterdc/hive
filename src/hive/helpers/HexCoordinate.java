@@ -27,7 +27,7 @@ public final class HexCoordinate {
 	}
 
 	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
-		return base.column() == target.column() || base.row() == target.row() || Math.abs(base.column()-target.column()) == Math.abs(base.row()-target.row());
+		return base.column() == target.column() || base.row() == target.row() || base.row()+base.column() == target.row()+target.column();
 	}
 
 	public boolean colinearWith(HexCoordinate target) {
@@ -41,6 +41,7 @@ public final class HexCoordinate {
 		return this.column;
 	}
 
+	//Chebyshev distance formula//
 	public static int distance(HexCoordinate base, HexCoordinate target) {
 		return Math.max(Math.abs(base.column() - target.column()), Math.abs(base.row() - target.row()));
 	}

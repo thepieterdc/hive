@@ -7,8 +7,6 @@ import hive.helpers.Unit;
 import hive.interfaces.UnitMoveValidator;
 import javafx.scene.shape.SVGPath;
 
-import java.util.List;
-
 /**
  * UnitType enum; contains all the unit types used in this game.
  * <p>
@@ -22,13 +20,7 @@ public enum UnitType {
 	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, new UnitMoveValidator() {
 		@Override
 		public boolean validate(Unit u, BoardState state, HexCoordinate dest) {
-			if(u.location().colinearWith(dest)) {
-				List<HexCoordinate> path = PathFinding.colinearPath(u.location(), dest);
-				for(HexCoordinate c : path) {
-					System.out.println("Coord: "+c);
-				}
-				//if path contains units -> false
-			}
+			System.out.println(u.location().colinearWith(dest));
 			return false;
 		}
 	}),
