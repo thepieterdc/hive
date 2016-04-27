@@ -15,9 +15,6 @@ import java.util.Set;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PathFinding {
-	private PathFinding() {
-		//
-	}
 
 	public static List<HexCoordinate> colinearPath(HexCoordinate begin, HexCoordinate dest) {
 		int cD = begin.column() - dest.column();

@@ -59,7 +59,7 @@ public class HexCoordinateTest {
 	}
 
 	/**
-	 * Tests HexCoordinate#colinear().
+	 * Tests HexCoordinate.colinear().
 	 *
 	 * @throws Exception
 	 */
@@ -92,7 +92,7 @@ public class HexCoordinateTest {
 	}
 
 	/**
-	 * Tests HexCoordinate#distance().
+	 * Tests HexCoordinate.distance().
 	 *
 	 * @throws Exception
 	 */
