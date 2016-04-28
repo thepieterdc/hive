@@ -1,10 +1,5 @@
 package hive.data;
 
-import hive.helpers.BoardState;
-import hive.helpers.HexCoordinate;
-import hive.helpers.PathFinding;
-import hive.helpers.Unit;
-import hive.interfaces.UnitMoveValidator;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -15,24 +10,17 @@ import javafx.scene.shape.SVGPath;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum UnitType {
-	ANT(3, Svg.UNIT_ANT, (u, s, d) -> true),
-	BEETLE(2, Svg.UNIT_BEETLE, (u, s, d) -> u.location().distanceTo(d) == 1),
-	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, new UnitMoveValidator() {
-		@Override
-		public boolean validate(Unit u, BoardState state, HexCoordinate dest) {
-			System.out.println(u.location().colinearWith(dest));
-			return false;
-		}
-	}),
-	LADYBUG(0, Svg.UNIT_LADYBUG, (u, s, d) -> true), //Not implemented//
-	MOSQUITO(0, Svg.UNIT_MOSQUITO, (u, s, d) -> true), //Not implemented//
-	PILLBUG(0, Svg.UNIT_PILLBUG, (u, s, d) -> true), //Not implemented//
-	QUEEN(1, Svg.UNIT_QUEEN, (u, s, d) -> u.location().distanceTo(d) == 1),
-	SPIDER(2, Svg.UNIT_SPIDER, (u, state, dest) -> PathFinding.pathExists(u.location(), dest, state, 3));
+	ANT(3, Svg.UNIT_ANT),
+	BEETLE(2, Svg.UNIT_BEETLE),
+	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER),
+	LADYBUG(0, Svg.UNIT_LADYBUG), //Not implemented//
+	MOSQUITO(0, Svg.UNIT_MOSQUITO), //Not implemented//
+	PILLBUG(0, Svg.UNIT_PILLBUG), //Not implemented//
+	QUEEN(1, Svg.UNIT_QUEEN),
+	SPIDER(2, Svg.UNIT_SPIDER);
 
 	private final int cap;
 	private final Svg path;
-	private final UnitMoveValidator validator;
 
 	/**
 	 * UnitType constructor.
@@ -40,10 +28,9 @@ public enum UnitType {
 	 * @param c the start capacity of this unit
 	 * @param p the vector image of this unit
 	 */
-	UnitType(int c, Svg p, UnitMoveValidator v) {
+	UnitType(int c, Svg p) {
 		this.cap = c;
 		this.path = p;
-		this.validator = v;
 	}
 
 	/**
@@ -52,11 +39,6 @@ public enum UnitType {
 	public char abbreviation() {
 		return this.name().charAt(0);
 	}
-
-	public boolean canMove(Unit u, BoardState s, HexCoordinate dest) {
-		return this.validator.validate(u, s, dest);
-	}
-
 	/**
 	 * @return the start capacity of this unit
 	 */

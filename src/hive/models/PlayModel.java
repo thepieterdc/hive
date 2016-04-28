@@ -4,13 +4,17 @@ import hive.components.UnitPane;
 import hive.components.hexagons.UnitHexagon;
 import hive.data.Players;
 import hive.data.UnitType;
-import hive.helpers.*;
+import hive.helpers.BoardState;
+import hive.helpers.Move;
+import hive.helpers.Player;
+import hive.helpers.Unit;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
-import hive.interfaces.MoveValidator;
 import javafx.beans.property.SimpleObjectProperty;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -22,8 +26,6 @@ import java.util.stream.IntStream;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayModel extends HiveModel {
-
-	private final Set<MoveValidator> moveValidators = new LinkedHashSet<>(2);
 
 	private final Player player1;
 	private final Player player2;
@@ -40,17 +42,6 @@ public final class PlayModel extends HiveModel {
 
 		AtomicInteger i = new AtomicInteger();
 		Arrays.asList(this.player1, this.player2).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p, u, c + 1))));
-
-		this.addMoveValidators();
-	}
-
-	private void addMoveValidators() {
-		//Validates placement//
-		this.moveValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
-		//Validates that a unit cannot be moved as long as the queen is not in game yet//
-		this.moveValidators.add((u, c) -> u.location() == null || u.type() == UnitType.QUEEN || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
-		//Validates that the queen is played in the first 3 moves//
-		this.moveValidators.add((u, c) -> u.type() == UnitType.QUEEN || this.totalMoves < 5 || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
 	}
 
 	@Override
@@ -74,18 +65,6 @@ public final class PlayModel extends HiveModel {
 	public boolean move(Move m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
-		}
-
-		HexCoordinate dest = HexCoordinate.fromOrientation(m.otherUnit().location(), m.orientation());
-
-		if(m.unit().location() != null && !m.unit().canMove(this.boardState(), dest)) {
-			return false;
-		}
-
-		for (MoveValidator v : this.moveValidators) {
-			if (!v.validate(m.unit(), dest)) {
-				return false;
-			}
 		}
 
 		this.moves.add(m);
