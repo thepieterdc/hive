@@ -1,5 +1,7 @@
 package hive.helpers;
 
+import hive.interfaces.Locatable;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class Coordinate {
+public final class Coordinate implements Locatable {
 	private final double x;
 	private final double y;
 
@@ -34,7 +36,7 @@ public final class Coordinate {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof Coordinate && ((Coordinate) obj).x() == this.x && ((Coordinate) obj).y() == this.y;
+		return obj instanceof Coordinate && ((Locatable) obj).x() == this.x && ((Locatable) obj).y() == this.y;
 	}
 
 	@Override
@@ -47,16 +49,12 @@ public final class Coordinate {
 		return "Coordinate[x=" + this.x + ", y=" + this.y + ']';
 	}
 
-	/**
-	 * @return the x-coordinate
-	 */
+	@Override
 	public double x() {
 		return this.x;
 	}
 
-	/**
-	 * @return the y-coordinate
-	 */
+	@Override
 	public double y() {
 		return this.y;
 	}

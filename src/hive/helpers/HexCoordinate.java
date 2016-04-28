@@ -1,6 +1,7 @@
 package hive.helpers;
 
 import hive.data.Orientation;
+import hive.interfaces.Locatable;
 
 import java.util.*;
 
@@ -11,7 +12,7 @@ import java.util.*;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class HexCoordinate {
+public final class HexCoordinate implements Locatable {
 	private final int column;
 	private final int row;
 
@@ -100,6 +101,7 @@ public final class HexCoordinate {
 	/**
 	 * @return the x(screen)-coordinate
 	 */
+	@Override
 	public double x() {
 		return 11 * 1.7320508075688772 * (this.column + this.row) - 9.5 * this.row;
 	}
@@ -107,6 +109,7 @@ public final class HexCoordinate {
 	/**
 	 * @return the y(screen)-coordinate
 	 */
+	@Override
 	public double y() {
 		return 11 * 1.5 * this.row;
 	}
