@@ -60,7 +60,9 @@ public final class PlayModel extends HiveModel {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 
-		//Todo check placement rules + queen already there rule//
+		//Todo determine destination//
+
+		//Todo check placement rule + queen already there rule + queen placed in first 3 moves rule//
 
 		//Todo make path for unit, if null then false//
 
