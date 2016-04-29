@@ -2,6 +2,7 @@ package hive.helpers;
 
 import hive.data.Players;
 import hive.data.UnitType;
+import hive.helpers.pathfinding.PathFinder;
 
 /**
  * A unit that can be played.
@@ -68,6 +69,10 @@ public final class Unit {
 
 	public void location(HexCoordinate c) {
 		this.location = c;
+	}
+
+	public PathFinder pathFinder() {
+		return this.type.pathFinder();
 	}
 
 	/**

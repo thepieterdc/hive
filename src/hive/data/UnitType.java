@@ -1,5 +1,7 @@
 package hive.data;
 
+import hive.helpers.pathfinding.PathFinder;
+import hive.helpers.pathfinding.pathfinders.QueenPathFinder;
 import javafx.scene.shape.SVGPath;
 
 /**
@@ -10,17 +12,18 @@ import javafx.scene.shape.SVGPath;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum UnitType {
-	ANT(3, Svg.UNIT_ANT),
-	BEETLE(2, Svg.UNIT_BEETLE),
-	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER),
-	LADYBUG(0, Svg.UNIT_LADYBUG), //Not implemented//
-	MOSQUITO(0, Svg.UNIT_MOSQUITO), //Not implemented//
-	PILLBUG(0, Svg.UNIT_PILLBUG), //Not implemented//
-	QUEEN(1, Svg.UNIT_QUEEN),
-	SPIDER(2, Svg.UNIT_SPIDER);
+	ANT(3, Svg.UNIT_ANT, null),
+	BEETLE(2, Svg.UNIT_BEETLE, null),
+	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, null),
+	LADYBUG(0, Svg.UNIT_LADYBUG, null), //Not implemented//
+	MOSQUITO(0, Svg.UNIT_MOSQUITO, null), //Not implemented//
+	PILLBUG(0, Svg.UNIT_PILLBUG, null), //Not implemented//
+	QUEEN(1, Svg.UNIT_QUEEN, new QueenPathFinder()),
+	SPIDER(2, Svg.UNIT_SPIDER, null);
 
 	private final int cap;
 	private final Svg path;
+	private final PathFinder pathFinder;
 
 	/**
 	 * UnitType constructor.
@@ -28,9 +31,10 @@ public enum UnitType {
 	 * @param c the start capacity of this unit
 	 * @param p the vector image of this unit
 	 */
-	UnitType(int c, Svg p) {
+	UnitType(int c, Svg p, PathFinder pf) {
 		this.cap = c;
 		this.path = p;
+		this.pathFinder = pf;
 	}
 
 	/**
@@ -39,6 +43,7 @@ public enum UnitType {
 	public char abbreviation() {
 		return this.name().charAt(0);
 	}
+
 	/**
 	 * @return the start capacity of this unit
 	 */
@@ -69,6 +74,10 @@ public enum UnitType {
 	 */
 	public SVGPath path() {
 		return this.path.path();
+	}
+
+	public PathFinder pathFinder() {
+		return this.pathFinder;
 	}
 
 	/**

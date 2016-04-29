@@ -69,11 +69,11 @@ public final class PlayModel extends HiveModel {
 			}
 		}
 
-		//Todo check placement rule + queen already there rule + queen placed in first 3 moves rule//
+		if(m.unit().location() != null) {
+			//Todo make path for unit, if null then false//
 
-		//Todo make path for unit, if null then false//
-
-		//Todo validate movement rules for every tile in path//
+			//Todo validate movement rules for every tile in path//
+		}
 
 		this.moves.add(m);
 		this.totalMoves++;
