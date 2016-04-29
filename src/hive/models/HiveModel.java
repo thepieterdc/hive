@@ -1,7 +1,5 @@
 package hive.models;
 
-import hive.components.UnitPane;
-import hive.components.hexagons.UnitHexagon;
 import hive.helpers.BoardState;
 import hive.helpers.Model;
 import hive.helpers.Move;
@@ -36,8 +34,6 @@ public abstract class HiveModel extends Model {
 	public BoardState boardState() {
 		return this.boardStates.get(this.moveIndex);
 	}
-
-	public abstract UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH);
 
 	public void move(int index) {
 		if (index < 0 || index >= this.moves.size()) {

@@ -1,7 +1,5 @@
 package hive.models;
 
-import hive.components.UnitPane;
-import hive.components.hexagons.UnitHexagon;
 import hive.data.Players;
 import hive.data.UnitType;
 import hive.helpers.BoardState;
@@ -42,11 +40,6 @@ public final class PlayModel extends HiveModel {
 
 		AtomicInteger i = new AtomicInteger();
 		Arrays.asList(this.player1, this.player2).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p, u, c + 1))));
-	}
-
-	@Override
-	public UnitHexagon callback_UnitPane(UnitPane u, UnitHexagon uH) {
-		return UnitPane.unit(uH, this);
 	}
 
 	public void move(FirstMove m) {

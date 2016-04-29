@@ -3,8 +3,6 @@ package hive.components;
 import hive.components.hexagons.UnitHexagon;
 import hive.helpers.Unit;
 import hive.models.HiveModel;
-import hive.models.PlayModel;
-import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.geometry.Pos;
@@ -19,17 +17,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 /**
- * UnitPane component - a horizontal bar that contains all playable units.
+ * Abstract UnitPane component - a horizontal bar that contains all playable units.
  * <p>
  * Created at 19/03/16 9:28
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class UnitPane extends GridPane implements InvalidationListener {
+public abstract class AbstractUnitPane extends GridPane implements InvalidationListener {
 	private static final ColumnConstraints COLUMN_CONSTRAINTS = new ColumnConstraints(9, 9, Double.MAX_VALUE);
 
 	private final HiveModel model;
-	private final Map<Unit, UnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
+
+	private final Map<Unit, AbstractUnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
 
 	private static class UnitPaneItem {
 		private final int column;
@@ -72,11 +71,11 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 	}
 
 	/**
-	 * UnitPane constructor.
+	 * AbstractUnitPane constructor.
 	 *
 	 * @param m the model
 	 */
-	public UnitPane(HiveModel m) {
+	protected AbstractUnitPane(HiveModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
@@ -84,7 +83,7 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 		this.model.addListener(this);
 
 		AtomicInteger i = new AtomicInteger(0);
-		Arrays.stream(this.model.units()).forEach(u -> this.unitHexagons.put(u, new UnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().id() == 'b' ? 0 : 1, i.getAndIncrement() % 11)));
+		Arrays.stream(m.units()).forEach(u -> this.unitHexagons.put(u, new AbstractUnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().id() == 'b' ? 0 : 1, i.getAndIncrement() % 11)));
 
 		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
 
@@ -97,28 +96,12 @@ public final class UnitPane extends GridPane implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
+		this.onClear();
 		this.getChildren().clear();
-		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.model.callback_UnitPane(this, u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
+		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.patch(u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
 	}
 
-	@Override
-	public String toString() {
-		return "UnitPane[]";
-	}
+	protected abstract void onClear();
 
-	public static UnitHexagon unit(UnitHexagon uH, ViewerModel m) {
-		return uH;
-	}
-
-	public static UnitHexagon unit(UnitHexagon uH, PlayModel m) {
-		if (uH.unit().player().equals(m.turn())) {
-			uH.enable(true);
-			uH.setOnMouseClicked(e -> m.selectedUnitProperty().set(uH.unit()));
-		} else {
-			uH.enable(false);
-			uH.setOnMouseClicked(null);
-		}
-		m.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));
-		return uH;
-	}
+	protected abstract UnitHexagon patch(UnitHexagon uH);
 }
