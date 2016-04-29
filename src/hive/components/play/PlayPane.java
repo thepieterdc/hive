@@ -7,7 +7,6 @@ import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
 import hive.helpers.Unit;
-import hive.helpers.messages.ErrorMessage;
 import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
@@ -65,7 +64,7 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				uH.scale(factor);
 				uH.translate(c.x() * factor, c.y() * factor);
 
-				if(u.player().equals(this.model.turn())) {
+				if (u.player().equals(this.model.turn())) {
 					uH.setOnMouseClicked(event -> this.model.selectedUnitProperty().set(u));
 					this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(u.equals(nw)));
 				}
@@ -78,17 +77,19 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 				h.translate(c.x() * factor, c.y() * factor);
 
 				h.setOnMouseClicked(e -> {
-					if(this.model.selectedUnitProperty().get() != null) {
+					if (this.model.selectedUnitProperty().get() != null) {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
 							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(c).entrySet().stream().findAny().orElse(null);
-							if(!this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())), c)) {
-								new ErrorMessage("Illegal move.", false).render();
+							if (!this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())), c)) {
+								h.enable(false);
 							}
 						}
 					}
 				});
+
+				this.model.selectedUnitProperty().addListener(o -> h.enable(true));
 
 				g.getChildren().add(h);
 			}

@@ -5,11 +5,10 @@ import hive.data.UnitType;
 import hive.helpers.*;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
+import hive.interfaces.PlacementValidator;
 import javafx.beans.property.SimpleObjectProperty;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumSet;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -21,6 +20,7 @@ import java.util.stream.IntStream;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayModel extends HiveModel {
+	private final Collection<PlacementValidator> placementValidators = new LinkedHashSet<>(3);
 
 	private final Player player1;
 	private final Player player2;
@@ -37,6 +37,9 @@ public final class PlayModel extends HiveModel {
 
 		AtomicInteger i = new AtomicInteger();
 		Arrays.asList(this.player1, this.player2).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p, u, c + 1))));
+
+		//Unit may not be neighbouring to an enemy unit.//
+		this.placementValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
 	}
 
 	public void move(FirstMove m) {
@@ -56,7 +59,11 @@ public final class PlayModel extends HiveModel {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 
-		System.out.println(dest);
+		for (PlacementValidator v : this.placementValidators) {
+			if (!v.validate(m.unit(), dest)) {
+				return false;
+			}
+		}
 
 		//Todo check placement rule + queen already there rule + queen placed in first 3 moves rule//
 
