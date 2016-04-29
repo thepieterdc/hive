@@ -1,7 +1,7 @@
 package hive.components.viewer;
 
 import hive.helpers.Move;
-import hive.models.HiveModel;
+import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class MovesPane extends VBox implements InvalidationListener {
-	private final HiveModel model;
+	private final ViewerModel model;
 
 	private final ListView<Move> movesList;
 
@@ -27,7 +27,7 @@ public final class MovesPane extends VBox implements InvalidationListener {
 	 *
 	 * @param m the model
 	 */
-	public MovesPane(HiveModel m) {
+	public MovesPane(ViewerModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
