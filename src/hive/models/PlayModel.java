@@ -60,6 +60,12 @@ public final class PlayModel extends HiveModel {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 
+		//Todo check placement rules + queen already there rule//
+
+		//Todo make path for unit, if null then false//
+
+		//Todo validate movement rules for every tile in path//
+
 		this.moves.add(m);
 		this.totalMoves++;
 		this.selectedUnitProperty.setValue(null);
