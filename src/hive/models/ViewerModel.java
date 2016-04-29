@@ -30,13 +30,11 @@ public final class ViewerModel extends HiveModel {
 		EnumSet.allOf(Players.class).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p.player(), u, c + 1))));
 	}
 
-	@Override
-	public boolean move(Move m) {
+	public void move(Move m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 		this.move(this.moves.indexOf(m));
-		return true;
 	}
 
 	@Override

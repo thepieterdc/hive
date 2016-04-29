@@ -2,10 +2,7 @@ package hive.models;
 
 import hive.data.Players;
 import hive.data.UnitType;
-import hive.helpers.BoardState;
-import hive.helpers.Move;
-import hive.helpers.Player;
-import hive.helpers.Unit;
+import hive.helpers.*;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import javafx.beans.property.SimpleObjectProperty;
@@ -54,13 +51,12 @@ public final class PlayModel extends HiveModel {
 		this.move(this.totalMoves - 1);
 	}
 
-	@Override
-	public boolean move(Move m) {
+	public boolean move(Move m, HexCoordinate dest) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 
-		//Todo determine destination//
+		System.out.println(dest);
 
 		//Todo check placement rule + queen already there rule + queen placed in first 3 moves rule//
 
