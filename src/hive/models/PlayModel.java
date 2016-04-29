@@ -40,6 +40,10 @@ public final class PlayModel extends HiveModel {
 
 		//Unit may not be neighbouring to an enemy unit.//
 		this.placementValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
+		//Validates that a unit cannot be moved as long as the queen is not in game yet.//
+		this.placementValidators.add((u, c) -> u.location() == null || u.type() == UnitType.QUEEN || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
+		//Validates that the queen is played in the first 3 moves.//
+		this.placementValidators.add((u, c) -> u.type() == UnitType.QUEEN || this.totalMoves < 5 || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
 	}
 
 	public void move(FirstMove m) {
