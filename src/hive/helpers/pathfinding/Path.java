@@ -17,7 +17,7 @@ public class Path {
 
 	public Path(HexCoordinate... coords) {
 		this.coordinates = coords.clone();
-		this.tiles = this.coordinates.length-1;
+		this.tiles = this.coordinates.length - 1;
 	}
 
 	public Path(List<HexCoordinate> coords) {
@@ -29,10 +29,24 @@ public class Path {
 	}
 
 	public HexCoordinate last() {
-		return this.coordinates[this.tiles-1];
+		return this.coordinates[this.tiles - 1];
+	}
+
+	public String representation() {
+		StringBuilder sb = new StringBuilder(this.coordinates.length * 50);
+		for (HexCoordinate hc : this.coordinates) {
+			sb.append(hc);
+			sb.append(", ");
+		}
+		return sb.toString();
 	}
 
 	public int tiles() {
 		return this.tiles;
+	}
+
+	@Override
+	public String toString() {
+		return "Path[tiles=" + this.tiles + ", coordinates={" + this.representation() + "}]";
 	}
 }

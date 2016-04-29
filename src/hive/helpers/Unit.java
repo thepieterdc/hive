@@ -38,10 +38,6 @@ public final class Unit {
 		this.type = t;
 	}
 
-	public boolean canMove(BoardState s, HexCoordinate dest) {
-		return this.type.canMove(this, s, dest);
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Unit && ((Unit) obj).player() == this.player && ((Unit) obj).type() == this.type && ((Unit) obj).rank() == this.rank;
