@@ -1,6 +1,7 @@
 package hive.data;
 
 import hive.helpers.pathfinding.PathFinder;
+import hive.helpers.pathfinding.pathfinders.AntPathFinder;
 import hive.helpers.pathfinding.pathfinders.QueenBeetlePathFinder;
 import javafx.scene.shape.SVGPath;
 
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum UnitType {
-	ANT(3, Svg.UNIT_ANT, null),
+	ANT(3, Svg.UNIT_ANT, AntPathFinder::new),
 	BEETLE(2, Svg.UNIT_BEETLE, QueenBeetlePathFinder::new),
 	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, null),
 	LADYBUG(0, Svg.UNIT_LADYBUG, null), //Not implemented//
