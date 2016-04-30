@@ -2,6 +2,7 @@ package hive.helpers;
 
 import hive.TransferPiece;
 import hive.data.Orientation;
+import hive.exceptions.IllegalMoveException;
 import hive.exceptions.UnmarshalException;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
@@ -92,14 +93,15 @@ public final class BoardState {
 	}
 
 	public static BoardState calculate(BoardState previous, Unit u, HexCoordinate dest) {
-		if(!previous.freeHexagons().contains(dest) || !previous.units().containsKey(u)) {
+		if (!previous.freeHexagons().contains(dest) || !previous.units().containsKey(u)) {
 			return null;
 		}
-		Map.Entry<Unit, HexCoordinate> otherUnit = previous.neighbours(dest).entrySet().stream().findAny().orElse(null);
-		if(otherUnit != null) {
-
+		try {
+			Move m = Move.fromCoordinates(previous, u, dest);
+			return calculate(previous, m);
+		} catch (IllegalMoveException ignored) {
+			return null;
 		}
-		return null;
 	}
 
 	//Hexagons overlopen is genoeg aangezien units nooit op de rand kunnen staan//

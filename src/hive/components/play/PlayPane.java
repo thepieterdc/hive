@@ -2,7 +2,7 @@ package hive.components.play;
 
 import hive.components.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
-import hive.data.Orientation;
+import hive.exceptions.IllegalMoveException;
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
@@ -81,8 +81,12 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
-							Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(c).entrySet().stream().findAny().orElse(null);
-							if (!this.model.move(new Move(this.model.selectedUnitProperty().get(), otherUnit.getKey(), Orientation.fromHexCoordinates(c, otherUnit.getValue())), c)) {
+							try {
+								Move m = Move.fromCoordinates(state, this.model.selectedUnitProperty().get(), c);
+								if (!this.model.move(m, c)) {
+									h.enable(false);
+								}
+							} catch (IllegalMoveException ignored) {
 								h.enable(false);
 							}
 						}
