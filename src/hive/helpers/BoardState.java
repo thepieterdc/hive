@@ -119,7 +119,7 @@ public final class BoardState {
 	}
 
 	public Set<HexCoordinate> freeNeighbours(HexCoordinate c, Collection<HexCoordinate> skip) {
-		return HexCoordinate.surroundings(c).stream().filter(h -> freeHexagons.contains(h) && !skip.contains(h)).collect(Collectors.toSet());
+		return HexCoordinate.surroundings(c).stream().filter(h -> this.freeHexagons.contains(h) && !skip.contains(h)).collect(Collectors.toSet());
 	}
 
 	public Map<Unit, HexCoordinate> neighbours(HexCoordinate h) {

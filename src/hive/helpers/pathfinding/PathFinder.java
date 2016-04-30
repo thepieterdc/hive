@@ -1,8 +1,5 @@
 package hive.helpers.pathfinding;
 
-import hive.helpers.BoardState;
-import hive.helpers.HexCoordinate;
-
 /**
  * Finds paths between two hexagons.
  * <p>
@@ -10,7 +7,5 @@ import hive.helpers.HexCoordinate;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-@FunctionalInterface
-public interface PathFinder {
-	Path find(BoardState state, HexCoordinate start, HexCoordinate dest);
+public final class PathFinder {
 }

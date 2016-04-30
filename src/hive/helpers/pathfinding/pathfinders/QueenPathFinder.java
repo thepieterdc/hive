@@ -14,7 +14,7 @@ import hive.helpers.pathfinding.PathFinder;
  */
 public class QueenPathFinder implements PathFinder {
 	@Override
-	public Path find(BoardState state, HexCoordinate start, HexCoordinate dest) {
+	public Path[] find(BoardState state, HexCoordinate start, HexCoordinate dest) {
 		return start.distanceTo(dest) == 1 ? new Path(start, dest) : null;
 	}
 }
