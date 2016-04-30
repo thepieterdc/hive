@@ -27,17 +27,15 @@ public abstract class PathFinder {
 		this.validators.add(new ContinuousContactValidator());
 	}
 
-	protected boolean canPassThrough(BoardState state, HexCoordinate start, HexCoordinate dest) {
-		Set<HexCoordinate> commons = state.freeNeighbours(start).stream().filter(h -> dest.distanceTo(h) == 1).collect(Collectors.toSet());
-		System.out.println(commons);
-		return false;
+	protected static boolean canPassThrough(BoardState state, HexCoordinate start, HexCoordinate dest) {
+		return state.freeNeighbours(start).stream().filter(h -> dest.distanceTo(h) == 1).collect(Collectors.toSet()).size() == 2;
 	}
 
 	public abstract boolean valid(BoardState state, Move m, HexCoordinate dest);
 
 	protected boolean validState(BoardState s) {
 		for (Validatable<BoardState> v : this.validators) {
-			if(!v.valid(s)) {
+			if (!v.valid(s)) {
 				return false;
 			}
 		}
