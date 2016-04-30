@@ -9,6 +9,7 @@ import hive.interfaces.Validatable;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Finds paths between two hexagons.
@@ -26,5 +27,20 @@ public abstract class PathFinder {
 		this.validators.add(new ContinuousContactValidator());
 	}
 
+	protected boolean canPassThrough(BoardState state, HexCoordinate start, HexCoordinate dest) {
+		Set<HexCoordinate> commons = state.freeNeighbours(start).stream().filter(h -> dest.distanceTo(h) == 1).collect(Collectors.toSet());
+		System.out.println(commons.size());
+		return false;
+	}
+
 	public abstract boolean valid(BoardState state, Move m, HexCoordinate dest);
+
+	protected boolean validState(BoardState s) {
+		for (Validatable<BoardState> v : this.validators) {
+			if(!v.valid(s)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

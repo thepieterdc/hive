@@ -28,7 +28,7 @@ public final class HexCoordinate implements Locatable {
 	}
 
 	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
-		return base.column() == target.column() || base.row() == target.row() || base.row()+base.column() == target.row()+target.column();
+		return base.column() == target.column() || base.row() == target.row() || base.row() + base.column() == target.row() + target.column();
 	}
 
 	public boolean colinearWith(HexCoordinate target) {
@@ -44,7 +44,7 @@ public final class HexCoordinate implements Locatable {
 
 	//Chebyshev distance formula//
 	public static int distance(HexCoordinate base, HexCoordinate target) {
-		return Math.max(Math.abs(base.column() - target.column()), Math.abs(base.row() - target.row()));
+		return Math.max(Math.max(Math.abs(base.column() - target.column()), Math.abs(base.column() - target.column())), Math.abs(-base.column()-base.row() - (-target.column()-target.row())));
 	}
 
 	public int distanceTo(HexCoordinate target) {

@@ -4,7 +4,6 @@ import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
 import hive.helpers.pathfinding.PathFinder;
-import hive.interfaces.Validatable;
 
 /**
  * Description here
@@ -20,11 +19,6 @@ public class QueenPathFinder extends PathFinder {
 			return false;
 		}
 		BoardState newState = BoardState.calculate(state, m);
-		for (Validatable<BoardState> v : this.validators) {
-			if (!v.valid(newState)) {
-				return false;
-			}
-		}
-		return true;
+		return this.validState(newState) && this.canPassThrough(state, m.unit().location(), dest);
 	}
 }
