@@ -44,7 +44,9 @@ public final class HexCoordinate implements Locatable {
 
 	//Chebyshev distance formula//
 	public static int distance(HexCoordinate base, HexCoordinate target) {
-		return Math.max(Math.max(Math.abs(base.column() - target.column()), Math.abs(base.column() - target.column())), Math.abs(-base.column()-base.row() - (-target.column()-target.row())));
+		return (Math.abs(base.column() - target.column())
+				+ Math.abs(base.column() + base.row() - target.column() - target.row())
+				+ Math.abs(base.row() - target.row())) / 2;
 	}
 
 	public int distanceTo(HexCoordinate target) {
