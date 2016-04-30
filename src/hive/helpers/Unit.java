@@ -4,6 +4,8 @@ import hive.data.Players;
 import hive.data.UnitType;
 import hive.helpers.pathfinding.PathFinder;
 
+import java.util.function.Supplier;
+
 /**
  * A unit that can be played.
  * <p>
@@ -71,7 +73,7 @@ public final class Unit {
 		this.location = c;
 	}
 
-	public PathFinder pathFinder() {
+	public Supplier<PathFinder> pathFinder() {
 		return this.type.pathFinder();
 	}
 

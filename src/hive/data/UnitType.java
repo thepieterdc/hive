@@ -1,7 +1,10 @@
 package hive.data;
 
 import hive.helpers.pathfinding.PathFinder;
+import hive.helpers.pathfinding.pathfinders.QueenPathFinder;
 import javafx.scene.shape.SVGPath;
+
+import java.util.function.Supplier;
 
 /**
  * UnitType enum; contains all the unit types used in this game.
@@ -17,12 +20,12 @@ public enum UnitType {
 	LADYBUG(0, Svg.UNIT_LADYBUG, null), //Not implemented//
 	MOSQUITO(0, Svg.UNIT_MOSQUITO, null), //Not implemented//
 	PILLBUG(0, Svg.UNIT_PILLBUG, null), //Not implemented//
-	QUEEN(1, Svg.UNIT_QUEEN, null),
+	QUEEN(1, Svg.UNIT_QUEEN, QueenPathFinder::new),
 	SPIDER(2, Svg.UNIT_SPIDER, null);
 
 	private final int cap;
 	private final Svg path;
-	private final PathFinder pathFinder;
+	private final Supplier<PathFinder> pathFinder;
 
 	/**
 	 * UnitType constructor.
@@ -30,7 +33,7 @@ public enum UnitType {
 	 * @param c the start capacity of this unit
 	 * @param p the vector image of this unit
 	 */
-	UnitType(int c, Svg p, PathFinder pf) {
+	UnitType(int c, Svg p, Supplier<PathFinder> pf) {
 		this.cap = c;
 		this.path = p;
 		this.pathFinder = pf;
@@ -75,7 +78,7 @@ public enum UnitType {
 		return this.path.path();
 	}
 
-	public PathFinder pathFinder() {
+	public Supplier<PathFinder> pathFinder() {
 		return this.pathFinder;
 	}
 
