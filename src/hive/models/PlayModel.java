@@ -70,6 +70,7 @@ public final class PlayModel extends HiveModel {
 		}
 
 		if (m.unit().location() != null) {
+			System.out.println(m.unit().location());
 			if (!m.unit().pathFinder().get().valid(this.boardState(), m, dest)) {
 				return false;
 			}

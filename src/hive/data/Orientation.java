@@ -10,19 +10,21 @@ import hive.helpers.HexCoordinate;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public enum Orientation {
-	LEFTMIDDLE("-", Direction.LEFT, 0, -1, fromDeltas(1, -1), fromDeltas(-1, 0)),
-	LEFTUPPER("\\", Direction.LEFT, -1, 0, fromDeltas(0, -1), fromDeltas(-1, 1)),
-	LEFTUNDER("/", Direction.LEFT, 1, -1, fromDeltas(1, 0), fromDeltas(0, -1)),
-	RIGHTMIDDLE("-", Direction.RIGHT, 0, 1, fromDeltas(-1, 1), fromDeltas(1, 0)),
-	RIGHTUPPER("/", Direction.RIGHT, -1, 1, fromDeltas(-1, 0), fromDeltas(0, 1)),
-	RIGHTUNDER("\\", Direction.RIGHT, 1, 0, fromDeltas(0, 1), fromDeltas(1, -1));
+	LEFTMIDDLE("-", Direction.LEFT, 0, -1, 1, -1, -1, 0),
+	LEFTUPPER("\\", Direction.LEFT, -1, 0, 0, -1, -1, 1),
+	LEFTUNDER("/", Direction.LEFT, 1, -1, 1, 0, 0, -1),
+	RIGHTMIDDLE("-", Direction.RIGHT, 0, 1, -1, 1, 1, 0),
+	RIGHTUPPER("/", Direction.RIGHT, -1, 1, -1, 0, 0, 1),
+	RIGHTUNDER("\\", Direction.RIGHT, 1, 0, 0, 1, 1, -1);
 
 	private final String representation;
 	private final Direction direction;
 	private final int rowDelta;
 	private final int colDelta;
-	private final Orientation counterClockWise;
-	private final Orientation clockWise;
+	private final int counterClockWiseRow;
+	private final int counterClockWiseCol;
+	private final int clockWiseRow;
+	private final int clockWiseCol;
 
 	/**
 	 * Orientation constructor.
@@ -32,17 +34,19 @@ public enum Orientation {
 	 * @param rD the rowDelta
 	 * @param cD the columnDelta
 	 */
-	Orientation(String r, Direction d, int rD, int cD, Orientation ccw, Orientation cw) {
+	Orientation(String r, Direction d, int rD, int cD, int ccwR, int ccwC, int cwR, int cwC) {
 		this.representation = r;
 		this.direction = d;
 		this.rowDelta = rD;
 		this.colDelta = cD;
-		this.counterClockWise = ccw;
-		this.clockWise = cw;
+		this.counterClockWiseRow = ccwR;
+		this.counterClockWiseCol = ccwC;
+		this.clockWiseRow = cwR;
+		this.clockWiseCol = cwC;
 	}
 
 	public Orientation clockWise() {
-		return this.clockWise;
+		return fromDeltas(this.clockWiseRow, clockWiseCol);
 	}
 
 	/**
@@ -53,7 +57,7 @@ public enum Orientation {
 	}
 
 	public Orientation counterClockWise() {
-		return this.counterClockWise;
+		return fromDeltas(this.counterClockWiseRow, this.counterClockWiseCol);
 	}
 
 	/**
