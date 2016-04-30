@@ -91,6 +91,17 @@ public final class BoardState {
 		return new BoardState(unitsMap);
 	}
 
+	public static BoardState calculate(BoardState previous, Unit u, HexCoordinate dest) {
+		if(!previous.freeHexagons().contains(dest) || !previous.units().containsKey(u)) {
+			return null;
+		}
+		Map.Entry<Unit, HexCoordinate> otherUnit = previous.neighbours(dest).entrySet().stream().findAny().orElse(null);
+		if(otherUnit != null) {
+
+		}
+		return null;
+	}
+
 	//Hexagons overlopen is genoeg aangezien units nooit op de rand kunnen staan//
 	public BoardState.Dimensions dimensions() {
 		int hMax = 0;

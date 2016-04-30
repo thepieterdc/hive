@@ -1,5 +1,8 @@
 package hive.exceptions;
 
+import hive.helpers.HexCoordinate;
+import hive.helpers.Unit;
+
 /**
  * Exception that is thrown when a move cannot be done because it violates the gameplay rules.
  * <p>
@@ -9,7 +12,7 @@ package hive.exceptions;
  */
 public final class IllegalMoveException extends Exception {
 
-	public IllegalMoveException() {
-		super("Illegal move.");
+	public IllegalMoveException(Unit u, HexCoordinate dest) {
+		super("Cannot move " + u.representation() + " to " + dest + '.');
 	}
 }

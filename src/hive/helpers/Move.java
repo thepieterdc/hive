@@ -2,9 +2,12 @@ package hive.helpers;
 
 import hive.data.Direction;
 import hive.data.Orientation;
+import hive.exceptions.IllegalMoveException;
 import hive.exceptions.MalformedMoveException;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
+
+import java.util.Map;
 
 /**
  * Represents a move.
@@ -31,6 +34,14 @@ public class Move {
 		this.orientation = or;
 		this.otherUnit = ot;
 		this.unit = u;
+	}
+
+	public static Move fromCoordinates(BoardState state, Unit u, HexCoordinate dest) throws IllegalMoveException {
+		Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(dest).entrySet().stream().findAny().orElse(null);
+		if (otherUnit == null) {
+			throw new IllegalMoveException(u, dest);
+		}
+		return new Move(u, otherUnit.getKey(), Orientation.fromHexCoordinates(dest, otherUnit.getValue()));
 	}
 
 	/**
