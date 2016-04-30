@@ -5,6 +5,7 @@ import hive.data.UnitType;
 import hive.helpers.*;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
+import hive.helpers.statevalidators.SingleSwarmValidator;
 import hive.interfaces.PlacementValidator;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -70,6 +71,8 @@ public final class PlayModel extends HiveModel {
 		}
 
 		if(m.unit().location() != null) {
+			SingleSwarmValidator validator = new SingleSwarmValidator();
+			System.out.println(validator.valid(BoardState.calculate(this.boardState(), m)));
 			//Todo make path for unit, if null then false//
 
 			//Todo validate movement rules for every tile in path//

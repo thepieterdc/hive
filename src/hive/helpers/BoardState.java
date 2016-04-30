@@ -170,6 +170,10 @@ public final class BoardState {
 		return this.units.entrySet().stream().filter(e -> e.getValue().equals(c)).map(Map.Entry::getKey).findFirst().orElse(null);
 	}
 
+	public List<HexCoordinate> unitCoordinates() {
+		return new ArrayList<>(this.units.values());
+	}
+
 	/**
 	 * @return the map of units in the BoardState
 	 */
