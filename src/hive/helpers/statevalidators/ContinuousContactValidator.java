@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Validates rule "Continuous Contact".
  * <p>
- * Created at 30/04/16 11:57
+ * Created at 30/04/16 13:20
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
