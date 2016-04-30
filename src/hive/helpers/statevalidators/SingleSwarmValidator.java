@@ -5,6 +5,7 @@ import hive.helpers.HexCoordinate;
 import hive.helpers.Unit;
 import hive.interfaces.Validatable;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -24,12 +25,10 @@ public class SingleSwarmValidator implements Validatable<BoardState> {
 	}
 
 	private static int walk(BoardState state) {
-		Set<HexCoordinate> req = walkRecursion(state, state.unitCoordinates().get(0), new HashSet<>(state.units().size()));
-		System.out.println(req);
-		return req.size();
+		return walkRecursion(state, state.unitCoordinates().get(0), new HashSet<>(state.units().size())).size();
 	}
 
-	private static Set<HexCoordinate> walkRecursion(BoardState state, HexCoordinate coord, Set<HexCoordinate> skip) {
+	private static Collection<HexCoordinate> walkRecursion(BoardState state, HexCoordinate coord, Set<HexCoordinate> skip) {
 		if (!skip.contains(coord)) {
 			skip.add(coord);
 

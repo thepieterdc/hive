@@ -81,8 +81,6 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 						if (this.model.totalMoves() == 1) {
 							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
 						} else {
-							HexCoordinate coo = this.model.selectedUnitProperty().get().location();
-							if(coo != null) System.out.println(coo.distanceTo(c));
 							try {
 								Move m = Move.fromCoordinates(state, this.model.selectedUnitProperty().get(), c);
 								if (!this.model.move(m, c)) {

@@ -29,7 +29,7 @@ public abstract class PathFinder {
 
 	protected boolean canPassThrough(BoardState state, HexCoordinate start, HexCoordinate dest) {
 		Set<HexCoordinate> commons = state.freeNeighbours(start).stream().filter(h -> dest.distanceTo(h) == 1).collect(Collectors.toSet());
-		System.out.println(commons.size());
+		System.out.println(commons);
 		return false;
 	}
 
