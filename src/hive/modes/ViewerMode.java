@@ -31,7 +31,7 @@ public final class ViewerMode implements Mode {
 	@Override
 	public void start(Stage s, List<String> p) {
 		try {
-			List<Move> moves = Files.readAllLines(Paths.get(p.get(0))).stream().map(Move::fromRepresentation).collect(Collectors.toList());
+			List<Move> moves = Files.readAllLines(Paths.get(p.get(0))).stream().filter(b -> !b.toLowerCase().contains("congrat")).map(Move::fromRepresentation).collect(Collectors.toList());
 
 			ViewerModel model = new ViewerModel(moves);
 

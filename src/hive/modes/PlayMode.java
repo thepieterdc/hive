@@ -1,6 +1,8 @@
 package hive.modes;
 
 import hive.components.HivePane;
+import hive.helpers.Move;
+import hive.helpers.Player;
 import hive.helpers.messages.InfoMessage;
 import hive.interfaces.Mode;
 import hive.models.PlayModel;
@@ -8,6 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,10 +52,11 @@ public final class PlayMode implements Mode {
 		s.setScene(new Scene(new HivePane(model)));
 		s.show();
 
-		model.winnerProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null) {
+		model.winnerProperty().addListener((o, od, nw) -> {
+			if (nw != null) {
 				s.close();
-				new InfoMessage("Game ended.",newValue.name() + " has won the game in "+model.totalMoves()+" moves.").render();
+				new InfoMessage("Game ended.", nw.name() + " has won the game in " + (model.totalMoves() - 1) + " moves.").render();
+				writeLog(model.moves(), nw);
 			}
 		});
 	}
@@ -54,5 +64,19 @@ public final class PlayMode implements Mode {
 	@Override
 	public boolean valid(Integer args) {
 		return args == 0;
+	}
+
+	private static void writeLog(Collection<Move> moves, Player winner) {
+		Path p = Paths.get(System.getProperty("user.home"), "hive-" + System.currentTimeMillis() / 1000 + ".txt");
+
+		Collection<String> lines = new ArrayList<>(moves.size() + 2);
+		moves.forEach(m -> lines.add(m.representation()));
+		lines.add("Congratiulations to " + winner.name() + '!');
+		try {
+			Files.write(p, lines, StandardOpenOption.CREATE);
+			new InfoMessage("Match report was written to " + p).render();
+		} catch (IOException ignored) {
+			//
+		}
 	}
 }
