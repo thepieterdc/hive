@@ -49,19 +49,21 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 
 		BoardState state = this.model.boardState();
 
+		double factor = Math.max(this.getLayoutBounds().getWidth()/210, 4);
+
 		for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
 			Unit u = e.getKey();
 
 			HexCoordinate c = e.getValue();
 			u.location(c);
 
-			UnitHexagon uH = new UnitHexagon(u, 4);
-			uH.translate(c.x() * 4, c.y() * 4);
+			UnitHexagon uH = new UnitHexagon(u, factor);
+			uH.translate(c.x() * factor, c.y() * factor);
 			g.getChildren().add(uH);
 		}
 		for (HexCoordinate c : state.freeHexagons()) {
-			FreeHexagon h = new FreeHexagon(4);
-			h.translate(c.x() * 4, c.y() * 4);
+			FreeHexagon h = new FreeHexagon(factor);
+			h.translate(c.x() * factor, c.y() * factor);
 			g.getChildren().add(h);
 		}
 
