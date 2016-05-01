@@ -1,19 +1,8 @@
 package hive.components.play;
 
 import hive.components.AbstractPlayPane;
-import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
-import hive.exceptions.IllegalMoveException;
-import hive.helpers.BoardState;
-import hive.helpers.HexCoordinate;
-import hive.helpers.Move;
-import hive.helpers.Unit;
-import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
-import javafx.beans.Observable;
-import javafx.scene.Group;
-
-import java.util.Map;
 
 /**
  * PlayPane component for the Play-mode. The playing field of the game.
@@ -35,6 +24,17 @@ public final class PlayPane extends AbstractPlayPane {
 		this.model = m;
 	}
 
+	@Override
+	protected UnitHexagon parseUnitHexagon(UnitHexagon uH) {
+		uH.enable(this.model.turn().equals(uH.unit().player()));
+		if (uH.unit().player().equals(this.model.turn())) {
+			uH.setOnMouseClicked(event -> this.model.selectedUnitProperty().set(uH.unit()));
+			this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));
+		}
+		return uH;
+	}
+
+	/*
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
@@ -90,6 +90,7 @@ public final class PlayPane extends AbstractPlayPane {
 
 		this.getChildren().addAll(g);
 	}
+	*/
 
 	@Override
 	public String toString() {
