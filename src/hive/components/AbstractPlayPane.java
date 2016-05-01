@@ -2,6 +2,7 @@ package hive.components;
 
 import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
+import hive.helpers.HexCoordinate;
 import hive.models.HiveModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -52,13 +53,13 @@ public abstract class AbstractPlayPane extends StackPane implements Invalidation
 		this.model.boardState().freeHexagons().forEach(c -> {
 			FreeHexagon h = new FreeHexagon(factor);
 			h.translate(c.x() * factor, c.y() * factor);
-			g.getChildren().add(this.parseFreeHexagon(h));
+			g.getChildren().add(this.parseFreeHexagon(h, c));
 		});
 
 		this.getChildren().addAll(g);
 	}
 
-	protected abstract FreeHexagon parseFreeHexagon(FreeHexagon fH);
+	protected abstract FreeHexagon parseFreeHexagon(FreeHexagon fH, HexCoordinate c);
 
 	protected abstract UnitHexagon parseUnitHexagon(UnitHexagon uH);
 }

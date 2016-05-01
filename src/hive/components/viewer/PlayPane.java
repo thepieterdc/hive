@@ -1,7 +1,9 @@
 package hive.components.viewer;
 
 import hive.components.AbstractPlayPane;
+import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
+import hive.helpers.HexCoordinate;
 import hive.models.ViewerModel;
 
 /**
@@ -22,6 +24,11 @@ public final class PlayPane extends AbstractPlayPane {
 	public PlayPane(ViewerModel m) {
 		super(m);
 		this.model = m;
+	}
+
+	@Override
+	protected FreeHexagon parseFreeHexagon(FreeHexagon fH, HexCoordinate c) {
+		return fH;
 	}
 
 	@Override
