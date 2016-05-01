@@ -15,6 +15,11 @@ import hive.helpers.pathfinding.PathFinder;
  */
 public class GrasshopperPathFinder extends PathFinder {
 	@Override
+	public String toString() {
+		return "GrasshopperPathFinder[]";
+	}
+
+	@Override
 	public boolean valid(BoardState state, Move m, HexCoordinate dest) {
 		final int dist = m.unit().location().distanceTo(dest);
 		double cD = (dest.column() - m.unit().location().column()) / (double) dist;

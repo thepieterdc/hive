@@ -15,6 +15,10 @@ import java.util.Map;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public class ContinuousContactValidator implements Validatable<BoardState> {
+	@Override
+	public String toString() {
+		return "ContinuousContactValidator[]";
+	}
 
 	@Override
 	public boolean valid(BoardState state) {

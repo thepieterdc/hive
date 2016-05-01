@@ -80,6 +80,8 @@ public final class HexCoordinate implements Locatable {
 		return this.row * 100 + this.column;
 	}
 
+
+
 	/**
 	 * @return the row
 	 */

@@ -88,6 +88,11 @@ public abstract class PathFinder {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "PathFinder[]";
+	}
+
 	public abstract boolean valid(BoardState state, Move m, HexCoordinate dest);
 
 	protected boolean validState(BoardState s) {

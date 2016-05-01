@@ -14,6 +14,11 @@ import hive.helpers.pathfinding.PathFinder;
  */
 public class QueenBeetlePathFinder extends PathFinder {
 	@Override
+	public String toString() {
+		return "QueenBeetlePathFinder[]";
+	}
+
+	@Override
 	public boolean valid(BoardState state, Move m, HexCoordinate dest) {
 		if (m.unit().location().distanceTo(dest) != 1) {
 			return false;

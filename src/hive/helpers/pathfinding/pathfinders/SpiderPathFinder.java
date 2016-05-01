@@ -14,6 +14,11 @@ import hive.helpers.pathfinding.PathFinder;
  */
 public class SpiderPathFinder extends PathFinder {
 	@Override
+	public String toString() {
+		return "SpiderPathFinder[]";
+	}
+
+	@Override
 	public boolean valid(BoardState state, Move m, HexCoordinate dest) {
 		return m.unit().location().distanceTo(dest) <= 3 && this.pathFindExact(state, m.unit(), dest, 3);
 	}

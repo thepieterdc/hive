@@ -44,6 +44,10 @@ public final class Coordinate implements Locatable {
 		return (int) (this.x * 100 + this.y);
 	}
 
+	public String representation() {
+		return "[" + this.x + ", y=" + this.y + ']';
+	}
+
 	@Override
 	public String toString() {
 		return "Coordinate[x=" + this.x + ", y=" + this.y + ']';

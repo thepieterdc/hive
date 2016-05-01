@@ -14,6 +14,11 @@ import hive.helpers.pathfinding.PathFinder;
  */
 public class AntPathFinder extends PathFinder {
 	@Override
+	public String toString() {
+		return "AntPathFinder[]";
+	}
+
+	@Override
 	public boolean valid(BoardState state, Move m, HexCoordinate dest) {
 		return this.pathFind(state, m.unit(), dest);
 	}
