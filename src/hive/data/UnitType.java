@@ -92,6 +92,10 @@ public enum UnitType {
 		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
 	}
 
+	public String representation() {
+		return this.prettyName();
+	}
+
 	@Override
 	public String toString() {
 		return "UnitType[abbreviation=" + this.abbreviation() + ", capacity=" + this.cap + ", prettyName=" + this.prettyName() + ']';

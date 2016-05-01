@@ -21,8 +21,8 @@ public enum Players {
 	}
 
 	public static Player fromId(char i) {
-		for(Players p : Players.values()) {
-			if(p.player().id() == i) {
+		for (Players p : Players.values()) {
+			if (p.player().id() == i) {
 				return p.player();
 			}
 		}
@@ -31,5 +31,14 @@ public enum Players {
 
 	public Player player() {
 		return this.player;
+	}
+
+	public String representation() {
+		return String.valueOf(this.player.id());
+	}
+
+	@Override
+	public String toString() {
+		return "Players[id=" + this.representation() + ", color=" + this.player.color() + ']';
 	}
 }

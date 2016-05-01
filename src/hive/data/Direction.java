@@ -11,8 +11,12 @@ public enum Direction {
 	LEFT,
 	RIGHT;
 
+	public String representation() {
+		return this.name().substring(0, 1) + this.name().toLowerCase().substring(1);
+	}
+
 	@Override
 	public String toString() {
-		return this.name().substring(0, 1) + this.name().toLowerCase().substring(1);
+		return "Direction[" + this.representation() + ']';
 	}
 }
