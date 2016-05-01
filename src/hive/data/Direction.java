@@ -1,5 +1,7 @@
 package hive.data;
 
+import hive.interfaces.Representable;
+
 /**
  * Direction enum.
  * <p>
@@ -7,10 +9,11 @@ package hive.data;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public enum Direction {
+public enum Direction implements Representable {
 	LEFT,
 	RIGHT;
 
+	@Override
 	public String representation() {
 		return this.name().substring(0, 1) + this.name().toLowerCase().substring(1);
 	}

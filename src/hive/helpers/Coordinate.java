@@ -1,6 +1,7 @@
 package hive.helpers;
 
 import hive.interfaces.Locatable;
+import hive.interfaces.Representable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class Coordinate implements Locatable {
+public final class Coordinate implements Locatable, Representable {
 	private final double x;
 	private final double y;
 
@@ -44,6 +45,7 @@ public final class Coordinate implements Locatable {
 		return (int) (this.x * 100 + this.y);
 	}
 
+	@Override
 	public String representation() {
 		return "[" + this.x + ", y=" + this.y + ']';
 	}

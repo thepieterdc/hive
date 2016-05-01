@@ -2,6 +2,7 @@ package hive.helpers;
 
 import hive.data.Orientation;
 import hive.interfaces.Locatable;
+import hive.interfaces.Representable;
 
 import java.util.*;
 
@@ -12,7 +13,7 @@ import java.util.*;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class HexCoordinate implements Locatable {
+public final class HexCoordinate implements Locatable, Representable {
 	private final int column;
 	private final int row;
 
@@ -80,7 +81,10 @@ public final class HexCoordinate implements Locatable {
 		return this.row * 100 + this.column;
 	}
 
-
+	@Override
+	public String representation() {
+		return "[" + this.row + ", y=" + this.column + ']';
+	}
 
 	/**
 	 * @return the row

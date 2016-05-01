@@ -3,6 +3,7 @@ package hive.helpers;
 import hive.data.Players;
 import hive.data.UnitType;
 import hive.helpers.pathfinding.PathFinder;
+import hive.interfaces.Representable;
 
 import java.util.function.Supplier;
 
@@ -13,7 +14,7 @@ import java.util.function.Supplier;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class Unit {
+public final class Unit implements Representable {
 	private HexCoordinate location;
 	private final Player player;
 	private final int rank;
@@ -91,16 +92,14 @@ public final class Unit {
 		return this.rank;
 	}
 
-	/**
-	 * @return the string representation
-	 */
+	@Override
 	public String representation() {
 		return String.valueOf(this.player.id()) + this.type.abbreviation() + (this.type == UnitType.QUEEN ? "" : Integer.valueOf(this.rank));
 	}
 
 	@Override
 	public String toString() {
-		return "Unit[player=" + this.player + ", type=" + this.type.prettyName() + ", rank=" + this.rank + ", representation=" + this.representation() + ']';
+		return "Unit[player=" + this.player + ", type=" + this.type.representation() + ", rank=" + this.rank + ", representation=" + this.representation() + ']';
 	}
 
 	/**

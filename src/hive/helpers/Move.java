@@ -6,6 +6,7 @@ import hive.exceptions.IllegalMoveException;
 import hive.exceptions.MalformedMoveException;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
+import hive.interfaces.Representable;
 
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Move {
+public class Move implements Representable {
 	private final Orientation orientation;
 	private final Unit otherUnit;
 	private final Unit unit;
@@ -90,9 +91,7 @@ public class Move {
 		return this.otherUnit;
 	}
 
-	/**
-	 * @return the string representation of the move
-	 */
+	@Override
 	public String representation() {
 		return this.unit.representation() + ' ' + (this.orientation.direction() == Direction.LEFT ? this.orientation.representation() + this.otherUnit.representation() : this.otherUnit.representation() + this.orientation.representation());
 	}

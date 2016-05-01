@@ -1,6 +1,7 @@
 package hive.data;
 
 import hive.helpers.Player;
+import hive.interfaces.Representable;
 import javafx.scene.paint.Color;
 
 /**
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public enum Players {
+public enum Players implements Representable {
 	BLACK('b', Color.BLANCHEDALMOND.invert()),
 	WHITE('w', Color.BLANCHEDALMOND);
 
@@ -33,6 +34,7 @@ public enum Players {
 		return this.player;
 	}
 
+	@Override
 	public String representation() {
 		return String.valueOf(this.player.id());
 	}

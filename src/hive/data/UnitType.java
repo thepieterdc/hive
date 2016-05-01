@@ -5,6 +5,7 @@ import hive.helpers.pathfinding.pathfinders.AntPathFinder;
 import hive.helpers.pathfinding.pathfinders.GrasshopperPathFinder;
 import hive.helpers.pathfinding.pathfinders.QueenBeetlePathFinder;
 import hive.helpers.pathfinding.pathfinders.SpiderPathFinder;
+import hive.interfaces.Representable;
 import javafx.scene.shape.SVGPath;
 
 import java.util.function.Supplier;
@@ -16,7 +17,7 @@ import java.util.function.Supplier;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public enum UnitType {
+public enum UnitType implements Representable {
 	ANT(3, Svg.UNIT_ANT, AntPathFinder::new),
 	BEETLE(2, Svg.UNIT_BEETLE, QueenBeetlePathFinder::new),
 	GRASSHOPPER(3, Svg.UNIT_GRASSHOPPER, GrasshopperPathFinder::new),
@@ -85,19 +86,13 @@ public enum UnitType {
 		return this.pathFinder;
 	}
 
-	/**
-	 * @return a pretty formatted name of the unit; for nice printing
-	 */
-	public String prettyName() {
-		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
-	}
-
+	@Override
 	public String representation() {
-		return this.prettyName();
+		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
 	}
 
 	@Override
 	public String toString() {
-		return "UnitType[abbreviation=" + this.abbreviation() + ", capacity=" + this.cap + ", prettyName=" + this.prettyName() + ']';
+		return "UnitType[abbreviation=" + this.abbreviation() + ", capacity=" + this.cap + ", repr=" + this.representation() + ']';
 	}
 }

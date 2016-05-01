@@ -1,6 +1,7 @@
 package hive.helpers;
 
 import hive.data.Players;
+import hive.interfaces.Representable;
 import javafx.scene.paint.Color;
 
 /**
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class Player {
+public class Player implements Representable {
 	private final Color color;
 	private final char id;
 	private final String name;
@@ -48,6 +49,11 @@ public class Player {
 	}
 
 	public String name() {
+		return this.name;
+	}
+
+	@Override
+	public String representation() {
 		return this.name;
 	}
 
