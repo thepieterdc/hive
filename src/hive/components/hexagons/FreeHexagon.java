@@ -1,6 +1,5 @@
-package hive.components;
+package hive.components.hexagons;
 
-import hive.components.hexagons.Hexagon;
 import javafx.scene.paint.Color;
 
 /**
@@ -11,6 +10,11 @@ import javafx.scene.paint.Color;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class FreeHexagon extends Hexagon {
+	public FreeHexagon(double beginScale) {
+		this();
+		this.scale(beginScale);
+	}
+
 	public FreeHexagon() {
 		this.colour(Color.LIGHTGRAY, Color.DARKGRAY);
 	}

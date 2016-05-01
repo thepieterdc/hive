@@ -28,11 +28,16 @@ public final class BoardState {
 		public final int vMax;
 		public final int vMin;
 
-		public Dimensions(int hMax, int hMin, int vMax, int vMin) {
-			this.hMax = hMax;
-			this.hMin = hMin;
-			this.vMax = vMax;
-			this.vMin = vMin;
+		public Dimensions(int hMx, int hMn, int vMx, int vMn) {
+			this.hMax = hMx;
+			this.hMin = hMn;
+			this.vMax = vMx;
+			this.vMin = vMn;
+		}
+
+		@Override
+		public String toString() {
+			return "Dimensions[vMin=" + this.vMin + ", vMax=" + this.vMax + ", hMin=" + this.hMin + ", hMax=" + this.hMax + ']';
 		}
 	}
 
@@ -112,11 +117,11 @@ public final class BoardState {
 		int vMin = 0;
 		for (HexCoordinate c : this.freeHexagons) {
 			hMax = Math.max(hMax, c.row());
-			hMin = Math.min(hMax, c.row());
-			vMax = Math.max(hMax, c.column());
-			vMin = Math.min(hMax, c.column());
+			hMin = Math.min(hMin, c.row());
+			vMax = Math.max(vMax, c.column());
+			vMin = Math.min(vMin, c.column());
 		}
-		return new BoardState.Dimensions(hMax, hMin, vMax, vMin);
+		return new BoardState.Dimensions(hMax + 1, hMin, vMax + 1, vMin);
 	}
 
 	public boolean free(HexCoordinate c) {

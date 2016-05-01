@@ -23,17 +23,6 @@ public final class UnitHexagon extends Hexagon {
 	/**
 	 * UnitHexagon constructor.
 	 *
-	 * @param u          the unit
-	 * @param beginScale the initial scale
-	 */
-	public UnitHexagon(Unit u, double beginScale) {
-		this(u);
-		this.scale(beginScale);
-	}
-
-	/**
-	 * UnitHexagon constructor.
-	 *
 	 * @param u the unit
 	 */
 	public UnitHexagon(Unit u) {
@@ -52,6 +41,17 @@ public final class UnitHexagon extends Hexagon {
 
 		this.getChildren().addAll(this.unitSvg);
 		this.getChildren().addAll(this.ranks);
+	}
+	
+	/**
+	 * UnitHexagon constructor.
+	 *
+	 * @param u          the unit
+	 * @param beginScale the initial scale
+	 */
+	public UnitHexagon(Unit u, double beginScale) {
+		this(u);
+		this.scale(beginScale);
 	}
 
 	@Override

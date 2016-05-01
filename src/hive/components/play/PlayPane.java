@@ -1,6 +1,6 @@
 package hive.components.play;
 
-import hive.components.FreeHexagon;
+import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
 import hive.exceptions.IllegalMoveException;
 import hive.helpers.BoardState;
@@ -12,7 +12,7 @@ import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.ScrollPane;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class PlayPane extends StackPane implements InvalidationListener {
+public final class PlayPane extends ScrollPane implements InvalidationListener {
 	private final PlayModel model;
 
 	/**
@@ -38,6 +38,9 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
+		this.setFitToHeight(true);
+		this.setFitToWidth(true);
+
 		this.heightProperty().addListener(this);
 		this.widthProperty().addListener(this);
 	}
@@ -49,54 +52,48 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		Group g = new Group();
 
 		BoardState state = this.model.boardState();
-		//BoardState.Dimensions dims = state.dimensions();
 
-		double factor = 4;
-		if (factor > 0) {
-			for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
-				Unit u = e.getKey();
+		for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
+			Unit u = e.getKey();
 
-				HexCoordinate c = e.getValue();
-				u.location(c);
+			HexCoordinate c = e.getValue();
+			u.location(c);
 
-				UnitHexagon uH = new UnitHexagon(u);
-				uH.enable(this.model.turn().equals(u.player()));
-				uH.scale(factor);
-				uH.translate(c.x() * factor, c.y() * factor);
+			UnitHexagon uH = new UnitHexagon(u, 4);
+			uH.enable(this.model.turn().equals(u.player()));
+			uH.translate(c.x() * 4, c.y() * 4);
 
-				if (u.player().equals(this.model.turn())) {
-					uH.setOnMouseClicked(event -> this.model.selectedUnitProperty().set(u));
-					this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(u.equals(nw)));
-				}
-
-				g.getChildren().add(uH);
+			if (u.player().equals(this.model.turn())) {
+				uH.setOnMouseClicked(event -> this.model.selectedUnitProperty().set(u));
+				this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(u.equals(nw)));
 			}
-			for (HexCoordinate c : state.freeHexagons()) {
-				FreeHexagon h = new FreeHexagon();
-				h.scale(factor);
-				h.translate(c.x() * factor, c.y() * factor);
 
-				h.setOnMouseClicked(e -> {
-					if (this.model.selectedUnitProperty().get() != null) {
-						if (this.model.totalMoves() == 1) {
-							this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
-						} else {
-							try {
-								Move m = Move.fromCoordinates(state, this.model.selectedUnitProperty().get(), c);
-								if (!this.model.move(m, c)) {
-									h.enable(false);
-								}
-							} catch (IllegalMoveException ignored) {
+			g.getChildren().add(uH);
+		}
+		for (HexCoordinate c : state.freeHexagons()) {
+			FreeHexagon h = new FreeHexagon(4);
+			h.translate(c.x() * 4, c.y() * 4);
+
+			h.setOnMouseClicked(e -> {
+				if (this.model.selectedUnitProperty().get() != null) {
+					if (this.model.totalMoves() == 1) {
+						this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
+					} else {
+						try {
+							Move m = Move.fromCoordinates(state, this.model.selectedUnitProperty().get(), c);
+							if (!this.model.move(m, c)) {
 								h.enable(false);
 							}
+						} catch (IllegalMoveException ignored) {
+							h.enable(false);
 						}
 					}
-				});
+				}
+			});
 
-				this.model.selectedUnitProperty().addListener(o -> h.enable(true));
+			this.model.selectedUnitProperty().addListener(o -> h.enable(true));
 
-				g.getChildren().add(h);
-			}
+			g.getChildren().add(h);
 		}
 
 		this.getChildren().add(g);
