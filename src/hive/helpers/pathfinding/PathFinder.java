@@ -8,8 +8,9 @@ import hive.helpers.statevalidators.ContinuousContactValidator;
 import hive.helpers.statevalidators.SingleSwarmValidator;
 import hive.interfaces.Validatable;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Finds paths between two hexagons.
@@ -27,8 +28,9 @@ public abstract class PathFinder {
 		this.validators.add(new ContinuousContactValidator());
 	}
 
+	//Also checks if there is 1 common neighbour//
 	protected static boolean canPassThrough(BoardState state, HexCoordinate start, HexCoordinate dest) {
-		return state.freeNeighbours(start).stream().filter(h -> dest.distanceTo(h) == 1).collect(Collectors.toSet()).size() >= 1;
+		return HexCoordinate.surroundings(start).stream().filter(h -> dest.distanceTo(h) == 1).mapToInt(h -> state.free(h) ? 0 : 1).sum() % 2 != 0;
 	}
 
 	protected boolean pathFind(BoardState state, Unit u, HexCoordinate dest) {

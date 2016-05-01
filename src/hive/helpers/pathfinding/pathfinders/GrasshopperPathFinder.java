@@ -4,7 +4,6 @@ import hive.data.Orientation;
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
-import hive.helpers.Unit;
 import hive.helpers.pathfinding.PathFinder;
 
 /**
@@ -29,15 +28,12 @@ public class GrasshopperPathFinder extends PathFinder {
 
 		HexCoordinate c = m.unit().location();
 		BoardState newState = state;
-		Unit u = m.unit();
 		for(int i = 0; i < dist; i++) {
 			c = HexCoordinate.fromOrientation(c, o);
-			System.out.println(c);
-			u.location(c);
 			if(state.free(c) && !c.equals(dest)) {
 				return false;
 			}
-			newState = BoardState.calculate(state, u, c);
+			newState = BoardState.calculate(newState, m.unit(), c);
 			if(!this.validState(newState)) {
 				return false;
 			}
