@@ -48,7 +48,7 @@ public abstract class PathFinder {
 		}
 		HexCoordinate start = u.location();
 		for(HexCoordinate h : state.freeNeighbours(u.location())) {
-			if(!path.contains(h)) {
+			if(!path.contains(h) && canPassThrough(state, start, h)) {
 				path.add(h);
 				u.location(h);
 				BoardState newState = BoardState.calculate(state, u, h);
@@ -70,7 +70,7 @@ public abstract class PathFinder {
 		}
 		HexCoordinate start = u.location();
 		for(HexCoordinate h : state.freeNeighbours(u.location())) {
-			if(!path.contains(h)) {
+			if(!path.contains(h) && canPassThrough(state, start, h)) {
 				path.add(h);
 				u.location(h);
 				BoardState newState = BoardState.calculate(state, u, h);
