@@ -3,6 +3,7 @@ package hive.data;
 import hive.helpers.pathfinding.PathFinder;
 import hive.helpers.pathfinding.pathfinders.AntPathFinder;
 import hive.helpers.pathfinding.pathfinders.QueenBeetlePathFinder;
+import hive.helpers.pathfinding.pathfinders.SpiderPathFinder;
 import javafx.scene.shape.SVGPath;
 
 import java.util.function.Supplier;
@@ -22,7 +23,7 @@ public enum UnitType {
 	MOSQUITO(0, Svg.UNIT_MOSQUITO, null), //Not implemented//
 	PILLBUG(0, Svg.UNIT_PILLBUG, null), //Not implemented//
 	QUEEN(1, Svg.UNIT_QUEEN, QueenBeetlePathFinder::new),
-	SPIDER(2, Svg.UNIT_SPIDER, null);
+	SPIDER(2, Svg.UNIT_SPIDER, SpiderPathFinder::new);
 
 	private final int cap;
 	private final Svg path;

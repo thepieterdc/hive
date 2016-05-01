@@ -32,7 +32,36 @@ public abstract class PathFinder {
 	}
 
 	protected boolean pathFind(BoardState state, Unit u, HexCoordinate dest) {
-		return this.pathFindRecursion(state, u, dest, new ArrayList<>(state.freeHexagons().size()));
+		return this.pathFindRecursion(state, u, dest, new HashSet<>(state.freeHexagons().size()));
+	}
+
+	protected boolean pathFindExact(BoardState state, Unit u, HexCoordinate dest, int length) {
+		return this.pathFindExactRecursion(state, u, dest, new HashSet<>(state.freeHexagons().size()), length);
+	}
+
+	private boolean pathFindExactRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path, int length) {
+		if(u.location().equals(dest) && length == 0) {
+			return true;
+		}
+		if(length == 0) {
+			return false;
+		}
+		HexCoordinate start = u.location();
+		for(HexCoordinate h : state.freeNeighbours(u.location())) {
+			if(!path.contains(h)) {
+				path.add(h);
+				u.location(h);
+				BoardState newState = BoardState.calculate(state, u, h);
+				if(this.validState(newState)) {
+					if (this.pathFindExactRecursion(newState, u, dest, path, length-1)) {
+						return true;
+					}
+				}
+				u.location(start);
+				path.remove(h);
+			}
+		}
+		return false;
 	}
 
 	private boolean pathFindRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path) {
