@@ -1,5 +1,6 @@
 package hive.components.play;
 
+import hive.components.AbstractPlayPane;
 import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
 import hive.exceptions.IllegalMoveException;
@@ -9,10 +10,8 @@ import hive.helpers.Move;
 import hive.helpers.Unit;
 import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
-import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
-import javafx.scene.layout.StackPane;
 
 import java.util.Map;
 
@@ -23,7 +22,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class PlayPane extends StackPane implements InvalidationListener {
+public final class PlayPane extends AbstractPlayPane {
 	private final PlayModel model;
 
 	/**
@@ -32,16 +31,8 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 	 * @param m the model
 	 */
 	public PlayPane(PlayModel m) {
-		if (m == null) {
-			throw new IllegalArgumentException("Parameter \"m\" is null.");
-		}
+		super(m);
 		this.model = m;
-		this.model.addListener(this);
-
-		this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-		this.heightProperty().addListener(this);
-		this.widthProperty().addListener(this);
 	}
 
 	@Override

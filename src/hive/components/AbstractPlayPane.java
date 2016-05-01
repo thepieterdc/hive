@@ -1,35 +1,44 @@
-package hive.components.viewer;
+package hive.components;
 
-import hive.components.AbstractPlayPane;
 import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
 import hive.helpers.BoardState;
 import hive.helpers.HexCoordinate;
 import hive.helpers.Unit;
-import hive.models.ViewerModel;
+import hive.models.HiveModel;
+import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
+import javafx.scene.layout.StackPane;
 
 import java.util.Map;
 
 /**
- * PlayPane component for the Viewer-mode. The playing field of the game.
+ * Abstract PlayPane component - The playing field of the game.
  * <p>
- * Created at 19/03/16 22:17
+ * Created at 1/05/16 21:50
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class PlayPane extends AbstractPlayPane {
-	private final ViewerModel model;
+public abstract class AbstractPlayPane extends StackPane implements InvalidationListener {
+	private final HiveModel model;
 
 	/**
-	 * PlayPane constructor.
+	 * AbstractPlayPane constructor.
 	 *
 	 * @param m the model
 	 */
-	public PlayPane(ViewerModel m) {
-		super(m);
+	protected AbstractPlayPane(HiveModel m) {
+		if (m == null) {
+			throw new IllegalArgumentException("Parameter \"m\" is null.");
+		}
 		this.model = m;
+		this.model.addListener(this);
+
+		this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+		this.heightProperty().addListener(this);
+		this.widthProperty().addListener(this);
 	}
 
 	@Override
@@ -40,7 +49,7 @@ public final class PlayPane extends AbstractPlayPane {
 
 		BoardState state = this.model.boardState();
 
-		double factor = Math.max(this.getLayoutBounds().getWidth()/210, 4);
+		double factor = Math.max(this.getLayoutBounds().getWidth() / 210, 4);
 
 		for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
 			Unit u = e.getKey();
