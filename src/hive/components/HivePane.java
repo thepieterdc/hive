@@ -21,6 +21,9 @@ public final class HivePane extends VBox {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
 		ScrollPane mainPane = new ScrollPane(new hive.components.play.PlayPane(model));
+		mainPane.setFitToHeight(true);
+		mainPane.setFitToWidth(true);
+		mainPane.setStyle("-fx-padding: 0; -fx-background-insets: 0;");
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		hive.components.play.UnitPane bottomPane = new hive.components.play.UnitPane(model);
