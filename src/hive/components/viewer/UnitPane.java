@@ -30,4 +30,9 @@ public final class UnitPane extends AbstractUnitPane {
 	protected UnitHexagon patch(UnitHexagon uH) {
 		return uH;
 	}
+
+	@Override
+	public String toString() {
+		return "UnitPane[units=" + this.getChildren().size() + ']';
+	}
 }

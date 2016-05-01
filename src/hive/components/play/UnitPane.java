@@ -41,4 +41,9 @@ public final class UnitPane extends AbstractUnitPane {
 		this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));
 		return uH;
 	}
+
+	@Override
+	public String toString() {
+		return "UnitPane[units=" + this.getChildren().size() + ']';
+	}
 }

@@ -65,6 +65,6 @@ public final class MovesPane extends VBox implements InvalidationListener {
 
 	@Override
 	public String toString() {
-		return "MovesPane[]";
+		return "MovesPane[moves=" + this.movesList.getItems().size() + ']';
 	}
 }
