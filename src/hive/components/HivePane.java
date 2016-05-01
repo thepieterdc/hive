@@ -39,9 +39,16 @@ public final class HivePane extends VBox {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
 		MovesPane movesPane = new MovesPane(model);
+		movesPane.setMaxWidth(1);
 		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 
-		SplitPane mainPane = new SplitPane(movesPane, new hive.components.viewer.PlayPane(model));
+		ScrollPane playPane = new ScrollPane(new hive.components.viewer.PlayPane(model));
+		playPane.setFitToHeight(true);
+		playPane.setFitToWidth(true);
+		playPane.setStyle("-fx-padding: 0; -fx-background-insets: 0;");
+		VBox.setVgrow(playPane, Priority.ALWAYS);
+
+		SplitPane mainPane = new SplitPane(movesPane, playPane);
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		hive.components.viewer.UnitPane bottomPane = new hive.components.viewer.UnitPane(model);

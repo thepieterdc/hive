@@ -1,9 +1,17 @@
 package hive.components.viewer;
 
+import hive.components.hexagons.FreeHexagon;
+import hive.components.hexagons.UnitHexagon;
+import hive.helpers.BoardState;
+import hive.helpers.HexCoordinate;
+import hive.helpers.Unit;
 import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.Group;
 import javafx.scene.layout.StackPane;
+
+import java.util.Map;
 
 /**
  * PlayPane component for the Viewer-mode. The playing field of the game.
@@ -27,46 +35,37 @@ public final class PlayPane extends StackPane implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
+		this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
 		this.heightProperty().addListener(this);
 		this.widthProperty().addListener(this);
 	}
 
 	@Override
 	public void invalidated(Observable observable) {
-		/*
-
 		this.getChildren().clear();
 
 		Group g = new Group();
 
-		Map<HexCoordinate, Node> state = this.model.boardState().coordinates();
+		BoardState state = this.model.boardState();
 
-		int horizMin = Integer.MAX_VALUE;
-		int horizMax = Integer.MIN_VALUE;
-		int vertMin = Integer.MAX_VALUE;
-		int vertMax = Integer.MIN_VALUE;
+		for (Map.Entry<Unit, HexCoordinate> e : state.units().entrySet()) {
+			Unit u = e.getKey();
 
-		for (HexCoordinate h : state.keySet()) {
-			horizMin = Math.min(horizMin, h.row());
-			horizMax = Math.max(horizMax, h.row());
-			vertMin = Math.min(vertMin, h.column());
-			vertMax = Math.max(vertMax, h.column());
+			HexCoordinate c = e.getValue();
+			u.location(c);
+
+			UnitHexagon uH = new UnitHexagon(u, 4);
+			uH.translate(c.x() * 4, c.y() * 4);
+			g.getChildren().add(uH);
+		}
+		for (HexCoordinate c : state.freeHexagons()) {
+			FreeHexagon h = new FreeHexagon(4);
+			h.translate(c.x() * 4, c.y() * 4);
+			g.getChildren().add(h);
 		}
 
-		double factor = Math.max(this.getWidth() / this.getHeight() * 12 / Math.max(horizMax - horizMin + 1, vertMax - vertMin + 1), 4);
-
-		if (factor > 0) {
-			state.entrySet().forEach(e -> {
-				HexCoordinate c = e.getKey();
-				Node h = e.getValue();
-				((Scalable) h).scale(factor);
-				((Translatable) h).translate(c.x() * factor, c.y() * factor);
-				g.getChildren().add(h);
-			});
-		}
-
-		this.getChildren().add(g);
-		*/
+		this.getChildren().addAll(g);
 	}
 
 	@Override
