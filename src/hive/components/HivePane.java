@@ -1,9 +1,9 @@
 package hive.components;
 
-import hive.components.play.PlayPane;
 import hive.components.viewer.MovesPane;
 import hive.models.PlayModel;
 import hive.models.ViewerModel;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -20,7 +20,7 @@ public final class HivePane extends VBox {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
-		PlayPane mainPane = new hive.components.play.PlayPane(model);
+		ScrollPane mainPane = new ScrollPane(new hive.components.play.PlayPane(model));
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		hive.components.play.UnitPane bottomPane = new hive.components.play.UnitPane(model);

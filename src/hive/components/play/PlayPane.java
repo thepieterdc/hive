@@ -12,7 +12,7 @@ import hive.models.PlayModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Group;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.StackPane;
 
 import java.util.Map;
 
@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class PlayPane extends ScrollPane implements InvalidationListener {
+public final class PlayPane extends StackPane implements InvalidationListener {
 	private final PlayModel model;
 
 	/**
@@ -38,8 +38,7 @@ public final class PlayPane extends ScrollPane implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
-		this.setFitToHeight(true);
-		this.setFitToWidth(true);
+		this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
 		this.heightProperty().addListener(this);
 		this.widthProperty().addListener(this);
@@ -96,7 +95,9 @@ public final class PlayPane extends ScrollPane implements InvalidationListener {
 			g.getChildren().add(h);
 		}
 
-		this.getChildren().add(g);
+		this.getChildren().addAll(g);
+
+		System.out.println(this);
 	}
 
 	@Override
