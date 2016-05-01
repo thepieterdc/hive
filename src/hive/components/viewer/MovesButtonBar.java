@@ -1,13 +1,11 @@
 package hive.components.viewer;
 
 import hive.data.Svg;
-import hive.models.HiveModel;
+import hive.models.ViewerModel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
@@ -25,7 +23,7 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 	private final MovesButton btnForward = new MovesButton(Svg.MOVEBUTTON_FORWARD);
 	private final MovesButton btnPlay = new MovesButton(Svg.MOVEBUTTON_PLAY);
 
-	private final HiveModel model;
+	private final ViewerModel model;
 
 	private boolean playing;
 
@@ -36,31 +34,34 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 	 *
 	 * @param m the model
 	 */
-	public MovesButtonBar(HiveModel m) {
+	public MovesButtonBar(ViewerModel m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"m\" is null.");
 		}
 		this.model = m;
 		this.model.addListener(this);
 
-		this.btnBackward.setOnAction(e -> this.model.move(this.model.moveIndex() - 1));
-		this.btnBegin.setOnAction(e -> this.model.move(0));
-		this.btnEnd.setOnAction(e -> this.model.move(this.model.totalMoves() - 1));
-		this.btnForward.setOnAction(e -> this.model.move(this.model.moveIndex() + 1));
-		this.btnPlay.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				btnPlay.setGraphic(Svg.MOVEBUTTON_STOP.path());
-				playing = true;
-				timeline.setCycleCount(model.totalMoves() - model.moveIndex() - 1);
-				timeline.play();
-			}
-		});
-
 		this.timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> this.model.move(this.model.moveIndex() + 1)));
 		this.timeline.setOnFinished(e -> {
 			this.btnPlay.setGraphic(Svg.MOVEBUTTON_PLAY.path());
 			this.playing = false;
+			this.invalidated(null);
+		});
+
+		this.btnBackward.setOnAction(e -> this.model.move(this.model.moveIndex() - 1));
+		this.btnBegin.setOnAction(e -> this.model.move(0));
+		this.btnEnd.setOnAction(e -> this.model.move(this.model.totalMoves() - 1));
+		this.btnForward.setOnAction(e -> this.model.move(this.model.moveIndex() + 1));
+		this.btnPlay.setOnAction(e -> {
+			this.playing = !this.playing;
+			this.btnPlay.setGraphic(this.playing ? Svg.MOVEBUTTON_STOP.path() : Svg.MOVEBUTTON_PLAY.path());
+			if(this.playing) {
+				this.timeline.setCycleCount(this.model.totalMoves() - this.model.moveIndex() - 1);
+				this.timeline.play();
+			} else {
+				this.timeline.stop();
+			}
+			this.invalidated(null);
 		});
 
 		this.getChildren().addAll(this.btnBegin, this.btnBackward, this.btnPlay, this.btnForward, this.btnEnd);
@@ -68,10 +69,10 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 
 	@Override
 	public void invalidated(Observable observable) {
-		this.btnBackward.setDisable(!this.playing && this.model.moveIndex() - 1 < 0);
-		this.btnBegin.setDisable(!this.playing && this.model.moveIndex() - 1 < 0);
-		this.btnEnd.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
-		this.btnForward.setDisable(!this.playing && this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
+		this.btnBackward.setDisable(this.playing || this.model.moveIndex() - 1 < 0);
+		this.btnBegin.setDisable(this.playing || this.model.moveIndex() - 1 < 0);
+		this.btnEnd.setDisable(this.playing || this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
+		this.btnForward.setDisable(this.playing || this.model.moveIndex() + 1 > this.model.totalMoves() - 1);
 	}
 
 	@Override

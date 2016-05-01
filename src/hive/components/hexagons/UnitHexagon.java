@@ -1,6 +1,7 @@
 package hive.components.hexagons;
 
 import hive.helpers.Unit;
+import javafx.scene.Cursor;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -38,6 +39,7 @@ public final class UnitHexagon extends Hexagon {
 		IntStream.range(0, this.ranks.length).forEach(i -> this.ranks[i] = new Circle(1, this.unit.player().color()));
 
 		this.colour(this.unit.player().color().invert(), this.unit.player().color());
+		this.setCursor(Cursor.HAND);
 
 		this.getChildren().addAll(this.unitSvg);
 		this.getChildren().addAll(this.ranks);

@@ -1,6 +1,7 @@
 package hive.components.viewer;
 
 import hive.data.Svg;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 
 /**
@@ -21,6 +22,7 @@ public final class MovesButton extends Button {
 			throw new IllegalArgumentException("Parameter \"lbl\" is null.");
 		}
 		this.setGraphic(lbl.path());
+		this.setCursor(Cursor.HAND);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import hive.models.ViewerModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.scene.Cursor;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Priority;
@@ -35,8 +36,10 @@ public final class MovesPane extends VBox implements InvalidationListener {
 		this.model.addListener(this);
 
 		this.movesList = new ListView<>();
-		this.movesList.setItems(FXCollections.observableList(this.model.moves()));
-		this.movesList.setCellFactory(param -> new ListCell<Move>() {
+		this.movesList.getSelectionModel().selectedItemProperty().addListener((o, od, nw) -> {
+			this.model.move(nw);
+		});
+		this.movesList.setCellFactory(p -> new ListCell<Move>() {
 			@Override
 			protected void updateItem(Move t, boolean b) {
 				super.updateItem(t, b);
@@ -45,9 +48,9 @@ public final class MovesPane extends VBox implements InvalidationListener {
 				}
 			}
 		});
-		this.movesList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			model.move(newValue);
-		});
+
+		this.movesList.setCursor(Cursor.HAND);
+		this.movesList.setItems(FXCollections.observableList(this.model.moves()));
 		VBox.setVgrow(this.movesList, Priority.ALWAYS);
 
 		MovesButtonBar movesButtonBar = new MovesButtonBar(this.model);

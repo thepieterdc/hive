@@ -5,6 +5,7 @@ import hive.interfaces.Enableable;
 import hive.interfaces.Scalable;
 import hive.interfaces.Selectable;
 import hive.interfaces.Translatable;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -53,6 +54,7 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 
 	@Override
 	public void enable(boolean b) {
+		this.setCursor(b ? Cursor.HAND : Cursor.DEFAULT);
 		this.setOpacity(b ? 1 : 0.2);
 	}
 
