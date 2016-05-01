@@ -82,6 +82,12 @@ public final class PlayModel extends HiveModel {
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
 
 		this.move(this.totalMoves - 1);
+
+		this.boardState().units().forEach((u, h) -> {
+			if (u.type() == UnitType.QUEEN && this.boardState().freeNeighbours(h).isEmpty()) {
+				winnerProperty.set(u.player().equals(this.player1) ? this.player2 : this.player1);
+			}
+		});
 		return true;
 	}
 
