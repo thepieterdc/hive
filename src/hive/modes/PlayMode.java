@@ -28,13 +28,13 @@ import java.util.List;
  */
 public final class PlayMode implements Mode {
 	//TODO: Wegdoen//
-	private String player1 = "Jeej";
-	private String player2 = "Pieter";
+	private String player1;
+	private String player2;
 
 	@Override
 	public void start(Stage s, List<String> p) {
 		while (this.player1 == null || this.player1.length() < 1) {
-			TextInputDialog player1Dialog = new TextInputDialog(System.getProperty("user.name"));
+			TextInputDialog player1Dialog = new TextInputDialog(System.getProperty("user.name") + " the Loser");
 			player1Dialog.setContentText("Naam:");
 			player1Dialog.setHeaderText("Speler 1");
 			player1Dialog.showAndWait().ifPresent(n -> this.player1 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player2) ? n : null);

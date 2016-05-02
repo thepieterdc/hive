@@ -1,5 +1,6 @@
 package hive.data;
 
+import hive.helpers.StringUtils;
 import hive.helpers.pathfinding.PathFinder;
 import hive.helpers.pathfinding.pathfinders.AntPathFinder;
 import hive.helpers.pathfinding.pathfinders.GrasshopperPathFinder;
@@ -88,7 +89,7 @@ public enum UnitType implements Representable {
 
 	@Override
 	public String representation() {
-		return this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
+		return StringUtils.ucfirst(this.name());
 	}
 
 	@Override

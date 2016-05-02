@@ -16,6 +16,8 @@ public class Player implements Representable {
 	private final char id;
 	private final String name;
 
+	private final static String[] firstnames = new String[]{""};
+
 	public Player(char i, Color col) {
 		this(i, col, String.valueOf(i));
 	}

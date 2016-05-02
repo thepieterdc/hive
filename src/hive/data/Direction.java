@@ -1,5 +1,6 @@
 package hive.data;
 
+import hive.helpers.StringUtils;
 import hive.interfaces.Representable;
 
 /**
@@ -15,7 +16,7 @@ public enum Direction implements Representable {
 
 	@Override
 	public String representation() {
-		return this.name().substring(0, 1) + this.name().toLowerCase().substring(1);
+		return StringUtils.ucfirst(this.name());
 	}
 
 	@Override
