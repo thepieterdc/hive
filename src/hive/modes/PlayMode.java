@@ -3,6 +3,7 @@ package hive.modes;
 import hive.components.HivePane;
 import hive.helpers.Move;
 import hive.helpers.Player;
+import hive.helpers.StringUtils;
 import hive.helpers.messages.InfoMessage;
 import hive.interfaces.Mode;
 import hive.models.PlayModel;
@@ -34,14 +35,14 @@ public final class PlayMode implements Mode {
 	@Override
 	public void start(Stage s, List<String> p) {
 		while (this.player1 == null || this.player1.length() < 1) {
-			TextInputDialog player1Dialog = new TextInputDialog(System.getProperty("user.name") + " the Loser");
+			TextInputDialog player1Dialog = new TextInputDialog(StringUtils.ucfirst(System.getProperty("user.name")) + ' ' + Player.randomAdjective());
 			player1Dialog.setContentText("Naam:");
 			player1Dialog.setHeaderText("Speler 1");
 			player1Dialog.showAndWait().ifPresent(n -> this.player1 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player2) ? n : null);
 		}
 
 		while (this.player2 == null || this.player2.length() < 1) {
-			TextInputDialog player2Dialog = new TextInputDialog(System.getProperty("user.name"));
+			TextInputDialog player2Dialog = new TextInputDialog(Player.randomFirstName() + ' ' + Player.randomAdjective());
 			player2Dialog.setContentText("Naam:");
 			player2Dialog.setHeaderText("Speler 2");
 			player2Dialog.showAndWait().ifPresent(n -> this.player2 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player1) ? n : null);
