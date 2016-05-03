@@ -43,7 +43,7 @@ public abstract class PathFinder {
 
 	private boolean pathFindExactRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path, int length) {
 		if(u.location().equals(dest) && length == 0) {
-			return true;
+			return this.validState(state);
 		}
 		if(length == 0) {
 			return false;
@@ -68,7 +68,8 @@ public abstract class PathFinder {
 
 	private boolean pathFindRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path) {
 		if(u.location().equals(dest)) {
-			return true;
+			System.out.println(state.units().size());
+			return this.validState(state);
 		}
 		HexCoordinate start = u.location();
 		for(HexCoordinate h : state.freeNeighbours(u.location())) {

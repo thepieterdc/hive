@@ -43,7 +43,7 @@ public abstract class AbstractPlayPane extends StackPane implements Invalidation
 
 		final Group g = new Group();
 
-		final double factor = Math.max(this.getLayoutBounds().getWidth() / 210, 4);
+		final double factor = Math.max(this.getLayoutBounds().getWidth() / 220, 3.5);
 
 		this.model.boardState().units().forEach((u, c) -> {
 			UnitHexagon uH = new UnitHexagon(u, factor);
