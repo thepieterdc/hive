@@ -1,5 +1,9 @@
 package hive.exceptions;
 
+import hive.Hive;
+
+import java.text.MessageFormat;
+
 /**
  * Exception that is thrown when a move is incorrectly formatted.
  * <p>
@@ -18,7 +22,7 @@ public final class MalformedMoveException extends RuntimeException {
 	 * @param c the cause for the exception
 	 */
 	public MalformedMoveException(String m, Throwable c) {
-		super("The following move is invalid: " + m, c);
+		super(MessageFormat.format(Hive.BUNDLE.getString("exception_malformedmove"), m), c);
 		this.move = m;
 	}
 
