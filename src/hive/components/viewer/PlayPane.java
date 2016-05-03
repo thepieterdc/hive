@@ -35,11 +35,6 @@ public final class PlayPane extends AbstractPlayPane {
 	}
 
 	@Override
-	protected void removeListeners() {
-		//
-	}
-
-	@Override
 	public String toString() {
 		return "PlayPane[]";
 	}

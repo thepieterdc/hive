@@ -62,7 +62,9 @@ public final class PlayModel extends HiveModel {
 
 		this.moves.add(m);
 		this.totalMoves++;
+
 		this.selectedUnit.set(null);
+		this.selectedUnit.removeListeners();
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(m));
 		this.move(this.totalMoves - 1);
@@ -93,6 +95,8 @@ public final class PlayModel extends HiveModel {
 		this.selectedUnit.set(null);
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
+
+		this.selectedUnit.removeListeners();
 
 		this.move(this.totalMoves - 1);
 

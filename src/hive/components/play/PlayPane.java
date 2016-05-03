@@ -55,11 +55,6 @@ public final class PlayPane extends AbstractPlayPane {
 	}
 
 	@Override
-	protected void removeListeners() {
-		this.model.selectedUnit().removeListeners();
-	}
-
-	@Override
 	public String toString() {
 		return "PlayPane[]";
 	}
