@@ -5,7 +5,10 @@ import hive.modes.PlayMode;
 import hive.modes.ViewerMode;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -23,6 +26,11 @@ public final class Hive extends Application {
 
 	@Override
 	public void start(Stage stage) {
+		MediaPlayer backgroundPlayer = new MediaPlayer(new Media(this.getClass().getResource("/fantasie.mp3").toString()));
+		backgroundPlayer.setOnEndOfMedia(() -> backgroundPlayer.seek(Duration.ZERO));
+		backgroundPlayer.setVolume(0.5);
+		backgroundPlayer.play();
+
 		Application.Parameters args = this.getParameters();
 		try {
 			if (args == null || args.getRaw().size() > 2) {
