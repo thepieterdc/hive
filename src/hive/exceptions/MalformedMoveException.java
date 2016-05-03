@@ -22,7 +22,7 @@ public final class MalformedMoveException extends RuntimeException {
 	 * @param c the cause for the exception
 	 */
 	public MalformedMoveException(String m, Throwable c) {
-		super(MessageFormat.format(Hive.BUNDLE.getString("exception_malformedmove"), m), c);
+		super(MessageFormat.format(Hive.BUNDLE.getString("exceptions_malformedmove_msg"), m), c);
 		this.move = m;
 	}
 

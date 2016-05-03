@@ -71,7 +71,7 @@ public class Player implements Representable {
 			"the Bad Wolf",
 			"the Master",
 			"the Forgotten",
-			"the Conquerer",
+			"the Conqueror",
 			"the Denier",
 			"the Paralyzed",
 			"the Paralyzer",

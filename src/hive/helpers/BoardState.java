@@ -1,5 +1,6 @@
 package hive.helpers;
 
+import hive.Hive;
 import hive.TransferPiece;
 import hive.data.Orientation;
 import hive.exceptions.IllegalMoveException;
@@ -7,6 +8,7 @@ import hive.exceptions.UnmarshalException;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -21,25 +23,6 @@ import java.util.stream.IntStream;
 public final class BoardState {
 	private final Set<HexCoordinate> freeHexagons;
 	private final Map<Unit, HexCoordinate> units = new HashMap<>(22);
-
-	public static class Dimensions {
-		public final int hMax;
-		public final int hMin;
-		public final int vMax;
-		public final int vMin;
-
-		public Dimensions(int hMx, int hMn, int vMx, int vMn) {
-			this.hMax = hMx;
-			this.hMin = hMn;
-			this.vMax = vMx;
-			this.vMin = vMn;
-		}
-
-		@Override
-		public String toString() {
-			return "Dimensions[vMin=" + this.vMin + ", vMax=" + this.vMax + ", hMin=" + this.hMin + ", hMax=" + this.hMax + ']';
-		}
-	}
 
 	/**
 	 * BoardState constructor.
@@ -91,7 +74,7 @@ public final class BoardState {
 	public static BoardState calculate(BoardState previous, Move move) {
 		HashMap<Unit, HexCoordinate> unitsMap = new HashMap<>(previous.units());
 		if (!unitsMap.containsKey(move.otherUnit())) {
-			throw new UnmarshalException("Other unit not on board: " + move.otherUnit().type());
+			throw new UnmarshalException(MessageFormat.format(Hive.BUNDLE.getString("helpers_boardstate_calculate_exception"), move.otherUnit().type()));
 		}
 		unitsMap.put(move.unit(), HexCoordinate.fromOrientation(unitsMap.get(move.otherUnit()), move.orientation()));
 		return new BoardState(unitsMap);
@@ -107,21 +90,6 @@ public final class BoardState {
 		} catch (IllegalMoveException ignored) {
 			return null;
 		}
-	}
-
-	//Hexagons overlopen is genoeg aangezien units nooit op de rand kunnen staan//
-	public BoardState.Dimensions dimensions() {
-		int hMax = 0;
-		int hMin = 0;
-		int vMax = 0;
-		int vMin = 0;
-		for (HexCoordinate c : this.freeHexagons) {
-			hMax = Math.max(hMax, c.row());
-			hMin = Math.min(hMin, c.row());
-			vMax = Math.max(vMax, c.column());
-			vMin = Math.min(vMin, c.column());
-		}
-		return new BoardState.Dimensions(hMax + 1, hMin, vMax + 1, vMin);
 	}
 
 	public boolean free(HexCoordinate c) {
@@ -198,7 +166,7 @@ public final class BoardState {
 			throw new IllegalArgumentException("Parameter \"moves\" is null.");
 		}
 		if (moves.isEmpty()) {
-			throw new UnmarshalException("List of moves is empty.");
+			throw new UnmarshalException(Hive.BUNDLE.getString("helpers_boardstate_unmarshall_emptymoves"));
 		}
 		if (moves.get(0).type() != Move.MoveType.START) {
 			moves.add(0, new StartMove());
@@ -212,7 +180,7 @@ public final class BoardState {
 		}
 
 		if (moves.get(1).type() != Move.MoveType.FIRST) {
-			throw new UnmarshalException("First move is not instance of FirstMove.");
+			throw new UnmarshalException(Hive.BUNDLE.getString("helpers_boardstate_unmarshall_firstmove"));
 		}
 
 		boardStates.put(1, new BoardState((FirstMove) moves.get(1)));
