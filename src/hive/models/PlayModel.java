@@ -57,6 +57,8 @@ public final class PlayModel extends HiveModel {
 			return false;
 		}
 
+		m.unit().location(new HexCoordinate(0, 0));
+
 		this.moves.add(m);
 		this.totalMoves++;
 		this.selectedUnitProperty.setValue(null);
@@ -82,6 +84,8 @@ public final class PlayModel extends HiveModel {
 				return false;
 			}
 		}
+
+		m.unit().location(dest);
 
 		this.moves.add(m);
 		this.totalMoves++;

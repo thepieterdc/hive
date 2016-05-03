@@ -68,7 +68,6 @@ public abstract class PathFinder {
 
 	private boolean pathFindRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path) {
 		if(u.location().equals(dest)) {
-			System.out.println(state.units().size());
 			return this.validState(state);
 		}
 		HexCoordinate start = u.location();
