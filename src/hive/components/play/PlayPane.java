@@ -8,10 +8,6 @@ import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
 import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
-import javafx.scene.Group;
-import javafx.scene.Node;
-
-import java.util.function.Consumer;
 
 /**
  * PlayPane component for the Play-mode. The playing field of the game.
@@ -36,15 +32,15 @@ public final class PlayPane extends AbstractPlayPane {
 	@Override
 	protected FreeHexagon parseFreeHexagon(FreeHexagon h, HexCoordinate c) {
 		h.setOnMouseClicked(e -> {
-			if (this.model.selectedUnitProperty().get() != null) {
+			if (this.model.selectedUnit().get() != null) {
 				try {
-					h.enable(this.model.totalMoves() == 1 ? this.model.move(new FirstMove(this.model.selectedUnitProperty().get())) : this.model.move(Move.fromCoordinates(this.model.boardState(), this.model.selectedUnitProperty().get(), c), c));
+					h.enable(this.model.totalMoves() == 1 ? this.model.move(new FirstMove(this.model.selectedUnit().get())) : this.model.move(Move.fromCoordinates(this.model.boardState(), this.model.selectedUnit().get(), c), c));
 				} catch (IllegalMoveException ignored) {
 					h.enable(false);
 				}
 			}
 		});
-		this.model.selectedUnitProperty().addListener(o -> h.enable(true));
+		this.model.selectedUnit().addListener(o -> h.enable(true));
 		return h;
 	}
 
@@ -52,20 +48,15 @@ public final class PlayPane extends AbstractPlayPane {
 	protected UnitHexagon parseUnitHexagon(UnitHexagon uH) {
 		uH.enable(this.model.turn().equals(uH.unit().player()));
 		if (uH.unit().player().equals(this.model.turn())) {
-			uH.setOnMouseClicked(event -> this.model.selectedUnitProperty().set(uH.unit()));
-			this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));
+			uH.setOnMouseClicked(event -> this.model.selectedUnit().set(uH.unit()));
+			this.model.selectedUnit().addListener(o -> uH.select(uH.unit().equals(this.model.selectedUnit().get())));
 		}
 		return uH;
 	}
 
 	@Override
-	protected void removeListeners(Group children) {
-		children.getChildren().forEach(new Consumer<Node>() {
-			@Override
-			public void accept(Node n) {
-				model.selectedUnitProperty().
-			}
-		});
+	protected void removeListeners() {
+		this.model.selectedUnit().removeListeners();
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import hive.components.hexagons.FreeHexagon;
 import hive.components.hexagons.UnitHexagon;
 import hive.helpers.HexCoordinate;
 import hive.models.ViewerModel;
-import javafx.scene.Group;
 
 /**
  * PlayPane component for the Viewer-mode. The playing field of the game.
@@ -36,7 +35,7 @@ public final class PlayPane extends AbstractPlayPane {
 	}
 
 	@Override
-	protected void removeListeners(Group children) {
+	protected void removeListeners() {
 		//
 	}
 

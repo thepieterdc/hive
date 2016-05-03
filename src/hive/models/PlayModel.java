@@ -6,6 +6,7 @@ import hive.helpers.*;
 import hive.helpers.moves.FirstMove;
 import hive.helpers.moves.StartMove;
 import hive.interfaces.PlacementValidator;
+import hive.models.simple.SimpleObjectModel;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.*;
@@ -25,14 +26,14 @@ public final class PlayModel extends HiveModel {
 	private final Player player1;
 	private final Player player2;
 
-	private final SimpleObjectProperty<Unit> selectedUnitProperty;
+	private final SimpleObjectModel<Unit> selectedUnit;
 	private final SimpleObjectProperty<Player> winnerProperty;
 
 	public PlayModel(String p1, String p2) {
 		super(Collections.singletonList(new StartMove()));
 		this.player1 = new Player(Players.BLACK, p1);
 		this.player2 = new Player(Players.WHITE, p2);
-		this.selectedUnitProperty = new SimpleObjectProperty<>();
+		this.selectedUnit = new SimpleObjectModel<>();
 		this.winnerProperty = new SimpleObjectProperty<>();
 
 		AtomicInteger i = new AtomicInteger();
@@ -61,7 +62,7 @@ public final class PlayModel extends HiveModel {
 
 		this.moves.add(m);
 		this.totalMoves++;
-		this.selectedUnitProperty.setValue(null);
+		this.selectedUnit.set(null);
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(m));
 		this.move(this.totalMoves - 1);
@@ -89,7 +90,7 @@ public final class PlayModel extends HiveModel {
 
 		this.moves.add(m);
 		this.totalMoves++;
-		this.selectedUnitProperty.setValue(null);
+		this.selectedUnit.set(null);
 
 		this.boardStates.put(this.totalMoves - 1, BoardState.calculate(this.boardState(), m));
 
@@ -111,8 +112,8 @@ public final class PlayModel extends HiveModel {
 		return this.player2;
 	}
 
-	public SimpleObjectProperty<Unit> selectedUnitProperty() {
-		return this.selectedUnitProperty;
+	public SimpleObjectModel<Unit> selectedUnit() {
+		return this.selectedUnit;
 	}
 
 	public Player turn() {

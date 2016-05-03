@@ -3,8 +3,8 @@ package hive.helpers;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Abstract model class.
@@ -14,7 +14,7 @@ import java.util.Collection;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public abstract class Model implements Observable {
-	private final Collection<InvalidationListener> listeners = new ArrayList<>(4);
+	protected final Collection<InvalidationListener> listeners = new HashSet<>(100);
 
 	@Override
 	public void addListener(InvalidationListener l) {

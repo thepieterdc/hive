@@ -1,6 +1,7 @@
 package hive.models.simple;
 
 import hive.helpers.Model;
+import javafx.beans.InvalidationListener;
 
 /**
  * A model that only has one Observable value.
@@ -19,6 +20,14 @@ public class SimpleObjectModel<T> extends Model {
 
 	public void set(T t) {
 		this.o = t;
+		System.out.println("New value: "+t);
+		System.out.println(this.listeners.size());
 		this.notifyListeners();
+	}
+
+	@Override
+	public void addListener(InvalidationListener l) {
+		super.addListener(l);
+		System.out.println("added listener");
 	}
 }
