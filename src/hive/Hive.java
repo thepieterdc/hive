@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
- * Viewer application.
+ * Hive application.
  * <p>
  * Created at 16/03/16 19:16
  *
