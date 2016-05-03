@@ -39,6 +39,7 @@ public abstract class AbstractPlayPane extends StackPane implements Invalidation
 
 	@Override
 	public void invalidated(Observable observable) {
+		this.removeListeners((Group) this.getChildren().get(0));
 		this.getChildren().clear();
 
 		final Group g = new Group();
@@ -62,4 +63,6 @@ public abstract class AbstractPlayPane extends StackPane implements Invalidation
 	protected abstract FreeHexagon parseFreeHexagon(FreeHexagon fH, HexCoordinate c);
 
 	protected abstract UnitHexagon parseUnitHexagon(UnitHexagon uH);
+
+	protected abstract void removeListeners(Group children);
 }

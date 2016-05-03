@@ -38,4 +38,8 @@ public abstract class Model implements Observable {
 		}
 		this.listeners.remove(l);
 	}
+
+	public void removeListeners() {
+		this.listeners.clear();
+	}
 }

@@ -8,6 +8,10 @@ import hive.helpers.HexCoordinate;
 import hive.helpers.Move;
 import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
+import javafx.scene.Group;
+import javafx.scene.Node;
+
+import java.util.function.Consumer;
 
 /**
  * PlayPane component for the Play-mode. The playing field of the game.
@@ -52,6 +56,16 @@ public final class PlayPane extends AbstractPlayPane {
 			this.model.selectedUnitProperty().addListener((o, od, nw) -> uH.select(uH.unit().equals(nw)));
 		}
 		return uH;
+	}
+
+	@Override
+	protected void removeListeners(Group children) {
+		children.getChildren().forEach(new Consumer<Node>() {
+			@Override
+			public void accept(Node n) {
+				model.selectedUnitProperty().
+			}
+		});
 	}
 
 	@Override
