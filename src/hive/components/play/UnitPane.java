@@ -33,19 +33,12 @@ public final class UnitPane extends AbstractUnitPane {
 	protected UnitHexagon patch(UnitHexagon uH) {
 		if (uH.unit().player().equals(this.model.turn())) {
 			uH.enable(true);
-			uH.setOnMouseClicked(e -> {
-				System.out.println(this.model.selectedUnit().get());
-				this.model.selectedUnit().set(uH.unit());
-				System.out.println(this.model.selectedUnit().get());
-			});
+			uH.setOnMouseClicked(e -> this.model.selectedUnit().set(uH.unit()));
 		} else {
 			uH.enable(false);
 			uH.setOnMouseClicked(null);
 		}
-		this.model.selectedUnit().addListener(o -> {
-			System.out.println("test called");
-			uH.select(uH.unit().equals(this.model.selectedUnit().get()));
-		});
+		this.model.selectedUnit().addListener(o -> uH.select(uH.unit().equals(this.model.selectedUnit().get())));
 		return uH;
 	}
 
