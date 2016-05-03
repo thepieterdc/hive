@@ -33,17 +33,10 @@ public final class PlayPane extends AbstractPlayPane {
 	protected FreeHexagon parseFreeHexagon(FreeHexagon h, HexCoordinate c) {
 		h.setOnMouseClicked(e -> {
 			if (this.model.selectedUnitProperty().get() != null) {
-				if (this.model.totalMoves() == 1) {
-					this.model.move(new FirstMove(this.model.selectedUnitProperty().get()));
-				} else {
-					try {
-						Move m = Move.fromCoordinates(this.model.boardState(), this.model.selectedUnitProperty().get(), c);
-						if (!this.model.move(m, c)) {
-							h.enable(false);
-						}
-					} catch (IllegalMoveException ignored) {
-						h.enable(false);
-					}
+				try {
+					h.enable(this.model.totalMoves() == 1 ? this.model.move(new FirstMove(this.model.selectedUnitProperty().get())) : this.model.move(Move.fromCoordinates(this.model.boardState(), this.model.selectedUnitProperty().get(), c), c));
+				} catch (IllegalMoveException ignored) {
+					h.enable(false);
 				}
 			}
 		});

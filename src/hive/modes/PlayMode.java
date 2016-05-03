@@ -29,8 +29,8 @@ import java.util.List;
  */
 public final class PlayMode implements Mode {
 	//TODO: Wegdoen//
-	private String player1;
-	private String player2;
+	private String player1 = "Test";
+	private String player2 = "Test2";
 
 	@Override
 	public void start(Stage s, List<String> p) {

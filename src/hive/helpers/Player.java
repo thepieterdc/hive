@@ -16,7 +16,7 @@ public class Player implements Representable {
 	private final char id;
 	private final String name;
 
-	private final static String[] firstnames = {
+	private static final String[] firstnames = {
 			"Bob",
 			"Robert",
 			"Rick",
@@ -61,7 +61,7 @@ public class Player implements Representable {
 			"Bombur"
 	};
 
-	private final static String[] adjectives = {
+	private static final String[] adjectives = {
 			"the Destroyer",
 			"the Boss",
 			"the Precious",
