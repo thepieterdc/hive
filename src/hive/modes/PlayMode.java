@@ -38,14 +38,14 @@ public final class PlayMode implements Mode {
 		while (this.player1 == null || this.player1.length() < 1) {
 			TextInputDialog player1Dialog = new TextInputDialog(StringUtils.ucfirst(System.getProperty("user.name")) + ' ' + Player.randomAdjective());
 			player1Dialog.setContentText(Hive.BUNDLE.getString("modes_play_name") + ':');
-			player1Dialog.setHeaderText(Hive.BUNDLE.getString("modes_play_player") + '1');
+			player1Dialog.setHeaderText(Hive.BUNDLE.getString("modes_play_player") + " 1");
 			player1Dialog.showAndWait().ifPresent(n -> this.player1 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player2) ? n : null);
 		}
 
 		while (this.player2 == null || this.player2.length() < 1) {
 			TextInputDialog player2Dialog = new TextInputDialog(Player.randomFirstName() + ' ' + Player.randomAdjective());
 			player2Dialog.setContentText(Hive.BUNDLE.getString("modes_play_name") + ':');
-			player2Dialog.setHeaderText(Hive.BUNDLE.getString("modes_play_player") + '2');
+			player2Dialog.setHeaderText(Hive.BUNDLE.getString("modes_play_player") + " 2");
 			player2Dialog.showAndWait().ifPresent(n -> this.player2 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player1) ? n : null);
 		}
 
@@ -57,7 +57,7 @@ public final class PlayMode implements Mode {
 		model.winnerProperty().addListener((o, od, nw) -> {
 			if (nw != null) {
 				s.close();
-				new InfoMessage(MessageFormat.format(Hive.BUNDLE.getString("modes_play_endgame"), nw.name(), model.totalMoves() - 1)).render();
+				new InfoMessage(Hive.BUNDLE.getString("modes_play_gameover"), MessageFormat.format(Hive.BUNDLE.getString("modes_play_gameover_msg"), nw.name(), model.totalMoves() - 1)).render();
 				writeLog(model.moves());
 			}
 		});
@@ -73,7 +73,7 @@ public final class PlayMode implements Mode {
 
 		try {
 			Files.write(p, moves.stream().map(Move::representation).collect(Collectors.toList()), StandardOpenOption.CREATE);
-			new InfoMessage(MessageFormat.format(Hive.BUNDLE.getString("modes_play_report"), p)).render();
+			new InfoMessage(Hive.BUNDLE.getString("modes_play_report"), MessageFormat.format(Hive.BUNDLE.getString("modes_play_report_msg"), p)).render();
 		} catch (IOException ignored) {
 			//
 		}

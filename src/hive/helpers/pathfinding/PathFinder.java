@@ -54,10 +54,8 @@ public abstract class PathFinder {
 				path.add(h);
 				u.location(h);
 				BoardState newState = BoardState.calculate(state, u, h);
-				if (this.validState(newState)) {
-					if (this.pathFindExactRecursion(newState, u, dest, path, length - 1)) {
-						return true;
-					}
+				if (this.validState(newState) && this.pathFindExactRecursion(newState, u, dest, path, length - 1)) {
+					return true;
 				}
 				u.location(start);
 				path.remove(h);

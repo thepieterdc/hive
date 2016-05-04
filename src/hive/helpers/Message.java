@@ -22,7 +22,10 @@ public abstract class Message extends Alert {
 	 */
 	protected Message(String message, Alert.AlertType type, boolean s) {
 		super(type, message);
-		this.getDialogPane().setMinWidth(500);
+		this.getDialogPane().setMinWidth(StringUtils.longestLine(message) << 3);
+		this.getDialogPane().setMinHeight(100 + message.split(System.lineSeparator()).length*25);
+		this.getDialogPane().getScene().getWindow().sizeToScene();
+		this.setResizable(true);
 		this.shutDown = s;
 	}
 

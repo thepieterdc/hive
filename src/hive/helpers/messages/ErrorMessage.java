@@ -1,5 +1,6 @@
 package hive.helpers.messages;
 
+import hive.Hive;
 import hive.helpers.Message;
 import javafx.scene.control.Alert;
 
@@ -22,5 +23,6 @@ public final class ErrorMessage extends Message {
 
 	public ErrorMessage(String message, boolean b) {
 		super(message, Alert.AlertType.ERROR, b);
+		this.setHeaderText(Hive.BUNDLE.getString("helpers_msg_error_header"));
 	}
 }
