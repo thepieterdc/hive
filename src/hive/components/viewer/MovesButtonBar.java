@@ -27,8 +27,6 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 
 	private boolean playing;
 
-	private final Timeline timeline;
-
 	/**
 	 * MovesButtonBar constructor.
 	 *
@@ -41,8 +39,8 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 		this.model = m;
 		this.model.addListener(this);
 
-		this.timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> this.model.move(this.model.moveIndex() + 1)));
-		this.timeline.setOnFinished(e -> {
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1.5), e -> this.model.move(this.model.moveIndex() + 1)));
+		timeline.setOnFinished(e -> {
 			this.btnPlay.setGraphic(Svg.MOVEBUTTON_PLAY.path());
 			this.playing = false;
 			this.invalidated(null);
@@ -56,10 +54,10 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 			this.playing = !this.playing;
 			this.btnPlay.setGraphic(this.playing ? Svg.MOVEBUTTON_STOP.path() : Svg.MOVEBUTTON_PLAY.path());
 			if (this.playing) {
-				this.timeline.setCycleCount(this.model.totalMoves() - this.model.moveIndex() - 1);
-				this.timeline.play();
+				timeline.setCycleCount(this.model.totalMoves() - this.model.moveIndex() - 1);
+				timeline.play();
 			} else {
-				this.timeline.stop();
+				timeline.stop();
 			}
 			this.invalidated(null);
 		});
