@@ -29,6 +29,12 @@ public final class PlayModel extends HiveModel {
 	private final SimpleObjectModel<Unit> selectedUnit;
 	private final SimpleObjectProperty<Player> winnerProperty;
 
+	/**
+	 * PlayModel constructor.
+	 *
+	 * @param p1 the name of player 1
+	 * @param p2 the name of player 2
+	 */
 	public PlayModel(String p1, String p2) {
 		super(Collections.singletonList(new StartMove()));
 		this.player1 = new Player(Players.BLACK, p1);
@@ -49,6 +55,10 @@ public final class PlayModel extends HiveModel {
 		this.placementValidators.add((u, c) -> u.type() == UnitType.QUEEN || this.totalMoves < 5 || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
 	}
 
+	/**
+	 * @param m the FirstMove to apply
+	 * @return false if the move is illegal, true otherwise
+	 */
 	public boolean move(FirstMove m) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
@@ -71,6 +81,11 @@ public final class PlayModel extends HiveModel {
 		return true;
 	}
 
+	/**
+	 * @param m    the move to apply
+	 * @param dest the destination coordinate
+	 * @return false if the move is illegal, true otherwise
+	 */
 	public boolean move(Move m, HexCoordinate dest) {
 		if (m == null) {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
@@ -106,14 +121,23 @@ public final class PlayModel extends HiveModel {
 		return true;
 	}
 
+	/**
+	 * @return the selected unit
+	 */
 	public SimpleObjectModel<Unit> selectedUnit() {
 		return this.selectedUnit;
 	}
 
+	/**
+	 * @return the current player
+	 */
 	public Player turn() {
 		return this.totalMoves % 2 == 0 ? this.player1 : this.player2;
 	}
 
+	/**
+	 * @return the winner
+	 */
 	public SimpleObjectProperty<Player> winnerProperty() {
 		return this.winnerProperty;
 	}

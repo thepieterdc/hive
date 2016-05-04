@@ -83,6 +83,9 @@ public enum UnitType implements Representable {
 		return this.path.path();
 	}
 
+	/**
+	 * @return the PathFinder for the current unit.
+	 */
 	public Supplier<PathFinder> pathFinder() {
 		return this.pathFinder;
 	}

@@ -10,7 +10,7 @@ package hive.interfaces;
 @FunctionalInterface
 public interface Validatable<P> {
 	/**
-	 * Validates.
+	 * Validates anything.
 	 *
 	 * @param param a required parameter to validate
 	 * @return true if valid

@@ -28,10 +28,17 @@ public final class HexCoordinate implements Locatable, Representable {
 		this.row = r;
 	}
 
+	/**
+	 * Returns whether if two coordinates are colinear; meaning there is a direct line between both coordinates.
+	 *
+	 * @param base   the base coordinate
+	 * @param target the target coordinate
+	 * @return true if the given coordinates are colinear.
+	 */
 	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
 		return base.column() == target.column() || base.row() == target.row() || base.row() + base.column() == target.row() + target.column();
 	}
-	
+
 	/**
 	 * @return the column
 	 */
@@ -39,13 +46,23 @@ public final class HexCoordinate implements Locatable, Representable {
 		return this.column;
 	}
 
-	//Chebyshev distance formula//
+	/**
+	 * Calculates the distance between 2 hexagons using the Chebyshev distance formula.
+	 *
+	 * @param base   the base coordinate
+	 * @param target the target coordinate
+	 * @return the distance between the two coordinates
+	 */
 	public static int distance(HexCoordinate base, HexCoordinate target) {
 		return (Math.abs(base.column() - target.column())
 				+ Math.abs(base.column() + base.row() - target.column() - target.row())
 				+ Math.abs(base.row() - target.row())) / 2;
 	}
 
+	/**
+	 * @param target the target coordinate
+	 * @return the distance from the current coordinate to the given coordinate.
+	 */
 	public int distanceTo(HexCoordinate target) {
 		return distance(this, target);
 	}
@@ -89,10 +106,19 @@ public final class HexCoordinate implements Locatable, Representable {
 		return this.row;
 	}
 
+	/**
+	 * @param c the center coordinate
+	 * @return the surrounding coordinates
+	 */
 	public static Set<HexCoordinate> surroundings(HexCoordinate c) {
 		return surroundings(c, Collections.emptySet());
 	}
 
+	/**
+	 * @param c    the center coordinate
+	 * @param skip the coordinates to exclude from the result
+	 * @return the surrounding coordinates without the given "skip" set
+	 */
 	public static Set<HexCoordinate> surroundings(HexCoordinate c, Collection<HexCoordinate> skip) {
 		return EnumSet.allOf(Orientation.class).stream().filter(o -> !skip.contains(fromOrientation(c, o))).collect(HashSet::new, (h, e) -> h.add(fromOrientation(c, e)), HashSet::addAll);
 	}

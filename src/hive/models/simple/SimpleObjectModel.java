@@ -13,10 +13,18 @@ import hive.helpers.Model;
 public class SimpleObjectModel<T> extends Model {
 	private T o;
 
+	/**
+	 * @return the value of the object
+	 */
 	public T get() {
 		return this.o;
 	}
 
+	/**
+	 * Sets the value of the object.
+	 *
+	 * @param t the value
+	 */
 	public void set(T t) {
 		this.o = t;
 		this.notifyListeners();

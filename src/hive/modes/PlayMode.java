@@ -68,6 +68,11 @@ public final class PlayMode implements Mode {
 		return args == 0;
 	}
 
+	/**
+	 * Writes the list of moves to a file.
+	 *
+	 * @param moves the list of moves
+	 */
 	private static void writeLog(Collection<Move> moves) {
 		Path p = Paths.get(System.getProperty("user.home"), "hive-" + System.currentTimeMillis() / 1000 + ".txt");
 

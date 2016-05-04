@@ -28,10 +28,20 @@ public class SingleSwarmValidator implements Validatable<BoardState> {
 		return walk(state) == state.units().size();
 	}
 
+	/**
+	 * @param state the current boardstate
+	 * @return the amount of tiles traversed
+	 */
 	private static int walk(BoardState state) {
 		return walkRecursion(state, state.unitCoordinates().get(0), new HashSet<>(state.units().size())).size();
 	}
 
+	/**
+	 * @param state the current boardstate
+	 * @param coord the current coordinate to check
+	 * @param skip  the coordinates already passed
+	 * @return the list of coordinates traversed
+	 */
 	private static Collection<HexCoordinate> walkRecursion(BoardState state, HexCoordinate coord, Set<HexCoordinate> skip) {
 		if (!skip.contains(coord)) {
 			skip.add(coord);

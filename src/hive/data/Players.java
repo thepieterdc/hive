@@ -17,10 +17,22 @@ public enum Players implements Representable {
 
 	private final Player player;
 
+	/**
+	 * Players constructor.
+	 *
+	 * @param i   the identifier
+	 * @param col the colour
+	 */
 	Players(char i, Color col) {
 		this.player = new Player(i, col);
 	}
 
+	/**
+	 * Returns a Player from a given identifier.
+	 *
+	 * @param i the identifier
+	 * @return the Player found
+	 */
 	public static Player fromId(char i) {
 		for (Players p : Players.values()) {
 			if (p.player().id() == i) {
@@ -30,6 +42,9 @@ public enum Players implements Representable {
 		return null;
 	}
 
+	/**
+	 * @return the player
+	 */
 	public Player player() {
 		return this.player;
 	}

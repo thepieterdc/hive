@@ -14,12 +14,18 @@ public final class InfoMessage extends Message {
 	/**
 	 * InfoMessage constructor.
 	 *
-	 * @param message the error message
+	 * @param message the info message
 	 */
 	public InfoMessage(String message) {
 		super(message, Alert.AlertType.INFORMATION, false);
 	}
 
+	/**
+	 * InfoMessage constructor.
+	 *
+	 * @param header  the header text
+	 * @param message the info message
+	 */
 	public InfoMessage(String header, String message) {
 		this(message);
 		this.setHeaderText(header);

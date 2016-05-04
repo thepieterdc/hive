@@ -13,7 +13,12 @@ import java.text.MessageFormat;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class IllegalMoveException extends Exception {
-
+	/**
+	 * IllegalMoveException constructor.
+	 *
+	 * @param u    the unit wanted to move
+	 * @param dest the destination coordinate
+	 */
 	public IllegalMoveException(Representable u, Representable dest) {
 		super(MessageFormat.format(Hive.BUNDLE.getString("exceptions_illegalmove_msg"), u.representation(), dest.representation()));
 	}

@@ -22,7 +22,12 @@ public class Move implements Representable {
 	private final Unit otherUnit;
 	private final Unit unit;
 
-	public enum MoveType {START, FIRST, REGULAR}
+	/**
+	 * The move types.
+	 */
+	public enum MoveType {
+		START, FIRST, REGULAR
+	}
 
 	/**
 	 * Move constructor.
@@ -37,6 +42,15 @@ public class Move implements Representable {
 		this.unit = u;
 	}
 
+	/**
+	 * Calculates a move from a unit placement.
+	 *
+	 * @param state the current boardstate
+	 * @param u     the unit
+	 * @param dest  the new destination of the unit
+	 * @return the move calculated
+	 * @throws IllegalMoveException the move is invalid
+	 */
 	public static Move fromCoordinates(BoardState state, Unit u, HexCoordinate dest) throws IllegalMoveException {
 		Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(dest).entrySet().stream().findAny().orElse(null);
 		if (otherUnit == null) {

@@ -30,6 +30,9 @@ public abstract class AbstractUnitPane extends GridPane implements InvalidationL
 
 	private final Map<Unit, AbstractUnitPane.UnitPaneItem> unitHexagons = new HashMap<>(22);
 
+	/**
+	 * Class that represents an item(a unit) on the UnitPane.
+	 */
 	private static class UnitPaneItem {
 		private final int column;
 		private final UnitHexagon hexagon;
@@ -100,5 +103,11 @@ public abstract class AbstractUnitPane extends GridPane implements InvalidationL
 		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.patch(u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
 	}
 
+	/**
+	 * Manipulates a given UnitHexagon.
+	 *
+	 * @param uH the UnitHexagon to parse
+	 * @return the parsed UnitHexagon
+	 */
 	protected abstract UnitHexagon patch(UnitHexagon uH);
 }

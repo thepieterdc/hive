@@ -39,6 +39,9 @@ public abstract class Model implements Observable {
 		this.listeners.remove(l);
 	}
 
+	/**
+	 * Removes all attached listeners.
+	 */
 	public void removeListeners() {
 		this.listeners.clear();
 	}

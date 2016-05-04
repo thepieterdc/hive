@@ -12,5 +12,12 @@ import hive.helpers.Unit;
  */
 @FunctionalInterface
 public interface PlacementValidator {
+	/**
+	 * Validates a move.
+	 *
+	 * @param u    the unit
+	 * @param dest the destination coordinate
+	 * @return true if the unit can be moved to the given destination
+	 */
 	boolean validate(Unit u, HexCoordinate dest);
 }

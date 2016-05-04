@@ -22,6 +22,11 @@ public abstract class HiveModel extends Model {
 	protected int totalMoves;
 	protected final Unit[] units = new Unit[22];
 
+	/**
+	 * HiveModel constructor.
+	 *
+	 * @param moveList the list of moves
+	 */
 	protected HiveModel(List<Move> moveList) {
 		this.boardStates = new HashMap<>(100);
 		this.boardStates.putAll(BoardState.unmarshal(moveList));
@@ -31,10 +36,18 @@ public abstract class HiveModel extends Model {
 		this.totalMoves = this.moves.size();
 	}
 
+	/**
+	 * @return the current state
+	 */
 	public BoardState boardState() {
 		return this.boardStates.get(this.moveIndex);
 	}
 
+	/**
+	 * Displays a given move on the board.
+	 *
+	 * @param index the move to set
+	 */
 	public void move(int index) {
 		if (index < 0 || index >= this.moves.size()) {
 			throw new IllegalArgumentException("Parameter \"index\" is out of bounds.");
@@ -47,22 +60,37 @@ public abstract class HiveModel extends Model {
 		}
 	}
 
+	/**
+	 * @return the current move
+	 */
 	public Move move() {
 		return this.move;
 	}
 
+	/**
+	 * @return the index of the current move
+	 */
 	public int moveIndex() {
 		return this.moveIndex;
 	}
 
+	/**
+	 * @return the list of moves
+	 */
 	public List<Move> moves() {
 		return Collections.unmodifiableList(this.moves);
 	}
 
+	/**
+	 * @return the total amount of moves played
+	 */
 	public int totalMoves() {
 		return this.totalMoves;
 	}
 
+	/**
+	 * @return the array of units available
+	 */
 	public Unit[] units() {
 		return this.units.clone();
 	}

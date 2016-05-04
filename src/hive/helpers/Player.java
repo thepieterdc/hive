@@ -105,20 +105,42 @@ public class Player implements Representable {
 			"the Oakenshield"
 	};
 
+	/**
+	 * Player constructor.
+	 *
+	 * @param i   the identifier
+	 * @param col the colour
+	 */
 	public Player(char i, Color col) {
 		this(i, col, String.valueOf(i));
 	}
 
+	/**
+	 * Player constructor.
+	 *
+	 * @param i   the identifier
+	 * @param col the colour
+	 * @param n   the player name
+	 */
 	public Player(char i, Color col, String n) {
 		this.color = col;
 		this.id = i;
 		this.name = n;
 	}
 
+	/**
+	 * Player constructor.
+	 *
+	 * @param p the Players entry
+	 * @param n the player name
+	 */
 	public Player(Players p, String n) {
 		this(p.player().id(), p.player().color(), n);
 	}
 
+	/**
+	 * @return the colour
+	 */
 	public Color color() {
 		return this.color;
 	}
@@ -133,18 +155,30 @@ public class Player implements Representable {
 		return this.id + this.color.hashCode() + this.name.hashCode();
 	}
 
+	/**
+	 * @return the identifier
+	 */
 	public char id() {
 		return this.id;
 	}
 
+	/**
+	 * @return the player name
+	 */
 	public String name() {
 		return this.name;
 	}
 
+	/**
+	 * @return a random adjective for the first/second player
+	 */
 	public static String randomAdjective() {
 		return adjectives[(int) (adjectives.length * Math.random() - 1)];
 	}
 
+	/**
+	 * @return a random firstname for the second player
+	 */
 	public static String randomFirstName() {
 		return firstnames[(int) (firstnames.length * Math.random() - 1)];
 	}

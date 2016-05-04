@@ -21,6 +21,12 @@ public final class ErrorMessage extends Message {
 		this(message, true);
 	}
 
+	/**
+	 * ErrorMessage constructor.
+	 *
+	 * @param message the error message
+	 * @param b       true to shutdown the application
+	 */
 	public ErrorMessage(String message, boolean b) {
 		super(message, Alert.AlertType.ERROR, b);
 		this.setHeaderText(Hive.BUNDLE.getString("helpers_msg_error_header"));

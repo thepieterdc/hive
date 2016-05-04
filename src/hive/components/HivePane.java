@@ -16,6 +16,11 @@ import javafx.scene.layout.VBox;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class HivePane extends VBox {
+	/**
+	 * HivePane constructor.
+	 *
+	 * @param model the PlayModel
+	 */
 	public HivePane(PlayModel model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
@@ -34,6 +39,11 @@ public final class HivePane extends VBox {
 		model.move(0);
 	}
 
+	/**
+	 * HivePane constructor.
+	 *
+	 * @param model the ViewerModel
+	 */
 	public HivePane(ViewerModel model) {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");

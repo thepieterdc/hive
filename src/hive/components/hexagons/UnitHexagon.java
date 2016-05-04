@@ -83,6 +83,9 @@ public final class UnitHexagon extends Hexagon {
 		return "UnitHexagon[unit=" + this.unit.representation() + ", x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
 	}
 
+	/**
+	 * @return the unit of this UnitHexagon.
+	 */
 	public Unit unit() {
 		return this.unit;
 	}

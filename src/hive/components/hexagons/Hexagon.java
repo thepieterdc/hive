@@ -27,6 +27,9 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 
 	private final Polygon hexagon;
 
+	/**
+	 * Hexagon constructor.
+	 */
 	protected Hexagon() {
 		this.hexagon = new Polygon();
 		Arrays.asList(top(), topRight(), bottomRight(), bottom(), bottomLeft(), topLeft()).forEach(coordinate -> this.hexagon.getPoints().addAll(coordinate.asList()));
@@ -35,18 +38,30 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 		this.getChildren().add(this.hexagon);
 	}
 
+	/**
+	 * @return the bottom coordinate.
+	 */
 	private static Coordinate bottom() {
 		return new Coordinate(0.0, -RADIUS);
 	}
 
+	/**
+	 * @return the bottom-left coordinate.
+	 */
 	private static Coordinate bottomLeft() {
 		return new Coordinate(-SQRT75, -RADIUS / 2.0);
 	}
 
+	/**
+	 * @return the bottom-right coordinate.
+	 */
 	private static Coordinate bottomRight() {
 		return new Coordinate(SQRT75, -RADIUS / 2.0);
 	}
 
+	/**
+	 * Sets the colours of the hexagon.
+	 */
 	public void colour(Color fill, Color stroke) {
 		this.hexagon.setFill(fill);
 		this.hexagon.setStroke(stroke);
@@ -78,14 +93,23 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 		this.setTranslateY(y);
 	}
 
+	/**
+	 * @return the top coordinate.
+	 */
 	private static Coordinate top() {
 		return new Coordinate(0.0, RADIUS);
 	}
 
+	/**
+	 * @return the top-left coordinate.
+	 */
 	private static Coordinate topLeft() {
 		return new Coordinate(-SQRT75, RADIUS / 2.0);
 	}
 
+	/**
+	 * @return the top-right coordinate.
+	 */
 	private static Coordinate topRight() {
 		return new Coordinate(SQRT75, RADIUS / 2.0);
 	}

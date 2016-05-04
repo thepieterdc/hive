@@ -64,7 +64,7 @@ public final class BoardState {
 	}
 
 	/**
-	 * Calculates the next BoardState from a given BoardState.
+	 * Calculates the next BoardState from a given BoardState and Move.
 	 *
 	 * @param previous the previous(current) BoardState
 	 * @param move     the move to apply to the given BoardState
@@ -80,6 +80,14 @@ public final class BoardState {
 		return new BoardState(unitsMap);
 	}
 
+	/**
+	 * Calculates the next BoardState from a given BoardState and Unit replacement.
+	 *
+	 * @param previous the previous BoardState
+	 * @param u        the unit to move
+	 * @param dest     the destination of the unit
+	 * @return the new BoardState or null if the move cannot be applied.
+	 */
 	public static BoardState calculate(BoardState previous, Unit u, HexCoordinate dest) {
 		if (!previous.freeHexagons().contains(dest) || !previous.units().containsKey(u)) {
 			return null;
@@ -92,22 +100,42 @@ public final class BoardState {
 		}
 	}
 
+	/**
+	 * @param c the coordinate to check
+	 * @return true if the coordinate is free
+	 */
 	public boolean free(HexCoordinate c) {
 		return this.freeHexagons.contains(c);
 	}
 
+	/**
+	 * @return the set of FreeHexagons
+	 */
 	public Set<HexCoordinate> freeHexagons() {
 		return Collections.unmodifiableSet(this.freeHexagons);
 	}
 
+	/**
+	 * @param c the center coordinate
+	 * @return a set containing the free neighbours of the given coordinate
+	 */
 	public Set<HexCoordinate> freeNeighbours(HexCoordinate c) {
 		return this.freeNeighbours(c, Collections.emptySet());
 	}
 
+	/**
+	 * @param c    the center coordinate
+	 * @param skip coordinates not to include in the response
+	 * @return a set containing the free neighbours of the given coordinate, excluding the "skip" coordinates
+	 */
 	public Set<HexCoordinate> freeNeighbours(HexCoordinate c, Collection<HexCoordinate> skip) {
 		return HexCoordinate.surroundings(c).stream().filter(h -> this.freeHexagons.contains(h) && !skip.contains(h)).collect(Collectors.toSet());
 	}
 
+	/**
+	 * @param h the center coordinate
+	 * @return a map containing the neighbouring units and their coordinates
+	 */
 	public Map<Unit, HexCoordinate> neighbours(HexCoordinate h) {
 		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
@@ -139,10 +167,17 @@ public final class BoardState {
 		return lijst;
 	}
 
+	/**
+	 * @param c the coordinate
+	 * @return the unit at the given coordinate, or null if it's free
+	 */
 	public Unit unit(HexCoordinate c) {
 		return this.units.entrySet().stream().filter(e -> e.getValue().equals(c)).map(Map.Entry::getKey).findFirst().orElse(null);
 	}
 
+	/**
+	 * @return a list of coordinates that contain units.
+	 */
 	public List<HexCoordinate> unitCoordinates() {
 		return new ArrayList<>(this.units.values());
 	}

@@ -59,7 +59,20 @@ public abstract class AbstractPlayPane extends StackPane implements Invalidation
 		this.getChildren().addAll(g);
 	}
 
+	/**
+	 * Manipulates a given FreeHexagon.
+	 *
+	 * @param fH the FreeHexagon to parse
+	 * @param c  the coordinate of the FreeHexagon
+	 * @return the parsed FreeHexagon
+	 */
 	protected abstract FreeHexagon parseFreeHexagon(FreeHexagon fH, HexCoordinate c);
 
+	/**
+	 * Manipulates a given UnitHexagon.
+	 *
+	 * @param uH the UnitHexagon to parse
+	 * @return the parsed UnitHexagon
+	 */
 	protected abstract UnitHexagon parseUnitHexagon(UnitHexagon uH);
 }

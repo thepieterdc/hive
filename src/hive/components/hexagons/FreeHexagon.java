@@ -10,11 +10,19 @@ import javafx.scene.paint.Color;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class FreeHexagon extends Hexagon {
+	/**
+	 * FreeHexagon constructor.
+	 *
+	 * @param beginScale the initial scale to set
+	 */
 	public FreeHexagon(double beginScale) {
 		this();
 		this.scale(beginScale);
 	}
 
+	/**
+	 * FreeHexagon constructor.
+	 */
 	public FreeHexagon() {
 		this.colour(Color.LIGHTGRAY, Color.DARKGRAY);
 	}

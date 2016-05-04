@@ -52,6 +52,13 @@ public enum Orientation implements Representable {
 		return this.direction;
 	}
 
+	/**
+	 * Returns an Orientation from a given column and row differential.
+	 *
+	 * @param cD the column delta
+	 * @param rD the row delta
+	 * @return the Orientation identified
+	 */
 	public static Orientation fromDeltas(int cD, int rD) {
 		for (Orientation o : Orientation.values()) {
 			if (o.columnDelta() == cD && o.rowDelta() == rD) {
@@ -61,8 +68,14 @@ public enum Orientation implements Representable {
 		throw new IllegalArgumentException("Orientation not found: colDelta=" + cD + ", rowDelta=" + rD);
 	}
 
+	/**
+	 * Returns an Orientation from two given coordinates.
+	 *
+	 * @param base the reference coordinate
+	 * @param hC   the target coordinate
+	 * @return the Orientation identified, or null if the coordinates are not neighbouring.
+	 */
 	public static Orientation fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
-		//THROWS NO EXCEPTION SINCE THEY CAN BE NOT NEIGHBOURING//
 		for (Orientation o : Orientation.values()) {
 			if (HexCoordinate.fromOrientation(hC, o).equals(base)) {
 				return o;

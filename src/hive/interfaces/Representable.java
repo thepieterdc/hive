@@ -7,6 +7,10 @@ package hive.interfaces;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
+@FunctionalInterface
 public interface Representable {
+	/**
+	 * @return the string representation of the object
+	 */
 	String representation();
 }

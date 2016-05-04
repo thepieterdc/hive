@@ -66,14 +66,25 @@ public final class Unit implements Representable {
 		return player.hashCode() + rank + type.hashCode();
 	}
 
+	/**
+	 * @return the unit's location
+	 */
 	public HexCoordinate location() {
 		return this.location;
 	}
 
+	/**
+	 * Sets the unit's location.
+	 *
+	 * @param c the coordinate
+	 */
 	public void location(HexCoordinate c) {
 		this.location = c;
 	}
 
+	/**
+	 * @return the PathFinder for this unit
+	 */
 	public Supplier<PathFinder> pathFinder() {
 		return this.type.pathFinder();
 	}

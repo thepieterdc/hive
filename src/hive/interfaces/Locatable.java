@@ -8,7 +8,13 @@ package hive.interfaces;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public interface Locatable {
+	/**
+	 * @return the x-coordinate
+	 */
 	double x();
 
+	/**
+	 * @return the y-coordinate
+	 */
 	double y();
 }
