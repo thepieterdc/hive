@@ -44,7 +44,7 @@ public final class UnitHexagon extends Hexagon {
 		this.getChildren().addAll(this.unitSvg);
 		this.getChildren().addAll(this.ranks);
 	}
-	
+
 	/**
 	 * UnitHexagon constructor.
 	 *
@@ -76,11 +76,6 @@ public final class UnitHexagon extends Hexagon {
 	@Override
 	public void select(boolean b) {
 		this.setEffect(b ? new DropShadow(20, Color.BLUE) : null);
-	}
-
-	@Override
-	public boolean selectable() {
-		return true;
 	}
 
 	@Override

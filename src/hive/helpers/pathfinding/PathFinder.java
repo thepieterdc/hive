@@ -42,20 +42,20 @@ public abstract class PathFinder {
 	}
 
 	private boolean pathFindExactRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path, int length) {
-		if(u.location().equals(dest) && length == 0) {
+		if (u.location().equals(dest) && length == 0) {
 			return this.validState(state);
 		}
-		if(length == 0) {
+		if (length == 0) {
 			return false;
 		}
 		HexCoordinate start = u.location();
-		for(HexCoordinate h : state.freeNeighbours(u.location())) {
-			if(!path.contains(h) && canPassThrough(state, start, h)) {
+		for (HexCoordinate h : state.freeNeighbours(u.location())) {
+			if (!path.contains(h) && canPassThrough(state, start, h)) {
 				path.add(h);
 				u.location(h);
 				BoardState newState = BoardState.calculate(state, u, h);
-				if(this.validState(newState)) {
-					if (this.pathFindExactRecursion(newState, u, dest, path, length-1)) {
+				if (this.validState(newState)) {
+					if (this.pathFindExactRecursion(newState, u, dest, path, length - 1)) {
 						return true;
 					}
 				}
@@ -67,16 +67,16 @@ public abstract class PathFinder {
 	}
 
 	private boolean pathFindRecursion(BoardState state, Unit u, HexCoordinate dest, Collection<HexCoordinate> path) {
-		if(u.location().equals(dest)) {
+		if (u.location().equals(dest)) {
 			return this.validState(state);
 		}
 		HexCoordinate start = u.location();
-		for(HexCoordinate h : state.freeNeighbours(u.location())) {
-			if(!path.contains(h) && canPassThrough(state, start, h)) {
+		for (HexCoordinate h : state.freeNeighbours(u.location())) {
+			if (!path.contains(h) && canPassThrough(state, start, h)) {
 				path.add(h);
 				u.location(h);
 				BoardState newState = BoardState.calculate(state, u, h);
-				if(this.validState(newState)) {
+				if (this.validState(newState)) {
 					if (this.pathFindRecursion(newState, u, dest, path)) {
 						return true;
 					}

@@ -30,11 +30,6 @@ public final class FreeHexagon extends Hexagon {
 	}
 
 	@Override
-	public boolean selectable() {
-		return false;
-	}
-
-	@Override
 	public String toString() {
 		return "FreeHexagon[x=" + this.getTranslateX() + ", y=" + this.getTranslateY() + ']';
 	}

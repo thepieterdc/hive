@@ -19,9 +19,4 @@ public final class InfoMessage extends Message {
 	public InfoMessage(String message) {
 		super(message, Alert.AlertType.INFORMATION, false);
 	}
-
-	public InfoMessage(String header, String message) {
-		this(message);
-		this.setHeaderText(header);
-	}
 }

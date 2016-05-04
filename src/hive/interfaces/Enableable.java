@@ -7,6 +7,7 @@ package hive.interfaces;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
+@FunctionalInterface
 public interface Enableable {
 	/**
 	 * Enables or disables something.

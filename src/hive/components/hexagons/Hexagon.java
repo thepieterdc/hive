@@ -29,7 +29,7 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 
 	protected Hexagon() {
 		this.hexagon = new Polygon();
-		Arrays.asList(top(),topRight(),bottomRight(), bottom(), bottomLeft(), topLeft()).forEach(coordinate -> this.hexagon.getPoints().addAll(coordinate.asList()));
+		Arrays.asList(top(), topRight(), bottomRight(), bottom(), bottomLeft(), topLeft()).forEach(coordinate -> this.hexagon.getPoints().addAll(coordinate.asList()));
 		this.hexagon.setStrokeType(StrokeType.INSIDE);
 		this.hexagon.setStrokeWidth(1.0);
 		this.getChildren().add(this.hexagon);
@@ -61,15 +61,6 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 	@Override
 	public final double height() {
 		return this.hexagon.getScaleY() * (top().y() - bottom().y());
-	}
-
-	public Polygon hexagon() {
-		return this.hexagon;
-	}
-
-	@Override
-	public double scale() {
-		return this.hexagon.getScaleX();
 	}
 
 	@Override

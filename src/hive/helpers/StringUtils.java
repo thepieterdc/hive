@@ -7,7 +7,7 @@ package hive.helpers;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public class StringUtils {
+public final class StringUtils {
 	public static String ucfirst(String raw) {
 		if (raw.length() < 2) {
 			return raw.toUpperCase();

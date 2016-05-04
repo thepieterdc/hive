@@ -13,8 +13,6 @@ public interface Scalable {
 	 */
 	double height();
 
-	double scale();
-
 	/**
 	 * @param factor the factor to scale the node with
 	 */

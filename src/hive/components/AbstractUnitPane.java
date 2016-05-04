@@ -96,12 +96,9 @@ public abstract class AbstractUnitPane extends GridPane implements InvalidationL
 
 	@Override
 	public void invalidated(Observable observable) {
-		this.onClear();
 		this.getChildren().clear();
 		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.patch(u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
 	}
-
-	protected abstract void onClear();
 
 	protected abstract UnitHexagon patch(UnitHexagon uH);
 }

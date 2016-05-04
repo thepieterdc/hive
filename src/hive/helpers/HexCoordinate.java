@@ -31,11 +31,7 @@ public final class HexCoordinate implements Locatable, Representable {
 	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
 		return base.column() == target.column() || base.row() == target.row() || base.row() + base.column() == target.row() + target.column();
 	}
-
-	public boolean colinearWith(HexCoordinate target) {
-		return colinear(this, target);
-	}
-
+	
 	/**
 	 * @return the column
 	 */

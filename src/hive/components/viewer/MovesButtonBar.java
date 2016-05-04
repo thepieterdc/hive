@@ -55,7 +55,7 @@ public final class MovesButtonBar extends HBox implements InvalidationListener {
 		this.btnPlay.setOnAction(e -> {
 			this.playing = !this.playing;
 			this.btnPlay.setGraphic(this.playing ? Svg.MOVEBUTTON_STOP.path() : Svg.MOVEBUTTON_PLAY.path());
-			if(this.playing) {
+			if (this.playing) {
 				this.timeline.setCycleCount(this.model.totalMoves() - this.model.moveIndex() - 1);
 				this.timeline.play();
 			} else {

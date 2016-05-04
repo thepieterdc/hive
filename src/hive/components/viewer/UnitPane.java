@@ -22,11 +22,6 @@ public final class UnitPane extends AbstractUnitPane {
 	}
 
 	@Override
-	protected void onClear() {
-		//Does nothing because the UnitHexagons contain no listeners//
-	}
-
-	@Override
 	protected UnitHexagon patch(UnitHexagon uH) {
 		return uH;
 	}

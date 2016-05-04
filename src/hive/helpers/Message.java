@@ -35,11 +35,4 @@ public abstract class Message extends Alert {
 			Platform.exit();
 		}
 	}
-
-	/**
-	 * @return true if the program will shutdown after this message has been shown.
-	 */
-	public boolean shutDown() {
-		return this.shutDown;
-	}
 }

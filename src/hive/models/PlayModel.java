@@ -108,14 +108,6 @@ public final class PlayModel extends HiveModel {
 		return true;
 	}
 
-	public Player player1() {
-		return this.player1;
-	}
-
-	public Player player2() {
-		return this.player2;
-	}
-
 	public SimpleObjectModel<Unit> selectedUnit() {
 		return this.selectedUnit;
 	}

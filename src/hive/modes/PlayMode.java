@@ -30,9 +30,8 @@ import java.util.stream.Collectors;
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
 public final class PlayMode implements Mode {
-	//TODO: Wegdoen//
-	private String player1 = "Test";
-	private String player2 = "Test2";
+	private String player1;
+	private String player2;
 
 	@Override
 	public void start(Stage s, List<String> p) {

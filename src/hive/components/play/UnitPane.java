@@ -25,11 +25,6 @@ public final class UnitPane extends AbstractUnitPane {
 	}
 
 	@Override
-	protected void onClear() {
-		//TODO: remove listeners @58//
-	}
-
-	@Override
 	protected UnitHexagon patch(UnitHexagon uH) {
 		if (uH.unit().player().equals(this.model.turn())) {
 			uH.enable(true);
