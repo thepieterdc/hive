@@ -59,7 +59,7 @@ public final class PlayMode implements Mode {
 			if (nw != null) {
 				s.close();
 				new InfoMessage(MessageFormat.format(Hive.BUNDLE.getString("modes_play_endgame"), nw.name(), model.totalMoves() - 1)).render();
-				writeLog(model.moves(), nw);
+				writeLog(model.moves());
 			}
 		});
 	}
@@ -69,7 +69,7 @@ public final class PlayMode implements Mode {
 		return args == 0;
 	}
 
-	private static void writeLog(Collection<Move> moves, Player winner) {
+	private static void writeLog(Collection<Move> moves) {
 		Path p = Paths.get(System.getProperty("user.home"), "hive-" + System.currentTimeMillis() / 1000 + ".txt");
 
 		try {

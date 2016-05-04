@@ -33,16 +33,21 @@ public class GrasshopperPathFinder extends PathFinder {
 
 		HexCoordinate c = m.unit().location();
 		BoardState newState = state;
-		for(int i = 0; i < dist; i++) {
+		boolean jumpedOverUnit = false;
+		for (int i = 0; i < dist; i++) {
 			c = HexCoordinate.fromOrientation(c, o);
-			if(state.free(c) && !c.equals(dest)) {
-				return false;
-			}
-			newState = BoardState.calculate(newState, m.unit(), c);
-			if(!this.validState(newState)) {
-				return false;
+			if (state.free(c)) {
+				if (!c.equals(dest)) {
+					return false;
+				}
+				newState = BoardState.calculate(newState, m.unit(), c);
+				if (!this.validState(newState)) {
+					return false;
+				}
+			} else {
+				jumpedOverUnit = true;
 			}
 		}
-		return c.equals(dest);
+		return jumpedOverUnit && c.equals(dest);
 	}
 }
