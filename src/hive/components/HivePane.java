@@ -25,13 +25,17 @@ public final class HivePane extends VBox {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
-		ScrollPane mainPane = new ScrollPane(new hive.components.play.PlayPane(model));
+		hive.components.play.PlayPane playPane = new hive.components.play.PlayPane(model);
+		playPane.setStyle("-fx-background-color: #21252b");
+
+		ScrollPane mainPane = new ScrollPane(playPane);
 		mainPane.setFitToHeight(true);
 		mainPane.setFitToWidth(true);
-		mainPane.setStyle("-fx-padding: 0; -fx-background-insets: 0;");
+		mainPane.setStyle("-fx-padding: 0; -fx-background-insets: 0; -fx-background-color: #21252b");
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		hive.components.play.UnitPane bottomPane = new hive.components.play.UnitPane(model);
+		bottomPane.setStyle("-fx-background-color: #21252b");
 
 		this.getChildren().addAll(mainPane, bottomPane);
 		this.setMinSize(800.0, 600.0);
