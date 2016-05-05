@@ -120,6 +120,6 @@ public enum Orientation implements Representable {
 
 	@Override
 	public String toString() {
-		return "Orientation[columnDelta=" + this.colDelta + ", direction=" + this.direction + ", representation=" + this.representation + ", rowDelta=" + this.rowDelta + ']';
+		return "Orientation[columnDelta=" + this.colDelta + ", direction=" + this.direction.representation() + ", representation=" + this.representation + ", rowDelta=" + this.rowDelta + ']';
 	}
 }

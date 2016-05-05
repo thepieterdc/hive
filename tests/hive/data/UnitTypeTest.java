@@ -1,5 +1,9 @@
 package hive.data;
 
+import hive.helpers.pathfinding.pathfinders.AntPathFinder;
+import hive.helpers.pathfinding.pathfinders.GrasshopperPathFinder;
+import hive.helpers.pathfinding.pathfinders.QueenBeetlePathFinder;
+import hive.helpers.pathfinding.pathfinders.SpiderPathFinder;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -100,6 +104,25 @@ public class UnitTypeTest {
 		assertEquals(Svg.UNIT_SPIDER.path().getContent(), UnitType.SPIDER.path().getContent());
 	}
 
+
+	/**
+	 * Tests UnitType#pathFinder().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testPathFinder() throws Exception {
+		assertTrue(UnitType.ANT.pathFinder().get() instanceof AntPathFinder);
+		assertTrue(UnitType.BEETLE.pathFinder().get() instanceof QueenBeetlePathFinder);
+		assertTrue(UnitType.GRASSHOPPER.pathFinder().get() instanceof GrasshopperPathFinder);
+		assertNull(UnitType.LADYBUG.pathFinder());
+		assertNull(UnitType.MOSQUITO.pathFinder());
+		assertNull(UnitType.PILLBUG.pathFinder());
+		assertTrue(UnitType.QUEEN.pathFinder().get() instanceof QueenBeetlePathFinder);
+		assertTrue(UnitType.SPIDER.pathFinder().get() instanceof SpiderPathFinder);
+
+	}
+
 	/**
 	 * Tests UnitType#representation().
 	 *
@@ -124,13 +147,13 @@ public class UnitTypeTest {
 	 */
 	@Test
 	public void testToString() throws Exception {
-		assertEquals("UnitType[abbreviation=A, capacity=3, prettyName=Ant]", UnitType.ANT.toString());
-		assertEquals("UnitType[abbreviation=B, capacity=2, prettyName=Beetle]", UnitType.BEETLE.toString());
-		assertEquals("UnitType[abbreviation=G, capacity=3, prettyName=Grasshopper]", UnitType.GRASSHOPPER.toString());
-		assertEquals("UnitType[abbreviation=L, capacity=0, prettyName=Ladybug]", UnitType.LADYBUG.toString());
-		assertEquals("UnitType[abbreviation=M, capacity=0, prettyName=Mosquito]", UnitType.MOSQUITO.toString());
-		assertEquals("UnitType[abbreviation=P, capacity=0, prettyName=Pillbug]", UnitType.PILLBUG.toString());
-		assertEquals("UnitType[abbreviation=Q, capacity=1, prettyName=Queen]", UnitType.QUEEN.toString());
-		assertEquals("UnitType[abbreviation=S, capacity=2, prettyName=Spider]", UnitType.SPIDER.toString());
+		assertEquals("UnitType[abbreviation=A, capacity=3, repr=Ant]", UnitType.ANT.toString());
+		assertEquals("UnitType[abbreviation=B, capacity=2, repr=Beetle]", UnitType.BEETLE.toString());
+		assertEquals("UnitType[abbreviation=G, capacity=3, repr=Grasshopper]", UnitType.GRASSHOPPER.toString());
+		assertEquals("UnitType[abbreviation=L, capacity=0, repr=Ladybug]", UnitType.LADYBUG.toString());
+		assertEquals("UnitType[abbreviation=M, capacity=0, repr=Mosquito]", UnitType.MOSQUITO.toString());
+		assertEquals("UnitType[abbreviation=P, capacity=0, repr=Pillbug]", UnitType.PILLBUG.toString());
+		assertEquals("UnitType[abbreviation=Q, capacity=1, repr=Queen]", UnitType.QUEEN.toString());
+		assertEquals("UnitType[abbreviation=S, capacity=2, repr=Spider]", UnitType.SPIDER.toString());
 	}
 }

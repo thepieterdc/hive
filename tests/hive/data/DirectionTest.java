@@ -13,13 +13,24 @@ import static org.junit.Assert.*;
  */
 public class DirectionTest {
 	/**
+	 * Tests Direction#representation().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testRepresentation() throws Exception {
+		assertEquals("Left", Direction.LEFT.representation());
+		assertEquals("Right", Direction.RIGHT.representation());
+	}
+
+	/**
 	 * Tests Direction#toString().
 	 *
 	 * @throws Exception
 	 */
 	@Test
 	public void testToString() throws Exception {
-		assertEquals("Left", Direction.LEFT.toString());
-		assertEquals("Right", Direction.RIGHT.toString());
+		assertEquals("Direction[Left]", Direction.LEFT.toString());
+		assertEquals("Direction[Right]", Direction.RIGHT.toString());
 	}
 }

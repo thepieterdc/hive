@@ -1,5 +1,6 @@
 package hive.data;
 
+import hive.helpers.HexCoordinate;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -43,7 +44,38 @@ public class OrientationTest {
 	}
 
 	/**
-	 * Tests Orientation#fromRepresentation().
+	 * Tests Orientation.fromDeltas().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testFromDeltas() throws Exception {
+		assertEquals(Orientation.LEFTMIDDLE, Orientation.fromDeltas(-1, 0));
+	}
+
+	/**
+	 * Tests Orientation.fromDeltas() with invalid parameters: the deltas.
+	 *
+	 * @throws Exception
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testFromDeltasInvalid() throws Exception {
+		Orientation.fromDeltas(5, 2);
+	}
+
+	/**
+	 * Tests Orientation.fromHexCoordinates().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testFromHexCoordinates() throws Exception {
+		assertEquals(Orientation.RIGHTMIDDLE, Orientation.fromHexCoordinates(new HexCoordinate(0, 0), HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.LEFTMIDDLE)));
+		assertNull(Orientation.fromHexCoordinates(HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.RIGHTUNDER), HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.LEFTUPPER)));
+	}
+
+	/**
+	 * Tests Orientation.fromRepresentation().
 	 *
 	 * @throws Exception
 	 */
@@ -58,30 +90,31 @@ public class OrientationTest {
 	}
 
 	/**
-	 * Tests Orientation#fromRepresentation() with invalid parameter: rep (null).
+	 * Tests Orientation.fromRepresentation() with invalid parameter: rep (null).
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testFromRepresentationRepNull() throws Exception {
 		Orientation.fromRepresentation(null, Direction.LEFT);
 	}
 
 	/**
-	 * Tests Orientation#fromRepresentation() with invalid parameter: rep (fake).
+	 * Tests Orientation.fromRepresentation() with invalid parameter: rep (fake).
 	 *
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testFromRepresentationRepFake() throws Exception {
 		Orientation.fromRepresentation("@", Direction.LEFT);
 	}
 
 	/**
-	 * Tests Orientation#fromRepresentation() with invalid parameter: dir (null).
+	 * Tests Orientation.fromRepresentation() with invalid parameter: dir (null).
+	 *
 	 * @throws Exception
 	 */
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testFromRepresentationDirNull() throws Exception {
 		Orientation.fromRepresentation("/", null);
 	}
