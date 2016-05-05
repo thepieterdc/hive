@@ -5,6 +5,7 @@ import hive.modes.PlayMode;
 import hive.modes.ViewerMode;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
@@ -32,9 +33,11 @@ public final class Hive extends Application {
 			backgroundPlayer.setOnEndOfMedia(() -> backgroundPlayer.seek(Duration.ZERO));
 			backgroundPlayer.setVolume(0.8);
 			backgroundPlayer.play();
-		} catch(MediaException ignored) {
+		} catch (MediaException ignored) {
 			new ErrorMessage(BUNDLE.getString("main_musicerror"), false).render();
 		}
+
+		stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/logo.png")));
 
 		Application.Parameters args = this.getParameters();
 		try {
