@@ -44,6 +44,13 @@ public abstract class HiveModel extends Model {
 	}
 
 	/**
+	 * @return the boardstates
+	 */
+	public Map<Integer, BoardState> boardStates() {
+		return Collections.unmodifiableMap(this.boardStates);
+	}
+
+	/**
 	 * Displays a given move on the board.
 	 *
 	 * @param index the move to set

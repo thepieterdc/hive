@@ -1,7 +1,6 @@
 package hive.models;
 
 import hive.TestListener;
-import hive.helpers.BoardState;
 import hive.helpers.Move;
 import hive.helpers.Unit;
 import hive.helpers.moves.StartMove;
@@ -11,7 +10,6 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +25,6 @@ public class ViewerModelTest {
 	private TestListener listener;
 	private ViewerModel model;
 	private List<Move> moves;
-	private Map<Integer, BoardState> states;
 
 	/**
 	 * Set-up the test environment.
@@ -37,7 +34,6 @@ public class ViewerModelTest {
 	@Before
 	public void setUp() throws Exception {
 		this.moves = Arrays.asList(new StartMove(), Move.fromRepresentation("wQ"), Move.fromRepresentation("bA1 wQ-"));
-		this.states = BoardState.unmarshal(this.moves);
 		this.model = new ViewerModel(this.moves);
 		this.listener = new TestListener(this.model);
 	}
@@ -61,7 +57,6 @@ public class ViewerModelTest {
 	public void tearDown() throws Exception {
 		this.model = null;
 		this.moves = null;
-		this.states = null;
 	}
 
 	/**
@@ -72,7 +67,7 @@ public class ViewerModelTest {
 	@Test
 	public void testBoardState() throws Exception {
 		this.model.move(this.moves.get(2));
-		assertEquals(this.states.get(2), this.model.boardState());
+		assertEquals(this.model.boardStates().get(2), this.model.boardState());
 	}
 
 	/**

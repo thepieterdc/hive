@@ -112,7 +112,7 @@ public class Move implements Representable {
 
 	@Override
 	public String toString() {
-		return "Move[orientation=" + this.orientation.direction() + this.orientation.representation() + ", otherUnit=" + this.otherUnit.representation() + ", representation=" + this.representation() + ", unit=" + this.unit.representation() + ']';
+		return "Move[orientation=" + this.orientation.direction().representation() + this.orientation.representation() + ", otherUnit=" + this.otherUnit.representation() + ", representation=" + this.representation() + ", unit=" + this.unit.representation() + ']';
 	}
 
 	/**

@@ -1,14 +1,17 @@
 package hive.helpers;
 
 import hive.TransferPiece;
-import hive.data.Orientation;
 import hive.exceptions.UnmarshalException;
 import hive.helpers.moves.StartMove;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests for hive.helpers.BoardState.
@@ -35,19 +38,13 @@ public class BoardStateTest {
 		assertTrue(onlyStart.get(0).freeHexagons().size() == 1 && onlyStart.get(0).freeHexagons().contains(center));
 		assertTrue(threeMoves.get(0).freeHexagons().size() == 1 && threeMoves.get(0).freeHexagons().contains(center));
 		assertTrue(threeMoves.get(1).freeHexagons().size() == 6 && threeMoves.get(1).units().size() == 1);
-		Collection<HexCoordinate> surrounds = new ArrayList<>(7);
-		surrounds.add(center);
-		for (Orientation o : Orientation.values()) {
-			surrounds.add(HexCoordinate.fromOrientation(center, o));
-		}
-		surrounds.forEach(h -> assertTrue(threeMoves.get(1).freeHexagons().contains(h)));
-
+		center.surroundings().forEach(h -> assertTrue(threeMoves.get(1).freeHexagons().contains(h)));
 
 		//Test BoardState#toString().
-		assertEquals("BoardState[hexagons=1, units=0]", onlyStart.get(0).toString());
-		assertEquals("BoardState[hexagons=1, units=0]", threeMoves.get(0).toString());
-		assertEquals("BoardState[hexagons=7, units=1]", threeMoves.get(1).toString());
-		assertEquals("BoardState[hexagons=10, units=2]", threeMoves.get(2).toString());
+		assertEquals("BoardState[freeHexagons=1, units=0]", onlyStart.get(0).toString());
+		assertEquals("BoardState[freeHexagons=1, units=0]", threeMoves.get(0).toString());
+		assertEquals("BoardState[freeHexagons=6, units=1]", threeMoves.get(1).toString());
+		assertEquals("BoardState[freeHexagons=8, units=2]", threeMoves.get(2).toString());
 
 		//Test BoardState#transferPieces().
 		assertTrue(onlyStart.get(0).transferPieces().isEmpty());
@@ -73,16 +70,6 @@ public class BoardStateTest {
 	@Test(expected = UnmarshalException.class)
 	public void testUnmarshalMovesEmpty() throws Exception {
 		BoardState.unmarshal(new ArrayList<>(0));
-	}
-
-	/**
-	 * Tests BoardState#unmarshal() with invalid parameter: move 0 is not instance of StartMove.
-	 *
-	 * @throws Exception
-	 */
-	@Test(expected = UnmarshalException.class)
-	public void testUnmarshalIllegalFirstMove() throws Exception {
-		BoardState.unmarshal(Collections.singletonList(Move.fromRepresentation("bQ")));
 	}
 
 	/**
