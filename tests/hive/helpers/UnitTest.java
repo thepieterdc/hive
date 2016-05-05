@@ -1,12 +1,15 @@
 package hive.helpers;
 
+import hive.data.Orientation;
 import hive.data.Players;
 import hive.data.UnitType;
+import hive.helpers.pathfinding.pathfinders.GrasshopperPathFinder;
+import hive.helpers.pathfinding.pathfinders.QueenBeetlePathFinder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Tests for hive.helpers.Unit.
@@ -81,6 +84,31 @@ public class UnitTest {
 	}
 
 	/**
+	 * Tests Unit#location().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testLocation() throws Exception {
+		HexCoordinate origin = new HexCoordinate(0, 0);
+		HexCoordinate leftUpper = HexCoordinate.fromOrientation(origin, Orientation.LEFTUPPER);
+		this.bQ.location(leftUpper);
+		assertEquals(leftUpper, this.bQ.location());
+		this.bQ.location(origin);
+	}
+
+	/**
+	 * Tests Unit#pathFinder().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testPathFinder() throws Exception {
+		assertTrue(this.bQ.pathFinder().get() instanceof QueenBeetlePathFinder);
+		assertTrue(this.wG2.pathFinder().get() instanceof GrasshopperPathFinder);
+	}
+
+	/**
 	 * Tests Unit#player().
 	 *
 	 * @throws Exception
@@ -120,8 +148,8 @@ public class UnitTest {
 	 */
 	@Test
 	public void testToString() throws Exception {
-		assertEquals("Unit[player=Player[color=0xffebcdff, id=b], type=Queen, rank=1, representation=bQ]", this.bQ.toString());
-		assertEquals("Unit[player=Player[color=0x001432ff, id=w], type=Grasshopper, rank=2, representation=wG2]", this.wG2.toString());
+		assertEquals("Unit[player=Player[color=0x001432ff, id=b, name=b], type=Queen, rank=1, representation=bQ]", this.bQ.toString());
+		assertEquals("Unit[player=Player[color=0xffebcdff, id=w, name=w], type=Grasshopper, rank=2, representation=wG2]", this.wG2.toString());
 	}
 
 	/**
