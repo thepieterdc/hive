@@ -31,6 +31,7 @@ public abstract class AbstractPlayPane extends StackPane implements Invalidation
 		this.model = m;
 		this.model.addListener(this);
 
+		this.getStyleClass().add("stack-pane");
 		this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
 		this.heightProperty().addListener(this);

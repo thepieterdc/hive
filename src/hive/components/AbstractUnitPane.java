@@ -92,6 +92,7 @@ public abstract class AbstractUnitPane extends GridPane implements InvalidationL
 
 		IntStream.range(0, 11).forEach(v -> this.getColumnConstraints().add(COLUMN_CONSTRAINTS));
 
+		this.getStyleClass().add("grid-pane");
 		this.setAlignment(Pos.CENTER);
 		this.setMaxWidth(Integer.MAX_VALUE);
 		this.setMinHeight(168);

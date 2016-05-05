@@ -54,6 +54,8 @@ public final class MovesPane extends VBox implements InvalidationListener {
 
 		MovesButtonBar movesButtonBar = new MovesButtonBar(this.model);
 
+		this.getStyleClass().add("vBox");
+
 		this.getChildren().addAll(this.movesList, movesButtonBar);
 	}
 

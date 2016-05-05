@@ -33,6 +33,7 @@ public final class HivePane extends VBox {
 		hive.components.play.UnitPane bottomPane = new hive.components.play.UnitPane(model);
 
 		this.getChildren().addAll(mainPane, bottomPane);
+		this.getStyleClass().add("vBox");
 		this.setMinSize(800.0, 600.0);
 
 		model.move(0);
@@ -63,6 +64,7 @@ public final class HivePane extends VBox {
 		hive.components.viewer.UnitPane bottomPane = new hive.components.viewer.UnitPane(model);
 
 		this.getChildren().addAll(mainPane, bottomPane);
+		this.getStyleClass().add("vBox");
 		this.setMinSize(800.0, 600.0);
 
 		model.move(0);
