@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * @author <a href="mailto:pieterdeclercq@outlook.com">Pieter De Clercq</a>
  */
-public final class StringUtils {
+public class StringUtils {
 	/**
 	 * Finds the length of the longest line in a multiline-string.
 	 *
