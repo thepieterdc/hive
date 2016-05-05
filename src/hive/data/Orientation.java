@@ -3,6 +3,8 @@ package hive.data;
 import hive.helpers.HexCoordinate;
 import hive.interfaces.Representable;
 
+import java.util.EnumSet;
+
 /**
  * Orientation enum; describes an orientation on the hexagonal grid.
  * <p>
@@ -60,12 +62,7 @@ public enum Orientation implements Representable {
 	 * @return the Orientation identified
 	 */
 	public static Orientation fromDeltas(int cD, int rD) {
-		for (Orientation o : Orientation.values()) {
-			if (o.columnDelta() == cD && o.rowDelta() == rD) {
-				return o;
-			}
-		}
-		throw new IllegalArgumentException("Orientation not found: colDelta=" + cD + ", rowDelta=" + rD);
+		return EnumSet.allOf(Orientation.class).stream().filter(o -> o.columnDelta() == cD && o.rowDelta() == rD).findAny().orElseThrow(() -> new IllegalArgumentException("Orientation not found: colDelta=" + cD + ", rowDelta=" + rD));
 	}
 
 	/**
@@ -76,12 +73,7 @@ public enum Orientation implements Representable {
 	 * @return the Orientation identified, or null if the coordinates are not neighbouring.
 	 */
 	public static Orientation fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
-		for (Orientation o : Orientation.values()) {
-			if (HexCoordinate.fromOrientation(hC, o).equals(base)) {
-				return o;
-			}
-		}
-		return null;
+		return EnumSet.allOf(Orientation.class).stream().filter(o -> HexCoordinate.fromOrientation(hC, o).equals(base)).findAny().orElse(null);
 	}
 
 	/**
@@ -98,12 +90,7 @@ public enum Orientation implements Representable {
 		if (dir == null) {
 			throw new IllegalArgumentException("Parameter \"dir\" is null.");
 		}
-		for (Orientation o : Orientation.values()) {
-			if (o.direction() == dir && rep.contains(o.representation())) {
-				return o;
-			}
-		}
-		throw new IllegalArgumentException("Orientation not found: " + rep);
+		return EnumSet.allOf(Orientation.class).stream().filter(o -> o.direction() == dir && rep.contains(o.representation())).findFirst().orElseThrow(() -> new IllegalArgumentException("Orientation not found: " + rep));
 	}
 
 	@Override

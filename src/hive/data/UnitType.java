@@ -9,6 +9,7 @@ import hive.helpers.pathfinding.pathfinders.SpiderPathFinder;
 import hive.interfaces.Representable;
 import javafx.scene.shape.SVGPath;
 
+import java.util.EnumSet;
 import java.util.function.Supplier;
 
 /**
@@ -68,12 +69,7 @@ public enum UnitType implements Representable {
 		if (a == 0) {
 			throw new IllegalArgumentException("Parameter \"a\" is empty.");
 		}
-		for (UnitType u : UnitType.values()) {
-			if (u.abbreviation() == a) {
-				return u;
-			}
-		}
-		throw new IllegalArgumentException("UnitType not found: " + a);
+		return EnumSet.allOf(UnitType.class).stream().filter(u -> u.abbreviation() == a).findAny().orElseThrow(() -> new IllegalArgumentException("UnitType not found: " + a));
 	}
 
 	/**
