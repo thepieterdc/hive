@@ -24,12 +24,12 @@ public final class FreeHexagon extends Hexagon {
 	 * FreeHexagon constructor.
 	 */
 	public FreeHexagon() {
-		this.colour(Color.LIGHTGRAY, Color.DARKGRAY);
+		this.colour(Color.web("#e5c100"), Color.web("#726000"));
 	}
 
 	@Override
 	public void enable(boolean b) {
-		this.colour(b ? Color.LIGHTGRAY : Color.RED, b ? Color.DARKGRAY : Color.DARKRED);
+		this.colour(b ? Color.web("#e5c100") : Color.RED, b ? Color.web("#726000") : Color.DARKRED);
 	}
 
 	@Override

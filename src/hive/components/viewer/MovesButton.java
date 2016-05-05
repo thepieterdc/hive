@@ -3,6 +3,8 @@ package hive.components.viewer;
 import hive.data.Svg;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 
 /**
  * MovesButton component. Can be used to navigate through the list of moves.
@@ -21,8 +23,11 @@ public final class MovesButton extends Button {
 		if (lbl == null) {
 			throw new IllegalArgumentException("Parameter \"lbl\" is null.");
 		}
-		this.setGraphic(lbl.path());
 		this.setCursor(Cursor.HAND);
+
+		SVGPath g = lbl.path();
+		g.setFill(Color.BLANCHEDALMOND);
+		this.setGraphic(g);
 	}
 
 	@Override

@@ -48,7 +48,6 @@ public final class MovesPane extends VBox implements InvalidationListener {
 				}
 			}
 		});
-
 		this.movesList.setCursor(Cursor.HAND);
 		this.movesList.setItems(FXCollections.observableList(this.model.moves()));
 		VBox.setVgrow(this.movesList, Priority.ALWAYS);

@@ -25,17 +25,12 @@ public final class HivePane extends VBox {
 		if (model == null) {
 			throw new IllegalArgumentException("Parameter \"model\" is null.");
 		}
-		hive.components.play.PlayPane playPane = new hive.components.play.PlayPane(model);
-		playPane.setStyle("-fx-background-color: #21252b");
-
-		ScrollPane mainPane = new ScrollPane(playPane);
+		ScrollPane mainPane = new ScrollPane(new hive.components.play.PlayPane(model));
 		mainPane.setFitToHeight(true);
 		mainPane.setFitToWidth(true);
-		mainPane.setStyle("-fx-padding: 0; -fx-background-insets: 0; -fx-background-color: #21252b");
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		hive.components.play.UnitPane bottomPane = new hive.components.play.UnitPane(model);
-		bottomPane.setStyle("-fx-background-color: #21252b");
 
 		this.getChildren().addAll(mainPane, bottomPane);
 		this.setMinSize(800.0, 600.0);
@@ -56,13 +51,13 @@ public final class HivePane extends VBox {
 		movesPane.setMaxWidth(1);
 		SplitPane.setResizableWithParent(movesPane, Boolean.FALSE);
 
-		ScrollPane playPane = new ScrollPane(new hive.components.viewer.PlayPane(model));
-		playPane.setFitToHeight(true);
-		playPane.setFitToWidth(true);
-		playPane.setStyle("-fx-padding: 0; -fx-background-insets: 0;");
-		VBox.setVgrow(playPane, Priority.ALWAYS);
+		ScrollPane playPaneScroll = new ScrollPane(new hive.components.viewer.PlayPane(model));
+		playPaneScroll.setFitToHeight(true);
+		playPaneScroll.setFitToWidth(true);
+		VBox.setVgrow(playPaneScroll, Priority.ALWAYS);
 
-		SplitPane mainPane = new SplitPane(movesPane, playPane);
+		SplitPane mainPane = new SplitPane(movesPane, playPaneScroll);
+
 		VBox.setVgrow(mainPane, Priority.ALWAYS);
 
 		hive.components.viewer.UnitPane bottomPane = new hive.components.viewer.UnitPane(model);
