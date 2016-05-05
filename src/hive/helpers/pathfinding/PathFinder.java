@@ -41,7 +41,7 @@ public abstract class PathFinder {
 	 * @return true if the unit can move to the destination coordinate
 	 */
 	protected static boolean canPassThrough(BoardState state, HexCoordinate start, HexCoordinate dest) {
-		return HexCoordinate.surroundings(start).stream().filter(h -> dest.distanceTo(h) == 1).mapToInt(h -> state.free(h) ? 0 : 1).sum() % 2 != 0;
+		return start.surroundings().stream().filter(h -> dest.distanceTo(h) == 1).mapToInt(h -> state.free(h) ? 0 : 1).sum() % 2 != 0;
 	}
 
 	/**

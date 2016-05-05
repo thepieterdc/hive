@@ -29,17 +29,6 @@ public final class HexCoordinate implements Locatable, Representable {
 	}
 
 	/**
-	 * Returns whether if two coordinates are colinear; meaning there is a direct line between both coordinates.
-	 *
-	 * @param base   the base coordinate
-	 * @param target the target coordinate
-	 * @return true if the given coordinates are colinear.
-	 */
-	public static boolean colinear(HexCoordinate base, HexCoordinate target) {
-		return base.column() == target.column() || base.row() == target.row() || base.row() + base.column() == target.row() + target.column();
-	}
-
-	/**
 	 * @return the column
 	 */
 	public int column() {
@@ -96,7 +85,7 @@ public final class HexCoordinate implements Locatable, Representable {
 
 	@Override
 	public String representation() {
-		return "[" + this.row + ", y=" + this.column + ']';
+		return "[" + this.row + ", " + this.column + ']';
 	}
 
 	/**
@@ -104,6 +93,13 @@ public final class HexCoordinate implements Locatable, Representable {
 	 */
 	public int row() {
 		return this.row;
+	}
+
+	/**
+	 * @return the surroundings of the current coordinate
+	 */
+	public Set<HexCoordinate> surroundings() {
+		return surroundings(this);
 	}
 
 	/**
