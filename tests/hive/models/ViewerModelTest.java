@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +27,7 @@ public class ViewerModelTest {
 	private TestListener listener;
 	private ViewerModel model;
 	private List<Move> moves;
-	private HashMap<Integer, BoardState> states;
+	private Map<Integer, BoardState> states;
 
 	/**
 	 * Set-up the test environment.
@@ -38,7 +38,7 @@ public class ViewerModelTest {
 	public void setUp() throws Exception {
 		this.moves = Arrays.asList(new StartMove(), Move.fromRepresentation("wQ"), Move.fromRepresentation("bA1 wQ-"));
 		this.states = BoardState.unmarshal(this.moves);
-		this.model = new ViewerModel(this.moves, this.states);
+		this.model = new ViewerModel(this.moves);
 		this.listener = new TestListener(this.model);
 	}
 
@@ -213,14 +213,6 @@ public class ViewerModelTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorMovesNull() {
-		new ViewerModel(null, this.states);
-	}
-
-	/**
-	 * Tests ViewerModel constructor with invalid parameter: states (null).
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorStatesNull() {
-		new ViewerModel(this.moves, null);
+		new ViewerModel(null);
 	}
 }

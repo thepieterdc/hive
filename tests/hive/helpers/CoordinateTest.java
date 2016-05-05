@@ -94,6 +94,20 @@ public class CoordinateTest {
 	}
 
 	/**
+	 * Tests Coordinate#representation().
+	 *
+	 * @throws Exception
+	 */
+	@Test
+	public void testRepresentation() throws Exception {
+		assertEquals("[0.0, 0.0]", this.origin.representation());
+		assertEquals("[-5.0, -10.0]", this.allNeg.representation());
+		assertEquals("[5.0, 10.0]", this.allPos.representation());
+		assertEquals("[-5.0, 10.0]", this.negXposY.representation());
+		assertEquals("[5.0, -10.0]", this.posXNegY.representation());
+	}
+
+	/**
 	 * Tests Coordinate#toString().
 	 *
 	 * @throws Exception

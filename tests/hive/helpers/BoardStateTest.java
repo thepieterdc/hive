@@ -32,15 +32,15 @@ public class BoardStateTest {
 
 		//Test BoardState#coordinates().
 		HexCoordinate center = new HexCoordinate(0, 0);
-		assertTrue(onlyStart.get(0).coordinates().size() == 1 && onlyStart.get(0).coordinates().containsKey(center));
-		assertTrue(threeMoves.get(0).coordinates().size() == 1 && threeMoves.get(0).coordinates().containsKey(center));
-		assertTrue(threeMoves.get(1).coordinates().size() == 7);
+		assertTrue(onlyStart.get(0).freeHexagons().size() == 1 && onlyStart.get(0).freeHexagons().contains(center));
+		assertTrue(threeMoves.get(0).freeHexagons().size() == 1 && threeMoves.get(0).freeHexagons().contains(center));
+		assertTrue(threeMoves.get(1).freeHexagons().size() == 6 && threeMoves.get(1).units().size() == 1);
 		Collection<HexCoordinate> surrounds = new ArrayList<>(7);
 		surrounds.add(center);
 		for (Orientation o : Orientation.values()) {
 			surrounds.add(HexCoordinate.fromOrientation(center, o));
 		}
-		surrounds.forEach(h -> assertTrue(threeMoves.get(1).coordinates().containsKey(h)));
+		surrounds.forEach(h -> assertTrue(threeMoves.get(1).freeHexagons().contains(h)));
 
 
 		//Test BoardState#toString().

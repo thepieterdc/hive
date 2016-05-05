@@ -47,7 +47,7 @@ public final class Coordinate implements Locatable, Representable {
 
 	@Override
 	public String representation() {
-		return "[" + this.x + ", y=" + this.y + ']';
+		return "[" + this.x + ", " + this.y + ']';
 	}
 
 	@Override
