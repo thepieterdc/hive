@@ -8,9 +8,7 @@ import org.junit.Test;
 import java.util.EnumSet;
 import java.util.Set;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Tests for hive.helpers.HexCoordinate.
@@ -83,7 +81,7 @@ public class HexCoordinateTest {
 	 */
 	@Test
 	public void testDistanceAndDistanceTo() throws Exception {
-		EnumSet.allOf(Orientation.class).forEach(o -> assertEquals(1, this.origin.distanceTo(HexCoordinate.fromOrientation(this.origin, o)), "Distance should be 1 for base=" + this.origin + ", target=" + HexCoordinate.fromOrientation(this.origin, o) + '.'));
+		EnumSet.allOf(Orientation.class).forEach(o -> assertEquals(1, this.origin.distanceTo(HexCoordinate.fromOrientation(this.origin, o))));
 	}
 
 	/**

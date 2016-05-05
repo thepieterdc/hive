@@ -2,8 +2,7 @@ package hive.data;
 
 import org.junit.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * Tests for hive.data.Players.
