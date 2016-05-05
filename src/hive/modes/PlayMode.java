@@ -51,7 +51,10 @@ public final class PlayMode implements Mode {
 
 		PlayModel model = new PlayModel(this.player1, this.player2);
 
-		s.setScene(new Scene(new HivePane(model)));
+		Scene scene = new Scene(new HivePane(model));
+		scene.getStylesheets().add(Hive.class.getClass().getResource("/stylesheet.min.css").toString());
+
+		s.setScene(scene);
 		s.show();
 
 		model.winnerProperty().addListener((o, od, nw) -> {
