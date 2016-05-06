@@ -1,2 +1,2 @@
-# hive2
-Programmeren II Project.
+# programmeren2-hive
+Programmeren II Project - Hive.
