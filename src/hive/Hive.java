@@ -10,7 +10,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -30,7 +29,7 @@ public final class Hive extends Application {
 	public void start(Stage stage) {
 		try {
 			MediaPlayer backgroundPlayer = new MediaPlayer(new Media(this.getClass().getResource("/fantasie.mp3").toString()));
-			backgroundPlayer.setOnEndOfMedia(() -> backgroundPlayer.seek(Duration.ZERO));
+			backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			backgroundPlayer.setVolume(0.8);
 			backgroundPlayer.play();
 		} catch (MediaException ignored) {
