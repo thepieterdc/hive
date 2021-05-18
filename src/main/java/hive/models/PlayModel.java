@@ -46,7 +46,7 @@ public final class PlayModel extends HiveModel {
 		Arrays.asList(this.player1, this.player2).forEach(p -> EnumSet.allOf(UnitType.class).forEach(u -> IntStream.range(0, u.capacity()).forEach(c -> units[i.getAndIncrement()] = new Unit(p, u, c + 1))));
 
 		//Unit may not be neighbouring to an enemy unit.//
-		this.placementValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).entrySet().stream().noneMatch(e -> !e.getKey().player().equals(u.player())));
+		this.placementValidators.add((u, c) -> u.location() != null || this.totalMoves < 3 || this.boardState().neighbours(c).keySet().stream().map(Unit::player).allMatch(p -> p.equals(u.player())));
 		//Validates that a unit cannot be moved as long as the queen is not in game yet.//
 		this.placementValidators.add((u, c) -> u.location() == null || u.type() == UnitType.QUEEN || this.boardState().units().containsKey(new Unit(u.player(), UnitType.QUEEN, 1)));
 		//Validates that the queen is not played in the first move.//
@@ -91,10 +91,8 @@ public final class PlayModel extends HiveModel {
 			throw new IllegalArgumentException("Parameter \"move\" is null.");
 		}
 
-		for (PlacementValidator v : this.placementValidators) {
-			if (!v.validate(m.unit(), dest)) {
-				return false;
-			}
+		if (this.placementValidators.stream().anyMatch(v -> !v.validate(m.unit(), dest))) {
+			return false;
 		}
 
 		if (m.unit().location() != null && !m.unit().pathFinder().get().valid(this.boardState(), m, dest)) {
@@ -113,11 +111,16 @@ public final class PlayModel extends HiveModel {
 
 		this.move(this.totalMoves - 1);
 
-		this.boardState().units().forEach((u, h) -> {
-			if (u.type() == UnitType.QUEEN && this.boardState().freeNeighbours(h).isEmpty()) {
-				winnerProperty.set(u.player().equals(this.player1) ? this.player2 : this.player1);
-			}
-		});
+		// Set the winner.
+		this.boardState()
+			.units()
+			.entrySet()
+			.stream()
+			.filter((e) -> e.getKey().type() == UnitType.QUEEN && this.boardState().freeNeighbours(e.getValue()).isEmpty())
+			.map(e -> e.getKey().player())
+			.findAny()
+			.ifPresent(loser -> this.winnerProperty.set(loser.equals(this.player1) ? this.player2 : this.player1));
+
 		return true;
 	}
 

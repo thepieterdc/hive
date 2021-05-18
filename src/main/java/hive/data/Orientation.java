@@ -4,6 +4,7 @@ import hive.helpers.HexCoordinate;
 import hive.interfaces.Representable;
 
 import java.util.EnumSet;
+import java.util.Optional;
 
 /**
  * Orientation enum; describes an orientation on the hexagonal grid.
@@ -72,8 +73,8 @@ public enum Orientation implements Representable {
 	 * @param hC   the target coordinate
 	 * @return the Orientation identified, or null if the coordinates are not neighbouring.
 	 */
-	public static Orientation fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
-		return EnumSet.allOf(Orientation.class).stream().filter(o -> HexCoordinate.fromOrientation(hC, o).equals(base)).findAny().orElse(null);
+	public static Optional<Orientation> fromHexCoordinates(HexCoordinate base, HexCoordinate hC) {
+		return EnumSet.allOf(Orientation.class).stream().filter(o -> HexCoordinate.fromOrientation(hC, o).equals(base)).findAny();
 	}
 
 	/**

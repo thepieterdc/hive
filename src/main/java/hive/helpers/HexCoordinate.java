@@ -5,6 +5,7 @@ import hive.interfaces.Locatable;
 import hive.interfaces.Representable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A hexagonal (axial) coordinate.
@@ -116,7 +117,11 @@ public final class HexCoordinate implements Locatable, Representable {
 	 * @return the surrounding coordinates without the given "skip" set
 	 */
 	public static Set<HexCoordinate> surroundings(HexCoordinate c, Collection<HexCoordinate> skip) {
-		return EnumSet.allOf(Orientation.class).stream().filter(o -> !skip.contains(fromOrientation(c, o))).collect(HashSet::new, (h, e) -> h.add(fromOrientation(c, e)), HashSet::addAll);
+		return EnumSet.allOf(Orientation.class)
+			.stream()
+			.map(o -> fromOrientation(c, o))
+			.filter(co -> !skip.contains(co))
+			.collect(Collectors.toSet());
 	}
 
 	@Override

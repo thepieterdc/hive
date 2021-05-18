@@ -155,11 +155,6 @@ public abstract class PathFinder {
 	 * @return true if the boardstate is valid
 	 */
 	protected boolean validState(BoardState s) {
-		for (Validatable<BoardState> v : this.validators) {
-			if (!v.valid(s)) {
-				return false;
-			}
-		}
-		return true;
+		return this.validators.stream().allMatch(v -> v.valid(s));
 	}
 }

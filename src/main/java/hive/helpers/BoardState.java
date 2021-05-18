@@ -137,7 +137,7 @@ public final class BoardState {
 	 * @return a map containing the neighbouring units and their coordinates
 	 */
 	public Map<Unit, HexCoordinate> neighbours(HexCoordinate h) {
-		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()) != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		return this.units.entrySet().stream().filter(e -> Orientation.fromHexCoordinates(h, e.getValue()).isPresent()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
 
 	/**
@@ -147,8 +147,7 @@ public final class BoardState {
 	 * @return a map of hexagonal coordinates and their surroundings
 	 */
 	private static Set<HexCoordinate> surroundings(Map<Unit, HexCoordinate> m) {
-		Collection<HexCoordinate> unitCoords = m.entrySet().stream().collect(HashSet::new, (h, e) -> h.add(e.getValue()), HashSet::addAll);
-		return m.entrySet().stream().collect(HashSet::new, (h, e) -> h.addAll(HexCoordinate.surroundings(e.getValue(), unitCoords)), HashSet::addAll);
+		return m.values().stream().flatMap(c -> HexCoordinate.surroundings(c, m.values()).stream()).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -162,17 +161,10 @@ public final class BoardState {
 	 * @return the list of TransferPiece objects
 	 */
 	public List<TransferPiece> transferPieces() {
-		List<TransferPiece> lijst = this.units.entrySet().stream().map(e -> new TransferPiece(e.getKey().type().abbreviation(), e.getKey().player().id(), e.getKey().rank(), e.getValue().row(), e.getValue().column())).collect(Collectors.toList());
-		Collections.sort(lijst);
-		return lijst;
-	}
-
-	/**
-	 * @param c the coordinate
-	 * @return the unit at the given coordinate, or null if it's free
-	 */
-	public Unit unit(HexCoordinate c) {
-		return this.units.entrySet().stream().filter(e -> e.getValue().equals(c)).map(Map.Entry::getKey).findFirst().orElse(null);
+		return this.units.entrySet().stream()
+			.map(e -> new TransferPiece(e.getKey().type().abbreviation(), e.getKey().player().id(), e.getKey().rank(), e.getValue().row(), e.getValue().column()))
+			.sorted()
+			.collect(Collectors.toList());
 	}
 
 	/**

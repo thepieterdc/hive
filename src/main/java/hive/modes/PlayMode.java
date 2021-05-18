@@ -20,6 +20,7 @@ import java.nio.file.StandardOpenOption;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +33,7 @@ import java.util.stream.Collectors;
 public final class PlayMode implements Mode {
 	private String player1;
 	private String player2;
-
+	
 	@Override
 	public void start(Stage s, List<String> p) {
 		while (this.player1 == null || this.player1.length() < 1) {
@@ -41,36 +42,34 @@ public final class PlayMode implements Mode {
 			player1Dialog.setHeaderText(Hive.BUNDLE.getString("modes_play_player") + " 1");
 			player1Dialog.showAndWait().ifPresent(n -> this.player1 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player2) ? n : null);
 		}
-
+		
 		while (this.player2 == null || this.player2.length() < 1) {
 			TextInputDialog player2Dialog = new TextInputDialog(Player.randomFirstName() + ' ' + Player.randomAdjective());
 			player2Dialog.setContentText(Hive.BUNDLE.getString("modes_play_name") + ':');
 			player2Dialog.setHeaderText(Hive.BUNDLE.getString("modes_play_player") + " 2");
 			player2Dialog.showAndWait().ifPresent(n -> this.player2 = n != null && n.length() > 1 && !n.equalsIgnoreCase(this.player1) ? n : null);
 		}
-
+		
 		PlayModel model = new PlayModel(this.player1, this.player2);
-
+		
 		Scene scene = new Scene(new HivePane(model));
 		scene.getStylesheets().add(Hive.class.getResource("/stylesheet.min.css").toString());
-
+		
 		s.setScene(scene);
 		s.show();
-
-		model.winnerProperty().addListener((o, od, nw) -> {
-			if (nw != null) {
-				s.close();
-				new InfoMessage(Hive.BUNDLE.getString("modes_play_gameover"), MessageFormat.format(Hive.BUNDLE.getString("modes_play_gameover_msg"), nw.name(), model.totalMoves() - 1)).render();
-				writeLog(model.moves());
-			}
-		});
+		
+		model.winnerProperty().addListener((o, od, nw) -> Optional.ofNullable(nw).ifPresent(winner -> {
+			s.close();
+			new InfoMessage(Hive.BUNDLE.getString("modes_play_gameover"), MessageFormat.format(Hive.BUNDLE.getString("modes_play_gameover_msg"), winner.name(), model.totalMoves() - 1)).render();
+			writeLog(model.moves());
+		}));
 	}
-
+	
 	@Override
 	public boolean valid(Integer args) {
 		return args == 0;
 	}
-
+	
 	/**
 	 * Writes the list of moves to a file.
 	 *
@@ -78,7 +77,7 @@ public final class PlayMode implements Mode {
 	 */
 	private static void writeLog(Collection<Move> moves) {
 		Path p = Paths.get(System.getProperty("user.home"), "hive-" + System.currentTimeMillis() / 1000 + ".txt");
-
+		
 		try {
 			Files.write(p, moves.stream().map(Move::representation).collect(Collectors.toList()), StandardOpenOption.CREATE);
 			new InfoMessage(Hive.BUNDLE.getString("modes_play_report"), MessageFormat.format(Hive.BUNDLE.getString("modes_play_report_msg"), p)).render();

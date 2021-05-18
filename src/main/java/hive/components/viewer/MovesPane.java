@@ -11,6 +11,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.util.Optional;
+
 /**
  * MovesPane component - contains a list of moves and a MovesButtonBar to navigate through those moves.
  * <p>
@@ -43,9 +45,7 @@ public final class MovesPane extends VBox implements InvalidationListener {
 			@Override
 			protected void updateItem(Move t, boolean b) {
 				super.updateItem(t, b);
-				if (t != null) {
-					this.setText(t.representation());
-				}
+				Optional.ofNullable(t).map(Move::representation).ifPresent(this::setText);
 			}
 		});
 		this.movesList.setCursor(Cursor.HAND);

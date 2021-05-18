@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 /**
  * Hive application.
@@ -28,7 +29,7 @@ public final class Hive extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			MediaPlayer backgroundPlayer = new MediaPlayer(new Media(this.getClass().getResource("/fantasie.mp3").toString()));
+			final MediaPlayer backgroundPlayer = new MediaPlayer(new Media(this.getClass().getResource("/fantasie.mp3").toString()));
 			backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 			backgroundPlayer.setVolume(0.8);
 			backgroundPlayer.play();
@@ -38,13 +39,13 @@ public final class Hive extends Application {
 
 		stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/logo.png")));
 
-		Application.Parameters args = this.getParameters();
+		final Application.Parameters args = this.getParameters();
 		try {
 			if (args == null || args.getRaw().size() > 2) {
 				throw new IllegalArgumentException(BUNDLE.getString("main_syntax"));
 			}
 
-			Arrays.asList(new PlayMode(), new ViewerMode()).stream().filter(m -> m.valid(args.getRaw().size())).findFirst().ifPresent(m -> m.start(stage, args.getRaw()));
+			Stream.of(new PlayMode(), new ViewerMode()).filter(m -> m.valid(args.getRaw().size())).findFirst().ifPresent(m -> m.start(stage, args.getRaw()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			Platform.runLater(() -> new ErrorMessage(e.getMessage()).render());

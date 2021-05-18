@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -89,8 +90,7 @@ public abstract class AbstractUnitPane extends GridPane implements InvalidationL
 		Arrays.stream(m.units()).forEach(u -> this.unitHexagons.put(u, new AbstractUnitPane.UnitPaneItem(new UnitHexagon(u, 4), u.player().id() == 'b' ? 0 : 1, i.getAndIncrement() % 11)));
 
 		COLUMN_CONSTRAINTS.setHgrow(Priority.ALWAYS);
-
-		IntStream.range(0, 11).forEach(v -> this.getColumnConstraints().add(COLUMN_CONSTRAINTS));
+		this.getColumnConstraints().addAll(IntStream.range(0, 11).mapToObj(j -> COLUMN_CONSTRAINTS).collect(Collectors.toList()));
 
 		this.getStyleClass().add("grid-pane");
 		this.setAlignment(Pos.CENTER);
@@ -101,7 +101,12 @@ public abstract class AbstractUnitPane extends GridPane implements InvalidationL
 	@Override
 	public void invalidated(Observable observable) {
 		this.getChildren().clear();
-		this.unitHexagons.entrySet().stream().filter(u -> !this.model.boardState().units().containsKey(u.getKey())).forEach(u -> this.add(this.patch(u.getValue().hexagon()), u.getValue().column(), u.getValue().row()));
+		this.unitHexagons
+			.entrySet()
+			.stream()
+			.filter(u -> !this.model.boardState().units().containsKey(u.getKey()))
+			.map(Map.Entry::getValue)
+			.forEach(c -> this.add(this.patch(c.hexagon()), c.column(), c.row()));
 	}
 
 	/**

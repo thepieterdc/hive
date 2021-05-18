@@ -28,13 +28,6 @@ public final class Coordinate implements Locatable, Representable {
 		this.y = yCoord;
 	}
 
-	/**
-	 * @return a list of the coordinates as doubles; for convenient usage in Polygon classes
-	 */
-	public List<Double> asList() {
-		return Arrays.asList(this.x, this.y);
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		return obj instanceof Coordinate && ((Locatable) obj).x() == this.x && ((Locatable) obj).y() == this.y;

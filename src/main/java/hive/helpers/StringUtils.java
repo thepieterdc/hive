@@ -18,9 +18,11 @@ public class StringUtils {
 	 * @return the length of the longest line
 	 */
 	public static int longestLine(String multilineString) {
-		AtomicInteger max = new AtomicInteger(0);
-		Arrays.stream(multilineString.split(System.lineSeparator())).forEach(s -> max.set(Math.max(max.get(), s.length())));
-		return max.get();
+		return Arrays
+			.stream(multilineString.split(System.lineSeparator()))
+			.mapToInt(String::length)
+			.max()
+			.orElse(0);
 	}
 
 	/**

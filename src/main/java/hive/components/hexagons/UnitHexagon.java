@@ -35,8 +35,7 @@ public final class UnitHexagon extends Hexagon {
 		this.unitSvg = this.unit.type().path();
 		this.unitSvg.setFill(this.unit.player().color());
 
-		this.ranks = new Circle[this.unit.rank()];
-		IntStream.range(0, this.ranks.length).forEach(i -> this.ranks[i] = new Circle(1, this.unit.player().color()));
+		this.ranks = IntStream.range(0, this.unit.rank()).mapToObj(i -> new Circle(1, this.unit.player().color())).toArray(Circle[]::new);
 
 		this.colour(this.unit.player().color().invert(), this.unit.player().color());
 		this.setCursor(Cursor.HAND);

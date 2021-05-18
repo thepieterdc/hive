@@ -52,11 +52,13 @@ public class Move implements Representable {
 	 * @throws IllegalMoveException the move is invalid
 	 */
 	public static Move fromCoordinates(BoardState state, Unit u, HexCoordinate dest) throws IllegalMoveException {
-		Map.Entry<Unit, HexCoordinate> otherUnit = state.neighbours(dest).entrySet().stream().findAny().orElse(null);
-		if (otherUnit == null) {
-			throw new IllegalMoveException(u, dest);
-		}
-		return new Move(u, otherUnit.getKey(), Orientation.fromHexCoordinates(dest, otherUnit.getValue()));
+		return state
+			.neighbours(dest)
+			.entrySet()
+			.stream()
+			.map(e -> new Move(u, e.getKey(), Orientation.fromHexCoordinates(dest, e.getValue()).orElse(null)))
+			.findAny()
+			.orElseThrow(() -> new IllegalMoveException(u, dest));
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class Move implements Representable {
 		if (r == null) {
 			throw new IllegalArgumentException("Parameter \"r\" is null.");
 		}
-		if ("start".equals(r.toLowerCase())) {
+		if ("start".equalsIgnoreCase(r)) {
 			return new StartMove();
 		}
 		try {

@@ -35,7 +35,7 @@ public final class ViewerMode implements Mode {
 			ViewerModel model = new ViewerModel(moves);
 
 			Scene scene = new Scene(new HivePane(model));
-			scene.getStylesheets().add(Hive.class.getClass().getResource("/stylesheet.min.css").toString());
+			scene.getStylesheets().add(Hive.class.getResource("/stylesheet.min.css").toString());
 
 			s.setScene(scene);
 			s.setTitle("Hive Viewer" + (p.size() == 2 ? " [" + Hive.BUNDLE.getString("modes_viewer_testmode") + ']' : ""));

@@ -70,8 +70,8 @@ public class OrientationTest {
 	 */
 	@Test
 	public void testFromHexCoordinates() throws Exception {
-		assertEquals(Orientation.RIGHTMIDDLE, Orientation.fromHexCoordinates(new HexCoordinate(0, 0), HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.LEFTMIDDLE)));
-		assertNull(Orientation.fromHexCoordinates(HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.RIGHTUNDER), HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.LEFTUPPER)));
+		assertEquals(Orientation.RIGHTMIDDLE, Orientation.fromHexCoordinates(new HexCoordinate(0, 0), HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.LEFTMIDDLE)).get());
+		assertFalse(Orientation.fromHexCoordinates(HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.RIGHTUNDER), HexCoordinate.fromOrientation(new HexCoordinate(0, 0), Orientation.LEFTUPPER)).isPresent());
 	}
 
 	/**

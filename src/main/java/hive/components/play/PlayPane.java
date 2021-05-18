@@ -9,6 +9,8 @@ import hive.helpers.Move;
 import hive.helpers.moves.FirstMove;
 import hive.models.PlayModel;
 
+import java.util.Optional;
+
 /**
  * PlayPane component for the Play-mode. The playing field of the game.
  * <p>
@@ -18,7 +20,7 @@ import hive.models.PlayModel;
  */
 public final class PlayPane extends AbstractPlayPane {
 	private final PlayModel model;
-
+	
 	/**
 	 * PlayPane constructor.
 	 *
@@ -28,22 +30,20 @@ public final class PlayPane extends AbstractPlayPane {
 		super(m);
 		this.model = m;
 	}
-
+	
 	@Override
 	protected FreeHexagon parseFreeHexagon(FreeHexagon h, HexCoordinate c) {
-		h.setOnMouseClicked(e -> {
-			if (this.model.selectedUnit().get() != null) {
-				try {
-					h.enable(this.model.totalMoves() == 1 ? this.model.move(new FirstMove(this.model.selectedUnit().get())) : this.model.move(Move.fromCoordinates(this.model.boardState(), this.model.selectedUnit().get(), c), c));
-				} catch (IllegalMoveException ignored) {
-					h.enable(false);
-				}
+		h.setOnMouseClicked(e -> Optional.ofNullable(this.model.selectedUnit().get()).ifPresent(u -> {
+			try {
+				h.enable(this.model.totalMoves() == 1 ? this.model.move(new FirstMove(u)) : this.model.move(Move.fromCoordinates(this.model.boardState(), u, c), c));
+			} catch (IllegalMoveException ignored) {
+				h.enable(false);
 			}
-		});
+		}));
 		this.model.selectedUnit().addListener(o -> h.enable(true));
 		return h;
 	}
-
+	
 	@Override
 	protected UnitHexagon parseUnitHexagon(UnitHexagon uH) {
 		uH.enable(this.model.turn().equals(uH.unit().player()));
@@ -53,7 +53,7 @@ public final class PlayPane extends AbstractPlayPane {
 		}
 		return uH;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "PlayPane[]";

@@ -22,11 +22,6 @@ public class ContinuousContactValidator implements Validatable<BoardState> {
 
 	@Override
 	public boolean valid(BoardState state) {
-		for (Map.Entry<Unit, HexCoordinate> u : state.units().entrySet()) {
-			if (state.neighbours(u.getValue()).isEmpty()) {
-				return false;
-			}
-		}
-		return true;
+		return state.units().values().stream().noneMatch(c -> state.neighbours(c).isEmpty());
 	}
 }

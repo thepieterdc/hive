@@ -52,20 +52,6 @@ public class CoordinateTest {
 	}
 
 	/**
-	 * Tests Coordinate#asList().
-	 *
-	 * @throws Exception
-	 */
-	@Test
-	public void testAsList() throws Exception {
-		assertThat(Arrays.asList(0.0, 0.0), is(this.origin.asList()));
-		assertThat(Arrays.asList(-5.0, -10.0), is(this.allNeg.asList()));
-		assertThat(Arrays.asList(5.0, 10.0), is(this.allPos.asList()));
-		assertThat(Arrays.asList(-5.0, 10.0), is(this.negXposY.asList()));
-		assertThat(Arrays.asList(5.0, -10.0), is(this.posXNegY.asList()));
-	}
-
-	/**
 	 * Tests Coordinate#equals().
 	 *
 	 * @throws Exception

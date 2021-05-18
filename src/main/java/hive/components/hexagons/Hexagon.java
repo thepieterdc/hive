@@ -12,6 +12,10 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.StrokeType;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A hexagon. It extends Group because this allows putting FreeHexagons and UnitHexagons in the
@@ -24,41 +28,34 @@ import java.util.Arrays;
 public abstract class Hexagon extends Group implements Enableable, Scalable, Selectable, Translatable {
 	private static final double RADIUS = 10.0;
 	private static final double SQRT75 = 8.660254037844387;
-
+	
+	// Coordinates.
+	private static final Coordinate BOTTOM = new Coordinate(0.0, -RADIUS);
+	private static final Coordinate BOTTOM_LEFT = new Coordinate(-SQRT75, -RADIUS / 2.0);
+	private static final Coordinate BOTTOM_RIGHT = new Coordinate(SQRT75, -RADIUS / 2.0);
+	private static final Coordinate TOP = new Coordinate(0.0, RADIUS);
+	private static final Coordinate TOP_LEFT = new Coordinate(-SQRT75, RADIUS / 2.0);
+	private static final Coordinate TOP_RIGHT = new Coordinate(SQRT75, RADIUS / 2.0);
+	
 	private final Polygon hexagon;
-
+	
 	/**
 	 * Hexagon constructor.
 	 */
 	protected Hexagon() {
-		this.hexagon = new Polygon();
-		Arrays.asList(top(), topRight(), bottomRight(), bottom(), bottomLeft(), topLeft()).forEach(coordinate -> this.hexagon.getPoints().addAll(coordinate.asList()));
+		this.hexagon = new Polygon(
+			TOP.x(), TOP.y(),
+			TOP_RIGHT.x(), TOP_RIGHT.y(),
+			BOTTOM_RIGHT.x(), BOTTOM_RIGHT.y(),
+			BOTTOM.x(), BOTTOM.y(),
+			BOTTOM_LEFT.x(), BOTTOM_RIGHT.y(),
+			TOP_LEFT.x(), TOP_RIGHT.y()
+		);
 		this.hexagon.setStrokeType(StrokeType.INSIDE);
 		this.hexagon.setStrokeWidth(1.0);
 		this.getChildren().add(this.hexagon);
 	}
-
-	/**
-	 * @return the bottom coordinate.
-	 */
-	private static Coordinate bottom() {
-		return new Coordinate(0.0, -RADIUS);
-	}
-
-	/**
-	 * @return the bottom-left coordinate.
-	 */
-	private static Coordinate bottomLeft() {
-		return new Coordinate(-SQRT75, -RADIUS / 2.0);
-	}
-
-	/**
-	 * @return the bottom-right coordinate.
-	 */
-	private static Coordinate bottomRight() {
-		return new Coordinate(SQRT75, -RADIUS / 2.0);
-	}
-
+	
 	/**
 	 * Sets the colours of the hexagon.
 	 */
@@ -66,18 +63,18 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 		this.hexagon.setFill(fill);
 		this.hexagon.setStroke(stroke);
 	}
-
+	
 	@Override
 	public void enable(boolean b) {
 		this.setCursor(b ? Cursor.HAND : Cursor.DEFAULT);
 		this.setOpacity(b ? 1 : 0.2);
 	}
-
+	
 	@Override
 	public final double height() {
-		return this.hexagon.getScaleY() * (top().y() - bottom().y());
+		return this.hexagon.getScaleY() * (TOP.y() - BOTTOM.y());
 	}
-
+	
 	@Override
 	public void scale(double factor) {
 		if (factor <= 0.0) {
@@ -86,36 +83,15 @@ public abstract class Hexagon extends Group implements Enableable, Scalable, Sel
 		this.hexagon.setScaleX(factor);
 		this.hexagon.setScaleY(factor);
 	}
-
+	
 	@Override
 	public void translate(double x, double y) {
 		this.setTranslateX(x);
 		this.setTranslateY(y);
 	}
-
-	/**
-	 * @return the top coordinate.
-	 */
-	private static Coordinate top() {
-		return new Coordinate(0.0, RADIUS);
-	}
-
-	/**
-	 * @return the top-left coordinate.
-	 */
-	private static Coordinate topLeft() {
-		return new Coordinate(-SQRT75, RADIUS / 2.0);
-	}
-
-	/**
-	 * @return the top-right coordinate.
-	 */
-	private static Coordinate topRight() {
-		return new Coordinate(SQRT75, RADIUS / 2.0);
-	}
-
+	
 	@Override
 	public final double width() {
-		return this.hexagon.getScaleX() * (topRight().x() - bottomLeft().x());
+		return this.hexagon.getScaleX() * (TOP_RIGHT.x() - BOTTOM_LEFT.x());
 	}
 }

@@ -46,8 +46,8 @@ public class SingleSwarmValidator implements Validatable<BoardState> {
 		if (!skip.contains(coord)) {
 			skip.add(coord);
 
-			for (Map.Entry<Unit, HexCoordinate> n : state.neighbours(coord).entrySet()) {
-				skip.addAll(walkRecursion(state, n.getValue(), skip));
+			for (HexCoordinate c : state.neighbours(coord).values()) {
+				skip.addAll(walkRecursion(state, c, skip));
 			}
 		}
 		return skip;
