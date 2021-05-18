@@ -52,7 +52,7 @@ public final class PlayMode implements Mode {
 		PlayModel model = new PlayModel(this.player1, this.player2);
 
 		Scene scene = new Scene(new HivePane(model));
-		scene.getStylesheets().add(Hive.class.getClass().getResource("/stylesheet.min.css").toString());
+		scene.getStylesheets().add(Hive.class.getResource("/stylesheet.min.css").toString());
 
 		s.setScene(scene);
 		s.show();

@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
 /**
  * Tests for hive.helpers.messages.ErrorMessageTest.

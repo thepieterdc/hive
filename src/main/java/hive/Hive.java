@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
  */
 public final class Hive extends Application {
 
-	public static final ResourceBundle BUNDLE = ResourceBundle.getBundle("hive/i18n");
+	public static final ResourceBundle BUNDLE = ResourceBundle.getBundle("i18n");
 
 	@Override
 	public void start(Stage stage) {

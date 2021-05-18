@@ -1,0 +1,49 @@
+plugins {
+    id 'application'
+    id 'idea'
+    id 'jacoco'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
+group 'io.github.thepieterdc.dodona'
+version '1.0.0'
+
+sourceCompatibility = 11
+
+repositories {
+    jcenter()
+
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+
+    testImplementation group: 'org.testfx', name: 'testfx-junit', version: '4.0.16-alpha'
+    testImplementation group: 'org.testfx', name: 'testfx-core', version: '4.0.16-alpha'
+}
+
+application {
+    mainClass = 'hive.Hive'
+}
+
+applicationDefaultJvmArgs = ['-Djdk.gtk.version=2']
+
+jacocoTestReport {
+    dependsOn test
+
+    reports {
+        html.enabled = true
+        xml.enabled = true
+    }
+}
+
+javafx {
+    modules = ['javafx.controls', 'javafx.media', 'javafx.swing']
+    version = "11"
+}
+
+wrapper {
+    gradleVersion = '7.0.0'
+}
